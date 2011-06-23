@@ -2,6 +2,7 @@ package ua.com.zhivko.coherence.viewer.navigation;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.io.IOException;
 import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -26,8 +27,9 @@ public class NavigationPanel extends JPanel{
     }
 
 
-    public void updateData(){
+    public void updateData() throws IOException{
         treeModel.updateTree();
+        
         tree.updateUI();
     }
 }

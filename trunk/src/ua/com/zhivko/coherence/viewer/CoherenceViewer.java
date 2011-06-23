@@ -1,11 +1,22 @@
 package ua.com.zhivko.coherence.viewer;
 
+import com.tangosol.net.CacheFactory;
+import com.tangosol.net.NamedCache;
 import java.awt.BorderLayout;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.HashSet;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Random;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.management.MBeanServer;
+import javax.management.MBeanServerFactory;
+import javax.management.MalformedObjectNameException;
+import javax.management.ObjectName;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
@@ -32,6 +43,18 @@ public class CoherenceViewer extends JFrame implements Observer {
     private NavigationPanel navigationPanel;
 
     public CoherenceViewer() {
+        NamedCache cache = CacheFactory.getCache("test");
+        cache.put("key" + (new Random().nextInt()), "value");
+        System.err.println("size: " + cache.size());
+        try {
+            System.err.println("caches: " + getCaches("localhost2"));
+        } catch (MalformedObjectNameException ex) {
+            Logger.getLogger(CoherenceViewer.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NullPointerException ex) {
+            Logger.getLogger(CoherenceViewer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.exit(0);
+
         setJMenuBar(new Menu());
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -67,7 +90,7 @@ public class CoherenceViewer extends JFrame implements Observer {
 //                                                         views[2]),
 //                                         tabWindow));
 
-        
+
         this.getContentPane().add(rootWindow, BorderLayout.CENTER);
         this.setVisible(true);
     }
@@ -80,7 +103,46 @@ public class CoherenceViewer extends JFrame implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        System.err.println("UPDATE");
-        navigationPanel.updateData();
+        try {
+            System.err.println("UPDATE");
+            navigationPanel.updateData();
+        } catch (IOException ex) {
+            Logger.getLogger(CoherenceViewer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public static Set<String> getCaches(String jmxDomainName) throws MalformedObjectNameException, NullPointerException {
+        // find (or create) an MBeanServer for the specified default JMX domain
+        // name
+        MBeanServer mServer = null;
+        for (MBeanServer server : MBeanServerFactory.findMBeanServer(null)) {
+            if (jmxDomainName.length() == 0
+                    || server.getDefaultDomain().equals(jmxDomainName)) {
+                mServer = server;
+                break;
+            }
+        }
+
+        if (mServer == null) {
+            mServer = MBeanServerFactory.createMBeanServer(jmxDomainName);
+        }
+
+        // get the set of all Coherence Member MBean ObjectNames
+        ObjectName objNameMembers = new ObjectName("Coherence:type=Node,*");
+        @SuppressWarnings("unused")
+        Set<ObjectName> setObjNameMembers = mServer.queryNames(objNameMembers, null);
+
+        // get the set of Coherence Cache names (obtained from the 'name'
+        // property on
+        // a Cache MBean ObjectName)
+        ObjectName objNameCaches = new ObjectName("Coherence:type=Cache,*");
+        Set<ObjectName> setObjNameCaches = mServer.queryNames(objNameCaches, null);
+        Set<String> cacheNames = new HashSet<String>();
+
+        for (ObjectName objName : setObjNameCaches) {
+            cacheNames.add(objName.getKeyProperty("name"));
+        }
+
+        return cacheNames;
     }
 }
