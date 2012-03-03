@@ -24,7 +24,11 @@ public class CoherenceConfigGenerator {
             str = str.replaceAll("__port__", port);
 
             //save file
-            File result = new File("tmp/extend-client-config.xml");
+            File tmpDir = new File("./tmp");
+            if(!tmpDir.exists()){
+                tmpDir.mkdir();
+            }
+            File result = new File(tmpDir ,"extend-client-config.xml");
             FileOutputStream fos = new FileOutputStream(result);
             fos.write(str.getBytes());
             fos.close();
