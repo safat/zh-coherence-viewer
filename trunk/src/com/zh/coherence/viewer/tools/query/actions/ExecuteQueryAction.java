@@ -16,9 +16,9 @@ public class ExecuteQueryAction extends AbstractAction{
 
     public ExecuteQueryAction(QueryTool queryTool) {
         putValue(Action.NAME, "Execute");
+        putValue(Action.SMALL_ICON, new ImageIcon("icons/start-icon.png"));
 
         scriptExecutor = new CqlScriptExecutor(queryTool);
-//        putValue(Action.SMALL_ICON, new ImageIcon(""));
     }
 
     @Override

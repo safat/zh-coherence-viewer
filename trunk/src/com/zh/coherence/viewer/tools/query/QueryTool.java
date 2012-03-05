@@ -80,7 +80,7 @@ public class QueryTool extends JPanel implements CoherenceViewerTool {
         output.add("Table", tableView);
         console = new JTextArea();
         console.setFont(new Font("Dialog", Font.PLAIN, 12));
-        output.add("Console", console);
+        output.add("Console", new JScrollPane(console));
 
         splitPane.setBottomComponent(output);
 
