@@ -18,6 +18,7 @@ public class CreateToolAction extends AbstractAction {
     public CreateToolAction(CoherenceViewerToolCreator creator) {
         this.creator = creator;
         this.putValue(Action.NAME, creator.getToolName());
+        putValue(Action.SMALL_ICON, new ImageIcon("icons/write.png"));
     }
 
     @Override
