@@ -1,8 +1,10 @@
 package com.zh.coherence.viewer;
 
+import com.zh.coherence.viewer.utils.FileUtils;
+
 import javax.swing.*;
-import java.io.*;
-import java.util.Properties;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by IntelliJ IDEA.
@@ -11,65 +13,21 @@ import java.util.Properties;
  * Time: 0:51
  */
 public class BootLoader {
-    /**
-     * Holds the child process
-     */
-    private Process child;
 
     public BootLoader() {
         try {
-            Properties properties = getProperties();
-            String javaPath = properties.getProperty("java.path");
-            String classpath = properties.getProperty("classpath");
-            String vmOptions = properties.getProperty("vm.options");
-            String mainClass = properties.getProperty("main.class");
-            String splash = properties.getProperty("splash.image");
-
-            String coherenceHome = properties.getProperty("coherence.home");
-            if (coherenceHome == null) {
-                File coherenceHomeFile = askCoherenceHome();
-                properties.setProperty("coherence.home", coherenceHomeFile.getAbsolutePath());
-                saveProperties(properties);
-                coherenceHome = coherenceHomeFile.getAbsolutePath();
+            if (!checkIsCoherenceExist()) {
+                askCoherenceJar();
+                JOptionPane.showMessageDialog(null, "Class path was updated. Restart application please.",
+                        "Reload", JOptionPane.INFORMATION_MESSAGE);
+                System.exit(0);
             }
-            File coherenceJar = new File(coherenceHome, "lib/coherence.jar");
-            coherenceHome = coherenceJar.getAbsolutePath();
 
-            classpath += File.pathSeparatorChar;
-            classpath += coherenceHome;
-
-            StringBuilder sb = new StringBuilder();
-            sb.append(javaPath).append("\" ");
-            sb.append(vmOptions).append(" ");
-            sb.append("-splash:").append(splash).append(" ");
-            sb.append("-cp ").append(classpath).append(" ");
-            sb.append(mainClass);
-            sb.append("\"");
-
-            System.err.println("\n");
-            System.err.println(sb.toString());
-            System.err.println("\n");
-
-            ProcessBuilder pb = new ProcessBuilder(sb.toString());
-            pb.redirectErrorStream(true);
-            child = pb.start();
-//            SplashScreen splashScreen = SplashScreen.getSplashScreen();
-//            if (splash != null) {
-//                splashScreen.close();
-//            }
-            new FollowerThread().start();
+            new Application();
 
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-    }
-
-    private void saveProperties(Properties properties) throws IOException {
-        File propFile = new File("config/bootLoader.properties");
-        FileOutputStream fos = new FileOutputStream(propFile);
-        properties.store(fos, "zh coherence viewer config file");
-        fos.flush();
-        fos.close();
     }
 
     /**
@@ -80,81 +38,56 @@ public class BootLoader {
         new BootLoader();
     }
 
-    private static Properties getProperties() throws IOException {
-        Properties properties = new Properties();
-        File propFile = new File("config/bootLoader.properties");
-        if (propFile.isFile()) {
-            InputStream in = new FileInputStream(propFile);
-            properties.load(in);
-            in.close();
-
-            return properties;
-        } else {
-            throw new FileNotFoundException("file: '" + propFile + "' not found");
-        }
-    }
-
-    private File askCoherenceHome() {
+    private File askCoherenceJar() {
         File selected = null;
-        int ret = JOptionPane.showConfirmDialog(null, "<html>Coherence home directory was not found.<br>" +
-                "Can you please choose it?</html>", "Coherence Home", JOptionPane.OK_CANCEL_OPTION);
+        int ret = JOptionPane.showConfirmDialog(null, "<html>Coherence library was not found.<br>" +
+                "Can you please choose it?</html>", "Coherence Library", JOptionPane.OK_CANCEL_OPTION);
         if (ret == JOptionPane.OK_OPTION) {
             JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+            fileChooser.setFileFilter(new javax.swing.filechooser.FileFilter() {
+                @Override
+                public boolean accept(File f) {
+                    return f.isDirectory() || f.getName().endsWith(".jar");
+                }
+
+                @Override
+                public String getDescription() {
+                    return "*.jar";
+                }
+            });
             fileChooser.showOpenDialog(null);
             selected = fileChooser.getSelectedFile();
         } else {
             System.exit(0);
         }
-        //check selected directory
-        if (!checkCoherenceHome(selected)) {
-            JOptionPane.showMessageDialog(null, "Selected folder isn't Coherence home.");
-            System.exit(-1);
+        //copy coherence into directory
+        File out = null;
+        if (selected != null) {
+            out = new File("coherence-lib/coherence.jar");
+            try {
+                FileUtils.copyFile(selected, out);
+            } catch (IOException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            System.exit(0);
         }
 
-        return selected;
+        return out;
     }
 
-    private boolean checkCoherenceHome(File file) {
-        boolean ret;
-        try{
-            File lib = new File(file, "lib");
-            String[] files = lib.list();
-            ret = false;
-            for (String name : files) {
-                if("coherence.jar".equalsIgnoreCase(name)){
-                    ret = true;
-                    break;
-                }
+    private boolean checkIsCoherenceExist() {
+        boolean ret = false;
+        try {
+            Class cls = Class.forName("com.tangosol.net.NamedCache");
+            if (cls != null) {
+                ret = true;
             }
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ret = false;
         }
         return ret;
-    }
-
-    /**
-     * Writes on std out the output of the child thread
-     */
-    class FollowerThread extends Thread {
-
-        public FollowerThread() {
-            setPriority(MIN_PRIORITY);
-        }
-
-        @Override
-        public void run() {
-            InputStream stream = child.getInputStream();
-            byte[] buf = new byte[1024];
-            try {
-                int read = stream.read(buf);
-                while (read >= 0) {
-                    System.out.write(buf, 0, read);
-                    read = stream.read(buf);
-                }
-            } catch (IOException ioe) {
-                ioe.printStackTrace();
-            }
-        }
     }
 }

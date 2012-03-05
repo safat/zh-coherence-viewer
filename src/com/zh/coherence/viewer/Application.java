@@ -10,10 +10,6 @@ import javax.swing.*;
  */
 public class Application {
 
-    public static void main(String[] args) {
-        new Application();
-    }
-
     public Application() {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
