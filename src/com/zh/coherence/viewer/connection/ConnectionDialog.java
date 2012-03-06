@@ -58,7 +58,7 @@ public class ConnectionDialog extends JDialog {
                 {PREFERRED}
         }));
         JButton ok = new JButton("Connect");
-        ok.setContentAreaFilled(false);
+//        ok.setContentAreaFilled(false);
         ok.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -69,7 +69,7 @@ public class ConnectionDialog extends JDialog {
             }
         });
         JButton cancel = new JButton("Cancel");
-        cancel.setContentAreaFilled(false);
+//        cancel.setContentAreaFilled(false);
         buttons.add(ok, "1,0");
         buttons.add(cancel, "3,0");
         cancel.addActionListener(new ActionListener() {

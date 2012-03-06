@@ -1,6 +1,7 @@
 package com.zh.coherence.viewer;
 
 import com.zh.coherence.viewer.connection.ConnectionDialog;
+import com.zh.coherence.viewer.menubar.ConfigJMenuBuilder;
 import com.zh.coherence.viewer.menubar.FileJMenuBuilder;
 import com.zh.coherence.viewer.tools.ToolsJMenuBuilder;
 
@@ -33,6 +34,7 @@ public class ApplicationMainFrame extends JFrame {
         //prepare default menu bar
         resourceManager.addMenu(new FileJMenuBuilder().buildMenu(mainPane));
         resourceManager.addMenu(new ToolsJMenuBuilder().buildMenu(mainPane));
+        resourceManager.addMenu(new ConfigJMenuBuilder().buildMenu(mainPane));
 
         setJMenuBar(resourceManager.getMenuBar());
 
