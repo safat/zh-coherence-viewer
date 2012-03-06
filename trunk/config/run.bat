@@ -1,1 +1,1 @@
-java -Xms64m -Xmx256m -splash:config/splash.png -cp ".;./lib/*;./coherence-lib/*;./zh_coherence_viewer.jar" com.zh.coherence.viewer.BootLoader
+java -Xms64m -Xmx512m -splash:config/splash.png -cp ".;./lib/*;./coherence-lib/*;./zh_coherence_viewer.jar;./user-files/*" com.zh.coherence.viewer.BootLoader
