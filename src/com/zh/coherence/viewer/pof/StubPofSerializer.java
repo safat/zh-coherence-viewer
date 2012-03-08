@@ -41,10 +41,6 @@ public class StubPofSerializer implements PofSerializer{
         PofBufferReader reader = (PofBufferReader) pofReader;
         int type = pofReader.getUserTypeId();
         try {
-
-            //read binary
-//            decoder.fillBinary(input, container);
-
             if(parentSerializer != null){
                 return parentSerializer.deserialize(pofReader);
             }else{
@@ -53,6 +49,7 @@ public class StubPofSerializer implements PofSerializer{
                 ff.setAccessible(true);
                 ReadBuffer.BufferInput input = (ReadBuffer.BufferInput) ff.get(reader);
                 ValueContainer container = new ValueContainer();
+                decoder.fillBinary(input, container);
                 decoder.setPofContext(pofReader.getPofContext());
                 decoder.decode(input, type, container);
                 return container;

@@ -24,7 +24,9 @@
           <root url="jar://$MODULE_DIR$/lib/AutoComplete.jar!/" />
         </CLASSES>
         <JAVADOC />
-        <SOURCES />
+        <SOURCES>
+          <root url="file://D:/dist/java/AutoComplete/src" />
+        </SOURCES>
       </library>
     </orderEntry>
     <orderEntry type="module-library">
@@ -42,7 +44,9 @@
           <root url="jar://$MODULE_DIR$/lib/Rsyntaxtextarea_2_0_1_Source.jar!/" />
         </CLASSES>
         <JAVADOC />
-        <SOURCES />
+        <SOURCES>
+          <root url="file://D:/dist/java/rsyntaxtextarea_2.0.1_Source/src" />
+        </SOURCES>
       </library>
     </orderEntry>
     <orderEntry type="module-library">
