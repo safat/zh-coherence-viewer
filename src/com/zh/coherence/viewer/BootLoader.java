@@ -2,14 +2,12 @@ package com.zh.coherence.viewer;
 
 import com.zh.coherence.viewer.config.PofConfigPane;
 import com.zh.coherence.viewer.utils.FileUtils;
-import com.zh.coherence.viewer.utils.PropertiesLoader;
 import org.jdesktop.swingx.JXHeader;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.util.Properties;
 
 /**
  * Created by IntelliJ IDEA.
@@ -28,17 +26,17 @@ public class BootLoader {
                 System.exit(0);
             }
             //load properties
-            Properties config = new PropertiesLoader("config/viewer.properties").load();
-            if(config != null){
-                String path = (String) config.get("pof.config");
-                if(path == null){
-                    //update pof config
-                    String result = askPofConfig();
-                }
-            }else{
-                System.err.println("file: config/viewer.properties not found"); //todo this check is stupid
-                System.exit(-1);
-            }
+//            Properties config = new PropertiesLoader("config/viewer.properties").load();
+//            if(config != null){
+//                String path = (String) config.get("pof.config");
+//                if(path == null){
+//                    //update pof config
+//                    String result = askPofConfig();
+//                }
+//            }else{
+//                System.err.println("file: config/viewer.properties not found"); //todo this check is stupid
+//                System.exit(-1);
+//            }
 
             new Application();
 

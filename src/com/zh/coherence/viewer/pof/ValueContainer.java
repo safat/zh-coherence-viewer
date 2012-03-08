@@ -12,7 +12,9 @@ import java.util.List;
 public class ValueContainer {
     private byte[] binary; //todo create flag, is need keep binary
     private List<Object> value = new ArrayList<Object>();
-    private List<Integer> typeSequence = new ArrayList<Integer>();
+
+    private Object userValue;
+
     private int typeId;
 
     public int size() {
@@ -47,24 +49,28 @@ public class ValueContainer {
         this.typeId = typeId;
     }
 
-    public void addTypeSequence(int type){
-        typeSequence.add(type);
+    public Object getUserValue() {
+        return userValue;
     }
 
-    public int getTypeBySequence(int sequence){
-        return typeSequence.get(sequence);
+    public void setUserValue(Object userValue) {
+        this.userValue = userValue;
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(typeId).append("{");
-        for(Object obj : value){
-            sb.append(obj).append(",");
+        if (userValue != null) {
+            return userValue.toString();
+        } else {
+            StringBuilder sb = new StringBuilder();
+            sb.append(typeId).append("{");
+            for (Object obj : value) {
+                sb.append(obj).append(",");
+            }
+            sb.deleteCharAt(sb.length() - 1);
+            sb.append("}");
+
+            return sb.toString();
         }
-        sb.deleteCharAt(sb.length()-1);
-        sb.append("}");
-        
-        return sb.toString();
     }
 }

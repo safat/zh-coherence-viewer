@@ -3,11 +3,14 @@ package com.zh.coherence.viewer.pof;
 import com.tangosol.io.ReadBuffer;
 import com.tangosol.io.Serializer;
 import com.tangosol.io.WriteBuffer;
-import com.tangosol.io.pof.*;
+import com.tangosol.io.pof.PofBufferReader;
+import com.tangosol.io.pof.PofBufferWriter;
+import com.tangosol.io.pof.PofContext;
+import com.tangosol.io.pof.PofSerializer;
+import com.zh.coherence.viewer.pof.xml.XmlPofConfig;
+import com.zh.coherence.viewer.pof.xml.XmlPofContextReader;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by IntelliJ IDEA.
@@ -16,44 +19,30 @@ import java.util.Map;
  * Time: 0:13
  */
 public class ZhPofContext implements Serializer, PofContext {
-    private ConfigurablePofContext context;
-    private volatile Map<Class<?>, SerializationContext> classMap;
-    private volatile SerializationContext[] typeIdMap = new SerializationContext[1001];
+    private XmlPofConfig pofConfig;
 
     public ZhPofContext() {
-        context = new ConfigurablePofContext();
-        initContextMap();
+        pofConfig = new XmlPofContextReader().readXmlPofConfig("/zh-pof-config.xml");
     }
 
     @Override
     public PofSerializer getPofSerializer(int i) {
-        PofSerializer ret;
-        if(i <= 1000){
-            ret = context.getPofSerializer(i);
-        } else {
-            ret = new StubPofSerializer();
-        }
-        
-        return ret;
+        return pofConfig.getPofSerializerById(i);
     }
 
     @Override
     public int getUserTypeIdentifier(Object o) {
-        if(o instanceof ValueContainer){
-            return ((ValueContainer)o).getTypeId();
-        }else{
+        if (o instanceof ValueContainer) {
+            return ((ValueContainer) o).getTypeId();
+        } else {
             return getUserTypeIdentifier(o.getClass());
         }
     }
 
     @Override
-    public int getUserTypeIdentifier(Class aClass) {
-        SerializationContext ctx = classMap.get(aClass);
-        if(ctx != null){
-            return ctx.pofId;
-        }else{
-            return Integer.MAX_VALUE;
-        }
+    public int getUserTypeIdentifier(Class clazz) {
+        Integer type = pofConfig.getTypeByClass(clazz);
+        return type != null ? type : Integer.MAX_VALUE;
     }
 
     @Override
@@ -62,22 +51,15 @@ public class ZhPofContext implements Serializer, PofContext {
     }
 
     @Override
-    public String getClassName(int i) {
-        if(i < 1000) {
-            return typeIdMap[i].type.getName();
-        }
-        System.err.println("UNKNOWN class name for : " + i);
-        return "name";
+    public String getClassName(int type) {
+        Class clazz = pofConfig.getClassByType(type);
+        return clazz != null ? clazz.getName() : Object.class.getName();
     }
 
     @Override
-    public Class getClass(int i) {
-        if(i < 1000) {
-            return typeIdMap[i].type;
-        } else{
-            System.err.println("ASC class from id: " + i);
-            return "".getClass();
-        }
+    public Class getClass(int type) {
+        Class clazz = pofConfig.getClassByType(type);
+        return clazz != null ? clazz : Object.class;
     }
 
     @Override
@@ -86,12 +68,9 @@ public class ZhPofContext implements Serializer, PofContext {
     }
 
     @Override
-    public boolean isUserType(Class aClass) {
-        SerializationContext ctx = classMap.get(aClass);
-        if(ctx != null){
-            return false;
-        }
-        return true;
+    public boolean isUserType(Class clazz) {
+        Integer type = pofConfig.getTypeByClass(clazz);
+        return type == null || type > 0;
     }
 
     @Override
@@ -104,11 +83,8 @@ public class ZhPofContext implements Serializer, PofContext {
         PofBufferWriter writer = new PofBufferWriter(bufferOutput, this);
         try {
             writer.writeObject(-1, o);
-        } catch (RuntimeException e) {
-            IOException ioex = new IOException(e.getMessage());
-
-            ioex.initCause(e);
-            throw ioex;
+        } catch (RuntimeException ex) {
+            throw new IOException(ex.getMessage(), ex);
         }
     }
 
@@ -117,54 +93,8 @@ public class ZhPofContext implements Serializer, PofContext {
         PofBufferReader reader = new PofBufferReader(bufferInput, this);
         try {
             return reader.readObject(-1);
-        } catch (RuntimeException e) {
-            IOException ioex = new IOException(e.getMessage());
-            ioex.initCause(e);
-            throw ioex;
-        }
-    }
-
-    private synchronized void initContextMap() {
-        Map<Class<?>, SerializationContext> map = new HashMap<Class<?>, SerializationContext>();
-        for(int i = 0; i != 1000; ++i) {
-            try {
-                PofSerializer serializer = context.getPofSerializer(i);
-                Class<?> cls = context.getClass(i);
-                SerializationContext ctx = new SerializationContext();
-                ctx.pofId = i;
-                ctx.type = cls;
-                ctx.serializer = serializer;
-                map.put(cls, ctx);
-                typeIdMap[i] = ctx;
-            }
-            catch(IllegalArgumentException e) {
-                continue;
-            }
-        }
-        classMap = map;
-    }
-
-    private SerializationContext contextById(int id) {
-        if(id < 1000) {
-            return typeIdMap[id];
-        } else {
-            return null;
+        } catch (RuntimeException ex) {
+            throw new IOException(ex.getMessage(), ex);
         }
     }
 }
-
-/*
-* PofSerializer serializer;
-		if (PortableObject.class.isAssignableFrom(cls)) {
-			serializer = new PortableObjectSerializer(userType);
-		}
-		else {
-			try {
-				serializer = autoSerializer.getClassCodec(cls);
-			} catch (IOException e) {
-				throw new IllegalArgumentException(e.getMessage(), e.getCause());
-			}
-		}
-
-		registerSerializationContext(userType, cls, serializer);
-* */

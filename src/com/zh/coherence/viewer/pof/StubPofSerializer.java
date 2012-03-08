@@ -16,35 +16,51 @@ import java.lang.reflect.Field;
  * Time: 0:21
  */
 public class StubPofSerializer implements PofSerializer{
+    private PofSerializer parentSerializer;
+    private PofDecoder decoder;
+
+    public StubPofSerializer(PofSerializer parentSerializer) {
+        this.parentSerializer = parentSerializer;
+        decoder = new PofDecoder();
+    }
+
     @Override
     public void serialize(PofWriter pofWriter, Object o) throws IOException {
-        if(pofWriter.getUserTypeId() > 1000){
+        if(parentSerializer != null){
+            parentSerializer.serialize(pofWriter, o);
+        }else if(o instanceof ValueContainer){
             ValueContainer vc = (ValueContainer) o;
             PofEncoder encoder = new PofEncoder();
             encoder.encode(pofWriter, vc);
+            pofWriter.writeRemainder(null);
         }
-
-        pofWriter.writeRemainder(null);
     }
 
     @Override
     public Object deserialize(PofReader pofReader) throws IOException {
         PofBufferReader reader = (PofBufferReader) pofReader;
         int type = pofReader.getUserTypeId();
-        ValueContainer container = null;
         try {
-            Class clazz = reader.getClass().getSuperclass();
-            Field ff =  clazz.getDeclaredField("m_in");
-            ff.setAccessible(true);
-            ReadBuffer.BufferInput input = (ReadBuffer.BufferInput) ff.get(reader);
-            PofDecoder decoder = new PofDecoder();
-            decoder.setPofContext(pofReader.getPofContext());
-            container = decoder.decode(input, type);
 
+            //read binary
+//            decoder.fillBinary(input, container);
+
+            if(parentSerializer != null){
+                return parentSerializer.deserialize(pofReader);
+            }else{
+                Class clazz = reader.getClass().getSuperclass();
+                Field ff =  clazz.getDeclaredField("m_in");
+                ff.setAccessible(true);
+                ReadBuffer.BufferInput input = (ReadBuffer.BufferInput) ff.get(reader);
+                ValueContainer container = new ValueContainer();
+                decoder.setPofContext(pofReader.getPofContext());
+                decoder.decode(input, type, container);
+                return container;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return container;
+        return null;
     }
 }
