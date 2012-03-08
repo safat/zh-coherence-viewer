@@ -15,7 +15,6 @@ import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rsyntaxtextarea.templates.CodeTemplate;
 import org.fife.ui.rsyntaxtextarea.templates.StaticCodeTemplate;
 import org.fife.ui.rtextarea.RTextScrollPane;
-import org.fife.ui.rtextarea.ToolTipSupplier;
 
 import javax.swing.*;
 import java.awt.*;
@@ -92,7 +91,7 @@ public class QueryTool extends JPanel implements CoherenceViewerTool {
         ac.setListCellRenderer(new CCellRenderer());
         ac.install(editor);
 
-        editor.setToolTipSupplier((ToolTipSupplier)lacProvider);
+        editor.setToolTipSupplier(lacProvider);
         ToolTipManager.sharedInstance().registerComponent(editor);
 
         splitPane.setTopComponent(editorScrollPane);
