@@ -22,17 +22,22 @@ public class PofDecoder extends PofHelper {
 
     private PofContext pofContext = null;
 
-    public ValueContainer decode(ReadBuffer.BufferInput input, int type) {
-        ValueContainer container = new ValueContainer();
-        container.setTypeId(type);
-
-        try {
+    public void fillBinary(ReadBuffer.BufferInput input, ValueContainer container){
+        try{
             byte[] binary = new byte[input.available()];
             int offset = input.getOffset();
             input.readFully(binary);
             container.setBinary(binary);
             input.setOffset(offset);
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+    }
 
+    public void decode(ReadBuffer.BufferInput input, int type, ValueContainer container) {
+        container.setTypeId(type);
+
+        try {
             boolean hasNext = true;
             while (hasNext) {
                 int fieldType = input.readPackedInt();
@@ -43,8 +48,6 @@ public class PofDecoder extends PofHelper {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        return container;
     }
 
 
