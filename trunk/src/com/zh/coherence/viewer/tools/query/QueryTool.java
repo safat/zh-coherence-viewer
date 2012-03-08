@@ -7,19 +7,23 @@ import com.zh.coherence.viewer.tools.CoherenceViewerTool;
 import com.zh.coherence.viewer.tools.query.actions.CqlScriptExecutor;
 import com.zh.coherence.viewer.tools.query.actions.ExecuteQueryAction;
 import org.fife.ui.autocomplete.AutoCompletion;
-import org.fife.ui.autocomplete.BasicCompletion;
 import org.fife.ui.autocomplete.DefaultCompletionProvider;
+import org.fife.ui.autocomplete.LanguageAwareCompletionProvider;
 import org.fife.ui.rsyntaxtextarea.CodeTemplateManager;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rsyntaxtextarea.templates.CodeTemplate;
 import org.fife.ui.rsyntaxtextarea.templates.StaticCodeTemplate;
 import org.fife.ui.rtextarea.RTextScrollPane;
+import org.fife.ui.rtextarea.ToolTipSupplier;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Writer;
 import java.text.DateFormat;
 import java.util.Date;
@@ -49,6 +53,7 @@ public class QueryTool extends JPanel implements CoherenceViewerTool {
         editor.setCodeFoldingEnabled(true);
         editor.setAntiAliasingEnabled(true);
 
+
         editor.addKeyListener(new KeyAdapter() {
             CqlScriptExecutor scriptExecutor = new CqlScriptExecutor(QueryTool.this);
             @Override
@@ -66,9 +71,29 @@ public class QueryTool extends JPanel implements CoherenceViewerTool {
         ctm.addTemplate(ct);
 
         DefaultCompletionProvider provider = new DefaultCompletionProvider();
-        provider.addCompletion(new BasicCompletion(provider, "select"));
-        AutoCompletion ac = new AutoCompletion(provider);
+        ClassLoader cl = getClass().getClassLoader();
+        InputStream in = cl.getResourceAsStream("cohQL.xml");
+        try{
+            if(in != null){
+                provider.loadFromXML(in);
+                in.close();
+            } else {
+                provider.loadFromXML(new File("cohQL.xml"));
+            }
+        }catch (IOException ex){
+            ex.printStackTrace();
+        }
+
+        LanguageAwareCompletionProvider lacProvider = new
+                LanguageAwareCompletionProvider(provider);
+        AutoCompletion ac = new AutoCompletion(lacProvider);
+        ac.setParameterAssistanceEnabled(true);
+        ac.setShowDescWindow(true);
+        ac.setListCellRenderer(new CCellRenderer());
         ac.install(editor);
+
+        editor.setToolTipSupplier((ToolTipSupplier)lacProvider);
+        ToolTipManager.sharedInstance().registerComponent(editor);
 
         splitPane.setTopComponent(editorScrollPane);
         splitPane.setDividerLocation(200);
@@ -88,6 +113,11 @@ public class QueryTool extends JPanel implements CoherenceViewerTool {
         //todo add query status? BorderLayout.SOUTH
 
         textAreaWriter = new JTextAreaWriter(console);
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                editor.requestFocusInWindow();
+            }
+        });
     }
 
     public String getScript(){

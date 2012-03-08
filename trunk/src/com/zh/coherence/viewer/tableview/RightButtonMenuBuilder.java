@@ -2,6 +2,7 @@ package com.zh.coherence.viewer.tableview;
 
 import com.zh.coherence.viewer.hexPanel.ShowHexViewerAction;
 import com.zh.coherence.viewer.pof.ValueContainer;
+import com.zh.coherence.viewer.tableview.actions.ShowObjectInText;
 
 import javax.swing.*;
 
@@ -14,13 +15,16 @@ import javax.swing.*;
 public class RightButtonMenuBuilder {
     public JPopupMenu buildMenu(Object value){
         JPopupMenu menu = new JPopupMenu();
+        if(value != null){
+            menu.add(new ShowObjectInText(value));
 
-        if(value instanceof ValueContainer){
-            ValueContainer vc = (ValueContainer) value;
+            if(value instanceof ValueContainer){
+                menu.addSeparator();
+                ValueContainer vc = (ValueContainer) value;
 
-            menu.add(new JMenuItem(new ShowHexViewerAction(vc.getBinary())));
+                menu.add(new JMenuItem(new ShowHexViewerAction(vc.getBinary())));
+            }
         }
-
         return menu;
     }
 }

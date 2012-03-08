@@ -38,12 +38,15 @@ public class CoherenceTableView extends JPanel{
                 if(e.getButton() == MouseEvent.BUTTON3){
                     Object value = tableModel.getValueAt(table.getSelectedRow(), table.getSelectedColumn());
                     JPopupMenu menu = rightButtonMenuBuilder.buildMenu(value);
-                    menu.show(e.getComponent(), e.getX(), e.getY());
+                    if(menu.getSubElements().length > 0){
+                        menu.show(e.getComponent(), e.getX(), e.getY());
+                    }
                 }
             }
         });
     }
 
+    @SuppressWarnings("unused")
     public Object getSubject() {
         return subject;
     }
