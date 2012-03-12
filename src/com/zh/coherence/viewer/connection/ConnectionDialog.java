@@ -1,19 +1,18 @@
 package com.zh.coherence.viewer.connection;
 
 import layout.TableLayout;
+import org.jdesktop.swingx.JXHeader;
 
 import javax.swing.*;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
 
 import static layout.TableLayoutConstants.FILL;
 import static layout.TableLayoutConstants.PREFERRED;
@@ -25,10 +24,13 @@ import static layout.TableLayoutConstants.PREFERRED;
  * Time: 19:38
  */
 public class ConnectionDialog extends JDialog {
+    private ServerList serverList = null;
+    private JTextField jmxUrl;
+
     public ConnectionDialog(JFrame owner) {
         super(owner, "Connection", true);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-        setSize(500, 260);
+        setSize(520, 285);
 
         setContentPane(generateView());
     }
@@ -36,40 +38,67 @@ public class ConnectionDialog extends JDialog {
     public JPanel generateView() {
         double[][] layout = new double[][]{
                 {5, PREFERRED, 10, FILL, 5},
-                {5, 100, PREFERRED, 7, PREFERRED, 4, PREFERRED, 5, PREFERRED, 5}
+                {5, 85, PREFERRED, 7, PREFERRED, 4, PREFERRED, 5, PREFERRED, 5, PREFERRED, 5, PREFERRED, 5}
         };
         JPanel pane = new JPanel(new TableLayout(layout));
 
-        pane.add(new JLabel("saved addresses"), "1, 2");
-        JComboBox hostList = new JComboBox();
+        JXHeader loginHeader = new JXHeader("Login",
+                "Login to the Coherence server", new ImageIcon("icons/login.png"));
+
+        pane.add(loginHeader, "1,1,3,1");
+        pane.add(new JLabel("Connection's name"), "1, 2");
+        final JComboBox hostList = new JComboBox();
+        hostList.setEditable(true);
 
         pane.add(hostList, "3,2");
 
         pane.add(new JLabel("Coherence host:"), "1, 4");
         final JTextField host = new JTextField();
         pane.add(host, "3, 4");
-        pane.add(new JLabel("Port (default is 8089)"), "1, 6");
+        pane.add(new JLabel("Port:"), "1, 6");
         final JTextField port = new JTextField();
         pane.add(port, "3, 6");
-        hostList.addItemListener(new ServerItemListener(host, port));
+        jmxUrl = new JTextField();
+        jmxUrl.setEnabled(false);
+        pane.add(new JLabel("JMX URL:"), "1,8");
+        pane.add(jmxUrl, "3,8");
+        final JCheckBox ignoreUserConfig = new JCheckBox("Ignore user POF config");
+        pane.add(ignoreUserConfig, "3,10");
+
+        hostList.addItemListener(new ServerItemListener(host, port, jmxUrl, ignoreUserConfig));
 
         JPanel buttons = new JPanel(new TableLayout(new double[][]{
                 {FILL, 100, 5, 100, FILL},
                 {PREFERRED}
         }));
         JButton ok = new JButton("Connect");
-//        ok.setContentAreaFilled(false);
         ok.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 CoherenceConfigGenerator generator = new CoherenceConfigGenerator();
-                //todo check if data correct
                 generator.setupExtendConfig(host.getText(), port.getText());
+                if(serverList == null){
+                    serverList = new ServerList();
+                }
+                //save data
+                ServerConfig config;
+                Object obj = hostList.getSelectedItem();
+                if(obj instanceof ServerConfig){
+                    config = (ServerConfig) obj;
+                }else{
+                    config = new ServerConfig();
+                    serverList.addServerConfig(config);
+                }
+                config.setName(obj.toString());
+                config.setHost(host.getText());
+                config.setPort(Integer.parseInt(port.getText()));
+                //todo set JMX
+                config.setIgnoreUserPof(ignoreUserConfig.isSelected());
+                writeServerList(serverList);
                 ConnectionDialog.this.dispose();
             }
         });
         JButton cancel = new JButton("Cancel");
-//        cancel.setContentAreaFilled(false);
         buttons.add(ok, "1,0");
         buttons.add(cancel, "3,0");
         cancel.addActionListener(new ActionListener() {
@@ -79,85 +108,67 @@ public class ConnectionDialog extends JDialog {
             }
         });
 
-        pane.add(buttons, "1,8,3,8");
+        pane.add(buttons, "1,12,3,12");
 
         //load saved servers
-        for(CoherenceServer server : getSavedServers()){
-            hostList.addItem(server);
+        serverList = readServerList();
+        for (ServerConfig config : serverList.getList()) {
+            hostList.addItem(config);
         }
 
         return pane;
     }
 
-    private List<CoherenceServer> getSavedServers(){
-        List<CoherenceServer> list = new ArrayList<CoherenceServer>();
-        try{
-            FileInputStream fis = new FileInputStream(new File("config/server.list"));
-            Properties properties = new Properties();
-            properties.load(fis);
-            fis.close();
-            
-            String name;
-            String value;
-            String[] data;
-            
-            for(Map.Entry entry : properties.entrySet()){
-                name = (String) entry.getKey();
-                value = (String) entry.getValue();
-                if(value == null){
-                    //todo log problem
-                    continue;
-                }
-                data = value.split(":");
-                if(data.length != 2){
-                    //todo Log problem
-                    continue;
-                }
-                list.add(new CoherenceServer(name, data));
+    private ServerList readServerList() {
+        ServerList list = null;
+        File file = new File("config/server-list.xml");
+        try {
+            if (file.exists()) {
+                JAXBContext context = JAXBContext.newInstance(ServerList.class);
+                Unmarshaller unmarshaller = context.createUnmarshaller();
+                list = (ServerList) unmarshaller.unmarshal(file);
             }
-
-        }catch(IOException ex){
-            ex.printStackTrace();
-            throw new IllegalStateException("I couldn't load properties file: config/server.list");
+        } catch (JAXBException e) {
+            e.printStackTrace();
         }
-        
+        if (list == null) {
+            list = new ServerList();
+        }
         return list;
     }
-    
-    private class CoherenceServer{
-        public String name;
 
-        public String[] data;
-
-        private CoherenceServer(String name, String[] data) {
-            this.name = name;
-            this.data = data;
-        }
-
-        @Override
-        public String toString() {
-            return name;
+    private void writeServerList(ServerList serverList) {
+        try {
+            JAXBContext context = JAXBContext.newInstance(ServerList.class);
+            Marshaller m = context.createMarshaller();
+            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+            m.marshal(serverList, new File("config/server-list.xml"));
+        } catch (JAXBException e) {
+            e.printStackTrace();
         }
     }
 
-    private class ServerItemListener implements ItemListener{
-        JTextField host, port;
+    private class ServerItemListener implements ItemListener {
+        private JTextField host, port, jmxUrl;
+        private JCheckBox ignoreUserConfig;
 
-        private ServerItemListener(JTextField host, JTextField port) {
+        private ServerItemListener(JTextField host, JTextField port,JTextField jmxUrl, JCheckBox ignoreUserConfig) {
             this.host = host;
             this.port = port;
+            this.jmxUrl = jmxUrl;
+            this.ignoreUserConfig = ignoreUserConfig;
         }
 
         @Override
         public void itemStateChanged(ItemEvent e) {
-            if(e.getStateChange() == ItemEvent.SELECTED){
+            if (e.getStateChange() == ItemEvent.SELECTED) {
                 Object item = e.getItem();
-                if(item instanceof  CoherenceServer){
-                    host.setText(((CoherenceServer) item).data[0]);
-                    port.setText(((CoherenceServer) item).data[1]);
-                }else{
-                    host.setText("");
-                    port.setText("");
+                if(item instanceof  ServerConfig){
+                    ServerConfig config = (ServerConfig) item;
+                    host.setText(config.getHost());
+                    port.setText(String.valueOf(config.getPort()));
+                    jmxUrl.setText(config.getJmxUrl());
+                    ignoreUserConfig.setSelected(config.isIgnoreUserPof());
                 }
             }
         }
