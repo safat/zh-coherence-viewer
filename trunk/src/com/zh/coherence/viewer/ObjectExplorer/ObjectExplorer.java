@@ -10,13 +10,13 @@ import java.awt.*;
 public class ObjectExplorer extends JPanel {
     private JTree fieldsTree;
     private ObjectExplorerTreeModel treeModel;
-    private JTextArea text =new JTextArea();
 
     public ObjectExplorer() {
         super(new BorderLayout());
         JSplitPane split = new JSplitPane();
         treeModel = new ObjectExplorerTreeModel();
         fieldsTree = new JTree(treeModel);
+        JTextArea text = new JTextArea();
         fieldsTree.addTreeSelectionListener(new ObjectExplorerTreeSelectionListener(text));
         text.setLineWrap(true);
         text.setFont(new Font("Dialog", Font.PLAIN, 12));

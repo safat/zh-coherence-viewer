@@ -37,10 +37,11 @@ public class ApplicationMainFrame extends JFrame {
         resourceManager.addMenu(new ConfigJMenuBuilder().buildMenu(mainPane));
 
         setJMenuBar(resourceManager.getMenuBar());
-
+        setLocationRelativeTo(null);
         setVisible(true);
 
         ConnectionDialog connectionDialog = new ConnectionDialog(this);
+        connectionDialog.setLocationRelativeTo(this);
         connectionDialog.setVisible(true);
     }
 }
