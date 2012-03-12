@@ -71,7 +71,7 @@ public class QueryTool extends JPanel implements CoherenceViewerTool {
 
         DefaultCompletionProvider provider = new DefaultCompletionProvider();
         ClassLoader cl = getClass().getClassLoader();
-        InputStream in = cl.getResourceAsStream("cohQL.xml");
+        InputStream in = cl.getResourceAsStream("config/cohQL.xml");
         try{
             if(in != null){
                 provider.loadFromXML(in);
