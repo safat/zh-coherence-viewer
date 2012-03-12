@@ -4,6 +4,8 @@ import layout.TableLayout;
 import org.jdesktop.swingx.JXHeader;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -64,6 +66,12 @@ public class ConnectionDialog extends JDialog {
         pane.add(jmxUrl, "3,8");
         final JCheckBox ignoreUserConfig = new JCheckBox("Ignore user POF config");
         pane.add(ignoreUserConfig, "3,10");
+        ignoreUserConfig.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                System.setProperty("zh.coherence.viewer.ignoreUserPof", String.valueOf(ignoreUserConfig.isSelected()));
+            }
+        });
 
         hostList.addItemListener(new ServerItemListener(host, port, jmxUrl, ignoreUserConfig));
 

@@ -22,7 +22,12 @@ public class ZhPofContext implements Serializer, PofContext {
     private XmlPofConfig pofConfig;
 
     public ZhPofContext() {
-        pofConfig = new XmlPofContextReader().readXmlPofConfig("/zh-pof-config.xml");
+        String ignoreUserPof = System.getProperty("zh.coherence.viewer.ignoreUserPof");
+        if(ignoreUserPof == null || !Boolean.parseBoolean(ignoreUserPof)){
+            pofConfig = new XmlPofContextReader().readXmlPofConfig("/zh-pof-config.xml");
+        }else{
+            pofConfig = new XmlPofContextReader().readXmlPofConfig("coherence-pof-config.xml");
+        }
     }
 
     @Override
