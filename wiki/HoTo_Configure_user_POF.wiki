@@ -1,7 +1,7 @@
-#summary One-sentence summary of this page.
+#summary instruction: how to use application with user POF libraries
 #labels Phase-Deploy
 
-= Ho To Configure user POF =
+= How To Configure user POF =
 
  # unpack zhCoherenceViewer application
  # find a folder: user-files
