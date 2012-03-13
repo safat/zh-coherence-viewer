@@ -1,0 +1,10 @@
+#summary instruction: how to use application with user POF libraries
+
+= How To Configure user POF =
+
+ # unpack zhCoherenceViewer application
+ # find a folder: user-files
+ # copy all needed jars to it
+ # copy all needed pof XML files
+ # edit zh-pof-config.xml, add next line:
+ `<include>name of your pof file</include>`
