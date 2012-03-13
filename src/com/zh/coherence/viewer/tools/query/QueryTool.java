@@ -77,7 +77,7 @@ public class QueryTool extends JPanel implements CoherenceViewerTool {
                 provider.loadFromXML(in);
                 in.close();
             } else {
-                provider.loadFromXML(new File("cohQL.xml"));
+                provider.loadFromXML(new File("config/cohQL.xml"));
             }
         }catch (IOException ex){
             ex.printStackTrace();

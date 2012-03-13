@@ -1,5 +1,6 @@
 package com.zh.coherence.viewer.objectexplorer;
 
+import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,6 +14,10 @@ public class StopList {
         STOP_LIST.add(Integer.class);
         STOP_LIST.add(Float.class);
         STOP_LIST.add(Long.class);
+        STOP_LIST.add(Timestamp.class);
+        STOP_LIST.add(java.util.Date.class);
+        STOP_LIST.add(java.sql.Date.class);
+        STOP_LIST.add(java.util.Calendar.class);
     }
     
     public static boolean isStopped(Object obj){
