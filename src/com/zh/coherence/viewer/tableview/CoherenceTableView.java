@@ -2,6 +2,9 @@ package com.zh.coherence.viewer.tableview;
 
 import com.tangosol.coherence.dsltools.termtrees.Term;
 import org.jdesktop.swingx.JXTable;
+import org.jdesktop.swingx.decorator.Highlighter;
+import org.jdesktop.swingx.decorator.HighlighterFactory;
+import org.jdesktop.swingx.search.TableSearchable;
 
 import javax.swing.*;
 import javax.swing.table.TableColumnModel;
@@ -22,6 +25,7 @@ public class CoherenceTableView extends JPanel{
     private JXTable table;
     private TableModel tableModel;
     private RightButtonMenuBuilder rightButtonMenuBuilder;
+    private JXSearchPanelForJXTable searchPanel;
 
     private Object subject;
 
@@ -30,6 +34,9 @@ public class CoherenceTableView extends JPanel{
         table = new JXTable();
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         table.setRolloverEnabled(true);
+        Highlighter highlighter = HighlighterFactory.createAlternateStriping();
+        table.setHighlighters(highlighter);
+
         add(new JScrollPane(table), BorderLayout.CENTER);
         rightButtonMenuBuilder = new RightButtonMenuBuilder();
         table.addMouseListener(new MouseAdapter() {
@@ -44,6 +51,14 @@ public class CoherenceTableView extends JPanel{
                 }
             }
         });
+        table.setSearchable(new TableSearchable(table));
+        JToolBar toolBar = new JToolBar();
+        searchPanel = new JXSearchPanelForJXTable(table);
+
+        toolBar.add(searchPanel);
+        toolBar.addSeparator();
+        toolBar.add(new JLabel("test"));
+        add(toolBar, BorderLayout.NORTH);
     }
 
     @SuppressWarnings("unused")
@@ -61,16 +76,15 @@ public class CoherenceTableView extends JPanel{
         }else if((subject instanceof Integer || subject instanceof String) && params instanceof Term){
             tableModel = new OneLineTableModel(subject, (Term) params);
         }
-        
-        //todo add another models
-        
+
         if(tableModel != null){
             table.setModel(tableModel);
+            searchPanel.refreshFieldsList();
         }
         TableColumnModel cm = table.getTableHeader().getColumnModel();
         int width = this.getWidth();
         for(int i = 0, size = cm.getColumnCount(); i < size; i++){
-            cm.getColumn(i).setPreferredWidth(width / size - 1);
+            cm.getColumn(i).setPreferredWidth((width / size)-10);
         }
     }
 }
