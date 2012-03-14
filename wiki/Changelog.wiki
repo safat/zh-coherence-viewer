@@ -1,13 +1,21 @@
-= todo: 0.2.4 =
+== todo: 0.2.6 ==
+ * disable login window if need
+ * close text-dialog and object explorer dialog by ESC
+ * backup tools
+ * update Object Explorer to use search
+ * enamble support of templates
+ * add template editor
+----
+== 0.2.4 ==
  * add Highlighter for table
  * add filter for table
  * add search for table (ctrl+F)
  * search in text-view window
  * history of requests
 
-= 0.2.2 =
+== 0.2.2 ==
  * added Object Explorer
  * updeted logon dialog
 
-= 0.2 =
+== 0.2 ==
  * support user POF files
