@@ -6,6 +6,8 @@ import com.zh.coherence.viewer.tableview.CoherenceTableView;
 import com.zh.coherence.viewer.tools.CoherenceViewerTool;
 import com.zh.coherence.viewer.tools.query.actions.CqlScriptExecutor;
 import com.zh.coherence.viewer.tools.query.actions.ExecuteQueryAction;
+import com.zh.coherence.viewer.tools.query.actions.HistoryAction;
+import com.zh.coherence.viewer.utils.LRUList;
 import org.fife.ui.autocomplete.AutoCompletion;
 import org.fife.ui.autocomplete.DefaultCompletionProvider;
 import org.fife.ui.autocomplete.LanguageAwareCompletionProvider;
@@ -40,12 +42,16 @@ public class QueryTool extends JPanel implements CoherenceViewerTool {
     private JTextAreaWriter textAreaWriter;
     private JTabbedPane output;
 
+    private LRUList<String> history = new LRUList<String>(10);
+
     public QueryTool() {
         super(new BorderLayout());
         JToolBar toolBar = new JToolBar();
         toolBar.add(new ExecuteQueryAction(this));
+        toolBar.add(new HistoryAction(this));
+
         add(toolBar, BorderLayout.NORTH);
-        
+
         JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
         editor = new RSyntaxTextArea();
         editor.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_SQL);
@@ -55,10 +61,12 @@ public class QueryTool extends JPanel implements CoherenceViewerTool {
 
         editor.addKeyListener(new KeyAdapter() {
             CqlScriptExecutor scriptExecutor = new CqlScriptExecutor(QueryTool.this);
+
             @Override
             public void keyReleased(KeyEvent e) {
-                if(e.getKeyCode() == KeyEvent.VK_F5){
-                     scriptExecutor.execute();
+                if (e.getKeyCode() == KeyEvent.VK_F5 ||
+                        (e.getKeyCode() == KeyEvent.VK_ENTER && e.isControlDown())) {
+                    scriptExecutor.execute();
                 }
             }
         });
@@ -66,20 +74,20 @@ public class QueryTool extends JPanel implements CoherenceViewerTool {
         editorScrollPane.setFoldIndicatorEnabled(true);
         RSyntaxTextArea.setTemplatesEnabled(true);
         CodeTemplateManager ctm = RSyntaxTextArea.getCodeTemplateManager();
-        CodeTemplate ct = new StaticCodeTemplate("zc", "select * from 'ch'", null);
+        CodeTemplate ct = new StaticCodeTemplate("zc", "select * from 'ch'", null); //todo
         ctm.addTemplate(ct);
 
         DefaultCompletionProvider provider = new DefaultCompletionProvider();
         ClassLoader cl = getClass().getClassLoader();
         InputStream in = cl.getResourceAsStream("config/cohQL.xml");
-        try{
-            if(in != null){
+        try {
+            if (in != null) {
                 provider.loadFromXML(in);
                 in.close();
             } else {
                 provider.loadFromXML(new File("config/cohQL.xml"));
             }
-        }catch (IOException ex){
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
 
@@ -119,17 +127,17 @@ public class QueryTool extends JPanel implements CoherenceViewerTool {
         });
     }
 
-    public String getScript(){
+    public String getScript() {
         String selected = editor.getSelectedText();
-        if(selected != null){
+        if (selected != null) {
             return selected;
-        }else{
+        } else {
             return editor.getText();
         }
     }
 
-    public void traceText(Object text){
-        if(text == null){
+    public void traceText(Object text) {
+        if (text == null) {
             throw new IllegalArgumentException("text");
         }
         try {
@@ -145,7 +153,7 @@ public class QueryTool extends JPanel implements CoherenceViewerTool {
         }
     }
 
-    public Writer getConsolePrintWriter(){
+    public Writer getConsolePrintWriter() {
         return textAreaWriter;
     }
 
@@ -158,8 +166,20 @@ public class QueryTool extends JPanel implements CoherenceViewerTool {
     public String getName() {
         return "Query";
     }
-    
-    public void showResult(Object obj, Term tern, int limit){
+
+    public void showResult(Object obj, Term tern, int limit) {
         tableView.setSubject(obj, tern, limit);
+    }
+
+    public LRUList<String> getHistory() {
+        return history;
+    }
+
+    public void setHistory(LRUList<String> history) {
+        this.history = history;
+    }
+
+    public RSyntaxTextArea getEditor() {
+        return editor;
     }
 }
