@@ -2,6 +2,8 @@
  * add Highlighter for table
  * add filter for table
  * add search for table (ctrl+F)
+ * search in text-view window
+ * history of requests
 
 = 0.2.2 =
  * added Object Explorer
