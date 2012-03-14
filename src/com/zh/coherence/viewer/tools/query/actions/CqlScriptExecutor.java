@@ -86,9 +86,9 @@ public class CqlScriptExecutor {
     }
 
     private int checkSize(int size){
-        if(size > 100){
+        if(size > 500){
             String res = JOptionPane.showInputDialog("<html>Size of result more then 100.<br>The application can be crushed.<br>" +
-                    "Input number of lines and click the 'Ok' button to cut output data<br>or click the 'Cancel' button to ignore this message</html>", 100);
+                    "Input number of lines and click the 'Ok' button to cut output data<br>or click the 'Cancel' button to ignore this message</html>", 500);
             if(res != null){
                 try{
                     return Integer.parseInt(res);
