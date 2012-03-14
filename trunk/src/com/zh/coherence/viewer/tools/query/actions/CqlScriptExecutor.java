@@ -28,14 +28,16 @@ public class CqlScriptExecutor {
         this.queryTool = queryTool;
     }
 
-    public void execute(){
+    public void execute() {
         TokenTable toks = CoherenceQueryLanguage.getSqlTokenTable(true);
-        SQLOPParser p = new SQLOPParser(queryTool.getScript(), toks);
+        String script = queryTool.getScript();
+        queryTool.getHistory().add(script);
+        SQLOPParser p = new SQLOPParser(script, toks);
 
         Term tn;
-        try{
+        try {
             tn = p.parse();
-        }catch (Exception ex){
+        } catch (Exception ex) {
             queryTool.traceText("Parsing exception");
             queryTool.traceText(ex.getMessage() + "\n");
 
@@ -44,34 +46,34 @@ public class CqlScriptExecutor {
 
         CoherenceQuery query = new CoherenceQuery(true);
         PrintWriter printWriter = new PrintWriter(System.out);
-        if (query.build((NodeTerm)tn)){
+        if (query.build((NodeTerm) tn)) {
             query.showPlan(printWriter);
         }
         Object ret = null;
-        try{
-            ret =query.execute(printWriter, true);
-        }catch (Exception ex){
+        try {
+            ret = query.execute(printWriter, true);
+        } catch (Exception ex) {
             queryTool.traceText("Executing exception");
             queryTool.traceText(ex.getMessage() + "\n");
         }
-        if(ret == null){
-        }else if(ret instanceof Map){
-            int size = checkSize(((Map)ret).size());
-            if(size == 0){
+        if (ret == null) {
+        } else if (ret instanceof Map) {
+            int size = checkSize(((Map) ret).size());
+            if (size == 0) {
                 queryTool.traceText("result is Map with size: 0");
-            }else{
+            } else {
                 queryTool.showResult(ret, tn, size);
             }
-        }else if (ret instanceof Collection){
-            int size = checkSize(((Collection)ret).size());
-            if(size == 0){
+        } else if (ret instanceof Collection) {
+            int size = checkSize(((Collection) ret).size());
+            if (size == 0) {
                 queryTool.traceText("result is Collection with size: 0");
-            }else{
+            } else {
                 queryTool.showResult(ret, tn, size);
             }
-        }else if(ret instanceof Integer || ret instanceof String){
+        } else if (ret instanceof Integer || ret instanceof String) {
             queryTool.showResult(ret, tn, 1);
-        }else{
+        } else {
             System.err.println("class: " + ret.getClass());
             try {
                 Writer writer = queryTool.getConsolePrintWriter();
@@ -85,14 +87,14 @@ public class CqlScriptExecutor {
         printWriter.flush();
     }
 
-    private int checkSize(int size){
-        if(size > 500){
+    private int checkSize(int size) {
+        if (size > 500) {
             String res = JOptionPane.showInputDialog("<html>Size of result more then 100.<br>The application can be crushed.<br>" +
                     "Input number of lines and click the 'Ok' button to cut output data<br>or click the 'Cancel' button to ignore this message</html>", 500);
-            if(res != null){
-                try{
+            if (res != null) {
+                try {
                     return Integer.parseInt(res);
-                }catch(NumberFormatException ex){
+                } catch (NumberFormatException ex) {
                     //todo send message to console
                     ex.printStackTrace();
                 }
