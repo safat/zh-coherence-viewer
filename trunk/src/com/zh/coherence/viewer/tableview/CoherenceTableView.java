@@ -1,9 +1,8 @@
 package com.zh.coherence.viewer.tableview;
 
 import com.tangosol.coherence.dsltools.termtrees.Term;
+import com.zh.coherence.viewer.tableview.actions.TableHighlighterAction;
 import org.jdesktop.swingx.JXTable;
-import org.jdesktop.swingx.decorator.Highlighter;
-import org.jdesktop.swingx.decorator.HighlighterFactory;
 import org.jdesktop.swingx.search.TableSearchable;
 
 import javax.swing.*;
@@ -21,7 +20,7 @@ import java.util.Set;
  * Date: 13.02.12
  * Time: 23:03
  */
-public class CoherenceTableView extends JPanel{
+public class CoherenceTableView extends JPanel {
     private JXTable table;
     private TableModel tableModel;
     private RightButtonMenuBuilder rightButtonMenuBuilder;
@@ -34,18 +33,16 @@ public class CoherenceTableView extends JPanel{
         table = new JXTable();
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         table.setRolloverEnabled(true);
-        Highlighter highlighter = HighlighterFactory.createAlternateStriping();
-        table.setHighlighters(highlighter);
 
         add(new JScrollPane(table), BorderLayout.CENTER);
         rightButtonMenuBuilder = new RightButtonMenuBuilder();
         table.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
-                if(e.getButton() == MouseEvent.BUTTON3){
+                if (e.getButton() == MouseEvent.BUTTON3) {
                     Object value = tableModel.getValueAt(table.getSelectedRow(), table.getSelectedColumn());
                     JPopupMenu menu = rightButtonMenuBuilder.buildMenu(value);
-                    if(menu.getSubElements().length > 0){
+                    if (menu.getSubElements().length > 0) {
                         menu.show(e.getComponent(), e.getX(), e.getY());
                     }
                 }
@@ -57,7 +54,13 @@ public class CoherenceTableView extends JPanel{
 
         toolBar.add(searchPanel);
         toolBar.addSeparator();
-        toolBar.add(new JLabel("test"));
+
+        JToggleButton highlightTable = new JToggleButton();
+        highlightTable.setAction(new TableHighlighterAction(highlightTable, table));
+        highlightTable.getModel().setSelected(true);
+        highlightTable.getAction().actionPerformed(null);
+
+        toolBar.add(highlightTable);
         add(toolBar, BorderLayout.NORTH);
     }
 
@@ -69,22 +72,22 @@ public class CoherenceTableView extends JPanel{
     public void setSubject(Object subject, Object params, int limit) {
         this.subject = subject;
         //choose and setup new TableModel
-        if(subject instanceof Map && params instanceof Term){
-             tableModel = new MapTableModel((Map) subject, (Term) params, limit);
-        }else if(subject instanceof Set){
-             tableModel = new SetTableModel((Set) subject, limit);
-        }else if((subject instanceof Integer || subject instanceof String) && params instanceof Term){
+        if (subject instanceof Map && params instanceof Term) {
+            tableModel = new MapTableModel((Map) subject, (Term) params, limit);
+        } else if (subject instanceof Set) {
+            tableModel = new SetTableModel((Set) subject, limit);
+        } else if ((subject instanceof Integer || subject instanceof String) && params instanceof Term) {
             tableModel = new OneLineTableModel(subject, (Term) params);
         }
 
-        if(tableModel != null){
+        if (tableModel != null) {
             table.setModel(tableModel);
             searchPanel.refreshFieldsList();
         }
         TableColumnModel cm = table.getTableHeader().getColumnModel();
         int width = this.getWidth();
-        for(int i = 0, size = cm.getColumnCount(); i < size; i++){
-            cm.getColumn(i).setPreferredWidth((width / size)-10);
+        for (int i = 0, size = cm.getColumnCount(); i < size; i++) {
+            cm.getColumn(i).setPreferredWidth((width / size) - 10);
         }
     }
 }
