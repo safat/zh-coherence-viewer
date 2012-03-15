@@ -1,6 +1,8 @@
 package com.zh.coherence.viewer.tools.query.actions;
 
 import com.zh.coherence.viewer.tools.query.QueryTool;
+import com.zh.coherence.viewer.utils.icons.IconHelper;
+import com.zh.coherence.viewer.utils.icons.IconType;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,7 +21,7 @@ public class HistoryAction extends AbstractAction{
         this.queryTool = queryTool;
 
         putValue(Action.NAME, "History");
-        putValue(Action.SMALL_ICON, new ImageIcon("icons/history.png"));
+        putValue(Action.SMALL_ICON, IconHelper.getInstance().getIcon(IconType.HISTORY));
     }
 
     @Override
