@@ -1,4 +1,4 @@
-== todo: 0.2.6 ==
+== todo: 0.3, release date: 19.03 ==
  * about dialog
  * close text-dialog and object explorer dialog by ESC
  * backup tools
