@@ -1,5 +1,5 @@
 == todo: 0.2.6 ==
- * disable login window if need
+ * about dialog
  * close text-dialog and object explorer dialog by ESC
  * backup tools
  * update Object Explorer to use search
