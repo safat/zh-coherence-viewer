@@ -1,5 +1,8 @@
 package com.zh.coherence.viewer.components;
 
+import com.zh.coherence.viewer.utils.icons.IconHelper;
+import com.zh.coherence.viewer.utils.icons.IconType;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -21,7 +24,7 @@ public class TabCloseIcon implements Icon {
     }
 
     public TabCloseIcon() {
-        this(new ImageIcon("icons/close-icon.gif"));
+        this(IconHelper.getInstance().getIcon(IconType.CLOSE_TAB));
     }
 
     public void paintIcon(Component c, Graphics g, int x, int y) {

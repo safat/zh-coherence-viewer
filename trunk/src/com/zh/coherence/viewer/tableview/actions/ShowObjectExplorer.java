@@ -1,6 +1,8 @@
 package com.zh.coherence.viewer.tableview.actions;
 
 import com.zh.coherence.viewer.objectexplorer.ObjectExplorer;
+import com.zh.coherence.viewer.utils.icons.IconHelper;
+import com.zh.coherence.viewer.utils.icons.IconType;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -17,7 +19,7 @@ public class ShowObjectExplorer extends AbstractAction{
     public ShowObjectExplorer(Object value) {
         this.value = value;
         putValue(Action.NAME, "object explorer");
-        putValue(Action.SMALL_ICON, new ImageIcon("icons/explorer.png"));
+        putValue(Action.SMALL_ICON, IconHelper.getInstance().getIcon(IconType.EXPLORER));
     }
 
     @Override

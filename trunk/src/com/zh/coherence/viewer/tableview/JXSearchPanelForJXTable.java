@@ -1,5 +1,7 @@
 package com.zh.coherence.viewer.tableview;
 
+import com.zh.coherence.viewer.utils.icons.IconHelper;
+import com.zh.coherence.viewer.utils.icons.IconType;
 import org.jdesktop.swingx.AbstractPatternPanel;
 import org.jdesktop.swingx.JXButton;
 import org.jdesktop.swingx.JXComboBox;
@@ -279,7 +281,7 @@ public class JXSearchPanelForJXTable extends AbstractPatternPanel {
         buttons.setBorder(BorderFactory.createEtchedBorder());
         cont.add(buttons, BorderLayout.SOUTH);
         JButton ok = new JButton("OK");
-        ok.setIcon(new ImageIcon("icons/ok.png"));
+        ok.setIcon(IconHelper.getInstance().getIcon(IconType.OK));
         ok.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

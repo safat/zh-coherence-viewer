@@ -1,5 +1,7 @@
 package com.zh.coherence.viewer.tableview.actions;
 
+import com.zh.coherence.viewer.utils.icons.IconHelper;
+import com.zh.coherence.viewer.utils.icons.IconType;
 import org.jdesktop.swingx.JXTable;
 import org.jdesktop.swingx.decorator.Highlighter;
 import org.jdesktop.swingx.decorator.HighlighterFactory;
@@ -14,8 +16,8 @@ import java.awt.event.ActionEvent;
  * Time: 22:06
  */
 public class TableHighlighterAction extends AbstractAction {
-    private ImageIcon yellow = new ImageIcon("icons/yellow-hint-icon.png");
-    private ImageIcon white = new ImageIcon("icons/white-hint-icon.png");
+    private Icon yellow = IconHelper.getInstance().getIcon(IconType.YELLOW_HINT);
+    private Icon white = IconHelper.getInstance().getIcon(IconType.WHITE_HINT);
     private Highlighter highlighter = HighlighterFactory.createAlternateStriping();
 
     private JToggleButton button;

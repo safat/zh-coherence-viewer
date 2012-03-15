@@ -1,5 +1,7 @@
 package com.zh.coherence.viewer.tableview.actions;
 
+import com.zh.coherence.viewer.utils.icons.IconHelper;
+import com.zh.coherence.viewer.utils.icons.IconType;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextAreaHighlighter;
 import org.fife.ui.rtextarea.ChangeableHighlightPainter;
 import org.fife.ui.rtextarea.RTextArea;
@@ -25,7 +27,7 @@ public class ShowObjectInText extends AbstractAction {
         this.value = String.valueOf(value);
 
         putValue(Action.NAME, "Show text");
-        putValue(Action.SMALL_ICON, new ImageIcon("icons/text-icon.png"));
+        putValue(Action.SMALL_ICON, IconHelper.getInstance().getIcon(IconType.TEXT));
     }
 
     @Override
