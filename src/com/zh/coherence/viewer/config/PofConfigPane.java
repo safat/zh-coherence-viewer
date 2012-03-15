@@ -1,5 +1,7 @@
 package com.zh.coherence.viewer.config;
 
+import com.zh.coherence.viewer.utils.icons.IconHelper;
+import com.zh.coherence.viewer.utils.icons.IconType;
 import org.jdesktop.swingx.JXList;
 
 import javax.swing.*;
@@ -31,7 +33,7 @@ public class PofConfigPane extends JPanel {
 
     private class AddFileAction extends AbstractAction {
         private AddFileAction() {
-            putValue(Action.SMALL_ICON, new ImageIcon("icons/plus.png"));
+            putValue(Action.SMALL_ICON, IconHelper.getInstance().getIcon(IconType.PLUS));
             putValue(Action.NAME, "Add");
         }
 
@@ -43,7 +45,7 @@ public class PofConfigPane extends JPanel {
 
     private class RemoveFileAction extends AbstractAction {
         private RemoveFileAction() {
-            putValue(Action.SMALL_ICON, new ImageIcon("icons/close-icon.png"));
+            putValue(Action.SMALL_ICON, IconHelper.getInstance().getIcon(IconType.CLOSE_TAB));
             putValue(Action.NAME, "Remove");
         }
 
