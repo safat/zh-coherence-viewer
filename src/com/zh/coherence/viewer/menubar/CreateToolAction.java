@@ -2,6 +2,8 @@ package com.zh.coherence.viewer.menubar;
 
 import com.zh.coherence.viewer.ResourceManager;
 import com.zh.coherence.viewer.tools.CoherenceViewerToolCreator;
+import com.zh.coherence.viewer.utils.icons.IconHelper;
+import com.zh.coherence.viewer.utils.icons.IconType;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -18,7 +20,7 @@ public class CreateToolAction extends AbstractAction {
     public CreateToolAction(CoherenceViewerToolCreator creator) {
         this.creator = creator;
         this.putValue(Action.NAME, creator.getToolName());
-        putValue(Action.SMALL_ICON, new ImageIcon("icons/write.png"));
+        putValue(Action.SMALL_ICON, IconHelper.getInstance().getIcon(IconType.WRITE));
     }
 
     @Override

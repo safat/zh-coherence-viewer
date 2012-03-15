@@ -1,6 +1,8 @@
 package com.zh.coherence.viewer.tools.query.actions;
 
 import com.zh.coherence.viewer.tools.query.QueryTool;
+import com.zh.coherence.viewer.utils.icons.IconHelper;
+import com.zh.coherence.viewer.utils.icons.IconType;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -16,7 +18,7 @@ public class ExecuteQueryAction extends AbstractAction{
 
     public ExecuteQueryAction(QueryTool queryTool) {
         putValue(Action.NAME, "Execute");
-        putValue(Action.SMALL_ICON, new ImageIcon("icons/start-icon.png"));
+        putValue(Action.SMALL_ICON, IconHelper.getInstance().getIcon(IconType.START));
 
         scriptExecutor = new CqlScriptExecutor(queryTool);
     }

@@ -22,6 +22,8 @@
  */
 package com.zh.coherence.viewer.tools.query;
 
+import com.zh.coherence.viewer.utils.icons.IconHelper;
+import com.zh.coherence.viewer.utils.icons.IconType;
 import org.fife.ui.autocomplete.Completion;
 import org.fife.ui.autocomplete.CompletionCellRenderer;
 import org.fife.ui.autocomplete.FunctionCompletion;
@@ -29,10 +31,7 @@ import org.fife.ui.autocomplete.VariableCompletion;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
 import java.io.Serializable;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 
 /**
@@ -52,33 +51,10 @@ class CCellRenderer extends CompletionCellRenderer {
      * Constructor.
      */
     public CCellRenderer() {
-        keywordIcon = getIcon("icons/keyword.png");
-        functionIcon = getIcon("icons/function.png");
+        keywordIcon = IconHelper.getInstance().getIcon(IconType.KEYWORD);
+        functionIcon = IconHelper.getInstance().getIcon(IconType.FUNCTION);
         emptyIcon = new EmptyIcon(16);
     }
-
-
-    /**
-     * Returns an icon.
-     *
-     * @param resource The icon to retrieve.  This should either be a file,
-     *                 or a resource loadable by the current ClassLoader.
-     * @return The icon.
-     */
-    private Icon getIcon(String resource) {
-        ClassLoader cl = getClass().getClassLoader();
-        URL url = cl.getResource(resource);
-        if (url == null) {
-            File file = new File(resource);
-            try {
-                url = file.toURI().toURL();
-            } catch (MalformedURLException mue) {
-                mue.printStackTrace(); // Never happens
-            }
-        }
-        return url != null ? new ImageIcon(url) : null;
-    }
-
 
     /**
      * {@inheritDoc}

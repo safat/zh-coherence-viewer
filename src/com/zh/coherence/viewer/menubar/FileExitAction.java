@@ -1,5 +1,8 @@
 package com.zh.coherence.viewer.menubar;
 
+import com.zh.coherence.viewer.utils.icons.IconHelper;
+import com.zh.coherence.viewer.utils.icons.IconType;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
@@ -12,7 +15,7 @@ import java.awt.event.ActionEvent;
 public class FileExitAction extends AbstractAction{
     public FileExitAction() {
         putValue(Action.NAME, "Exit");
-        putValue(Action.SMALL_ICON, new ImageIcon("icons/exit.png"));
+        putValue(Action.SMALL_ICON, IconHelper.getInstance().getIcon(IconType.EXIT));
     }
 
     @Override
