@@ -1,6 +1,7 @@
 package com.zh.coherence.viewer.pof;
 
 import com.tangosol.io.ReadBuffer;
+import com.tangosol.io.WrapperBufferInput;
 import com.tangosol.io.pof.*;
 import com.tangosol.util.Binary;
 import com.tangosol.util.ImmutableArrayList;
@@ -24,11 +25,13 @@ public class PofDecoder extends PofHelper {
 
     public void fillBinary(ReadBuffer.BufferInput input, ValueContainer container){
         try{
-            byte[] binary = new byte[input.available()];
-            int offset = input.getOffset();
-            input.readFully(binary);
-            container.setBinary(binary);
-            input.setOffset(offset);
+            if(!(input instanceof WrapperBufferInput)){
+                byte[] binary = new byte[input.available()];
+                int offset = input.getOffset();
+                input.readFully(binary);
+                container.setBinary(binary);
+                input.setOffset(offset);
+            }
         }catch (Exception ex){
             ex.printStackTrace();
         }

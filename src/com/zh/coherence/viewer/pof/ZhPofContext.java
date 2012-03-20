@@ -11,6 +11,7 @@ import com.zh.coherence.viewer.pof.xml.XmlPofConfig;
 import com.zh.coherence.viewer.pof.xml.XmlPofContextReader;
 
 import java.io.IOException;
+import java.util.Map;
 
 /**
  * Created by IntelliJ IDEA.
@@ -69,6 +70,9 @@ public class ZhPofContext implements Serializer, PofContext {
 
     @Override
     public boolean isUserType(Object o) {
+        if(o instanceof Map){
+            return false;
+        }
         return isUserType(o.getClass());
     }
 

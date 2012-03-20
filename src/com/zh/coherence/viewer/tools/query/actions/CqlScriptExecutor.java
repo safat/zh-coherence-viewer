@@ -44,11 +44,13 @@ public class CqlScriptExecutor {
             return;
         }
 
+        long time = System.currentTimeMillis();
         CoherenceQuery query = new CoherenceQuery(true);
         PrintWriter printWriter = new PrintWriter(System.out);
         if (query.build((NodeTerm) tn)) {
             query.showPlan(printWriter);
         }
+
         Object ret = null;
         try {
             ret = query.execute(printWriter, true);
@@ -85,6 +87,7 @@ public class CqlScriptExecutor {
             }
         }
         printWriter.flush();
+        System.err.println("Time: " + (System.currentTimeMillis() - time));
     }
 
     private int checkSize(int size) {

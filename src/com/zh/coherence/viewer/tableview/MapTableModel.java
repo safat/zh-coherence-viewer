@@ -57,11 +57,14 @@ public class MapTableModel implements TableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Object tmp = subject.get(keys.get(rowIndex));
+        Object ret;
         if(tmp instanceof List){
-            return ((List)tmp).get(columnIndex);
+            ret = ((List)tmp).get(columnIndex);
         }else{
-            return tmp;
+            ret = tmp;
         }
+
+        return new TableValueWrapper(ret);
     }
 
     @Override

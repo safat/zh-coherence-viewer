@@ -52,10 +52,10 @@ public class SetTableModel implements TableModel{
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         if(columnIndex == 0){
-            return list.get(rowIndex).getKey();
+            return new TableValueWrapper(list.get(rowIndex).getKey());
 
         }else{
-            return list.get(rowIndex).getValue();
+            return new TableValueWrapper(list.get(rowIndex).getValue());
         }
     }
 
