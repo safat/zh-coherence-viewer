@@ -1,9 +1,9 @@
 == todo: 0.3, release date: 26.03 ==
  * about dialog
  * close text-dialog and object explorer dialog by ESC
- * backup tools *`[in progress]`*
+ * *`[in progress]`* backup tool
  * update Object Explorer to use search
- * enamble support of templates
+ * enable support of templates
  * add template editor
 ----
 == 0.2.4 ==
