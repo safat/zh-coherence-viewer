@@ -1,1 +1,2 @@
 Query = com.zh.coherence.viewer.tools.query.QueryToolCreator
+Backup/Restore = com.zh.coherence.viewer.tools.backup.BackupToolCreator

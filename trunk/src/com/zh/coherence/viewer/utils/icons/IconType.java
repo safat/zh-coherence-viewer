@@ -20,7 +20,9 @@ public enum IconType {
     TEXT("text-icon.png"),
     WHITE_HINT("white-hint-icon.png"),
     WRITE("write.png"),
-    YELLOW_HINT("yellow-hint-icon.png")
+    YELLOW_HINT("yellow-hint-icon.png"),
+    BACKUP("backup.png"),
+    MINUS("minus.png")
     ;
 
     private String type;

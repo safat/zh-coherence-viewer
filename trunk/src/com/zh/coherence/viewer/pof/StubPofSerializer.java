@@ -1,10 +1,7 @@
 package com.zh.coherence.viewer.pof;
 
 import com.tangosol.io.ReadBuffer;
-import com.tangosol.io.pof.PofBufferReader;
-import com.tangosol.io.pof.PofReader;
-import com.tangosol.io.pof.PofSerializer;
-import com.tangosol.io.pof.PofWriter;
+import com.tangosol.io.pof.*;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
