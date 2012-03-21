@@ -59,7 +59,6 @@ public class BackupTool extends JPanel implements CoherenceViewerTool {
 
         backupActionRadio = new JRadioButton(new BackupAction(context, BackupContext.BackupAction.BACKUP, "Backup"));
         restoreActionRadio = new JRadioButton(new BackupAction(context, BackupContext.BackupAction.RESTORE, "Restore"));
-        restoreActionRadio.setEnabled(false);
 
         JXRadioGroup actionRadioGroup = new JXRadioGroup();
         actionRadioGroup.setValues(new JRadioButton[]{backupActionRadio, restoreActionRadio});
