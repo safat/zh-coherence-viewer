@@ -43,9 +43,9 @@ public class TagHandler extends DefaultHandler {
             userType.type = Integer.parseInt(currentText);
         }else if("class-name".equalsIgnoreCase(qName)){
             if(isSerializer){
-                userType.serializer = currentText;
+                userType.serializer = currentText.trim();
             }else{
-                userType.clazz = currentText;
+                userType.clazz = currentText.trim();
             }
         }else if("serializer".equalsIgnoreCase(qName)){
             isSerializer = false;

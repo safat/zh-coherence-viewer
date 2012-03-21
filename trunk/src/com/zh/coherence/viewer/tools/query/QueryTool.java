@@ -17,6 +17,7 @@ import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rsyntaxtextarea.templates.CodeTemplate;
 import org.fife.ui.rsyntaxtextarea.templates.StaticCodeTemplate;
 import org.fife.ui.rtextarea.RTextScrollPane;
+import org.jdesktop.swingx.JXPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,7 +36,7 @@ import java.util.Date;
  * Date: 11.02.12
  * Time: 1:18
  */
-public class QueryTool extends JPanel implements CoherenceViewerTool {
+public class QueryTool extends JXPanel implements CoherenceViewerTool {
     private RSyntaxTextArea editor;
     private JTextArea console;
     private CoherenceTableView tableView;
