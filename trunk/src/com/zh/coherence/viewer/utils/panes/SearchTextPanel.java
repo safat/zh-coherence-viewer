@@ -70,6 +70,8 @@ public class SearchTextPanel extends JPanel{
         north.add(searchField);
 
         add(north, BorderLayout.NORTH);
+
+        wrap.setSelected(true);
     }
 
     public void setText(String text){

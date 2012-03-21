@@ -1,6 +1,9 @@
 package com.zh.coherence.viewer.objectexplorer;
 
 import com.zh.coherence.viewer.objectexplorer.viewer.Viewer;
+import com.zh.coherence.viewer.utils.panes.SearchTextPanel;
+import org.jdesktop.swingx.JXTree;
+import org.jdesktop.swingx.search.TreeSearchable;
 
 import javax.swing.*;
 import javax.swing.event.TreeSelectionEvent;
@@ -8,18 +11,17 @@ import javax.swing.event.TreeSelectionListener;
 import java.awt.*;
 
 public class ObjectExplorer extends JPanel {
-    private JTree fieldsTree;
+    private JXTree fieldsTree;
     private ObjectExplorerTreeModel treeModel;
 
     public ObjectExplorer() {
         super(new BorderLayout());
         JSplitPane split = new JSplitPane();
         treeModel = new ObjectExplorerTreeModel();
-        fieldsTree = new JTree(treeModel);
-        JTextArea text = new JTextArea();
+        fieldsTree = new JXTree(treeModel);
+        SearchTextPanel text = new SearchTextPanel();
         fieldsTree.addTreeSelectionListener(new ObjectExplorerTreeSelectionListener(text));
-        text.setLineWrap(true);
-        text.setFont(new Font("Dialog", Font.PLAIN, 12));
+        fieldsTree.setSearchable(new TreeSearchable(fieldsTree));
 
         add(split, BorderLayout.CENTER);
         split.setLeftComponent(new JScrollPane(fieldsTree));
@@ -34,9 +36,9 @@ public class ObjectExplorer extends JPanel {
     }
 
     private class ObjectExplorerTreeSelectionListener implements TreeSelectionListener{
-        JTextArea field;
+        SearchTextPanel field;
 
-        private ObjectExplorerTreeSelectionListener(JTextArea field) {
+        private ObjectExplorerTreeSelectionListener(SearchTextPanel field) {
             this.field = field;
         }
 
