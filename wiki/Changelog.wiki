@@ -2,7 +2,7 @@
  * about dialog
  * close text-dialog and object explorer dialog by ESC
  * *`[in progress]`* backup tool
- * update Object Explorer to use search
+ * *`[done]`* update Object Explorer to use search
  * enable support of templates
  * add template editor
 ----
