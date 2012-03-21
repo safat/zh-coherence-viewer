@@ -3,6 +3,7 @@ package com.zh.coherence.viewer.tableview.actions;
 import com.zh.coherence.viewer.utils.icons.IconHelper;
 import com.zh.coherence.viewer.utils.icons.IconType;
 import com.zh.coherence.viewer.utils.panes.SearchTextPanel;
+import com.zh.coherence.viewer.utils.ui.JDialogHelper;
 
 import javax.swing.*;
 import java.awt.*;
@@ -31,6 +32,7 @@ public class ShowObjectInText extends AbstractAction {
     public void actionPerformed(ActionEvent e) {
         final JDialog dialog = new JDialog();
         Container container = dialog.getContentPane();
+        JDialogHelper.escDialog(dialog);
 
         container.add(searchTextPanel, BorderLayout.CENTER);
         searchTextPanel.setText(value);

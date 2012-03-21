@@ -2,6 +2,7 @@ package com.zh.coherence.viewer.tools.backup.actions;
 
 import com.zh.coherence.viewer.tools.backup.BackupContext;
 import com.zh.coherence.viewer.tools.backup.BackupMaker;
+import com.zh.coherence.viewer.tools.backup.RestoreMaker;
 import com.zh.coherence.viewer.utils.icons.IconHelper;
 import com.zh.coherence.viewer.utils.icons.IconType;
 
@@ -42,6 +43,9 @@ public class StartAction extends AbstractAction{
                 }
             });
             thread.start();
+        } else {
+            final RestoreMaker restoreMaker = new RestoreMaker(context, parent);
+            restoreMaker.make();
         }
     }
 }

@@ -3,6 +3,7 @@ package com.zh.coherence.viewer.tableview.actions;
 import com.zh.coherence.viewer.objectexplorer.ObjectExplorer;
 import com.zh.coherence.viewer.utils.icons.IconHelper;
 import com.zh.coherence.viewer.utils.icons.IconType;
+import com.zh.coherence.viewer.utils.ui.JDialogHelper;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -25,6 +26,7 @@ public class ShowObjectExplorer extends AbstractAction{
     @Override
     public void actionPerformed(ActionEvent e) {
         JDialog dialog = new JDialog((JFrame)null, "Object Explorer");
+        JDialogHelper.escDialog(dialog);
         dialog.setSize(800, 600);
         dialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         ObjectExplorer explorer = new ObjectExplorer();
