@@ -1,11 +1,8 @@
 == todo: 0.3, release date: 26.03 ==
- * about dialog
- * *`[done]`* close text-dialog and object explorer dialog by ESC
- * *`[done]`* backup tool
- * *`[done]`* update Object Explorer to use search
- * *`[in progress]`* enable support of templates
- * add template editor
-----
+ * close text-dialog and object explorer dialog by ESC
+ * backup tool
+ * update Object Explorer to use search
+ ----
 == 0.2.4 ==
  * add Highlighter for table
  * add filter for table
