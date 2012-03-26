@@ -22,13 +22,13 @@ public class ApplicationMainPane extends JPanel implements ApplicationPane{
 
         tabbedPane = new ClosableTabbedPane();
         add(tabbedPane, BorderLayout.CENTER);
-
     }
 
     @Override
     public void addTool(CoherenceViewerTool tool) {
         tabbedPane.addTab(tool.getName() + " #" + count ,tool.getPane());
         tabbedPane.setIconAt(tabbedPane.getTabCount()-1, null);
+        tabbedPane.setSelectedIndex(count);
         count ++;
     }
 }
