@@ -64,7 +64,7 @@ public class MapTableModel implements TableModel {
             ret = tmp;
         }
 
-        return new TableValueWrapper(ret);
+        return ret;
     }
 
     @Override
