@@ -23,7 +23,8 @@ public enum IconType {
     YELLOW_HINT("yellow-hint-icon.png"),
     BACKUP("backup.png"),
     MINUS("minus.png"),
-    CLOCK_64("clock-icon.png")
+    CLOCK_64("clock-icon.png"),
+    SETTINGS("settings.png")
     ;
 
     private String type;
