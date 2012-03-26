@@ -54,8 +54,8 @@
         <mkdir dir="${dist_dir}/coherence-lib"/>
         <mkdir dir="${dist_dir}/tmp"/>
 
-        <zip destfile="${dist}/zhCoherenceViewer.zip">
-            <fileset dir="${dist}" includes="zhCoherenceViewer/**/*.*"/>
+        <zip destfile="${dist}/zhCoherenceViewer_${version}.zip" level="9" filesonly="false">
+            <fileset dir="${dist}" includes="zhCoherenceViewer/**/"/>
 
         </zip>
     </target>
