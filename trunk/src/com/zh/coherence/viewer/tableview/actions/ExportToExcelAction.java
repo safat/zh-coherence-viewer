@@ -81,7 +81,7 @@ public class ExportToExcelAction extends AbstractAction {
                 column.setCellFormat(headFormat);
                 sheet1.addCell(column);
             }
-            int j = 0;
+            int j;
             for (int i = 0; i < model.getRowCount(); i++) {
                 for (j = 0; j < model.getColumnCount(); j++) {
                     Label row = new Label(j, i + 1,

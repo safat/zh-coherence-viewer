@@ -67,7 +67,7 @@ public class ExportToCsvAction extends AbstractAction {
             }
             csvOutput.endRecord();
 
-            int j = 0;
+            int j;
             for (int i = 0; i < model.getRowCount(); i++) {
                 for (j = 0; j < model.getColumnCount(); j++) {
                     csvOutput.write(String.valueOf(model.getValueAt(i, j)));

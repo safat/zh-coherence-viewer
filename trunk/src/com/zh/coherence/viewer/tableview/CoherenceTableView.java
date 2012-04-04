@@ -34,6 +34,7 @@ public class CoherenceTableView extends JPanel {
         super(new BorderLayout());
         table = new JXTable();
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        table.setColumnControlVisible(true);
         table.setRolloverEnabled(true);
 
         add(new JScrollPane(table), BorderLayout.CENTER);
@@ -41,7 +42,12 @@ public class CoherenceTableView extends JPanel {
         table.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
-                if (e.getButton() == MouseEvent.BUTTON3) {
+                if (SwingUtilities.isRightMouseButton( e )) {
+                    Point p = e.getPoint();
+                    int rowNumber = table.rowAtPoint( p );
+                    ListSelectionModel model = table.getSelectionModel();
+                    model.setSelectionInterval( rowNumber, rowNumber );
+
                     Object value = tableModel.getValueAt(table.getSelectedRow(), table.getSelectedColumn());
                     JPopupMenu menu = rightButtonMenuBuilder.buildMenu(value);
                     if (menu.getSubElements().length > 0) {
