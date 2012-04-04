@@ -6,14 +6,17 @@ import com.tangosol.coherence.dslquery.SQLOPParser;
 import com.tangosol.coherence.dsltools.precedence.TokenTable;
 import com.tangosol.coherence.dsltools.termtrees.NodeTerm;
 import com.tangosol.coherence.dsltools.termtrees.Term;
+import com.tangosol.util.Filter;
+import com.tangosol.util.filter.LimitFilter;
 import com.zh.coherence.viewer.tools.query.QueryTool;
 
 import javax.swing.*;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.Writer;
+import java.lang.reflect.Field;
 import java.util.Collection;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 /**
  * Created by IntelliJ IDEA.
@@ -23,6 +26,7 @@ import java.util.Map;
  */
 public class CqlScriptExecutor {
     private QueryTool queryTool;
+    private Integer topLimiter = null;
 
     public CqlScriptExecutor(QueryTool queryTool) {
         this.queryTool = queryTool;
@@ -32,6 +36,21 @@ public class CqlScriptExecutor {
         TokenTable toks = CoherenceQueryLanguage.getSqlTokenTable(true);
         String script = queryTool.getScript();
         queryTool.getHistory().add(script);
+
+        Pattern pattern = Pattern.compile("^select top \\d*");
+
+        if(pattern.matcher(script).find()){
+            int start = script.indexOf("top");
+            start = script.indexOf(" ", start);
+            int  stop = script.indexOf(" ", start + 1);
+            String top = script.substring(start, stop);
+            topLimiter = Integer.parseInt(top.trim());
+
+            script = script.replaceFirst("top \\d* ", "");
+        }else {
+            topLimiter = null;
+        }
+
         SQLOPParser p = new SQLOPParser(script, toks);
 
         Term tn;
@@ -46,14 +65,27 @@ public class CqlScriptExecutor {
 
         long time = System.currentTimeMillis();
         CoherenceQuery query = new CoherenceQuery(true);
-        PrintWriter printWriter = new PrintWriter(System.out);
-        if (query.build((NodeTerm) tn)) {
-            query.showPlan(printWriter);
+        boolean buildResult = query.build((NodeTerm) tn);
+        if(!buildResult){
+            return;
         }
+
+        if(topLimiter != null){
+            try {
+                Field field = query.getClass().getDeclaredField("m_filter");
+                field.setAccessible(true);
+                Filter filter = (Filter) field.get(query);
+                LimitFilter limitFilter = new LimitFilter(filter, topLimiter);
+                field.set(query, limitFilter);
+            } catch (Exception e) {
+                queryTool.traceText(e.getMessage());
+            }
+        }
+
 
         Object ret = null;
         try {
-            ret = query.execute(printWriter, true);
+            ret = query.execute();
         } catch (Exception ex) {
             queryTool.traceText("Executing exception");
             queryTool.traceText(ex.getMessage() + "\n");
@@ -86,7 +118,6 @@ public class CqlScriptExecutor {
                 e1.printStackTrace();
             }
         }
-        printWriter.flush();
         System.err.println("Time: " + (System.currentTimeMillis() - time));
     }
 
