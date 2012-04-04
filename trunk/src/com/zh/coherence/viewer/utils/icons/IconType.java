@@ -24,7 +24,10 @@ public enum IconType {
     BACKUP("backup.png"),
     MINUS("minus.png"),
     CLOCK_64("clock-icon.png"),
-    SETTINGS("settings.png")
+    SETTINGS("settings.png"),
+    SAVE("save.png"),
+    CSV_28("csv_icon.jpg"),
+    EXCEL_28("excel_icon.jpg")
     ;
 
     private String type;

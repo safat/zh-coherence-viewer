@@ -1,7 +1,9 @@
 package com.zh.coherence.viewer.tableview;
 
 import com.tangosol.coherence.dsltools.termtrees.Term;
+import com.zh.coherence.viewer.tableview.actions.ExportDownDropAction;
 import com.zh.coherence.viewer.tableview.actions.TableHighlighterAction;
+import org.jdesktop.swingx.JXButton;
 import org.jdesktop.swingx.JXTable;
 import org.jdesktop.swingx.search.TableSearchable;
 
@@ -55,6 +57,9 @@ public class CoherenceTableView extends JPanel {
         toolBar.add(searchPanel);
         toolBar.addSeparator();
 
+        JButton export = new JXButton(new ExportDownDropAction(this));
+        toolBar.add(export);
+
         JToggleButton highlightTable = new JToggleButton();
         highlightTable.setAction(new TableHighlighterAction(highlightTable, table));
         highlightTable.getModel().setSelected(true);
@@ -89,5 +94,13 @@ public class CoherenceTableView extends JPanel {
         for (int i = 0, size = cm.getColumnCount(); i < size; i++) {
             cm.getColumn(i).setPreferredWidth((width / size) - 10);
         }
+    }
+
+    public JXTable getTable() {
+        return table;
+    }
+
+    public void setTable(JXTable table) {
+        this.table = table;
     }
 }
