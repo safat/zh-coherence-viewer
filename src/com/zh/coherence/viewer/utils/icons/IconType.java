@@ -27,7 +27,8 @@ public enum IconType {
     SETTINGS("settings.png"),
     SAVE("save.png"),
     CSV_28("csv_icon.jpg"),
-    EXCEL_28("excel_icon.jpg")
+    EXCEL_28("excel_icon.jpg"),
+    DATABASE_LINK("database-link.png")
     ;
 
     private String type;
