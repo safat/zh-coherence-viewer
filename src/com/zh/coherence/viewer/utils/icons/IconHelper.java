@@ -18,19 +18,25 @@ public class IconHelper {
 
     private IconHelper() {
     }
-    
-    public static IconHelper getInstance(){
+
+    public static IconHelper getInstance() {
         return HELPER;
     }
 
-    public Icon getIcon(IconType type){
-        if(icons.containsKey(type)){
-            return icons.get(type);
-        }else{
-            URL url = getClass().getResource(type.getType());
-            ImageIcon icon = new ImageIcon(url);
-            icons.put(type, icon);
-            return icon;
+    public Icon getIcon(IconType type) {
+        try {
+            if (icons.containsKey(type)) {
+                return icons.get(type);
+            } else {
+                URL url = getClass().getResource(type.getType());
+                ImageIcon icon = new ImageIcon(url);
+                icons.put(type, icon);
+                return icon;
+            }
+        } catch (Exception ex) {
+            System.err.println("icon: " + type + " not found");
+            ex.printStackTrace();
+            return null;
         }
     }
 }

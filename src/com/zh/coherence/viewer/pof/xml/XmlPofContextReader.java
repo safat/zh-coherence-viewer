@@ -25,6 +25,7 @@ public class XmlPofContextReader {
             parser.parse(stream, new TagHandler(pofConfig));
             stream.close();
         } catch (Exception ex) {
+            System.err.println("file: '" + path + "' was not found");
             ex.printStackTrace();
         }
 
