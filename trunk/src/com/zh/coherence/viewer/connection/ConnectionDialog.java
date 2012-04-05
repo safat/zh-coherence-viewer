@@ -1,5 +1,6 @@
 package com.zh.coherence.viewer.connection;
 
+import com.zh.coherence.viewer.jmx.JMXManager;
 import com.zh.coherence.viewer.utils.icons.IconHelper;
 import com.zh.coherence.viewer.utils.icons.IconType;
 import layout.TableLayout;
@@ -12,10 +13,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.awt.event.*;
 import java.io.File;
 
 import static layout.TableLayoutConstants.FILL;
@@ -29,7 +27,9 @@ import static layout.TableLayoutConstants.PREFERRED;
  */
 public class ConnectionDialog extends JDialog {
     private ServerList serverList = null;
-    private JTextField jmxUrl;
+    private JTextField jmxUrl, host, port;
+    private JComboBox hostList;
+    private JCheckBox ignoreUserConfig;
 
     public ConnectionDialog(JFrame owner) {
         super(owner, "Connection", true);
@@ -51,22 +51,25 @@ public class ConnectionDialog extends JDialog {
 
         pane.add(loginHeader, "1,1,3,1");
         pane.add(new JLabel("Connection's name"), "1, 2");
-        final JComboBox hostList = new JComboBox();
+        hostList = new JComboBox();
         hostList.setEditable(true);
+//        AutoCompleteDecorator.decorate(hostList);
 
         pane.add(hostList, "3,2");
 
         pane.add(new JLabel("Coherence host:"), "1, 4");
-        final JTextField host = new JTextField();
+        host = new JTextField();
+        host.addKeyListener(new LoginKeyListener());
         pane.add(host, "3, 4");
         pane.add(new JLabel("Port:"), "1, 6");
-        final JTextField port = new JTextField();
+        port = new JTextField();
+        port.addKeyListener(new LoginKeyListener());
         pane.add(port, "3, 6");
         jmxUrl = new JTextField();
-        jmxUrl.setEnabled(false);
+        jmxUrl.addKeyListener(new LoginKeyListener());
         pane.add(new JLabel("JMX URL:"), "1,8");
         pane.add(jmxUrl, "3,8");
-        final JCheckBox ignoreUserConfig = new JCheckBox("Ignore user POF config");
+        ignoreUserConfig = new JCheckBox("Ignore user POF config");
         pane.add(ignoreUserConfig, "3,10");
         ignoreUserConfig.addChangeListener(new ChangeListener() {
             @Override
@@ -85,27 +88,7 @@ public class ConnectionDialog extends JDialog {
         ok.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CoherenceConfigGenerator generator = new CoherenceConfigGenerator();
-                generator.setupExtendConfig(host.getText(), port.getText());
-                if(serverList == null){
-                    serverList = new ServerList();
-                }
-                //save data
-                ServerConfig config;
-                Object obj = hostList.getSelectedItem();
-                if(obj instanceof ServerConfig){
-                    config = (ServerConfig) obj;
-                }else{
-                    config = new ServerConfig();
-                    serverList.addServerConfig(config);
-                }
-                config.setName(obj.toString());
-                config.setHost(host.getText());
-                config.setPort(Integer.parseInt(port.getText()));
-                //todo set JMX
-                config.setIgnoreUserPof(ignoreUserConfig.isSelected());
-                writeServerList(serverList);
-                ConnectionDialog.this.dispose();
+                login();
             }
         });
         JButton cancel = new JButton("Cancel");
@@ -127,6 +110,44 @@ public class ConnectionDialog extends JDialog {
         }
 
         return pane;
+    }
+
+    private class LoginKeyListener extends KeyAdapter{
+        @Override
+        public void keyReleased(KeyEvent e) {
+            if(e.getKeyCode() == KeyEvent.VK_ENTER){
+                login();
+            }
+        }
+    }
+
+    private void login(){
+        CoherenceConfigGenerator generator = new CoherenceConfigGenerator();
+        generator.setupExtendConfig(host.getText(), port.getText());
+        if(serverList == null){
+            serverList = new ServerList();
+        }
+        //save data
+        ServerConfig config;
+        Object obj = hostList.getSelectedItem();
+        if(obj instanceof ServerConfig){
+            config = (ServerConfig) obj;
+        }else{
+            config = new ServerConfig();
+            serverList.addServerConfig(config);
+        }
+        config.setName(obj.toString());
+        config.setHost(host.getText());
+        config.setPort(Integer.parseInt(port.getText()));
+        String jmxUrlString = jmxUrl.getText().trim();
+        config.setJmxUrl(jmxUrlString);
+        if(!jmxUrlString.isEmpty()){
+            JMXManager.getInstance().connect(jmxUrlString);
+        }
+
+        config.setIgnoreUserPof(ignoreUserConfig.isSelected());
+        writeServerList(serverList);
+        ConnectionDialog.this.dispose();
     }
 
     private ServerList readServerList() {

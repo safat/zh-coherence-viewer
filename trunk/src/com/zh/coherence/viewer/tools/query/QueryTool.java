@@ -7,6 +7,7 @@ import com.zh.coherence.viewer.tools.CoherenceViewerTool;
 import com.zh.coherence.viewer.tools.query.actions.CqlScriptExecutor;
 import com.zh.coherence.viewer.tools.query.actions.ExecuteQueryAction;
 import com.zh.coherence.viewer.tools.query.actions.HistoryAction;
+import com.zh.coherence.viewer.tools.query.actions.InsertCacheNameAction;
 import com.zh.coherence.viewer.utils.LRUList;
 import org.fife.ui.autocomplete.AutoCompletion;
 import org.fife.ui.autocomplete.DefaultCompletionProvider;
@@ -50,6 +51,7 @@ public class QueryTool extends JXPanel implements CoherenceViewerTool {
         JToolBar toolBar = new JToolBar();
         toolBar.add(new ExecuteQueryAction(this));
         toolBar.add(new HistoryAction(this));
+        toolBar.add(new InsertCacheNameAction(this));
 
         add(toolBar, BorderLayout.NORTH);
 
