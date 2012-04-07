@@ -29,6 +29,9 @@ public class BackupMaker {
     }
 
     public void make(){
+        long globalTime = System.currentTimeMillis();
+        context.logPane.addMessage(new BackupLogEvent(
+                System.currentTimeMillis(), "", System.currentTimeMillis(), "Start task", "backup"));
         List<CacheWrapper> caches = new ArrayList<CacheWrapper>();
         NamedCache nCache;
         int maxElements = 0;
@@ -46,6 +49,7 @@ public class BackupMaker {
         context.updateGeneralProgress();
 
         for(CacheWrapper wrapper : caches){
+            long startTime = System.currentTimeMillis();
             context.cacheProgress.setMinimum(0);
             context.cacheProgress.setMaximum(wrapper.cache.size());
             context.cacheProgress.setValue(0);
@@ -80,6 +84,7 @@ public class BackupMaker {
                     store.setPassThrough(false);
                     buf.flush();
                     buf.close();
+                    file.close();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -88,6 +93,12 @@ public class BackupMaker {
             }
             wrapper.info.processed = true;
             context.getBackupTableModel().refresh(wrapper.info);
+
+            context.logPane.addMessage(new BackupLogEvent(
+                    startTime,wrapper.info.name , System.currentTimeMillis(),
+                    "Done, cache has been saved", "backup"));
         }
+        context.logPane.addMessage(new BackupLogEvent(
+                globalTime,"" , System.currentTimeMillis(), "Done", "Task has been finished"));
     }
 }

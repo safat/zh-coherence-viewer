@@ -1,5 +1,7 @@
 package com.zh.coherence.viewer.tools.backup;
 
+import com.zh.coherence.viewer.eventlog.EventLogPane;
+
 import javax.swing.*;
 
 /**
@@ -13,6 +15,8 @@ public class BackupContext {
     public enum Target {FOLDER, ZIP}
 
     protected JProgressBar generalProgress, cacheProgress;
+
+    public EventLogPane logPane;
 
     private BackupAction action = BackupAction.BACKUP;
     private Target target = Target.FOLDER;
@@ -71,7 +75,9 @@ public class BackupContext {
 
     public void setPath(String path) {
         this.path = path;
-        refreshTableData();
+        if(action == BackupAction.RESTORE){
+            refreshTableData();
+        }
     }
 
     public BackupTableModel getBackupTableModel() {

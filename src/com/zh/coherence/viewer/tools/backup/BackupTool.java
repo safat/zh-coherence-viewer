@@ -1,5 +1,6 @@
 package com.zh.coherence.viewer.tools.backup;
 
+import com.zh.coherence.viewer.eventlog.EventLogPane;
 import com.zh.coherence.viewer.tools.CoherenceViewerTool;
 import com.zh.coherence.viewer.tools.backup.actions.*;
 import com.zh.coherence.viewer.utils.icons.IconHelper;
@@ -38,8 +39,8 @@ public class BackupTool extends JPanel implements CoherenceViewerTool {
     public BackupTool() {
         super(new TableLayout(new double[][]{
                 {2, 300, 2, TableLayout.FILL, 2},
-                {2, PREFERRED, 2, PREFERRED, 5, PREFERRED, 5, PREFERRED, 10, PREFERRED}
-                //  header        action      source/target   progress       button
+                {2, PREFERRED, 2, PREFERRED, 5, PREFERRED, 5, PREFERRED, 10, PREFERRED, 5, FILL}
+                //  header        action      source/target   progress       button     event_log
         }));
 
         JXHeader header = new JXHeader("Backup / Restore",
@@ -147,6 +148,10 @@ public class BackupTool extends JPanel implements CoherenceViewerTool {
         }));
         startPanel.add(start, "0,0");
         add(startPanel, "3,9");
+
+        context.logPane = new EventLogPane(new BackupLogRenderer());
+        context.logPane.setBorder(BorderFactory.createTitledBorder("Event log"));
+        add(context.logPane, "1,11,3,11");
     }
 
     @Override
