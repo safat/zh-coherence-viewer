@@ -30,7 +30,7 @@ public class InsertCacheNameAction extends AbstractAction {
         JPopupMenu menu = new JPopupMenu();
         Set<String> names = JMXManager.getInstance().getCacheNamesList();
 
-        for(String name : names){
+        for (String name : names) {
             menu.add(new InsertTextAction(name, queryTool));
         }
 
@@ -38,7 +38,7 @@ public class InsertCacheNameAction extends AbstractAction {
         menu.show(component, 0, component.getHeight());
     }
 
-    private class InsertTextAction extends AbstractAction{
+    private class InsertTextAction extends AbstractAction {
         private String name;
         private QueryTool queryTool;
 
@@ -52,10 +52,13 @@ public class InsertCacheNameAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
             int caret = queryTool.getEditor().getCaretPosition();
-            String text = queryTool.getEditor().getText();
-            String leftSymbol = text.substring(caret-1, caret);
-            boolean ignoreComa = leftSymbol.equals("'") || leftSymbol.equals("\"");
-            if(!ignoreComa){
+            boolean ignoreComa = false;
+            if (caret > 0) {
+                String text = queryTool.getEditor().getText();
+                String leftSymbol = text.substring(caret - 1, caret);
+                ignoreComa = leftSymbol.equals("'") || leftSymbol.equals("\"");
+            }
+            if (!ignoreComa) {
                 name = "'" + name + "'";
             }
             queryTool.getEditor().insert(name, caret);

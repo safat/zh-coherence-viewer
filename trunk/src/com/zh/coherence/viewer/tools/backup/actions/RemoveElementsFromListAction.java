@@ -1,9 +1,10 @@
 package com.zh.coherence.viewer.tools.backup.actions;
 
 import com.zh.coherence.viewer.tools.backup.BackupContext;
+import com.zh.coherence.viewer.tools.backup.BackupTableModel;
 import com.zh.coherence.viewer.utils.icons.IconHelper;
 import com.zh.coherence.viewer.utils.icons.IconType;
-import org.jdesktop.swingx.JXList;
+import org.jdesktop.swingx.JXTable;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -16,11 +17,11 @@ import java.awt.event.ActionEvent;
  */
 public class RemoveElementsFromListAction extends AbstractAction{
     private BackupContext context;
-    private JXList list;
+    private JXTable table;
 
-    public RemoveElementsFromListAction(BackupContext context, JXList list) {
+    public RemoveElementsFromListAction(BackupContext context, JXTable table) {
         this.context = context;
-        this.list = list;
+        this.table = table;
 
         putValue(Action.NAME, "Remove");
         putValue(Action.SMALL_ICON, IconHelper.getInstance().getIcon(IconType.MINUS));
@@ -28,9 +29,9 @@ public class RemoveElementsFromListAction extends AbstractAction{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        DefaultListModel model = context.getCaches();
-        for(Object selected : list.getSelectedValues()){
-            model.removeElement(selected);
+        BackupTableModel model = context.getBackupTableModel();
+        for(int row : table.getSelectedRows()){
+            model.removeValue((BackupTableModel.CacheInfo) model.getValueAt(row, 1));
         }
     }
 }

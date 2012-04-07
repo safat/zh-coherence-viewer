@@ -39,9 +39,10 @@ public class ChoosePathAction extends AbstractAction{
                 ? JFileChooser.SAVE_DIALOG : JFileChooser.OPEN_DIALOG);
         fileChooser.setFileSelectionMode(context.getTarget() == BackupContext.Target.FOLDER
             ? JFileChooser.DIRECTORIES_ONLY : JFileChooser.FILES_ONLY);
-        fileChooser.showDialog(component.getTopLevelAncestor(), "OK");
-
-        File target = fileChooser.getSelectedFile();
-        textField.setText(target.toString());
+        int ret = fileChooser.showDialog(component.getTopLevelAncestor(), "OK");
+        if(ret == JFileChooser.APPROVE_OPTION){
+            File target = fileChooser.getSelectedFile();
+            textField.setText(target.toString());
+        }
     }
 }

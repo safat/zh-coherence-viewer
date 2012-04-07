@@ -10,7 +10,10 @@ import com.tangosol.util.Binary;
 import java.io.File;
 import java.io.RandomAccessFile;
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by IntelliJ IDEA.
@@ -26,31 +29,31 @@ public class BackupMaker {
     }
 
     public void make(){
-        List<NamedCache> caches = new ArrayList<NamedCache>();
+        List<CacheWrapper> caches = new ArrayList<CacheWrapper>();
         NamedCache nCache;
         int maxElements = 0;
 
-        Enumeration<String> cachesEnumeration = (Enumeration<String>) context.getCaches().elements();
-        while(cachesEnumeration.hasMoreElements()){
-            nCache = CacheFactory.getCache(cachesEnumeration.nextElement());
-            //todo check if cache doesn't exist
-            caches.add(nCache);
-            maxElements += nCache.size();
+        for(BackupTableModel.CacheInfo info : context.getBackupTableModel().getCacheInfoList()){
+            if(info.enabled){
+                nCache = CacheFactory.getCache(info.name);
+                caches.add(new CacheWrapper(nCache, info));
+                maxElements += nCache.size();
+            }
         }
         context.generalProgress.setMinimum(0);
         context.generalProgress.setMaximum(maxElements);
         context.generalProgress.setValue(0);
         context.updateGeneralProgress();
 
-        for(NamedCache cache : caches){
+        for(CacheWrapper wrapper : caches){
             context.cacheProgress.setMinimum(0);
-            context.cacheProgress.setMaximum(cache.size());
+            context.cacheProgress.setMaximum(wrapper.cache.size());
             context.cacheProgress.setValue(0);
-            context.updateCacheProgress(cache.getCacheName());
+            context.updateCacheProgress(wrapper.cache.getCacheName());
             //store file
 
-            if(cache instanceof SafeNamedCache){
-                SafeNamedCache snc = (SafeNamedCache) cache;
+            if(wrapper.cache instanceof SafeNamedCache){
+                SafeNamedCache snc = (SafeNamedCache) wrapper.cache;
                 try {
                     Method method = snc.getClass().getDeclaredMethod("getRunningNamedCache");
                     method.setAccessible(true);
@@ -58,12 +61,12 @@ public class BackupMaker {
                     store.setPassThrough(true);
 
                     Set<Map.Entry<Binary,Binary>> entries = store.entrySet();
-                    String name = cache.getCacheName();
+                    String name = wrapper.cache.getCacheName();
                     RandomAccessFile file = new RandomAccessFile(new File(context.getPath()
                             + File.separator + name), "rw");
                     WrapperBufferOutput buf = new WrapperBufferOutput(file);
                     buf.writePackedInt(-28);
-                    buf.writePackedInt(cache.size());
+                    buf.writePackedInt(wrapper.cache.size());
 
                     byte[] array;
                     for(Map.Entry<Binary,Binary> entry : entries){
@@ -75,14 +78,16 @@ public class BackupMaker {
                         buf.write(array, 1, array.length - 1);
                     }
                     store.setPassThrough(false);
-                    file.close();
+                    buf.flush();
+                    buf.close();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }else{
-                throw new RuntimeException("cannot save class: " + cache.getClass());
+                throw new RuntimeException("cannot save class: " + wrapper.cache.getClass());
             }
+            wrapper.info.processed = true;
+            context.getBackupTableModel().refresh(wrapper.info);
         }
-
     }
 }

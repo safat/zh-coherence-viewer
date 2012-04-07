@@ -19,6 +19,7 @@ import org.fife.ui.rsyntaxtextarea.templates.CodeTemplate;
 import org.fife.ui.rsyntaxtextarea.templates.StaticCodeTemplate;
 import org.fife.ui.rtextarea.RTextScrollPane;
 import org.jdesktop.swingx.JXPanel;
+import org.jdesktop.swingx.JXStatusBar;
 
 import javax.swing.*;
 import java.awt.*;
@@ -115,12 +116,16 @@ public class QueryTool extends JXPanel implements CoherenceViewerTool {
         output.add("Table", tableView);
         console = new JTextArea();
         console.setFont(new Font("Dialog", Font.PLAIN, 12));
-        output.add("Console", new JScrollPane(console));
+        //output.add("Console", new JScrollPane(console));
 
         splitPane.setBottomComponent(output);
 
         add(splitPane, BorderLayout.CENTER);
         //todo add query status? BorderLayout.SOUTH
+
+        JXStatusBar statusBar = new JXStatusBar();
+
+        add(statusBar, BorderLayout.SOUTH);
 
         textAreaWriter = new JTextAreaWriter(console);
         SwingUtilities.invokeLater(new Runnable() {
