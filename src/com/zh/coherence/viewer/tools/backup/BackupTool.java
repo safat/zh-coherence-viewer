@@ -6,13 +6,15 @@ import com.zh.coherence.viewer.utils.icons.IconHelper;
 import com.zh.coherence.viewer.utils.icons.IconType;
 import layout.TableLayout;
 import org.jdesktop.swingx.JXHeader;
-import org.jdesktop.swingx.JXList;
 import org.jdesktop.swingx.JXRadioGroup;
+import org.jdesktop.swingx.JXTable;
 import org.jdesktop.swingx.VerticalLayout;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
 import java.awt.*;
 
 import static layout.TableLayoutConstants.FILL;
@@ -29,7 +31,7 @@ public class BackupTool extends JPanel implements CoherenceViewerTool {
     private JRadioButton backupActionRadio, restoreActionRadio;
     private JRadioButton folderRadio, zipRadio;
     private BackupContext context = new BackupContext();
-    private JXList cacheList;
+    private JXTable caches;
     private JPanel cacheListPane = new JPanel(new BorderLayout());
     private JTextField pathFiled;
 
@@ -46,14 +48,28 @@ public class BackupTool extends JPanel implements CoherenceViewerTool {
                 IconHelper.getInstance().getIcon(IconType.BACKUP));
         add(header, "1,1,3,1");
 
-        cacheList = new JXList(context.getCaches());
+        caches = new JXTable(context.getBackupTableModel());
+        JTableHeader tHeader = caches.getTableHeader();
+        tHeader.setReorderingAllowed(false);
+        tHeader.setResizingAllowed(false);
+        TableColumn col = caches.getColumnModel().getColumn(0);
+        col.setPreferredWidth(25);
+        col = caches.getColumnModel().getColumn(2);
+        col.setPreferredWidth(25);
+        col = caches.getColumnModel().getColumn(1);
+        int total = caches.getColumnModel().getTotalColumnWidth();
+        col.setPreferredWidth(total - 10);
+
         //cache tool bar
-        cacheListPane.add(cacheList, BorderLayout.CENTER);
+        cacheListPane.add(new JScrollPane(caches), BorderLayout.CENTER);
         cacheListPane.setBorder(BorderFactory.createTitledBorder("List of caches"));
         JToolBar cacheListToolBar = new JToolBar();
         cacheListPane.add(cacheListToolBar, BorderLayout.NORTH);
         cacheListToolBar.add(new AddStringToListAction(context));
-        cacheListToolBar.add(new RemoveElementsFromListAction(context, cacheList));
+        cacheListToolBar.add(new RemoveElementsFromListAction(context, caches));
+        cacheListToolBar.addSeparator();
+        cacheListToolBar.add(new CheckAllCachesAction(context.getBackupTableModel()));
+        cacheListToolBar.add(new UnCheckAllCachesAction(context.getBackupTableModel()));
 
         add(cacheListPane, "1, 3, 1, 9");
 

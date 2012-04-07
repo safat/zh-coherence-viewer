@@ -53,7 +53,6 @@ public class ConnectionDialog extends JDialog {
         pane.add(new JLabel("Connection's name"), "1, 2");
         hostList = new JComboBox();
         hostList.setEditable(true);
-//        AutoCompleteDecorator.decorate(hostList);
 
         pane.add(hostList, "3,2");
 

@@ -17,11 +17,10 @@ public class BackupContext {
     private BackupAction action = BackupAction.BACKUP;
     private Target target = Target.FOLDER;
     private String path;
-//    private List<String> caches = new ArrayList<String>();
-    private DefaultListModel caches = new DefaultListModel();
+    private BackupTableModel backupTableModel = new BackupTableModel();
 
     public void updateGeneralProgress(){
-        generalProgress.setString((generalProgress.getPercentComplete()*100) + " %");
+        generalProgress.setString((Math.rint(1000.0 * generalProgress.getPercentComplete()) / 10.0)  + " %");
     }
 
     public void incrementGeneralProgress(){
@@ -35,7 +34,8 @@ public class BackupContext {
     }
 
     public void updateCacheProgress(String name) {
-        cacheProgress.setString("["+name+"] - " + (cacheProgress.getPercentComplete()*100) + " %");
+        cacheProgress.setString("["+name+"] - " + (Math.rint(100.0 * cacheProgress.getPercentComplete()))
+                + " %");
     }
 
     public BackupAction getAction() {
@@ -44,6 +44,17 @@ public class BackupContext {
 
     public void setAction(BackupAction action) {
         this.action = action;
+        refreshTableData();
+    }
+
+    public void refreshTableData(){
+        switch (action){
+            case BACKUP:
+                backupTableModel.updateCachesFromJMX();
+                break;
+            case RESTORE:
+                backupTableModel.updateCacheFromDir(path);
+        }
     }
 
     public void setTarget(Target target) {
@@ -60,13 +71,10 @@ public class BackupContext {
 
     public void setPath(String path) {
         this.path = path;
+        refreshTableData();
     }
 
-    public DefaultListModel getCaches() {
-        return caches;
-    }
-
-    public void setCaches(DefaultListModel caches) {
-        this.caches = caches;
+    public BackupTableModel getBackupTableModel() {
+        return backupTableModel;
     }
 }

@@ -28,7 +28,11 @@ public enum IconType {
     SAVE("save.png"),
     CSV_28("csv_icon.jpg"),
     EXCEL_28("excel_icon.jpg"),
-    DATABASE_LINK("database-link.png")
+    DATABASE_LINK("database-link.png"),
+    CHECK_ALL("check-all.png"),
+    UN_CHECK_ALL("uncheck.png"),
+    CLOCK("clock.png"),
+    TICK_WHITE("tick-white.png")
     ;
 
     private String type;
