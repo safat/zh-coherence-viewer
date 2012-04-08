@@ -26,13 +26,18 @@ public class RestoreMaker {
     private BackupContext context;
     private JComponent parent;
 
+    private long globalTime;
+
     public RestoreMaker(BackupContext context, JComponent parent) {
         this.context = context;
         this.parent = parent;
     }
 
     public void make() {
+        globalTime = System.currentTimeMillis();
         final String path = context.getPath();
+        context.logPane.addMessage(new BackupLogEvent(
+                System.currentTimeMillis(), "Source folder: " + path, System.currentTimeMillis(), "Start task", "restore"));
         File file = new File(path);
         if (!file.exists() || file.isFile()) {
             JOptionPane.showMessageDialog(parent, "Directory '" + context.getPath() + "' not found.");
@@ -60,22 +65,26 @@ public class RestoreMaker {
 
     private class RestoreThread extends Thread {
         private List<CacheWrapper> caches;
-//        private BackupContext context;
         private String path;
 
         private RestoreThread(List<CacheWrapper> caches, String path) {
             this.caches = caches;
-//            this.context = context;
             this.path = path;
         }
 
         @Override
         public void run() {
             for (final CacheWrapper wrapper : caches) {
+                long startTime = System.currentTimeMillis();
                 restoreCache(wrapper, path);
                 wrapper.info.processed = true;
                 context.getBackupTableModel().refresh(wrapper.info);
+                context.logPane.addMessage(new BackupLogEvent(
+                        startTime,wrapper.info.name , System.currentTimeMillis(),
+                        "Done, cache has been restored.", "restore"));
             }
+            context.logPane.addMessage(new BackupLogEvent(
+                    globalTime,"" , System.currentTimeMillis(), "Done", "Task has been finished"));
         }
     }
 
@@ -102,6 +111,7 @@ public class RestoreMaker {
                 context.updateCacheProgress(cache.getCacheName());
                 inPof.getPofReader().readMap(0, cache);
             }
+            raf.close();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
