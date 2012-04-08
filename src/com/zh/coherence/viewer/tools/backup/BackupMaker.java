@@ -6,6 +6,7 @@ import com.tangosol.io.WrapperBufferOutput;
 import com.tangosol.net.CacheFactory;
 import com.tangosol.net.NamedCache;
 import com.tangosol.util.Binary;
+import com.zh.coherence.viewer.utils.FileUtils;
 
 import java.io.File;
 import java.io.RandomAccessFile;
@@ -31,7 +32,7 @@ public class BackupMaker {
     public void make(){
         long globalTime = System.currentTimeMillis();
         context.logPane.addMessage(new BackupLogEvent(
-                System.currentTimeMillis(), "", System.currentTimeMillis(), "Start task", "backup"));
+                System.currentTimeMillis(), "Target folder: " + context.getPath(), System.currentTimeMillis(), "Start task", "backup"));
         List<CacheWrapper> caches = new ArrayList<CacheWrapper>();
         NamedCache nCache;
         int maxElements = 0;
@@ -55,7 +56,7 @@ public class BackupMaker {
             context.cacheProgress.setValue(0);
             context.updateCacheProgress(wrapper.cache.getCacheName());
             //store file
-
+            File target = new File(context.getPath() + File.separator + wrapper.info.name);
             if(wrapper.cache instanceof SafeNamedCache){
                 SafeNamedCache snc = (SafeNamedCache) wrapper.cache;
                 try {
@@ -65,16 +66,14 @@ public class BackupMaker {
                     store.setPassThrough(true);
 
                     Set<Map.Entry<Binary,Binary>> entries = store.entrySet();
-                    String name = wrapper.cache.getCacheName();
-                    RandomAccessFile file = new RandomAccessFile(new File(context.getPath()
-                            + File.separator + name), "rw");
+                    RandomAccessFile file = new RandomAccessFile(target, "rw");
                     WrapperBufferOutput buf = new WrapperBufferOutput(file);
                     buf.writePackedInt(-28);
                     buf.writePackedInt(wrapper.cache.size());
 
                     byte[] array;
                     for(Map.Entry<Binary,Binary> entry : entries){
-                        context.incrementCacheProgress(name);
+                        context.incrementCacheProgress(wrapper.info.name);
                         context.incrementGeneralProgress();
                         array = entry.getKey().toByteArray();
                         buf.write(array, 1, array.length - 1);
@@ -96,7 +95,8 @@ public class BackupMaker {
 
             context.logPane.addMessage(new BackupLogEvent(
                     startTime,wrapper.info.name , System.currentTimeMillis(),
-                    "Done, cache has been saved", "backup"));
+                    "Done, cache has been saved, size of file: "
+                            + FileUtils.convertToStringRepresentation(target.length()), "backup"));
         }
         context.logPane.addMessage(new BackupLogEvent(
                 globalTime,"" , System.currentTimeMillis(), "Done", "Task has been finished"));
