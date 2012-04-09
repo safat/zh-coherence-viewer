@@ -10,9 +10,6 @@ import com.tangosol.util.Filter;
 import com.tangosol.util.filter.LimitFilter;
 import com.zh.coherence.viewer.tools.query.QueryTool;
 
-import javax.swing.*;
-import java.io.IOException;
-import java.io.Writer;
 import java.lang.reflect.Field;
 import java.util.Collection;
 import java.util.Map;
@@ -57,8 +54,8 @@ public class CqlScriptExecutor {
         try {
             tn = p.parse();
         } catch (Exception ex) {
-            queryTool.traceText("Parsing exception");
-            queryTool.traceText(ex.getMessage() + "\n");
+//            queryTool.traceText("Parsing exception");
+//            queryTool.traceText(ex.getMessage() + "\n");
 
             return;
         }
@@ -78,7 +75,7 @@ public class CqlScriptExecutor {
                 LimitFilter limitFilter = new LimitFilter(filter, topLimiter);
                 field.set(query, limitFilter);
             } catch (Exception e) {
-                queryTool.traceText(e.getMessage());
+//                queryTool.traceText(e.getMessage());
             }
         }
 
@@ -87,21 +84,21 @@ public class CqlScriptExecutor {
         try {
             ret = query.execute();
         } catch (Exception ex) {
-            queryTool.traceText("Executing exception");
-            queryTool.traceText(ex.getMessage() + "\n");
+//            queryTool.traceText("Executing exception");
+//            queryTool.traceText(ex.getMessage() + "\n");
         }
         if (ret == null) {
         } else if (ret instanceof Map) {
-            int size = checkSize(((Map) ret).size());
+            int size = ((Map) ret).size();
             if (size == 0) {
-                queryTool.traceText("result is Map with size: 0");
+//                queryTool.traceText("result is Map with size: 0");
             } else {
                 queryTool.showResult(ret, tn, size);
             }
         } else if (ret instanceof Collection) {
-            int size = checkSize(((Collection) ret).size());
+            int size = ((Collection) ret).size();
             if (size == 0) {
-                queryTool.traceText("result is Collection with size: 0");
+//                queryTool.traceText("result is Collection with size: 0");
             } else {
                 queryTool.showResult(ret, tn, size);
             }
@@ -109,31 +106,8 @@ public class CqlScriptExecutor {
             queryTool.showResult(ret, tn, 1);
         } else {
             System.err.println("class: " + ret.getClass());
-            try {
-                Writer writer = queryTool.getConsolePrintWriter();
-                System.err.println("class: " + ret);
-                writer.append(ret.toString());
-                writer.flush();
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
+
         }
         System.err.println("Time: " + (System.currentTimeMillis() - time));
-    }
-
-    private int checkSize(int size) {
-        if (size > 500) {
-            String res = JOptionPane.showInputDialog("<html>Size of result more then 100.<br>The application can be crushed.<br>" +
-                    "Input number of lines and click the 'Ok' button to cut output data<br>or click the 'Cancel' button to ignore this message</html>", 500);
-            if (res != null) {
-                try {
-                    return Integer.parseInt(res);
-                } catch (NumberFormatException ex) {
-                    //todo send message to console
-                    ex.printStackTrace();
-                }
-            }
-        }
-        return size;
     }
 }

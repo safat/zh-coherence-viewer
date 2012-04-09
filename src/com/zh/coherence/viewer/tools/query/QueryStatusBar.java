@@ -1,0 +1,58 @@
+package com.zh.coherence.viewer.tools.query;
+
+import layout.TableLayout;
+import org.jdesktop.swingx.JXBusyLabel;
+
+import javax.swing.*;
+import java.util.concurrent.TimeUnit;
+
+/**
+ * Created by IntelliJ IDEA.
+ * User: Живко
+ * Date: 09.04.12
+ * Time: 21:33
+ */
+public class QueryStatusBar extends JPanel {
+    private JXBusyLabel busy = new JXBusyLabel();
+    private JTextField text = new JTextField();
+    private JTextField timeField = new JTextField();
+    private JToggleButton eventLogButton = new JToggleButton("Event Log");
+
+    public QueryStatusBar() {
+        super(new TableLayout(new double[][]{
+                {2, TableLayout.PREFERRED, 2, TableLayout.FILL, 2, TableLayout.PREFERRED, 2, 130, 2,
+                        TableLayout.PREFERRED, 2},
+                {1, TableLayout.PREFERRED, 1}
+        }));
+
+        setBorder(BorderFactory.createEtchedBorder());
+        add(busy, "1,1");
+
+        text.setEditable(false);
+        text.setEnabled(false);
+        add(text, "3,1");
+
+        add(new JLabel("Time:"), "5,1");
+        timeField.setEditable(false);
+        timeField.setEnabled(false);
+        add(timeField, "7,1");
+
+        add(eventLogButton, "9,1");
+    }
+
+    public void setBusy(boolean busy) {
+        this.busy.setBusy(busy);
+    }
+
+    public void setTime(long time) {
+        timeField.setText(getTime(time));
+    }
+
+    private String getTime(long millis) {
+        long sec;
+        long min = TimeUnit.MILLISECONDS.toMinutes(millis);
+        sec = TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(min);
+        long ms = millis - TimeUnit.SECONDS.toMillis(sec) - TimeUnit.MINUTES.toMillis(min);
+        return String.format("%d min, %d sec %d ms", min, sec, ms);
+    }
+}
