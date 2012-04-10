@@ -22,7 +22,7 @@ public class ExecuteQueryAction extends AbstractAction{
         putValue(Action.NAME, "Execute");
         putValue(Action.SMALL_ICON, IconHelper.getInstance().getIcon(IconType.START));
 
-        scriptExecutor = new CqlScriptExecutor(context.getQueryTool());
+        scriptExecutor = new CqlScriptExecutor(context);
     }
 
     @Override
