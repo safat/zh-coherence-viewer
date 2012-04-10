@@ -1,9 +1,9 @@
 package com.zh.coherence.viewer.tools.query;
 
 import com.tangosol.coherence.dsltools.termtrees.Term;
+import com.zh.coherence.viewer.eventlog.EventLogPane;
 import com.zh.coherence.viewer.tableview.CoherenceTableView;
 import com.zh.coherence.viewer.tools.CoherenceViewerTool;
-import com.zh.coherence.viewer.tools.query.actions.CqlScriptExecutor;
 import com.zh.coherence.viewer.tools.query.actions.ExecuteQueryAction;
 import com.zh.coherence.viewer.tools.query.actions.HistoryAction;
 import com.zh.coherence.viewer.tools.query.actions.InsertCacheNameAction;
@@ -17,10 +17,12 @@ import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rsyntaxtextarea.templates.CodeTemplate;
 import org.fife.ui.rsyntaxtextarea.templates.StaticCodeTemplate;
 import org.fife.ui.rtextarea.RTextScrollPane;
+import org.jdesktop.swingx.JXLabel;
 import org.jdesktop.swingx.JXPanel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.File;
@@ -35,20 +37,23 @@ import java.io.InputStream;
  */
 public class QueryTool extends JXPanel implements CoherenceViewerTool {
     private RSyntaxTextArea editor;
-    private JTextArea console;
     private CoherenceTableView tableView;
     private JPanel output;
     private CardLayout outputCardLayout = new CardLayout(2,2);
     private QueryContext context;
     private QueryStatusBar statusBar;
+    private EventLogPane eventLogPane;
 
     private LRUList<String> history = new LRUList<String>(10);
 
     public QueryTool() {
         super(new BorderLayout());
         context = new QueryContext(this);
+        eventLogPane = new EventLogPane(new QueryEventLogRenderer());
+
+        final ExecuteQueryAction executeQueryAction = new ExecuteQueryAction(context);
         JToolBar toolBar = new JToolBar();
-        toolBar.add(new ExecuteQueryAction(context));
+        toolBar.add(executeQueryAction);
         toolBar.add(new HistoryAction(this));
         toolBar.add(new InsertCacheNameAction(this));
 
@@ -61,13 +66,11 @@ public class QueryTool extends JXPanel implements CoherenceViewerTool {
         editor.setAntiAliasingEnabled(true);
 
         editor.addKeyListener(new KeyAdapter() {
-            CqlScriptExecutor scriptExecutor = new CqlScriptExecutor(QueryTool.this);
-
             @Override
             public void keyReleased(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_F5 ||
                         (e.getKeyCode() == KeyEvent.VK_ENTER && e.isControlDown())) {
-                    scriptExecutor.execute();
+                    executeQueryAction.actionPerformed(new ActionEvent(e.getSource(), e.getID(), null));
                 }
             }
         });
@@ -109,13 +112,16 @@ public class QueryTool extends JXPanel implements CoherenceViewerTool {
 
         output = new JPanel(outputCardLayout);
         tableView = new CoherenceTableView();
-        output.add(tableView, "tableView");
+
+        output.add(createNoDataPanel(), QueryContext.NO_DATA);
+        output.add(eventLogPane, QueryContext.EVENT_LOG);
+        output.add(tableView, QueryContext.TABLE_VIEW);
 
         splitPane.setBottomComponent(output);
 
         add(splitPane, BorderLayout.CENTER);
 
-        statusBar = new QueryStatusBar();
+        statusBar = new QueryStatusBar(context);
 
         add(statusBar, BorderLayout.SOUTH);
 
@@ -124,6 +130,7 @@ public class QueryTool extends JXPanel implements CoherenceViewerTool {
                 editor.requestFocusInWindow();
             }
         });
+        outputCardLayout.show(output, QueryContext.TABLE_VIEW);
     }
 
     public String getScript() {
@@ -133,6 +140,13 @@ public class QueryTool extends JXPanel implements CoherenceViewerTool {
         } else {
             return editor.getText();
         }
+    }
+
+    private JPanel createNoDataPanel(){
+        JPanel panel = new JPanel();
+        panel.add(new JXLabel("No data", JXLabel.CENTER));
+
+        return panel;
     }
 
     @Override
@@ -183,5 +197,17 @@ public class QueryTool extends JXPanel implements CoherenceViewerTool {
 
     public void setOutput(JPanel output) {
         this.output = output;
+    }
+
+    public QueryContext getContext() {
+        return context;
+    }
+
+    public EventLogPane getEventLogPane() {
+        return eventLogPane;
+    }
+
+    public CardLayout getOutputCardLayout() {
+        return outputCardLayout;
     }
 }

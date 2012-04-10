@@ -7,6 +7,10 @@ package com.zh.coherence.viewer.tools.query;
  * Time: 22:39
  */
 public class QueryContext {
+    public static final String TABLE_VIEW = "table-view";
+    public static final String EVENT_LOG = "event-log";
+    public static final String NO_DATA = "no-data";
+
     private QueryTool queryTool;
 
     public QueryContext(QueryTool queryTool) {
@@ -21,11 +25,19 @@ public class QueryContext {
         return queryTool;
     }
 
-    public void setQueryTool(QueryTool queryTool) {
-        this.queryTool = queryTool;
-    }
-
     public void setTime(long time){
         queryTool.getStatusBar().setTime(time);
+    }
+
+    public void showOutputPane(String name){
+        queryTool.getOutputCardLayout().show(queryTool.getOutput(), name);
+    }
+
+    public void logEvent(QueryLogEvent event){
+        queryTool.getEventLogPane().addMessage(event);
+    }
+
+    public void showShortMessage(String msg){
+        queryTool.getStatusBar().showShortMessage(msg);
     }
 }
