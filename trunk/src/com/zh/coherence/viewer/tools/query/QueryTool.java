@@ -4,6 +4,7 @@ import com.tangosol.coherence.dsltools.termtrees.Term;
 import com.zh.coherence.viewer.eventlog.EventLogPane;
 import com.zh.coherence.viewer.tableview.CoherenceTableView;
 import com.zh.coherence.viewer.tools.CoherenceViewerTool;
+import com.zh.coherence.viewer.tools.query.actions.EventLogHyperlinkListener;
 import com.zh.coherence.viewer.tools.query.actions.ExecuteQueryAction;
 import com.zh.coherence.viewer.tools.query.actions.HistoryAction;
 import com.zh.coherence.viewer.tools.query.actions.InsertCacheNameAction;
@@ -50,6 +51,7 @@ public class QueryTool extends JXPanel implements CoherenceViewerTool {
         super(new BorderLayout());
         context = new QueryContext(this);
         eventLogPane = new EventLogPane(new QueryEventLogRenderer());
+        eventLogPane.addHyperlinkListener(new EventLogHyperlinkListener());
 
         final ExecuteQueryAction executeQueryAction = new ExecuteQueryAction(context);
         JToolBar toolBar = new JToolBar();
@@ -113,7 +115,8 @@ public class QueryTool extends JXPanel implements CoherenceViewerTool {
         output = new JPanel(outputCardLayout);
         tableView = new CoherenceTableView();
 
-        output.add(createNoDataPanel(), QueryContext.NO_DATA);
+        output.add(createTextPanel("No data"), QueryContext.NO_DATA);
+        output.add(createTextPanel("Error"), QueryContext.ERROR);
         output.add(eventLogPane, QueryContext.EVENT_LOG);
         output.add(tableView, QueryContext.TABLE_VIEW);
 
@@ -142,9 +145,9 @@ public class QueryTool extends JXPanel implements CoherenceViewerTool {
         }
     }
 
-    private JPanel createNoDataPanel(){
+    private JPanel createTextPanel(String text){
         JPanel panel = new JPanel();
-        panel.add(new JXLabel("No data", JXLabel.CENTER));
+        panel.add(new JXLabel(text, JXLabel.CENTER));
 
         return panel;
     }

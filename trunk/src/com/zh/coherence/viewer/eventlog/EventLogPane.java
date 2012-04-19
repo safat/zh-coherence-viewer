@@ -3,6 +3,7 @@ package com.zh.coherence.viewer.eventlog;
 import org.jdesktop.swingx.JXEditorPane;
 
 import javax.swing.*;
+import javax.swing.event.HyperlinkListener;
 import javax.swing.text.html.HTMLEditorKit;
 import java.awt.*;
 import java.util.LinkedList;
@@ -19,7 +20,7 @@ public class EventLogPane extends JPanel {
 
     private final int LOG_SIZE = 200;
 
-    private List messages = new LinkedList();
+    private List<Object> messages = new LinkedList<Object>();
 
     private JXEditorPane text = new JXEditorPane();
 
@@ -80,5 +81,9 @@ public class EventLogPane extends JPanel {
                 vertical.setValue(vertical.getMaximum());
             }
         });
+    }
+
+    public void addHyperlinkListener(HyperlinkListener listener) {
+        text.addHyperlinkListener(listener);
     }
 }

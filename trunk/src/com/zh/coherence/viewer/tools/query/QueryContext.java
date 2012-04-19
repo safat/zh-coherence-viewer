@@ -10,6 +10,7 @@ public class QueryContext {
     public static final String TABLE_VIEW = "table-view";
     public static final String EVENT_LOG = "event-log";
     public static final String NO_DATA = "no-data";
+    public static final String ERROR = "error";
 
     private QueryTool queryTool;
 

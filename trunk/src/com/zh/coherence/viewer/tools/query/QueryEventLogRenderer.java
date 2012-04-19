@@ -32,11 +32,12 @@ public class QueryEventLogRenderer implements EventLogRenderer {
                     StringBuilder sb = new StringBuilder();
                     sb.append(errorMsg).append(event.message).append(endLine);
                     if(event.error != null){
+                        sb.append("<div>").append("<a href='<b>");
                         for(StackTraceElement element : event.error.getStackTrace()){
                             sb.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;").append(element.toString());
                             sb.append("<br>");
                         }
-                        sb.append("<hr><br>");
+                        sb.append("'>Show stack</a></div><hr><br>");
                     }
                     //todo change icon
                     return sb.toString();
