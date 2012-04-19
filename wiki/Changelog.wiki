@@ -3,6 +3,10 @@
 
 ----
 
+== 0.3.2 ==
+ * removed tab: 'console'
+ * updated backup tool
+
 == 0.3.1 ==
  * added export of table output to xls and csv files
  * added expression: 'top number'
