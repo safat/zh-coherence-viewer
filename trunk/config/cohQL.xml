@@ -97,7 +97,7 @@ FROM "cache-name" [[AS] alias]
             </desc>
         </keyword>
         <keyword name="sum" type="function"><params><param name="value"/></params></keyword>
-        <keyword name="count" type="function"><params><param name="value"/></params></keyword>
+        <keyword name="count" type="function"></keyword>
         <keyword name="avg" type="function"><params><param name="value"/></params></keyword>
         <keyword name="min" type="function"><params><param name="value"/></params></keyword>
         <keyword name="max" type="function"><params><param name="value"/></params></keyword>

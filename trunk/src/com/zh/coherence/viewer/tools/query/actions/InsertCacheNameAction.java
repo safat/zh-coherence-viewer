@@ -52,15 +52,17 @@ public class InsertCacheNameAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
             int caret = queryTool.getEditor().getCaretPosition();
-            boolean ignoreComa = false;
-            if (caret > 0) {
-                String text = queryTool.getEditor().getText();
-                String leftSymbol = text.substring(caret - 1, caret);
-                ignoreComa = leftSymbol.equals("'") || leftSymbol.equals("\"");
-            }
-            if (!ignoreComa) {
-                name = "'" + name + "'";
-            }
+//            boolean ignoreComa = false;
+//            if (caret > 0) {
+//                String text = queryTool.getEditor().getText();
+//                String leftSymbol = text.substring(caret - 1, caret);
+//                ignoreComa = leftSymbol.equals("'") || leftSymbol.equals("\"");
+//            }
+//            if (!ignoreComa) {
+//                name = "'" + name + "'";
+//            }
+
+            name = "SELECT * from '"+name+"'";
             queryTool.getEditor().insert(name, caret);
         }
     }

@@ -91,11 +91,13 @@ public class CqlScriptExecutor {
             context.logEvent(new QueryLogEvent(ex, ex.getMessage(), QueryLogEvent.EventType.ERROR));
         }
         if (ret == null) {
+            context.showOutputPane(QueryContext.NO_DATA);
         } else if (ret instanceof Map) {
             int size = ((Map) ret).size();
             if (size == 0) {
                 context.showOutputPane(QueryContext.NO_DATA);
             } else {
+                context.showOutputPane(QueryContext.TABLE_VIEW);
                 context.getQueryTool().showResult(ret, tn, size);
             }
         } else if (ret instanceof Collection) {
@@ -103,9 +105,11 @@ public class CqlScriptExecutor {
             if (size == 0) {
                 context.showOutputPane(QueryContext.NO_DATA);
             } else {
+                context.showOutputPane(QueryContext.TABLE_VIEW);
                 context.getQueryTool().showResult(ret, tn, size);
             }
         } else if (ret instanceof Integer || ret instanceof String) {
+            context.showOutputPane(QueryContext.TABLE_VIEW);
             context.getQueryTool().showResult(ret, tn, 1);
         } else {
             context.logEvent(new QueryLogEvent(null, "unknown class: " + ret.getClass(), QueryLogEvent.EventType.MESSAGE));
