@@ -38,6 +38,8 @@ public class RestoreMaker {
         final String path = context.getPath();
         context.logPane.addMessage(new BackupLogEvent(
                 System.currentTimeMillis(), "Source folder: " + path, System.currentTimeMillis(), "Start task", "restore"));
+        context.logPane.addMessage(new BackupLogEvent(System.currentTimeMillis(), "Info", System.currentTimeMillis(),
+                "buffer size: " + context.getBufferSize(), "restore"));
         File file = new File(path);
         if (!file.exists() || file.isFile()) {
             JOptionPane.showMessageDialog(parent, "Directory '" + context.getPath() + "' not found.");
@@ -109,7 +111,10 @@ public class RestoreMaker {
             if ((dInput instanceof PofInputStream)) {
                 PofInputStream inPof = (PofInputStream) dInput;
                 context.updateCacheProgress(cache.getCacheName());
-                inPof.getPofReader().readMap(0, cache);
+                FlushMap map = new FlushMap(context.getBufferSize(), cache);
+                map.setContext(context);
+                inPof.getPofReader().readMap(0, map);
+                map.flush();
             }
             raf.close();
         } catch (Exception ex) {

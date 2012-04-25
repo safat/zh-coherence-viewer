@@ -22,6 +22,7 @@ public class BackupContext {
     private Target target = Target.FOLDER;
     private String path;
     private BackupTableModel backupTableModel = new BackupTableModel();
+    private int bufferSize = 2000;
 
     public void updateGeneralProgress(){
         generalProgress.setString((Math.rint(1000.0 * generalProgress.getPercentComplete()) / 10.0)  + " %");
@@ -82,5 +83,17 @@ public class BackupContext {
 
     public BackupTableModel getBackupTableModel() {
         return backupTableModel;
+    }
+
+    public int getBufferSize() {
+        return bufferSize;
+    }
+
+    public void setBufferSize(String bufferSize) {
+        try{
+            this.bufferSize = Integer.parseInt(bufferSize);
+        }catch (NumberFormatException ex){
+            //nothing to do
+        }
     }
 }

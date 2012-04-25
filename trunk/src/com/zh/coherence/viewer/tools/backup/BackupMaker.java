@@ -6,6 +6,8 @@ import com.tangosol.io.WrapperBufferOutput;
 import com.tangosol.net.CacheFactory;
 import com.tangosol.net.NamedCache;
 import com.tangosol.util.Binary;
+import com.tangosol.util.filter.AlwaysFilter;
+import com.tangosol.util.filter.LimitFilter;
 import com.zh.coherence.viewer.utils.FileUtils;
 
 import java.io.File;
@@ -29,16 +31,19 @@ public class BackupMaker {
         this.context = context;
     }
 
-    public void make(){
+    public void make() {
         long globalTime = System.currentTimeMillis();
         context.logPane.addMessage(new BackupLogEvent(
                 System.currentTimeMillis(), "Target folder: " + context.getPath(), System.currentTimeMillis(), "Start task", "backup"));
+        context.logPane.addMessage(new BackupLogEvent(System.currentTimeMillis(), "Info", System.currentTimeMillis(),
+                "buffer size: " + context.getBufferSize(), "backup"));
+
         List<CacheWrapper> caches = new ArrayList<CacheWrapper>();
         NamedCache nCache;
         int maxElements = 0;
 
-        for(BackupTableModel.CacheInfo info : context.getBackupTableModel().getCacheInfoList()){
-            if(info.enabled){
+        for (BackupTableModel.CacheInfo info : context.getBackupTableModel().getCacheInfoList()) {
+            if (info.enabled) {
                 nCache = CacheFactory.getCache(info.name);
                 caches.add(new CacheWrapper(nCache, info));
                 maxElements += nCache.size();
@@ -49,7 +54,7 @@ public class BackupMaker {
         context.generalProgress.setValue(0);
         context.updateGeneralProgress();
 
-        for(CacheWrapper wrapper : caches){
+        for (CacheWrapper wrapper : caches) {
             long startTime = System.currentTimeMillis();
             context.cacheProgress.setMinimum(0);
             context.cacheProgress.setMaximum(wrapper.cache.size());
@@ -57,7 +62,7 @@ public class BackupMaker {
             context.updateCacheProgress(wrapper.cache.getCacheName());
             //store file
             File target = new File(context.getPath() + File.separator + wrapper.info.name);
-            if(wrapper.cache instanceof SafeNamedCache){
+            if (wrapper.cache instanceof SafeNamedCache) {
                 SafeNamedCache snc = (SafeNamedCache) wrapper.cache;
                 try {
                     Method method = snc.getClass().getDeclaredMethod("getRunningNamedCache");
@@ -65,40 +70,47 @@ public class BackupMaker {
                     RemoteNamedCache store = (RemoteNamedCache) method.invoke(snc);
                     store.setPassThrough(true);
 
-                    Set<Map.Entry<Binary,Binary>> entries = store.entrySet();
+                    int bufferSize = context.getBufferSize();
+                    LimitFilter limitFilter = new LimitFilter(new AlwaysFilter(), bufferSize);
+
                     RandomAccessFile file = new RandomAccessFile(target, "rw");
                     WrapperBufferOutput buf = new WrapperBufferOutput(file);
+                    int size = store.size();
                     buf.writePackedInt(-28);
                     buf.writePackedInt(wrapper.cache.size());
-
                     byte[] array;
-                    for(Map.Entry<Binary,Binary> entry : entries){
-                        context.incrementCacheProgress(wrapper.info.name);
-                        context.incrementGeneralProgress();
-                        array = entry.getKey().toByteArray();
-                        buf.write(array, 1, array.length - 1);
-                        array = entry.getValue().toByteArray();
-                        buf.write(array, 1, array.length - 1);
+                    for (int i = 0; i < size; i += bufferSize) {
+                        Set<Map.Entry<Binary, Binary>> entries = store.entrySet(limitFilter);
+
+                        for (Map.Entry<Binary, Binary> entry : entries) {
+                            context.incrementCacheProgress(wrapper.info.name);
+                            context.incrementGeneralProgress();
+                            array = entry.getKey().toByteArray();
+                            buf.write(array, 1, array.length - 1);
+                            array = entry.getValue().toByteArray();
+                            buf.write(array, 1, array.length - 1);
+                        }
+                        buf.flush();
+                        limitFilter.nextPage();
                     }
                     store.setPassThrough(false);
-                    buf.flush();
                     buf.close();
                     file.close();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            }else{
+            } else {
                 throw new RuntimeException("cannot save class: " + wrapper.cache.getClass());
             }
             wrapper.info.processed = true;
             context.getBackupTableModel().refresh(wrapper.info);
 
             context.logPane.addMessage(new BackupLogEvent(
-                    startTime,wrapper.info.name , System.currentTimeMillis(),
+                    startTime, wrapper.info.name, System.currentTimeMillis(),
                     "Done, cache has been saved, size of file: "
                             + FileUtils.convertToStringRepresentation(target.length()), "backup"));
         }
         context.logPane.addMessage(new BackupLogEvent(
-                globalTime,"" , System.currentTimeMillis(), "Done", "Task has been finished"));
+                globalTime, "", System.currentTimeMillis(), "Done", "Task has been finished"));
     }
 }

@@ -81,7 +81,35 @@ public class BackupTool extends JPanel implements CoherenceViewerTool {
         actionRadioGroup.setValues(new JRadioButton[]{backupActionRadio, restoreActionRadio});
         actionRadioGroup.setSelectedValue(backupActionRadio);
         actionRadioGroup.setBorder(BorderFactory.createTitledBorder("Action"));
-        add(actionRadioGroup, "3, 3");
+        JPanel panel1 = new JPanel(new TableLayout(new double[][]{
+                {FILL,2,FILL},
+                {PREFERRED}
+        }));
+
+        panel1.add(actionRadioGroup,"0,0");
+        JPanel bufferPanel = new JPanel(new BorderLayout());
+        bufferPanel.setBorder(BorderFactory.createTitledBorder("Buffer size"));
+        final JTextField bufferSizeText = new JTextField();
+        bufferPanel.add(bufferSizeText);
+        bufferSizeText.setText("" + context.getBufferSize());
+        bufferSizeText.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                context.setBufferSize(bufferSizeText.getText());
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                context.setBufferSize(bufferSizeText.getText());
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                context.setBufferSize(bufferSizeText.getText());
+            }
+        });
+        panel1.add(bufferPanel, "2,0");
+        add(panel1, "3, 3");
 
         folderRadio = new JRadioButton(new ChangeTargetAction(context, BackupContext.Target.FOLDER, "Folder"));
         zipRadio = new JRadioButton(new ChangeTargetAction(context, BackupContext.Target.FOLDER, "ZIP"));
