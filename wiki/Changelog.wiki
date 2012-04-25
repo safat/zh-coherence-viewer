@@ -1,6 +1,7 @@
 == 0.3.3 TODO LIST ==
  * hide stack trace in the Query Tool Event Log
-
+ * force backup and restore (use loadAll and storeAll instead load and store)
+ * user Object renderer
 ----
 
 == 0.3.2 ==
