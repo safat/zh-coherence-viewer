@@ -57,8 +57,12 @@ public class CqlScriptExecutor {
         SQLOPParser p = new SQLOPParser(script, toks);
 
         Term tn;
+        boolean buildResult = false;
+        CoherenceQuery query = null;
         try {
             tn = p.parse();
+            query = new CoherenceQuery(true);
+            buildResult = query.build((NodeTerm) tn);
         } catch (Exception ex) {
             context.showShortMessage("Parsing exception");
             context.showOutputPane(QueryContext.ERROR);
@@ -66,8 +70,6 @@ public class CqlScriptExecutor {
             return;
         }
 
-        CoherenceQuery query = new CoherenceQuery(true);
-        boolean buildResult = query.build((NodeTerm) tn);
         if (!buildResult) {
             context.showShortMessage(query.getErrorString());
             context.logEvent(new QueryLogEvent(null, query.getErrorString(), QueryLogEvent.EventType.ERROR));
@@ -118,7 +120,7 @@ public class CqlScriptExecutor {
                 context.getQueryTool().showResult(ret, tn, size);
             }
             context.showShortMessage("OK");
-        } else if (ret instanceof Integer || ret instanceof String) {
+        } else if (ret instanceof Number || ret instanceof String) {
             context.showOutputPane(QueryContext.TABLE_VIEW);
             context.getQueryTool().showResult(ret, tn, 1);
             context.showShortMessage("OK");

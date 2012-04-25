@@ -24,22 +24,13 @@ public class CoherenceConfigGenerator {
             str = str.replaceAll("__port__", port);
 
             //save file
-            File tmpDir = new File("./tmp");
-            if(!tmpDir.exists()){
-                tmpDir.mkdir();
-            }
-            File result = new File(tmpDir ,"extend-client-config.xml");
+            File result = File.createTempFile("extend-client-config", ".xml");
             FileOutputStream fos = new FileOutputStream(result);
             fos.write(str.getBytes());
             fos.close();
 
             //configure coherence
-            System.setProperty("gridkit.auto-pof.use-public-cache-config", "true");
-
-            System.setProperty("tangosol.coherence.cacheconfig", "tmp/extend-client-config.xml");
-
-            //todo pof config
-
+            System.setProperty("tangosol.coherence.cacheconfig", result.getAbsolutePath());
         }catch(Exception ex){
             ex.printStackTrace();
             //todo process this exception

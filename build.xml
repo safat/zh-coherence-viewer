@@ -6,7 +6,7 @@
     <property name="classes" location="${build}/classes"/>
     <property name="dist_dir" location="${dist}/zhCoherenceViewer"/>
     <property name="pr_name" value="zhCoherenceViewer"/>
-    <property name="version" value="0.3.2"/>
+    <property name="version" value="0.3.3"/>
 
     <target name="init">
         <!-- Create the time stamp -->
@@ -52,7 +52,6 @@
         <mkdir dir="${dist_dir}/user-files"/>
         <copy file="user-files/zh-pof-config.xml" todir="${dist_dir}/user-files"/>
         <mkdir dir="${dist_dir}/coherence-lib"/>
-        <mkdir dir="${dist_dir}/tmp"/>
 
         <zip destfile="${dist}/zhCoherenceViewer_${version}.zip" level="9" filesonly="false">
             <fileset dir="${dist}" includes="zhCoherenceViewer/**/"/>

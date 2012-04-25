@@ -87,7 +87,7 @@ public class CoherenceTableView extends JPanel {
             tableModel = new MapTableModel((Map) subject, (Term) params, limit);
         } else if (subject instanceof Set) {
             tableModel = new SetTableModel((Set) subject, limit);
-        } else if ((subject instanceof Integer || subject instanceof String) && params instanceof Term) {
+        } else if ((subject instanceof Number || subject instanceof String) && params instanceof Term) {
             tableModel = new OneLineTableModel(subject, (Term) params);
         }
 
