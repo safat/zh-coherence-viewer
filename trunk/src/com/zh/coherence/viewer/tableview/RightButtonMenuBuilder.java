@@ -1,31 +1,22 @@
 package com.zh.coherence.viewer.tableview;
 
-import com.zh.coherence.viewer.hexPanel.ShowHexViewerAction;
-import com.zh.coherence.viewer.pof.ValueContainer;
-import com.zh.coherence.viewer.tableview.actions.ShowObjectExplorer;
-import com.zh.coherence.viewer.tableview.actions.ShowObjectInText;
+import com.zh.coherence.viewer.ResourceManager;
+import com.zh.coherence.viewer.tableview.user.ObjectViewersContainer;
+import com.zh.coherence.viewer.tableview.user.UserViewerAction;
+import com.zh.coherence.viewer.tableview.user.UserViewerItem;
 
 import javax.swing.*;
+import java.util.Collection;
 
-/**
- * Created by IntelliJ IDEA.
- * User: Живко
- * Date: 29.02.12
- * Time: 20:31
- */
 public class RightButtonMenuBuilder {
     public JPopupMenu buildMenu(Object value){
         JPopupMenu menu = new JPopupMenu();
-        if(value != null){
-            menu.add(new ShowObjectInText(value));
-            menu.add(new ShowObjectExplorer(value));
 
-            if(value instanceof ValueContainer){
-                menu.addSeparator();
-                ValueContainer vc = (ValueContainer) value;
-
-                menu.add(new JMenuItem(new ShowHexViewerAction(vc.getBinary())));
-            }
+        ResourceManager resourceManager = ResourceManager.getInstance();
+        ObjectViewersContainer viewersContainer = resourceManager.getViewersContainer();
+        Collection<UserViewerItem> coll = viewersContainer.getAvailableViewers(value);
+        for (UserViewerItem item : coll){
+            menu.add(new UserViewerAction(item, value));
         }
         return menu;
     }

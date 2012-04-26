@@ -1,5 +1,6 @@
 package com.zh.coherence.viewer.utils.panes;
 
+import com.zh.coherence.viewer.tableview.user.UserObjectViewer;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextAreaHighlighter;
 import org.fife.ui.rtextarea.ChangeableHighlightPainter;
 import org.fife.ui.rtextarea.RTextArea;
@@ -18,7 +19,7 @@ import java.awt.event.ActionListener;
  * Date: 15.03.12
  * Time: 23:36
  */
-public class SearchTextPanel extends JPanel{
+public class SearchTextPanel extends JPanel implements UserObjectViewer{
     private RTextArea editorPane = new RTextArea();
     private RSyntaxTextAreaHighlighter highlighter = new RSyntaxTextAreaHighlighter();
     private JToolBar north = new JToolBar();
@@ -77,5 +78,13 @@ public class SearchTextPanel extends JPanel{
     public void setText(String text){
         value = text;
         editorPane.setText(text);
+    }
+
+    @Override
+    public JComponent getPane(Object value) {
+        this.value = String.valueOf(value);
+        editorPane.setText(this.value);
+
+        return this;
     }
 }
