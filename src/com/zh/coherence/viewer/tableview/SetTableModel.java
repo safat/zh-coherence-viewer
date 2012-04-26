@@ -53,7 +53,6 @@ public class SetTableModel implements TableModel{
     public Object getValueAt(int rowIndex, int columnIndex) {
         if(columnIndex == 0){
             return list.get(rowIndex).getKey();
-
         }else{
             return list.get(rowIndex).getValue();
         }

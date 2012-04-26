@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<viewers>
+    <item class="java.lang.Object" viewer="com.zh.coherence.viewer.utils.panes.SearchTextPanel"
+          target="FRAME" icon="TEXT" name="Show toString"/>
+    <item class="java.lang.Object" viewer="com.zh.coherence.viewer.objectexplorer.ObjectExplorer"
+          target="FRAME" icon="EXPLORER" name="Object Explorer"/>
+
+    <item class="com.zh.coherence.viewer.pof.ValueContainer" viewer="com.zh.coherence.viewer.hexPanel.HexPanel"
+          target="FRAME" name="Hex viewer"/>
+</viewers>

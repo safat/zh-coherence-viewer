@@ -1,5 +1,7 @@
 package com.zh.coherence.viewer.hexPanel;
 
+import com.zh.coherence.viewer.pof.ValueContainer;
+import com.zh.coherence.viewer.tableview.user.UserObjectViewer;
 import org.fife.ui.hex.swing.HexEditor;
 
 import javax.swing.*;
@@ -13,28 +15,29 @@ import java.io.IOException;
  * Date: 29.02.12
  * Time: 20:07
  */
-public class HexPanel extends JPanel {
+public class HexPanel extends JPanel implements UserObjectViewer{
     private HexEditor editor;
-    private byte[] data;
 
-    public HexPanel(byte[] data) {
+    public HexPanel() {
         super(new BorderLayout());
-        this.data = data;
 
         editor = new HexEditor();
         editor.setCellEditable(false);
 
-        ByteArrayInputStream bis = new ByteArrayInputStream(data);
-        try {
-            editor.open(bis);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
         add(editor, BorderLayout.CENTER);
     }
 
-    public byte[] getData() {
-        return data;
+    @Override
+    public JComponent getPane(Object value) {
+        if(value instanceof ValueContainer){
+            ByteArrayInputStream bis = new ByteArrayInputStream(((ValueContainer) value).getBinary());
+            try {
+                editor.open(bis);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return this;
     }
 }

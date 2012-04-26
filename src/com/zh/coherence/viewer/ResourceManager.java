@@ -1,17 +1,19 @@
 package com.zh.coherence.viewer;
 
-import javax.swing.*;
+import com.zh.coherence.viewer.tableview.user.ObjectViewersContainer;
 
-/**
- * Created by IntelliJ IDEA.
- * User: Живко
- * Date: 11.02.12
- * Time: 0:36
- */
+import javax.swing.*;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+import java.io.File;
+
 public class ResourceManager {
     private final static ResourceManager manager = new ResourceManager();
 
     private ApplicationPane applicationPane;
+
+    private ObjectViewersContainer viewersContainer;
 
     public static ResourceManager getInstance(){
         return manager;
@@ -21,6 +23,25 @@ public class ResourceManager {
 
     private ResourceManager() {
         mainMenuBar = new JMenuBar();
+
+        loadViewers();
+    }
+
+    private void loadViewers(){
+        File file = new File("config/viewers.xml");
+
+        try {
+            if (file.exists()) {
+                JAXBContext context = JAXBContext.newInstance(ObjectViewersContainer.class);
+                Unmarshaller unmarshaller = context.createUnmarshaller();
+                viewersContainer = (ObjectViewersContainer) unmarshaller.unmarshal(file);
+            }
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+        if(viewersContainer == null){
+            viewersContainer = new ObjectViewersContainer();
+        }
     }
 
     public void addMenu(JMenu menu){
@@ -52,5 +73,9 @@ public class ResourceManager {
 
     public void setApplicationPane(ApplicationPane applicationPane) {
         this.applicationPane = applicationPane;
+    }
+
+    public ObjectViewersContainer getViewersContainer() {
+        return viewersContainer;
     }
 }
