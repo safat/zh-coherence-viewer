@@ -1,8 +1,13 @@
-== 0.3.3 TODO LIST ==
- * hide stack trace in the Query Tool Event Log
- * force backup and restore (use loadAll and storeAll instead load and store)
- * user Object renderer
+== 0.3.4 TODO LIST ==
+ * clean code of Query builder
+ * fix bugs
 ----
+
+== 0.3.3 ==
+ * hide stack trace in the Query Tool Event Log
+ * forced backup and restore (use loadAll and storeAll instead load and store)
+ * user can add own Object viewer
+ * fixed some small bugs
 
 == 0.3.2 ==
  * removed tab: 'console'
