@@ -24,15 +24,6 @@ public class UserViewerItem {
     @XmlAttribute
     private String name;
 
-    public UserViewerItem() {
-    }
-
-    public UserViewerItem(String clazz, String renderer, UserObjectViewer.Target target) {
-        this.clazz = clazz;
-        this.renderer = renderer;
-        this.target = target;
-    }
-
     public String getClazz() {
         return clazz;
     }

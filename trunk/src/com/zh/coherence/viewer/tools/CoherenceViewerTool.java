@@ -11,5 +11,5 @@ import javax.swing.*;
 public interface CoherenceViewerTool {
     JComponent getPane();
 
-    String getName();
+
 }

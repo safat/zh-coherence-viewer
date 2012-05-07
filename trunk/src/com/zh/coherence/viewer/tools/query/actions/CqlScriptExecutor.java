@@ -38,7 +38,7 @@ public class CqlScriptExecutor {
         try {
             Pattern pattern = Pattern.compile("^select top \\d*");
 
-            if (pattern.matcher(script).find()) {
+            if (pattern.matcher(script.toLowerCase()).find()) {
                 int start = script.indexOf("top");
                 start = script.indexOf(" ", start);
                 int stop = script.indexOf(" ", start + 1);
