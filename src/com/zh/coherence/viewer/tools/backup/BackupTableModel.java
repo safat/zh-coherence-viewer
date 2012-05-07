@@ -139,11 +139,17 @@ public class BackupTableModel implements TableModel {
             index.put(name, cacheInfo);
             cacheInfoList.add(cacheInfo);
         }
+        sendEvent(null);
     }
 
     public void removeValue(CacheInfo cacheInfo){
         cacheInfoList.remove(cacheInfo);
         index.remove(cacheInfo.name);
+        sendEvent(null);
+    }
+
+    public void removeValue(String name){
+        removeValue(index.get(name));
     }
 
     public void changeCheck(boolean value){

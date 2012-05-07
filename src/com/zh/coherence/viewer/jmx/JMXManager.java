@@ -5,15 +5,11 @@ import javax.management.ObjectName;
 import javax.management.remote.JMXConnector;
 import javax.management.remote.JMXConnectorFactory;
 import javax.management.remote.JMXServiceURL;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
-/**
- * Created by IntelliJ IDEA.
- * User: Живко
- * Date: 05.04.12
- * Time: 22:29
- */
 public class JMXManager {
     private static JMXManager manager = new JMXManager();
     private MBeanServerConnection server = null;
@@ -27,6 +23,10 @@ public class JMXManager {
 
     public boolean isEnabled() {
         return server != null;
+    }
+
+    public MBeanServerConnection getServer() {
+        return server;
     }
 
     public void connect(String url) {
@@ -53,5 +53,20 @@ public class JMXManager {
             e.printStackTrace();
         }
         return ret;
+    }
+
+    public Map<String, String> getClusterInfo(){
+        Map<String, String> data = new HashMap<String, String>();
+        try{
+            ObjectName oName = new ObjectName("Coherence:type=Cluster");
+            data.put("Name", String.valueOf(server.getAttribute(oName, "ClusterName")));
+            data.put("Size", String.valueOf(server.getAttribute(oName, "ClusterSize")));
+            data.put("License Mode", String.valueOf(server.getAttribute(oName, "LicenseMode")));
+            data.put("Coherence Version", String.valueOf(server.getAttribute(oName, "Version")));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return data;
     }
 }

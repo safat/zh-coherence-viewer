@@ -24,7 +24,7 @@ public class ServerList {
     }
 
     public void addServerConfig(ServerConfig config){
-        if(list.size() > 10){
+        if(list.size() > 20){
             list.remove(list.size() - 1);
         }
         if(list.contains(config)){

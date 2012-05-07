@@ -31,7 +31,7 @@ public class RemoveElementsFromListAction extends AbstractAction{
     public void actionPerformed(ActionEvent e) {
         BackupTableModel model = context.getBackupTableModel();
         for(int row : table.getSelectedRows()){
-            model.removeValue((BackupTableModel.CacheInfo) model.getValueAt(row, 1));
+            model.removeValue((String) model.getValueAt(row, 1));
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.zh.coherence.viewer;
 
 import com.zh.coherence.viewer.tableview.user.ObjectViewersContainer;
+import com.zh.coherence.viewer.tools.ToolContainer;
 
 import javax.swing.*;
 import javax.xml.bind.JAXBContext;
@@ -15,7 +16,9 @@ public class ResourceManager {
 
     private ObjectViewersContainer viewersContainer;
 
-    public static ResourceManager getInstance(){
+    private ToolContainer toolContainer;
+
+    public static ResourceManager getInstance() {
         return manager;
     }
 
@@ -24,38 +27,40 @@ public class ResourceManager {
     private ResourceManager() {
         mainMenuBar = new JMenuBar();
 
-        loadViewers();
+        viewersContainer = loadJAXBObject("config/viewers.xml", ObjectViewersContainer.class);
+        toolContainer = loadJAXBObject("config/tools.xml", ToolContainer.class);
     }
 
-    private void loadViewers(){
-        File file = new File("config/viewers.xml");
+    private <T> T loadJAXBObject(String xml, Class clazz) {
+        File file = new File(xml);
+        T ret = null;
 
         try {
             if (file.exists()) {
-                JAXBContext context = JAXBContext.newInstance(ObjectViewersContainer.class);
+                JAXBContext context = JAXBContext.newInstance(clazz);
                 Unmarshaller unmarshaller = context.createUnmarshaller();
-                viewersContainer = (ObjectViewersContainer) unmarshaller.unmarshal(file);
+                ret = (T) unmarshaller.unmarshal(file);
             }
         } catch (JAXBException e) {
             e.printStackTrace();
         }
-        if(viewersContainer == null){
-            viewersContainer = new ObjectViewersContainer();
-        }
+
+        return ret;
     }
 
-    public void addMenu(JMenu menu){
+
+    public void addMenu(JMenu menu) {
         mainMenuBar.add(menu);
     }
-    
-    public JMenu getMenu(String name){
-        if(name == null){
+
+    public JMenu getMenu(String name) {
+        if (name == null) {
             throw new IllegalArgumentException("name");
         }
         String tmp;
-        for(int i = 0, size = mainMenuBar.getMenuCount(); i < size; i++){
+        for (int i = 0, size = mainMenuBar.getMenuCount(); i < size; i++) {
             tmp = mainMenuBar.getMenu(i).getName();
-            if(name.equals(tmp)){
+            if (name.equals(tmp)) {
                 return mainMenuBar.getMenu(i);
             }
         }
@@ -77,5 +82,9 @@ public class ResourceManager {
 
     public ObjectViewersContainer getViewersContainer() {
         return viewersContainer;
+    }
+
+    public ToolContainer getToolContainer() {
+        return toolContainer;
     }
 }

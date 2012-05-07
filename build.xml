@@ -6,7 +6,7 @@
     <property name="classes" location="${build}/classes"/>
     <property name="dist_dir" location="${dist}/zhCoherenceViewer"/>
     <property name="pr_name" value="zhCoherenceViewer"/>
-    <property name="version" value="0.3.3"/>
+    <property name="version" value="0.3.4"/>
 
     <target name="init">
         <!-- Create the time stamp -->
@@ -41,7 +41,7 @@
         <jar jarfile="${dist}/lib/${pr_name}-${version}.jar" basedir="${classes}"/>
     </target>
 
-    <target name="dist" depends="jar" description="generate the distribution">
+    <target name="dist" depends="clean,jar" description="generate the distribution">
         <mkdir dir="${dist_dir}"/>
         <mkdir dir="${dist_dir}/lib"/>
         <copy file="${dist}/lib/${pr_name}-${version}.jar" todir="${dist_dir}/lib"/>
@@ -49,6 +49,7 @@
         <mkdir dir="${dist_dir}/config"/>
         <copydir dest="${dist_dir}/config" src="config" excludes="run.bat, server-list.xml"/>
         <copy file="config/run.bat" todir="${dist_dir}"/>
+        <copy file="config/readme.txt" todir="${dist_dir}"/>
         <mkdir dir="${dist_dir}/user-files"/>
         <copy file="user-files/zh-pof-config.xml" todir="${dist_dir}/user-files"/>
         <mkdir dir="${dist_dir}/coherence-lib"/>

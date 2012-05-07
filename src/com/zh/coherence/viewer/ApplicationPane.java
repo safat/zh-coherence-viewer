@@ -9,5 +9,5 @@ import com.zh.coherence.viewer.tools.CoherenceViewerTool;
  * Time: 10:47
  */
 public interface ApplicationPane {
-    void addTool(CoherenceViewerTool tool);
+    void addTool(CoherenceViewerTool tool, String name);
 }

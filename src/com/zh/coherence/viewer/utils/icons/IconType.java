@@ -32,7 +32,12 @@ public enum IconType {
     CHECK_ALL("check-all.png"),
     UN_CHECK_ALL("uncheck.png"),
     CLOCK("clock.png"),
-    TICK_WHITE("tick-white.png")
+    TICK_WHITE("tick-white.png"),
+    CAMERA("camera.png"),
+    CHART_UP("chart-up.png"),
+    FILM("film.png"),
+    ARROW_CIRCLE_DOUBLE("arrow-circle-double.png"),
+    CLUSTER("cluster.png")
     ;
 
     private String type;

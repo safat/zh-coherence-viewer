@@ -25,8 +25,8 @@ public class ApplicationMainPane extends JPanel implements ApplicationPane{
     }
 
     @Override
-    public void addTool(CoherenceViewerTool tool) {
-        tabbedPane.addTab(tool.getName() + " #" + count ,tool.getPane());
+    public void addTool(CoherenceViewerTool tool, String name) {
+        tabbedPane.addTab(name + " #" + count ,tool.getPane());
         tabbedPane.setIconAt(tabbedPane.getTabCount()-1, null);
         tabbedPane.setSelectedIndex(tabbedPane.getTabCount()-1);
         count ++;

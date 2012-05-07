@@ -32,7 +32,7 @@ public class ApplicationMainFrame extends JFrame {
 
         //prepare default menu bar
         resourceManager.addMenu(new FileJMenuBuilder().buildMenu(mainPane));
-        resourceManager.addMenu(new ToolsJMenuBuilder().buildMenu(mainPane));
+        resourceManager.addMenu(new ToolsJMenuBuilder().buildMenu());
 
         setJMenuBar(resourceManager.getMenuBar());
         setLocationRelativeTo(null);
