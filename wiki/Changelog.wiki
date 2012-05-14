@@ -1,6 +1,7 @@
-== 0.3.4 TODO LIST ==
- * clean code of Query builder
- * fix bugs
+== 0.3.4 ==
+ * tools.list file changed with tools.xml
+ * added simple jmx memory report
+ * fixed some small bugs
 ----
 
 == 0.3.3 ==
