@@ -21,7 +21,7 @@ public class InsertCacheNameAction extends AbstractAction {
     public InsertCacheNameAction(QueryTool queryTool) {
         this.queryTool = queryTool;
 
-        putValue(Action.SMALL_ICON, IconHelper.getInstance().getIcon(IconType.DATABASE_LINK));
+        putValue(Action.SMALL_ICON, IconHelper.getInstance().getIcon(IconType.SCRIPTS));
         setEnabled(JMXManager.getInstance().isEnabled());
     }
 

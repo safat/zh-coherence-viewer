@@ -1,8 +1,18 @@
 application name: zh coherence viewer
 license: LGPL
 
+How To Configure user POF
+
+* unpack zhCoherenceViewer application
+* find a folder: user-files
+* copy all needed jars to it
+* copy all needed pof XML files
+*edit zh-pof-config.xml, add next line:
+    <include>name of your pof file</include>
+
 Changelog:
 
 0.3.4
 tools.list file changed with tools.xml
+added simple jmx memory report
 fixed some small bugs

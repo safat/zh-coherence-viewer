@@ -21,7 +21,7 @@ public class HistoryAction extends AbstractAction{
         this.queryTool = queryTool;
 
         putValue(Action.NAME, "History");
-        putValue(Action.SMALL_ICON, IconHelper.getInstance().getIcon(IconType.HISTORY));
+        putValue(Action.SMALL_ICON, IconHelper.getInstance().getIcon(IconType.CLIPBOARD_TEXT));
     }
 
     @Override
