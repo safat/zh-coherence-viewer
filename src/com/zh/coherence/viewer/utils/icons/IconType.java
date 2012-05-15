@@ -11,7 +11,6 @@ public enum IconType {
     EXIT("exit.png"),
     EXPLORER("explorer.png"),
     FUNCTION("function.png"),
-    HISTORY("history.png"),
     KEYWORD("keyword.png"),
     LOGIN("login.png"),
     OK("ok.png"),
@@ -28,7 +27,6 @@ public enum IconType {
     SAVE("save.png"),
     CSV_28("csv_icon.jpg"),
     EXCEL_28("excel_icon.jpg"),
-    DATABASE_LINK("database-link.png"),
     CHECK_ALL("check-all.png"),
     UN_CHECK_ALL("uncheck.png"),
     CLOCK("clock.png"),
@@ -37,7 +35,9 @@ public enum IconType {
     CHART_UP("chart-up.png"),
     FILM("film.png"),
     ARROW_CIRCLE_DOUBLE("arrow-circle-double.png"),
-    CLUSTER("cluster.png")
+    CLUSTER("cluster.png"),
+    SCRIPTS("scripts.png"),
+    CLIPBOARD_TEXT("clipboard-text.png")
     ;
 
     private String type;
