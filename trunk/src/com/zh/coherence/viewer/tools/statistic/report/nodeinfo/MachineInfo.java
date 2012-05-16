@@ -48,4 +48,16 @@ public class MachineInfo {
     public void incMemMax(int mem){
         memMaximum += mem;
     }
+
+    public int getAverage(){
+        if(nodes.size() == 0){
+            return 0;
+        }
+        int res = 0;
+        for(NodeInfo node : nodes){
+            res += node.getMemBusy();
+        }
+        res = res / nodes.size();
+        return res;
+    }
 }

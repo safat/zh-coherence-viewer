@@ -55,6 +55,13 @@ public class FileUtils {
         return result;
     }
 
+    public static String convertToStringRepresentation(final long value, String memUnit){
+        if("MB".equals(memUnit)){
+            return convertToStringRepresentation(value * M);
+        }
+        throw new IllegalArgumentException("memUnit");
+    }
+
     private static String format(final long value,
                                  final long divider,
                                  final String unit){

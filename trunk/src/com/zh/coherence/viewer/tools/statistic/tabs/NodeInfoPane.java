@@ -4,6 +4,7 @@ import com.zh.coherence.viewer.tools.statistic.report.JMXReport;
 import com.zh.coherence.viewer.tools.statistic.report.NodeReport;
 import com.zh.coherence.viewer.tools.statistic.report.nodeinfo.MachineInfo;
 import com.zh.coherence.viewer.tools.statistic.report.nodeinfo.NodeInfo;
+import com.zh.coherence.viewer.utils.FileUtils;
 import org.jdesktop.swingx.JXPanel;
 import org.jdesktop.swingx.JXTreeTable;
 import org.jdesktop.swingx.treetable.AbstractTreeTableModel;
@@ -24,7 +25,7 @@ public class NodeInfoPane extends JXPanel {
         initUi();
     }
 
-    private void initUi(){
+    private void initUi() {
         setLayout(new BorderLayout());
         treeTable = new JXTreeTable();
         treeTableModel = new TreeTableModelImpl(report.getNodeReport());
@@ -46,11 +47,11 @@ public class NodeInfoPane extends JXPanel {
             super(root);
         }
 
-        private String[] header = new String[] {"Tree", "mem Max", "mem Available", "mem Busy"};
+        private String[] header = new String[]{"Tree", "mem Max", "mem Available", "mem Busy", "Average busy"};
 
         @Override
         public int getColumnCount() {
-            return 4;
+            return header.length;
         }
 
         @Override
@@ -60,39 +61,57 @@ public class NodeInfoPane extends JXPanel {
 
         @Override
         public Object getValueAt(Object o, int i) {
-            if(o instanceof MachineInfo){
+            if (o instanceof MachineInfo) {
                 MachineInfo info = (MachineInfo) o;
-                switch (i){
-                    case 0: return info.getName();
-                    case 1: return info.getMemMaximum();
-                    case 2: return info.getMemAvailable();
-                    case 3: return info.getMemMaximum() - info.getMemAvailable();
+                switch (i) {
+                    case 0:
+                        return info.getName();
+                    case 1:
+                        return FileUtils.convertToStringRepresentation(info.getMemMaximum(), "MB");
+                    case 2:
+                        return FileUtils.convertToStringRepresentation(info.getMemAvailable(), "MB");
+                    case 3:
+                        return FileUtils.convertToStringRepresentation(
+                                info.getMemMaximum() - info.getMemAvailable(), "MB");
+                    case 4:
+                        return FileUtils.convertToStringRepresentation(info.getAverage(), "MB");
                 }
-            }else if(o instanceof NodeInfo){
+            } else if (o instanceof NodeInfo) {
                 NodeInfo info = (NodeInfo) o;
-                switch (i){
-                    case 0: return info.getName();
-                    case 1: return info.getMemMaximum();
-                    case 2: return info.getMemAvailable();
-                    case 3: return info.getMemMaximum() - info.getMemAvailable();
+                switch (i) {
+                    case 0:
+                        return info.getName();
+                    case 1:
+                        return FileUtils.convertToStringRepresentation(info.getMemMaximum(), "MB");
+                    case 2:
+                        return FileUtils.convertToStringRepresentation(info.getMemAvailable(), "MB");
+                    case 3:
+                        return FileUtils.convertToStringRepresentation(
+                                info.getMemMaximum() - info.getMemAvailable(), "MB");
                 }
-            }else if(o instanceof NodeReport){
+            } else if (o instanceof NodeReport) {
                 NodeReport report = ((NodeReport) o);
-                switch (i){
-                    case 0: return "Memory report";
-                    case 1: return report.getMemMaximum();
-                    case 2: return report.getMemAvailable();
-                    case 3: return report.getMemBusy();
+                switch (i) {
+                    case 0:
+                        return "Memory report";
+                    case 1:
+                        return FileUtils.convertToStringRepresentation(report.getMemMaximum(), "MB");
+                    case 2:
+                        return FileUtils.convertToStringRepresentation(report.getMemAvailable(), "MB");
+                    case 3:
+                        return FileUtils.convertToStringRepresentation(report.getMemBusy(), "MB");
+                    case 4:
+                        return FileUtils.convertToStringRepresentation(report.getAverage(), "MB");
                 }
             }
-            return null;
+            return "";
         }
 
         @Override
         public Object getChild(Object parent, int index) {
-            if(parent instanceof NodeReport){
+            if (parent instanceof NodeReport) {
                 return ((NodeReport) parent).getData().get(index);
-            }else if(parent instanceof MachineInfo){
+            } else if (parent instanceof MachineInfo) {
                 return ((MachineInfo) parent).getNodes().get(index);
             }
             return null;
@@ -100,9 +119,9 @@ public class NodeInfoPane extends JXPanel {
 
         @Override
         public int getChildCount(Object parent) {
-            if(parent instanceof NodeReport){
-                return ((NodeReport)parent).size();
-            }else if(parent instanceof MachineInfo){
+            if (parent instanceof NodeReport) {
+                return ((NodeReport) parent).size();
+            } else if (parent instanceof MachineInfo) {
                 return ((MachineInfo) parent).getNodes().size();
             }
             return 0;
@@ -110,16 +129,16 @@ public class NodeInfoPane extends JXPanel {
 
         @Override
         public int getIndexOfChild(Object parent, Object child) {
-            if(parent instanceof NodeReport){
+            if (parent instanceof NodeReport) {
                 return ((NodeReport) parent).getData().indexOf(child);
-            }else if(parent instanceof MachineInfo){
-                return ((MachineInfo)parent).getNodes().indexOf(child);
+            } else if (parent instanceof MachineInfo) {
+                return ((MachineInfo) parent).getNodes().indexOf(child);
             }
 
             return 0;
         }
 
-        public void fireNewRoot(){
+        public void fireNewRoot() {
             modelSupport.fireNewRoot();
         }
     }
