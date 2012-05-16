@@ -43,7 +43,7 @@ public class NodeReport {
                 MachineInfo info = data.get(name);
                 if (info == null) {
                     info = new MachineInfo(name);
-                    data.put(name,info);
+                    data.put(name, info);
                 }
                 info.incMemAvailable(available);
                 info.incMemMax(max);
@@ -54,6 +54,18 @@ public class NodeReport {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public int getAverage() {
+        if (data.size() == 0) {
+            return 0;
+        }
+        int res = 0;
+        for (MachineInfo info : data.values()) {
+            res += info.getAverage();
+        }
+        res = res / data.size();
+        return res;
     }
 
     public List<MachineInfo> getData() {
@@ -72,7 +84,7 @@ public class NodeReport {
         return memMaximum;
     }
 
-    public int getMemBusy(){
+    public int getMemBusy() {
         return memMaximum - memAvailable;
     }
 }
