@@ -37,7 +37,7 @@ public class JmxStatisticTool extends JXPanel implements CoherenceViewerTool {
 
         tabbedPane.add("Overview", new ClusterInfoPane());
         tabbedPane.add("Memory", new NodeInfoPane(jmxReport));
-        tabbedPane.add("Caches", new CachesInfoPane());
+        tabbedPane.add("Caches", new CachesInfoPane(jmxReport));
 
         JToolBar toolBar = new JToolBar(JToolBar.VERTICAL);
         toolBar.add(new UpdateDataAction(jmxReport));

@@ -40,6 +40,7 @@ public class JMXReport {
 
     public void refresh(){
         nodeReport.updateData();
+        cacheReport.updateData();
 
         for(ChangeListener l : listeners){
             l.stateChanged(new ChangeEvent(this));
