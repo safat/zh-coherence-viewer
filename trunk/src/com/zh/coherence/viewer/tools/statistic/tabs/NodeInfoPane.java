@@ -65,7 +65,7 @@ public class NodeInfoPane extends JXPanel {
                 MachineInfo info = (MachineInfo) o;
                 switch (i) {
                     case 0:
-                        return info.getName();
+                        return info.getName() + " [" + info.getNodes().size() + "]";
                     case 1:
                         return FileUtils.convertToStringRepresentation(info.getMemMaximum(), "MB");
                     case 2:
@@ -93,7 +93,7 @@ public class NodeInfoPane extends JXPanel {
                 NodeReport report = ((NodeReport) o);
                 switch (i) {
                     case 0:
-                        return "Memory report";
+                        return "Memory report [" + report.getData().size() + "]";
                     case 1:
                         return FileUtils.convertToStringRepresentation(report.getMemMaximum(), "MB");
                     case 2:
