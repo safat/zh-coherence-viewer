@@ -2,11 +2,15 @@ package com.zh.coherence.viewer.tools.statistic.tabs;
 
 import com.zh.coherence.viewer.tools.statistic.report.JMXReport;
 import com.zh.coherence.viewer.tools.statistic.report.NodeReport;
+import com.zh.coherence.viewer.tools.statistic.report.TreeTableStringValue;
 import com.zh.coherence.viewer.tools.statistic.report.nodeinfo.MachineInfo;
 import com.zh.coherence.viewer.tools.statistic.report.nodeinfo.NodeInfo;
 import com.zh.coherence.viewer.utils.FileUtils;
+import com.zh.coherence.viewer.utils.icons.IconHelper;
 import org.jdesktop.swingx.JXPanel;
 import org.jdesktop.swingx.JXTreeTable;
+import org.jdesktop.swingx.renderer.DefaultTreeRenderer;
+import org.jdesktop.swingx.renderer.IconValue;
 import org.jdesktop.swingx.treetable.AbstractTreeTableModel;
 
 import javax.swing.*;
@@ -31,6 +35,7 @@ public class NodeInfoPane extends JXPanel {
         treeTableModel = new TreeTableModelImpl(report.getNodeReport());
         treeTable.setTreeTableModel(treeTableModel);
         treeTable.setRootVisible(true);
+        treeTable.setTreeCellRenderer(new DefaultTreeRenderer(getIconValue(), new TreeTableStringValue()));
         report.addListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
@@ -40,6 +45,22 @@ public class NodeInfoPane extends JXPanel {
         });
 
         add(new JScrollPane(treeTable), BorderLayout.CENTER);
+    }
+
+    private IconValue getIconValue(){
+        return new IconValue() {
+            @Override
+            public Icon getIcon(Object o) {
+                if(o instanceof NodeReport){
+                    return IconHelper.getInstance().getIcon(com.zh.coherence.viewer.utils.icons.IconType.REPORT);
+                }else if(o instanceof MachineInfo){
+                    return IconHelper.getInstance().getIcon(com.zh.coherence.viewer.utils.icons.IconType.SERVER_NETWORK);
+                }else if(o instanceof NodeInfo){
+                    return IconHelper.getInstance().getIcon(com.zh.coherence.viewer.utils.icons.IconType.NODE);
+                }
+                return null;
+            }
+        };
     }
 
     private class TreeTableModelImpl extends AbstractTreeTableModel {
@@ -64,8 +85,6 @@ public class NodeInfoPane extends JXPanel {
             if (o instanceof MachineInfo) {
                 MachineInfo info = (MachineInfo) o;
                 switch (i) {
-                    case 0:
-                        return info.getName() + " [" + info.getNodes().size() + "]";
                     case 1:
                         return FileUtils.convertToStringRepresentation(info.getMemMaximum(), "MB");
                     case 2:
@@ -79,8 +98,6 @@ public class NodeInfoPane extends JXPanel {
             } else if (o instanceof NodeInfo) {
                 NodeInfo info = (NodeInfo) o;
                 switch (i) {
-                    case 0:
-                        return info.getName();
                     case 1:
                         return FileUtils.convertToStringRepresentation(info.getMemMaximum(), "MB");
                     case 2:
@@ -92,8 +109,6 @@ public class NodeInfoPane extends JXPanel {
             } else if (o instanceof NodeReport) {
                 NodeReport report = ((NodeReport) o);
                 switch (i) {
-                    case 0:
-                        return "Memory report [" + report.getData().size() + "]";
                     case 1:
                         return FileUtils.convertToStringRepresentation(report.getMemMaximum(), "MB");
                     case 2:

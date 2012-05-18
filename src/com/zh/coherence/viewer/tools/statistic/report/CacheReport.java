@@ -8,7 +8,7 @@ import javax.management.MBeanServerConnection;
 import javax.management.ObjectName;
 import java.util.*;
 
-public class CacheReport {
+public class CacheReport implements Named{
 
     private Map<String, CacheInfo> data = new HashMap<String, CacheInfo>();
 
@@ -63,5 +63,10 @@ public class CacheReport {
 
     public void setTotalUnits(long totalUnits) {
         this.totalUnits = totalUnits;
+    }
+
+    @Override
+    public String getName() {
+        return "Cache report";
     }
 }

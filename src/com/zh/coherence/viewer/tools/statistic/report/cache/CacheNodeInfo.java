@@ -1,6 +1,8 @@
 package com.zh.coherence.viewer.tools.statistic.report.cache;
 
-public class CacheNodeInfo {
+import com.zh.coherence.viewer.tools.statistic.report.Named;
+
+public class CacheNodeInfo implements Named{
     private int size;
     private long totalPuts;
     private long totalGets;

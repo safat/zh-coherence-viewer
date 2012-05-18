@@ -1,6 +1,8 @@
 package com.zh.coherence.viewer.tools.statistic.report.nodeinfo;
 
-public class NodeInfo {
+import com.zh.coherence.viewer.tools.statistic.report.Named;
+
+public class NodeInfo implements Named{
     private String name;
 
     private int memAvailable = 0;

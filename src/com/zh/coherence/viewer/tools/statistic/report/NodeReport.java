@@ -10,7 +10,7 @@ import javax.management.MBeanServerConnection;
 import javax.management.ObjectName;
 import java.util.*;
 
-public class NodeReport {
+public class NodeReport implements Named{
 
     private Map<String, MachineInfo> data = new HashMap<String, MachineInfo>();
 
@@ -86,5 +86,10 @@ public class NodeReport {
 
     public int getMemBusy() {
         return memMaximum - memAvailable;
+    }
+
+    @Override
+    public String getName() {
+        return "Memory report [" + getData().size() + "]";
     }
 }

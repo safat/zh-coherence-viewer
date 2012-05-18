@@ -12,6 +12,9 @@ How To Configure user POF
 
 Changelog:
 
+0.3.5
+added JMX cache statistic
+
 0.3.4
 tools.list file changed with tools.xml
 added simple jmx memory report

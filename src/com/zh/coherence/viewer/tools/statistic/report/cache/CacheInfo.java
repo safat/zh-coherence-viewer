@@ -1,5 +1,7 @@
 package com.zh.coherence.viewer.tools.statistic.report.cache;
 
+import com.zh.coherence.viewer.tools.statistic.report.Named;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +11,7 @@ import java.util.List;
  * Date: 18.05.12
  * Time: 21:44
  */
-public class CacheInfo {
+public class CacheInfo implements Named{
     private List<CacheNodeInfo> nodes = new ArrayList<CacheNodeInfo>();
 
     private int size = 0;
@@ -64,7 +66,7 @@ public class CacheInfo {
     }
 
     public String getName() {
-        return name;
+        return name + " [" + getNodes().size() + "]";
     }
 
     public void setName(String name) {

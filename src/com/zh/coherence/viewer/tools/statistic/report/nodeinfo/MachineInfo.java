@@ -1,9 +1,11 @@
 package com.zh.coherence.viewer.tools.statistic.report.nodeinfo;
 
+import com.zh.coherence.viewer.tools.statistic.report.Named;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class MachineInfo {
+public class MachineInfo implements Named{
 
     private String name;
 
@@ -18,7 +20,7 @@ public class MachineInfo {
     }
 
     public String getName() {
-        return name;
+        return name + " [" + getNodes().size() + "]";
     }
 
     public void setName(String name) {
