@@ -43,7 +43,7 @@ public class NodeInfoPane extends JXPanel {
     }
 
     private class TreeTableModelImpl extends AbstractTreeTableModel {
-        private TreeTableModelImpl(Object root) {
+        public TreeTableModelImpl(Object root) {
             super(root);
         }
 
