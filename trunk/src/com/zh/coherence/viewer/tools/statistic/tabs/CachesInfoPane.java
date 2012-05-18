@@ -2,10 +2,14 @@ package com.zh.coherence.viewer.tools.statistic.tabs;
 
 import com.zh.coherence.viewer.tools.statistic.report.CacheReport;
 import com.zh.coherence.viewer.tools.statistic.report.JMXReport;
+import com.zh.coherence.viewer.tools.statistic.report.TreeTableStringValue;
 import com.zh.coherence.viewer.tools.statistic.report.cache.CacheInfo;
 import com.zh.coherence.viewer.tools.statistic.report.cache.CacheNodeInfo;
+import com.zh.coherence.viewer.utils.icons.IconHelper;
 import org.jdesktop.swingx.JXPanel;
 import org.jdesktop.swingx.JXTreeTable;
+import org.jdesktop.swingx.renderer.DefaultTreeRenderer;
+import org.jdesktop.swingx.renderer.IconValue;
 import org.jdesktop.swingx.treetable.AbstractTreeTableModel;
 
 import javax.swing.*;
@@ -29,6 +33,8 @@ public class CachesInfoPane extends JXPanel {
         treeTableModel = new TreeTableModelImpl(report.getCacheReport());
         treeTable.setTreeTableModel(treeTableModel);
         treeTable.setRootVisible(true);
+
+        treeTable.setTreeCellRenderer(new DefaultTreeRenderer(getIconValue(), new TreeTableStringValue()));
         report.addListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
@@ -37,6 +43,22 @@ public class CachesInfoPane extends JXPanel {
             }
         });
         add(new JScrollPane(treeTable), BorderLayout.CENTER);
+    }
+
+    private IconValue getIconValue(){
+        return new IconValue() {
+            @Override
+            public Icon getIcon(Object o) {
+                if(o instanceof CacheReport){
+                    return IconHelper.getInstance().getIcon(com.zh.coherence.viewer.utils.icons.IconType.REPORT);
+                }else if(o instanceof CacheInfo){
+                    return IconHelper.getInstance().getIcon(com.zh.coherence.viewer.utils.icons.IconType.DATABASE);
+                }else if(o instanceof CacheNodeInfo){
+                    return IconHelper.getInstance().getIcon(com.zh.coherence.viewer.utils.icons.IconType.NODE);
+                }
+                return null;
+            }
+        };
     }
 
     private class TreeTableModelImpl extends AbstractTreeTableModel {
@@ -62,8 +84,6 @@ public class CachesInfoPane extends JXPanel {
             if (o instanceof CacheReport) {
                 CacheReport report = (CacheReport) o;
                 switch (i) {
-                    case 0:
-                        return "Cache report";
                     case 1:
                         return report.getTotalUnits();
                     default:
@@ -72,8 +92,6 @@ public class CachesInfoPane extends JXPanel {
             } else if (o instanceof CacheInfo) {
                 CacheInfo info = (CacheInfo) o;
                 switch (i) {
-                    case 0:
-                        return info.getName() + " [" + info.getNodes().size() + "]";
                     case 1:
                         return info.getSize();
                     case 2:
@@ -86,8 +104,6 @@ public class CachesInfoPane extends JXPanel {
             }else if(o instanceof CacheNodeInfo){
                 CacheNodeInfo info = (CacheNodeInfo) o;
                 switch (i) {
-                    case 0:
-                        return info.getName();
                     case 1:
                         return info.getSize();
                     case 2:

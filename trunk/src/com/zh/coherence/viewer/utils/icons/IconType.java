@@ -37,7 +37,11 @@ public enum IconType {
     ARROW_CIRCLE_DOUBLE("arrow-circle-double.png"),
     CLUSTER("cluster.png"),
     SCRIPTS("scripts.png"),
-    CLIPBOARD_TEXT("clipboard-text.png")
+    CLIPBOARD_TEXT("clipboard-text.png"),
+    REPORT("report.png"),
+    NODE("node.png"),
+    DATABASE("database.png"),
+    SERVER_NETWORK("server-network.png")
     ;
 
     private String type;
