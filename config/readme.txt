@@ -16,6 +16,7 @@ Changelog:
 added JMX cache statistic
 save/ load cohQl script
 query tool: show number of loaded rows
+added simple user classes viewer
 
 0.3.4
 tools.list file changed with tools.xml
