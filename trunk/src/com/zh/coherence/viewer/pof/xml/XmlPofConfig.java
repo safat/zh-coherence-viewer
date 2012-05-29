@@ -5,6 +5,7 @@ import com.tangosol.io.pof.PortableObject;
 import com.tangosol.io.pof.PortableObjectSerializer;
 import com.zh.coherence.viewer.pof.StubPofSerializer;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -75,5 +76,9 @@ public class XmlPofConfig {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    public Collection<Integer> getRegisteredTypes(){
+        return typeToClassMap.keySet();
     }
 }

@@ -100,10 +100,12 @@ public class CqlScriptExecutor {
             context.logEvent(new QueryLogEvent(ex, ex.getMessage(), QueryLogEvent.EventType.ERROR));
         }
         if (ret == null) {
+            context.setSize(0);
             context.showOutputPane(QueryContext.NO_DATA);
             context.showShortMessage("OK");
         } else if (ret instanceof Map) {
             int size = ((Map) ret).size();
+            context.setSize(size);
             if (size == 0) {
                 context.showOutputPane(QueryContext.NO_DATA);
             } else {
@@ -113,6 +115,7 @@ public class CqlScriptExecutor {
             context.showShortMessage("OK");
         } else if (ret instanceof Collection) {
             int size = ((Collection) ret).size();
+            context.setSize(size);
             if (size == 0) {
                 context.showOutputPane(QueryContext.NO_DATA);
             } else {
@@ -121,11 +124,14 @@ public class CqlScriptExecutor {
             }
             context.showShortMessage("OK");
         } else if (ret instanceof Number || ret instanceof String) {
+            context.setSize(1);
             context.showOutputPane(QueryContext.TABLE_VIEW);
             context.getQueryTool().showResult(ret, tn, 1);
             context.showShortMessage("OK");
         } else {
+            context.setSize(0);
             context.showOutputPane(QueryContext.ERROR);
+            context.showShortMessage("ERROR");
             context.logEvent(new QueryLogEvent(null, "unknown class: " + ret.getClass(), QueryLogEvent.EventType.MESSAGE));
         }
     }

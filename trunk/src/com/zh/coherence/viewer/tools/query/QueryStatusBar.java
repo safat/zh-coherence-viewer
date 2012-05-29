@@ -20,14 +20,15 @@ public class QueryStatusBar extends JPanel {
     private JXBusyLabel busy = new JXBusyLabel();
     private JTextField text = new JTextField();
     private JTextField timeField = new JTextField();
+    private JTextField rowsField = new JTextField();
 
     private JButton tableButton = new JButton("Table");
     private JButton eventLogButton = new JButton("Event Log");
 
     public QueryStatusBar(final QueryContext context) {
         super(new TableLayout(new double[][]{
-                {2, TableLayout.PREFERRED, 2, TableLayout.FILL, 2, TableLayout.PREFERRED, 2, 130, 2,
-                        TableLayout.PREFERRED, 2, TableLayout.PREFERRED, 2},
+                {2, TableLayout.PREFERRED, 2, TableLayout.FILL, 2, TableLayout.PREFERRED, 2, 70, 2,
+                        TableLayout.PREFERRED, 2, 130, 2, TableLayout.PREFERRED, 2, TableLayout.PREFERRED, 2},
                 {1, TableLayout.PREFERRED, 1}
         }));
         this.context = context;
@@ -39,12 +40,17 @@ public class QueryStatusBar extends JPanel {
         text.setEnabled(false);
         add(text, "3,1");
 
-        add(new JLabel("Time:"), "5,1");
+        add(new JLabel("Rows:"), "5,1");
+        rowsField.setEditable(false);
+        rowsField.setEnabled(false);
+        add(rowsField, "7,1");
+
+        add(new JLabel("Time:"), "9,1");
         timeField.setEditable(false);
         timeField.setEnabled(false);
-        add(timeField, "7,1");
+        add(timeField, "11,1");
 
-        add(tableButton, "9, 1");
+        add(tableButton, "13, 1");
         tableButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -52,7 +58,7 @@ public class QueryStatusBar extends JPanel {
             }
         });
 
-        add(eventLogButton, "11,1");
+        add(eventLogButton, "15,1");
         eventLogButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -67,6 +73,10 @@ public class QueryStatusBar extends JPanel {
 
     public void setTime(long time) {
         timeField.setText(getTime(time));
+    }
+
+    public void setRowsSize(int size){
+        rowsField.setText(String.valueOf(size));
     }
 
     private String getTime(long millis) {

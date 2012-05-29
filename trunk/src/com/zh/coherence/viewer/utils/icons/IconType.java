@@ -41,7 +41,10 @@ public enum IconType {
     REPORT("report.png"),
     NODE("node.png"),
     DATABASE("database.png"),
-    SERVER_NETWORK("server-network.png")
+    SERVER_NETWORK("server-network.png"),
+    FOLDER_OPEN("folder-open.png"),
+    INFORMATION("information.png"),
+    DOCUMENT_J("document-j.png")
     ;
 
     private String type;

@@ -41,4 +41,8 @@ public class QueryContext {
     public void showShortMessage(String msg){
         queryTool.getStatusBar().showShortMessage(msg);
     }
+
+    public void setSize(int size){
+        queryTool.getStatusBar().setRowsSize(size);
+    }
 }
