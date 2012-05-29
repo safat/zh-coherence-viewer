@@ -106,4 +106,8 @@ public class ZhPofContext implements Serializer, PofContext {
             throw new IOException(ex.getMessage(), ex);
         }
     }
+
+    public XmlPofConfig getPofConfig() {
+        return pofConfig;
+    }
 }

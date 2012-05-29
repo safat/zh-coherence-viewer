@@ -39,6 +39,7 @@ public class FileUtils {
     private static final long G = M * K;
     private static final long T = G * K;
 
+    //todo change units to enum
     public static String convertToStringRepresentation(final long value){
         final long[] dividers = new long[] { T, G, M, K, 1 };
         final String[] units = new String[] { "TB", "GB", "MB", "KB", "B" };

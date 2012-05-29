@@ -4,10 +4,7 @@ import com.tangosol.coherence.dsltools.termtrees.Term;
 import com.zh.coherence.viewer.eventlog.EventLogPane;
 import com.zh.coherence.viewer.tableview.CoherenceTableView;
 import com.zh.coherence.viewer.tools.CoherenceViewerTool;
-import com.zh.coherence.viewer.tools.query.actions.EventLogHyperlinkListener;
-import com.zh.coherence.viewer.tools.query.actions.ExecuteQueryAction;
-import com.zh.coherence.viewer.tools.query.actions.HistoryAction;
-import com.zh.coherence.viewer.tools.query.actions.InsertCacheNameAction;
+import com.zh.coherence.viewer.tools.query.actions.*;
 import com.zh.coherence.viewer.utils.LRUList;
 import org.fife.ui.autocomplete.AutoCompletion;
 import org.fife.ui.autocomplete.DefaultCompletionProvider;
@@ -58,6 +55,9 @@ public class QueryTool extends JXPanel implements CoherenceViewerTool {
         toolBar.add(executeQueryAction);
         toolBar.add(new HistoryAction(this));
         toolBar.add(new InsertCacheNameAction(this));
+        toolBar.addSeparator();
+        toolBar.add(new SaveCohQlAction(this));
+        toolBar.add(new OpenCohQlAction(this));
 
         add(toolBar, BorderLayout.NORTH);
 
