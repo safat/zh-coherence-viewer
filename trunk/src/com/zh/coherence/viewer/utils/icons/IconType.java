@@ -44,7 +44,8 @@ public enum IconType {
     SERVER_NETWORK("server-network.png"),
     FOLDER_OPEN("folder-open.png"),
     INFORMATION("information.png"),
-    DOCUMENT_J("document-j.png")
+    DOCUMENT_J("document-j.png"),
+    ASTERISK("asterisk.png")
     ;
 
     private String type;
