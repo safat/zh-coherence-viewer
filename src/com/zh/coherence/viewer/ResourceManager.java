@@ -27,12 +27,13 @@ public class ResourceManager {
     private ResourceManager() {
         mainMenuBar = new JMenuBar();
 
-        viewersContainer = loadJAXBObject("config/viewers.xml", ObjectViewersContainer.class);
-        toolContainer = loadJAXBObject("config/tools.xml", ToolContainer.class);
+        viewersContainer = loadJAXBObject("viewers.xml", ObjectViewersContainer.class);
+        toolContainer = loadJAXBObject("tools.xml", ToolContainer.class);
     }
 
     private <T> T loadJAXBObject(String xml, Class clazz) {
-        File file = new File(xml);
+        File file = new File(this.getClass().getClassLoader().getResource(xml).getFile());
+        System.err.println("load file: " + file.getAbsolutePath());
         T ret = null;
 
         try {

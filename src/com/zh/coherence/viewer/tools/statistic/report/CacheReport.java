@@ -4,6 +4,7 @@ import com.zh.coherence.viewer.jmx.JMXManager;
 import com.zh.coherence.viewer.tools.statistic.report.cache.CacheInfo;
 import com.zh.coherence.viewer.tools.statistic.report.cache.CacheNodeInfo;
 
+import javax.management.AttributeList;
 import javax.management.MBeanServerConnection;
 import javax.management.ObjectName;
 import java.util.*;
@@ -15,6 +16,7 @@ public class CacheReport implements Named{
     private long totalUnits = 0;
 
     public void updateData() {
+        long time = System.currentTimeMillis();
         try{
             data.clear();
             totalUnits = 0;
@@ -29,21 +31,24 @@ public class CacheReport implements Named{
                 }
                 CacheNodeInfo cacheNodeInfo = new CacheNodeInfo();
                 cacheNodeInfo.setName(cacheNameObjName.getKeyProperty("nodeId"));
-                Integer size = (Integer) server.getAttribute(cacheNameObjName, "Size");
+                AttributeList attributes = server.getAttributes(
+                        cacheNameObjName,
+                        new String[]{"Size", "TotalPuts", "TotalGets", "CacheHits", "AverageGetMillis"});
+                Integer size = (Integer) attributes.get(0);
                 cacheNodeInfo.setSize(size);
                 totalUnits += size;
-                Long totalPuts = (Long) server.getAttribute(cacheNameObjName, "TotalPuts");
+                Long totalPuts = (Long) attributes.get(1);
                 cacheNodeInfo.setTotalPuts(totalPuts);
-                Long totalGets = (Long) server.getAttribute(cacheNameObjName, "TotalGets");
+                Long totalGets = (Long) attributes.get(2);
                 cacheNodeInfo.setTotalGets(totalGets);
-                Long cacheHits = (Long) server.getAttribute(cacheNameObjName, "CacheHits");
+                Long cacheHits = (Long) attributes.get(3);
                 cacheNodeInfo.setCacheHits(cacheHits);
-                Double averageGetMillis = (Double) server.getAttribute(cacheNameObjName, "AverageGetMillis");
+                Double averageGetMillis = (Double) attributes.get(4);
                 cacheNodeInfo.setAverageGetMillis(averageGetMillis);
 
                 data.get(name).addCacheNodeInfo(cacheNodeInfo);
             }
-
+            System.err.println("cache report time : " + (System.currentTimeMillis() - time));
         }catch (Exception ex){
             ex.printStackTrace();
         }

@@ -6,7 +6,7 @@
     <property name="classes" location="${build}/classes"/>
     <property name="dist_dir" location="${dist}/zhCoherenceViewer"/>
     <property name="pr_name" value="zhCoherenceViewer"/>
-    <property name="version" value="0.3.4"/>
+    <property name="version" value="0.3.5"/>
 
     <target name="init">
         <!-- Create the time stamp -->
@@ -25,10 +25,11 @@
     </path>
 
     <target name="compile" description="Do the build" depends="init">
-        <javac srcdir="${src}" destdir="${classes}" classpathref="base.path"/>
+        <javac srcdir="${src}" destdir="${classes}" classpathref="base.path"
+               debug="true" debuglevel="lines, vars, and source"/>
         <copy todir="${classes}">
             <fileset dir="src"
-                     includes="**/*.xml,**/*.properties,**/*.txt,**/*.ico,**/*.png,**/*.gif, **/*.jpg"/>
+                     includes="**/*.xml,**/*.properties,**/*.txt,**/*.ico,**/*.png,**/*.gif, **/*.jpg, **/*.java"/>
         </copy>
     </target>
 
@@ -56,8 +57,11 @@
 
         <zip destfile="${dist}/zhCoherenceViewer_${version}.zip" level="9" filesonly="false">
             <fileset dir="${dist}" includes="zhCoherenceViewer/**/"/>
-
         </zip>
+        <zip destfile="${dist}/zhcv_src_${version}.zip" level="9" filesonly="false">
+            <fileset dir="./" excludes=".idea/**/, build/**/,data/**/,out/**/,lib/coherence.jar"/>
+        </zip>
+
     </target>
 
     <target name="clean"

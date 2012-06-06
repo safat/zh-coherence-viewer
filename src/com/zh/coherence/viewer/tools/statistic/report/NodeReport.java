@@ -20,6 +20,7 @@ public class NodeReport implements Named{
 
     public void updateData() {
         try {
+            long time = System.currentTimeMillis();
             data.clear();
             memAvailable = 0;
             memMaximum = 0;
@@ -50,7 +51,7 @@ public class NodeReport implements Named{
 
                 info.getNodes().add(new NodeInfo(id + " (" + member + ")", available, max));
             }
-
+            System.err.println("nodes report time : " + (System.currentTimeMillis() - time));
         } catch (Exception e) {
             e.printStackTrace();
         }
