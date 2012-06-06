@@ -29,12 +29,20 @@ public class BackupContext {
     }
 
     public void incrementGeneralProgress(){
-        generalProgress.setValue(generalProgress.getValue() + 1);
+        incrementGeneralProgress(1);
+    }
+
+    public void incrementGeneralProgress(int inc){
+        generalProgress.setValue(generalProgress.getValue() + inc);
         updateGeneralProgress();
     }
 
     public void incrementCacheProgress(String name){
-        cacheProgress.setValue(cacheProgress.getValue() + 1);
+        incrementCacheProgress(name, 1);
+    }
+
+    public void incrementCacheProgress(String name, int inc){
+        cacheProgress.setValue(cacheProgress.getValue() + inc);
         updateCacheProgress(name);
     }
 

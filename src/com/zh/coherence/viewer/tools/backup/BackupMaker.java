@@ -6,8 +6,6 @@ import com.tangosol.io.WrapperBufferOutput;
 import com.tangosol.net.CacheFactory;
 import com.tangosol.net.NamedCache;
 import com.tangosol.util.Binary;
-import com.tangosol.util.filter.AlwaysFilter;
-import com.tangosol.util.filter.LimitFilter;
 import com.zh.coherence.viewer.utils.FileUtils;
 
 import java.io.File;
@@ -71,28 +69,21 @@ public class BackupMaker {
                     store.setPassThrough(true);
 
                     int bufferSize = context.getBufferSize();
-                    LimitFilter limitFilter = new LimitFilter(new AlwaysFilter(), bufferSize);
-
                     RandomAccessFile file = new RandomAccessFile(target, "rw");
                     WrapperBufferOutput buf = new WrapperBufferOutput(file);
-                    int size = store.size();
                     buf.writePackedInt(-28);
                     buf.writePackedInt(wrapper.cache.size());
-                    byte[] array;
-                    for (int i = 0; i < size; i += bufferSize) {
-                        Set<Map.Entry<Binary, Binary>> entries = store.entrySet(limitFilter);
-
-                        for (Map.Entry<Binary, Binary> entry : entries) {
-                            context.incrementCacheProgress(wrapper.info.name);
-                            context.incrementGeneralProgress();
-                            array = entry.getKey().toByteArray();
-                            buf.write(array, 1, array.length - 1);
-                            array = entry.getValue().toByteArray();
-                            buf.write(array, 1, array.length - 1);
+                    context.updateCacheProgress("loading the keys of cache [" + wrapper.info.name + "]...");
+                    Set keys = store.keySet();
+                    List keysPack = new ArrayList();
+                    for(Object key : keys){
+                        keysPack.add(key);
+                        if(keysPack.size() == bufferSize){
+                            flushData(wrapper, store.getAll(keysPack), buf);
+                            keysPack.clear();
                         }
-                        buf.flush();
-                        limitFilter.nextPage();
                     }
+                    flushData(wrapper, store.getAll(keysPack), buf);
                     store.setPassThrough(false);
                     buf.close();
                     file.close();
@@ -112,5 +103,18 @@ public class BackupMaker {
         }
         context.logPane.addMessage(new BackupLogEvent(
                 globalTime, "", System.currentTimeMillis(), "Done", "Task has been finished"));
+    }
+
+    private void flushData(CacheWrapper wrapper, Map map, WrapperBufferOutput buf) throws Exception {
+        context.incrementCacheProgress(wrapper.info.name, map.size());
+        context.incrementGeneralProgress(map.size());
+        for(Object entryObj : map.entrySet()){
+            Map.Entry<Binary, Binary> entry = (Map.Entry<Binary, Binary>) entryObj;
+            byte[] array = entry.getKey().toByteArray();
+            buf.write(array, 1, array.length - 1);
+            array = entry.getValue().toByteArray();
+            buf.write(array, 1, array.length - 1);
+        }
+        buf.flush();
     }
 }

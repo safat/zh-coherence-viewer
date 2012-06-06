@@ -4,6 +4,7 @@ import com.zh.coherence.viewer.jmx.JMXManager;
 import com.zh.coherence.viewer.tools.statistic.report.cache.CacheInfo;
 import com.zh.coherence.viewer.tools.statistic.report.cache.CacheNodeInfo;
 
+import javax.management.Attribute;
 import javax.management.AttributeList;
 import javax.management.MBeanServerConnection;
 import javax.management.ObjectName;
@@ -31,19 +32,20 @@ public class CacheReport implements Named{
                 }
                 CacheNodeInfo cacheNodeInfo = new CacheNodeInfo();
                 cacheNodeInfo.setName(cacheNameObjName.getKeyProperty("nodeId"));
-                AttributeList attributes = server.getAttributes(
+                AttributeList attrs = server.getAttributes(
                         cacheNameObjName,
                         new String[]{"Size", "TotalPuts", "TotalGets", "CacheHits", "AverageGetMillis"});
-                Integer size = (Integer) attributes.get(0);
+                List<Attribute> attributes = attrs.asList();
+                Integer size = (Integer) attributes.get(0).getValue();
                 cacheNodeInfo.setSize(size);
                 totalUnits += size;
-                Long totalPuts = (Long) attributes.get(1);
+                Long totalPuts = (Long) attributes.get(1).getValue();
                 cacheNodeInfo.setTotalPuts(totalPuts);
-                Long totalGets = (Long) attributes.get(2);
+                Long totalGets = (Long) attributes.get(2).getValue();
                 cacheNodeInfo.setTotalGets(totalGets);
-                Long cacheHits = (Long) attributes.get(3);
+                Long cacheHits = (Long) attributes.get(3).getValue();
                 cacheNodeInfo.setCacheHits(cacheHits);
-                Double averageGetMillis = (Double) attributes.get(4);
+                Double averageGetMillis = (Double) attributes.get(4).getValue();
                 cacheNodeInfo.setAverageGetMillis(averageGetMillis);
 
                 data.get(name).addCacheNodeInfo(cacheNodeInfo);
