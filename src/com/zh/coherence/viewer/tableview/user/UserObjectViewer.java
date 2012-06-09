@@ -11,5 +11,13 @@ import javax.swing.*;
 public interface UserObjectViewer {
     public static enum Target{FRAME, DIALOG, TAB}
 
-    public JComponent getPane(Object value);
+    public JComponent buildPane(Object value);
+
+    public Icon getIcon();
+
+    public boolean isSupport(Object value);
+
+    public String getName();
+
+    public Target getTarget();
 }

@@ -3,6 +3,7 @@ package com.zh.coherence.viewer.tableview;
 import com.tangosol.coherence.dsltools.termtrees.Term;
 import com.zh.coherence.viewer.tableview.actions.ExportDownDropAction;
 import com.zh.coherence.viewer.tableview.actions.TableHighlighterAction;
+import com.zh.coherence.viewer.tableview.user.UserObjectViewer;
 import org.jdesktop.swingx.JXButton;
 import org.jdesktop.swingx.JXTable;
 import org.jdesktop.swingx.search.TableSearchable;
@@ -13,6 +14,7 @@ import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -27,18 +29,21 @@ public class CoherenceTableView extends JPanel {
     private TableModel tableModel;
     private RightButtonMenuBuilder rightButtonMenuBuilder;
     private JXSearchPanelForJXTable searchPanel;
+    private List<UserObjectViewer> viewers;
 
     private Object subject;
 
-    public CoherenceTableView() {
+    public CoherenceTableView(final List<UserObjectViewer> viewers, RightButtonMenuBuilder viewerMenuBuilder) {
         super(new BorderLayout());
+
+        this.viewers = viewers;
+        this.rightButtonMenuBuilder = viewerMenuBuilder;
         table = new JXTable();
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         table.setColumnControlVisible(true);
         table.setRolloverEnabled(true);
 
         add(new JScrollPane(table), BorderLayout.CENTER);
-        rightButtonMenuBuilder = new RightButtonMenuBuilder();
         table.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
@@ -49,7 +54,7 @@ public class CoherenceTableView extends JPanel {
                     model.setSelectionInterval( rowNumber, rowNumber );
 
                     Object value = tableModel.getValueAt(table.getSelectedRow(), table.getSelectedColumn());
-                    JPopupMenu menu = rightButtonMenuBuilder.buildMenu(value);
+                    JPopupMenu menu = rightButtonMenuBuilder.buildMenu(value, viewers);
                     if (menu.getSubElements().length > 0) {
                         menu.show(e.getComponent(), e.getX(), e.getY());
                     }

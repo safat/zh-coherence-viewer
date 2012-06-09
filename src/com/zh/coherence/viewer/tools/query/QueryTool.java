@@ -27,12 +27,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
-/**
- * Created by IntelliJ IDEA.
- * User: Живко
- * Date: 11.02.12
- * Time: 1:18
- */
 public class QueryTool extends JXPanel implements CoherenceViewerTool {
     private RSyntaxTextArea editor;
     private CoherenceTableView tableView;
@@ -44,8 +38,10 @@ public class QueryTool extends JXPanel implements CoherenceViewerTool {
 
     private LRUList<String> history = new LRUList<String>(10);
 
-    public QueryTool() {
+    public QueryTool(CoherenceTableView tableView) {
         super(new BorderLayout());
+
+        this.tableView = tableView;
         context = new QueryContext(this);
         eventLogPane = new EventLogPane(new QueryEventLogRenderer());
         eventLogPane.addHyperlinkListener(new EventLogHyperlinkListener());
@@ -113,7 +109,6 @@ public class QueryTool extends JXPanel implements CoherenceViewerTool {
         splitPane.setDividerSize(2);
 
         output = new JPanel(outputCardLayout);
-        tableView = new CoherenceTableView();
 
         output.add(createTextPanel("No data"), QueryContext.NO_DATA);
         output.add(createTextPanel("Error"), QueryContext.ERROR);

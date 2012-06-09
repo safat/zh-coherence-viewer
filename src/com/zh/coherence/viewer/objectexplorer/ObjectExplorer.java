@@ -1,8 +1,7 @@
 package com.zh.coherence.viewer.objectexplorer;
 
+import com.zh.coherence.viewer.components.text.SearchTextPanel;
 import com.zh.coherence.viewer.objectexplorer.viewer.Viewer;
-import com.zh.coherence.viewer.tableview.user.UserObjectViewer;
-import com.zh.coherence.viewer.utils.panes.SearchTextPanel;
 import org.jdesktop.swingx.JXTree;
 import org.jdesktop.swingx.search.TreeSearchable;
 
@@ -11,7 +10,7 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import java.awt.*;
 
-public class ObjectExplorer extends JPanel implements UserObjectViewer {
+public class ObjectExplorer extends JPanel{
     private JXTree fieldsTree;
     private ObjectExplorerTreeModel treeModel;
 
@@ -31,11 +30,9 @@ public class ObjectExplorer extends JPanel implements UserObjectViewer {
         split.setDividerSize(2);
     }
 
-    @Override
-    public JComponent getPane(Object value) {
+    public void setData(Object value){
         treeModel.setSubject(value);
         fieldsTree.updateUI();
-        return this;
     }
 
     private class ObjectExplorerTreeSelectionListener implements TreeSelectionListener{
