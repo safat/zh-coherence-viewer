@@ -1,40 +1,26 @@
 package com.zh.coherence.viewer;
 
 import com.zh.coherence.viewer.connection.ConnectionDialog;
-import com.zh.coherence.viewer.menubar.FileJMenuBuilder;
-import com.zh.coherence.viewer.menubar.HelpJMenuBuilder;
-import com.zh.coherence.viewer.tools.ToolsJMenuBuilder;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * Created by IntelliJ IDEA.
- * User: Живко
- * Date: 11.02.12
- * Time: 0:11
- */
 public class ApplicationMainFrame extends JFrame {
     private ResourceManager resourceManager;
+    private ApplicationContext context;
 
     public ApplicationMainFrame() throws HeadlessException {
         super("ZH Coherence Viewer");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        resourceManager = ResourceManager.getInstance();
+        context = new ClassPathXmlApplicationContext(new String[]{"context.xml"});
+        resourceManager = context.getBean("resourceManager", ResourceManager.class);
     }
 
     public void showFrame() {
         setSize(1024, 700);
-        //todo save window size and position to the properties file
-        //>>> load they each new application run
-        ApplicationMainPane mainPane = new ApplicationMainPane();
-        resourceManager.setApplicationPane(mainPane);
-        setContentPane(mainPane);
-
-        //prepare default menu bar
-        resourceManager.addMenu(new FileJMenuBuilder().buildMenu(mainPane));
-        resourceManager.addMenu(new ToolsJMenuBuilder().buildMenu());
-        resourceManager.addMenu(new HelpJMenuBuilder().buildMenu(mainPane));
+        setContentPane(resourceManager.getApplicationPane());
 
         setJMenuBar(resourceManager.getMenuBar());
         setLocationRelativeTo(null);

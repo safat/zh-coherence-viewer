@@ -2,9 +2,9 @@ package com.zh.coherence.viewer.tools.statistic;
 
 import com.zh.coherence.viewer.jmx.JMXManager;
 import com.zh.coherence.viewer.tools.CoherenceViewerTool;
-import com.zh.coherence.viewer.tools.ToolFounder;
+import com.zh.coherence.viewer.tools.ToolLauncher;
 
-public class JmxStatisticToolFounder extends ToolFounder {
+public class JmxStatisticToolLauncher extends ToolLauncher {
     @Override
     public CoherenceViewerTool newTool() {
         return new JmxStatisticTool();

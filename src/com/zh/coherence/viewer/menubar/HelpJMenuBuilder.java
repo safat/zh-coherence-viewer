@@ -1,6 +1,5 @@
 package com.zh.coherence.viewer.menubar;
 
-import com.zh.coherence.viewer.ApplicationMainPane;
 import com.zh.coherence.viewer.menubar.action.AboutAction;
 import com.zh.coherence.viewer.menubar.action.UserClassViewerAction;
 
@@ -13,7 +12,7 @@ import javax.swing.*;
  * Time: 17:22
  */
 public class HelpJMenuBuilder {
-    public JMenu buildMenu(ApplicationMainPane mainPane) {
+    public JMenu buildMenu() {
         JMenu menu = new JMenu("Help");
 
         menu.add(new AboutAction());

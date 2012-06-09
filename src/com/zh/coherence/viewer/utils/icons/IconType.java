@@ -45,7 +45,8 @@ public enum IconType {
     FOLDER_OPEN("folder-open.png"),
     INFORMATION("information.png"),
     DOCUMENT_J("document-j.png"),
-    ASTERISK("asterisk.png")
+    ASTERISK("asterisk.png"),
+    TOOLBOX("toolbox.png")
     ;
 
     private String type;
