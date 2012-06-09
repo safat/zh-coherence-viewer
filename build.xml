@@ -4,9 +4,10 @@
     <property name="build" location="build"/>
     <property name="dist" location="${build}/dist"/>
     <property name="classes" location="${build}/classes"/>
+    <property name="classes" location="icons"/>
     <property name="dist_dir" location="${dist}/zhCoherenceViewer"/>
     <property name="pr_name" value="zhCoherenceViewer"/>
-    <property name="version" value="0.3.5"/>
+    <property name="version" value="0.3.6"/>
 
     <target name="init">
         <!-- Create the time stamp -->

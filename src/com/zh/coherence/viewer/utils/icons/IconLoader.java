@@ -32,7 +32,8 @@ public class IconLoader extends ImageIcon implements InitializingBean{
 
     private void init(){
         if(path != null){
-            setImage(Toolkit.getDefaultToolkit().getImage(path));
+            URL url = this.getClass().getClassLoader().getResource(path);
+            setImage(Toolkit.getDefaultToolkit().getImage(url));
         }else{
             URL url = getClass().getResource("broken.png");
             setImage(Toolkit.getDefaultToolkit().getImage(url));
