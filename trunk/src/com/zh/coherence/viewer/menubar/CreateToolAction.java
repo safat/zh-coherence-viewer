@@ -1,28 +1,29 @@
 package com.zh.coherence.viewer.menubar;
 
-import com.zh.coherence.viewer.ResourceManager;
-import com.zh.coherence.viewer.tools.ToolFounder;
-import com.zh.coherence.viewer.utils.icons.IconHelper;
+import com.zh.coherence.viewer.ApplicationPane;
+import com.zh.coherence.viewer.tools.ToolLauncher;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 public class CreateToolAction extends AbstractAction {
-    private ToolFounder founder;
+    private ToolLauncher launcher;
+    private ApplicationPane applicationPane;
 
-    public CreateToolAction(ToolFounder founder) {
-        this.founder = founder;
-        this.putValue(Action.NAME, founder.getDescription().getName());
-        putValue(Action.SMALL_ICON, IconHelper.getInstance().getIcon(founder.getDescription().getIcon()));
+    public CreateToolAction(ToolLauncher launcher, ApplicationPane applicationPane) {
+        this.launcher = launcher;
+        this.applicationPane = applicationPane;
+
+        this.putValue(Action.NAME, launcher.getName());
+        putValue(Action.SMALL_ICON, launcher.getIcon());
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        ResourceManager.getInstance().getApplicationPane().addTool(
-                founder.newTool(), founder.getDescription().getName());
+        applicationPane.addTool(launcher.newTool(), launcher.getName());
     }
 
-    public ToolFounder getFounder() {
-        return founder;
+    public ToolLauncher getLauncher() {
+        return launcher;
     }
 }

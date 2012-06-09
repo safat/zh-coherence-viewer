@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<tools>
-    <tool class="com.zh.coherence.viewer.tools.query.QueryToolFounder" icon="WRITE" name="Query"/>
-    <tool class="com.zh.coherence.viewer.tools.backup.BackupToolFounder" icon="CAMERA" name="Backup/Restore"/>
-    <tool class="com.zh.coherence.viewer.tools.statistic.JmxStatisticToolFounder" icon="CHART_UP" name="JMX Statistic"/>
-</tools>

@@ -1,6 +1,5 @@
 package com.zh.coherence.viewer.menubar;
 
-import com.zh.coherence.viewer.ApplicationMainPane;
 import com.zh.coherence.viewer.menubar.action.ShowSettingsAction;
 
 import javax.swing.*;
@@ -12,7 +11,7 @@ import javax.swing.*;
  * Time: 0:41
  */
 public class FileJMenuBuilder {
-    public JMenu buildMenu(ApplicationMainPane mainPane) {
+    public JMenu buildMenu() {
         JMenu menu = new JMenu("File");
 
         menu.add(new ShowSettingsAction());
