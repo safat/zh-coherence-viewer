@@ -1,7 +1,5 @@
 package com.zh.coherence.viewer.tableview.user;
 
-import com.zh.coherence.viewer.utils.icons.IconHelper;
-import com.zh.coherence.viewer.utils.icons.IconType;
 import com.zh.coherence.viewer.utils.ui.ZHDialog;
 import com.zh.coherence.viewer.utils.ui.ZHDialogFrame;
 
@@ -9,26 +7,25 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 public class UserViewerAction extends AbstractAction{
-    private UserViewerItem item;
+    private UserObjectViewer viewer;
     private Object value;
 
-    public UserViewerAction(UserViewerItem item, Object value) {
-        this.item = item;
+    public UserViewerAction(UserObjectViewer viewer, Object value) {
+        this.viewer = viewer;
         this.value = value;
 
-        putValue(Action.NAME, item.getName());
-        if(item.getIcon() != null){
-            putValue(Action.SMALL_ICON, IconHelper.getInstance().getIcon(IconType.valueOf(item.getIcon())));
+        putValue(Action.NAME, viewer.getName());
+        if(viewer.getIcon() != null){
+            putValue(Action.SMALL_ICON, viewer.getIcon());
         }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        switch (item.getTarget()){
+        switch (viewer.getTarget()){
             case DIALOG:
                 try{
-                    UserObjectViewer viewer = (UserObjectViewer) Class.forName(item.getRenderer()).newInstance();
-                    ZHDialog dialog = new ZHDialog(viewer.getPane(value), item.getName());
+                    ZHDialog dialog = new ZHDialog(viewer.buildPane(value), viewer.getName());
                     dialog.show(800,600);
                 }catch (Exception ex){
                     ex.printStackTrace();
@@ -36,8 +33,7 @@ public class UserViewerAction extends AbstractAction{
                 break;
             case FRAME:
                 try{
-                    UserObjectViewer viewer = (UserObjectViewer) Class.forName(item.getRenderer()).newInstance();
-                    ZHDialogFrame dialog = new ZHDialogFrame(viewer.getPane(value), item.getName());
+                    ZHDialogFrame dialog = new ZHDialogFrame(viewer.buildPane(value), viewer.getName());
                     dialog.show(800,600);
                 }catch (Exception ex){
                     ex.printStackTrace();

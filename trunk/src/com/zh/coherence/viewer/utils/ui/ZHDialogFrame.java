@@ -1,13 +1,9 @@
 package com.zh.coherence.viewer.utils.ui;
 
-import com.zh.coherence.viewer.ResourceManager;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import static javax.swing.SwingUtilities.windowForComponent;
 
 /**
  * Created by IntelliJ IDEA.
@@ -43,7 +39,7 @@ public class ZHDialogFrame extends JFrame {
 
     public void show(int width, int height){
         setSize(width, height);
-        setLocationRelativeTo(windowForComponent((Component) ResourceManager.getInstance().getApplicationPane()));
+//        setLocationRelativeTo(windowForComponent((Component) ResourceManager.getInstance().getApplicationPane()));
         setVisible(true);
     }
 }

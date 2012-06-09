@@ -1,23 +1,31 @@
 package com.zh.coherence.viewer.tableview;
 
-import com.zh.coherence.viewer.ResourceManager;
-import com.zh.coherence.viewer.tableview.user.ObjectViewersContainer;
+import com.zh.coherence.viewer.ApplicationPane;
+import com.zh.coherence.viewer.tableview.user.UserObjectViewer;
 import com.zh.coherence.viewer.tableview.user.UserViewerAction;
-import com.zh.coherence.viewer.tableview.user.UserViewerItem;
 
 import javax.swing.*;
-import java.util.Collection;
+import java.util.List;
 
 public class RightButtonMenuBuilder {
-    public JPopupMenu buildMenu(Object value){
+    private ApplicationPane applicationPane;
+
+    public JPopupMenu buildMenu(Object value, List<UserObjectViewer> viewers){
         JPopupMenu menu = new JPopupMenu();
 
-        ResourceManager resourceManager = ResourceManager.getInstance();
-        ObjectViewersContainer viewersContainer = resourceManager.getViewersContainer();
-        Collection<UserViewerItem> coll = viewersContainer.getAvailableViewers(value);
-        for (UserViewerItem item : coll){
-            menu.add(new UserViewerAction(item, value));
+        for (UserObjectViewer viewer : viewers){
+            if(viewer.isSupport(value)){
+                menu.add(new UserViewerAction(viewer, value));
+            }
         }
         return menu;
+    }
+
+    public ApplicationPane getApplicationPane() {
+        return applicationPane;
+    }
+
+    public void setApplicationPane(ApplicationPane applicationPane) {
+        this.applicationPane = applicationPane;
     }
 }

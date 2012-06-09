@@ -16,7 +16,42 @@
         <property name="toolManager" ref="toolManager"/>
     </bean>
 
+    <!-- Viewers -->
+    <bean id="stringViewer" class="com.zh.coherence.viewer.tools.query.user.TextUserViewer">
+        <property name="name" value="Show toString"/>
+        <property name="target" value="FRAME"/>
+        <property name="icon">
+            <bean class="com.zh.coherence.viewer.utils.icons.IconLoader">
+                <property name="path" value="icons/text-icon.png"/>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="objectExplorer" class="com.zh.coherence.viewer.tools.query.user.ObjectExplorerViewer">
+        <property name="name" value="Object Explorer"/>
+        <property name="target" value="FRAME"/>
+        <property name="icon">
+            <bean class="com.zh.coherence.viewer.utils.icons.IconLoader">
+                <property name="path" value="icons/explorer.png"/>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="hexViewer" class="com.zh.coherence.viewer.tools.query.user.HexPanel">
+        <property name="name" value="Hex viewer"/>
+        <property name="target" value="FRAME"/>
+        <property name="icon">
+            <bean class="com.zh.coherence.viewer.utils.icons.IconLoader">
+                <property name="path" value="icons/document-binary.png"/>
+            </bean>
+        </property>
+    </bean>
+
     <!-- Tools -->
+    <bean id="viewerMenuBuilder" class="com.zh.coherence.viewer.tableview.RightButtonMenuBuilder">
+        <property name="applicationPane" ref="applicationPane"/>
+    </bean>
+
     <bean id="queryTool" class="com.zh.coherence.viewer.tools.query.QueryToolLauncher">
         <property name="name" value="Query"/>
         <property name="icon">
@@ -24,6 +59,14 @@
                 <property name="path" value="icons/write.png"/>
             </bean>
         </property>
+        <property name="viewers">
+            <util:list value-type="com.zh.coherence.viewer.tableview.user.UserObjectViewer">
+                <ref bean="stringViewer"/>
+                <ref bean="objectExplorer"/>
+                <ref bean="hexViewer"/>
+            </util:list>
+        </property>
+        <property name="viewerMenuBuilder" ref="viewerMenuBuilder"/>
     </bean>
 
     <bean id="backupTool" class="com.zh.coherence.viewer.tools.backup.BackupToolLauncher">
