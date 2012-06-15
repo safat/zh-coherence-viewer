@@ -15,10 +15,12 @@ public class QueryToolLauncher extends ToolLauncher implements InitializingBean{
 
     private RightButtonMenuBuilder viewerMenuBuilder;
 
+    private QueryEngine queryEngine;
+
     @Override
     public CoherenceViewerTool newTool() {
         CoherenceTableView tableView = new CoherenceTableView(viewers, viewerMenuBuilder);
-        return new QueryTool(tableView);
+        return new QueryTool(tableView, queryEngine);
     }
 
     public List<UserObjectViewer> getViewers() {
@@ -37,6 +39,9 @@ public class QueryToolLauncher extends ToolLauncher implements InitializingBean{
         if(viewerMenuBuilder == null){
             throw new IllegalStateException("viewerMenuBuilder couldn't be null");
         }
+        if(queryEngine == null){
+            throw new IllegalStateException("queryEngine couldn't be null");
+        }
     }
 
     public RightButtonMenuBuilder getViewerMenuBuilder() {
@@ -45,5 +50,13 @@ public class QueryToolLauncher extends ToolLauncher implements InitializingBean{
 
     public void setViewerMenuBuilder(RightButtonMenuBuilder viewerMenuBuilder) {
         this.viewerMenuBuilder = viewerMenuBuilder;
+    }
+
+    public QueryEngine getQueryEngine() {
+        return queryEngine;
+    }
+
+    public void setQueryEngine(QueryEngine queryEngine) {
+        this.queryEngine = queryEngine;
     }
 }

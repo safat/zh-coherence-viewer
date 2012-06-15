@@ -52,6 +52,8 @@
         <property name="applicationPane" ref="applicationPane"/>
     </bean>
 
+    <bean id="queryEngine" class="com.zh.coherence.viewer.tools.query.engine.ZhQueryEngine"/>
+
     <bean id="queryTool" class="com.zh.coherence.viewer.tools.query.QueryToolLauncher">
         <property name="name" value="Query"/>
         <property name="icon">
@@ -67,6 +69,7 @@
             </util:list>
         </property>
         <property name="viewerMenuBuilder" ref="viewerMenuBuilder"/>
+        <property name="queryEngine" ref="queryEngine"/>
     </bean>
 
     <bean id="backupTool" class="com.zh.coherence.viewer.tools.backup.BackupToolLauncher">
