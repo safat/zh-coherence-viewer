@@ -36,17 +36,22 @@ public class QueryTool extends JXPanel implements CoherenceViewerTool {
     private QueryStatusBar statusBar;
     private EventLogPane eventLogPane;
 
+    private QueryEngine queryEngine;
+
     private LRUList<String> history = new LRUList<String>(10);
 
-    public QueryTool(CoherenceTableView tableView) {
+    public QueryTool(CoherenceTableView tableView, QueryEngine queryEngine) {
         super(new BorderLayout());
 
         this.tableView = tableView;
+        this.queryEngine = queryEngine;
+
         context = new QueryContext(this);
         eventLogPane = new EventLogPane(new QueryEventLogRenderer());
         eventLogPane.addHyperlinkListener(new EventLogHyperlinkListener());
 
-        final ExecuteQueryAction executeQueryAction = new ExecuteQueryAction(context);
+        final ExecuteQueryAction executeQueryAction = new ExecuteQueryAction(context, queryEngine);
+
         JToolBar toolBar = new JToolBar();
         toolBar.add(executeQueryAction);
         toolBar.add(new HistoryAction(this));

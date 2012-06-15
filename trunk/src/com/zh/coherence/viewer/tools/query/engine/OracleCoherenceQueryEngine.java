@@ -1,12 +1,9 @@
-package com.zh.coherence.viewer.tools.query;
+package com.zh.coherence.viewer.tools.query.engine;
 
-/**
- * Created by IntelliJ IDEA.
- * User: Живко
- * Date: 09.06.12
- * Time: 12:08
- */
-public class DefaultExecutor implements CoherenceQueryExecutor {
+import com.zh.coherence.viewer.tools.query.QueryEngine;
+import com.zh.coherence.viewer.tools.query.QueryResult;
+
+public class OracleCoherenceQueryEngine implements QueryEngine {
     @Override
     public String getJavaSource(String query) {
         return null;
