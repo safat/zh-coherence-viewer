@@ -2,7 +2,9 @@ package com.zh.coherence.viewer.objectexplorer;
 
 import com.zh.coherence.viewer.components.text.SearchTextPanel;
 import com.zh.coherence.viewer.objectexplorer.viewer.Viewer;
+import com.zh.coherence.viewer.utils.icons.IconLoader;
 import org.jdesktop.swingx.JXTree;
+import org.jdesktop.swingx.renderer.*;
 import org.jdesktop.swingx.search.TreeSearchable;
 
 import javax.swing.*;
@@ -10,7 +12,7 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import java.awt.*;
 
-public class ObjectExplorer extends JPanel{
+public class ObjectExplorer extends JPanel {
     private JXTree fieldsTree;
     private ObjectExplorerTreeModel treeModel;
 
@@ -19,6 +21,12 @@ public class ObjectExplorer extends JPanel{
         JSplitPane split = new JSplitPane();
         treeModel = new ObjectExplorerTreeModel();
         fieldsTree = new JXTree(treeModel);
+        fieldsTree.setCellRenderer(new DefaultTreeRenderer(getIconValue(), new StringValue() {
+            @Override
+            public String getString(Object o) {
+                return String.valueOf(o);
+            }
+        }));
         SearchTextPanel text = new SearchTextPanel();
         fieldsTree.addTreeSelectionListener(new ObjectExplorerTreeSelectionListener(text));
         fieldsTree.setSearchable(new TreeSearchable(fieldsTree));
@@ -30,12 +38,35 @@ public class ObjectExplorer extends JPanel{
         split.setDividerSize(2);
     }
 
-    public void setData(Object value){
+    private IconValue getIconValue() {
+        return new IconValue() {
+            @Override
+            public Icon getIcon(Object o) {
+                if (o instanceof Viewer) {
+                    Viewer viewer = (Viewer) o;
+                    if (viewer.getSubject() == null) {
+                        return new IconLoader("icons/black_question.gif");
+                    }
+                    if (viewer.getSubject().getClass().isPrimitive() ||
+                            viewer.getSubject() instanceof Number) {
+                        return new IconLoader("icons/bean-small.png");
+                    } else if (viewer.getSubject().getClass().isArray()) {
+                        return new IconLoader("icons/array.png");
+                    } else if (treeModel.isLeaf(o)) {
+                        return new IconLoader("icons/block-small.png");
+                    }
+                }
+                return null;
+            }
+        };
+    }
+
+    public void setData(Object value) {
         treeModel.setSubject(value);
         fieldsTree.updateUI();
     }
 
-    private class ObjectExplorerTreeSelectionListener implements TreeSelectionListener{
+    private class ObjectExplorerTreeSelectionListener implements TreeSelectionListener {
         SearchTextPanel field;
 
         private ObjectExplorerTreeSelectionListener(SearchTextPanel field) {
@@ -45,11 +76,11 @@ public class ObjectExplorer extends JPanel{
         @Override
         public void valueChanged(TreeSelectionEvent e) {
             Object source = fieldsTree.getLastSelectedPathComponent();
-            if(source == null){
+            if (source == null) {
                 field.setText("NULL");
-            }else if(source instanceof Viewer){
-                field.setText(((Viewer)source).getText());
-            }else{
+            } else if (source instanceof Viewer) {
+                field.setText(((Viewer) source).getText());
+            } else {
                 field.setText(source.toString());
             }
         }
