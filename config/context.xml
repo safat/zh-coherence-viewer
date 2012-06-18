@@ -52,7 +52,9 @@
         <property name="applicationPane" ref="applicationPane"/>
     </bean>
 
-    <bean id="queryEngine" class="com.zh.coherence.viewer.tools.query.engine.ZhQueryEngine"/>
+    <!--<bean id="queryEngine" class="com.zh.coherence.viewer.tools.query.engine.ZhQueryEngine"/>-->
+
+    <bean id="queryEngine" class="com.zh.coherence.viewer.tools.query.engine.OracleCoherenceQueryEngine"/>
 
     <bean id="queryTool" class="com.zh.coherence.viewer.tools.query.QueryToolLauncher">
         <property name="name" value="Query"/>
