@@ -32,6 +32,7 @@ public class QueryEventLogRenderer implements EventLogRenderer {
                     StringBuilder sb = new StringBuilder();
                     sb.append(errorMsg).append(event.message).append(endLine);
                     if(event.error != null){
+                        sb.append("<div>message:<i>").append(event.error.getMessage()).append("</i></div>");
                         sb.append("<div>").append("<a href='<b>");
                         for(StackTraceElement element : event.error.getStackTrace()){
                             sb.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;").append(element.toString());
