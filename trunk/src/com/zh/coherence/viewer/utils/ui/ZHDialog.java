@@ -9,6 +9,15 @@ public class ZHDialog extends JDialog {
     private JComponent pane;
     private String title;
 
+    private Action userAction = null;
+
+    public ZHDialog(JComponent pane, String title, Action userAction) {
+        this.userAction = userAction;
+        this.pane = pane;
+        this.title = title;
+        init();
+    }
+
     public ZHDialog(JComponent pane, String title) {
 //        super(windowForComponent((Component) ResourceManager.getInstance().getApplicationPane()),
 //                ModalityType.APPLICATION_MODAL);
@@ -16,6 +25,10 @@ public class ZHDialog extends JDialog {
         this.pane = pane;
         this.title = title;
 
+        init();
+    }
+
+    public void init() {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setTitle(title);
         JDialogHelper.escDialog(this);
@@ -30,11 +43,14 @@ public class ZHDialog extends JDialog {
                 dispose();
             }
         });
+        if(userAction != null){
+            buts.add(new JButton(userAction));
+        }
         buts.add(close);
         container.add(buts, BorderLayout.SOUTH);
     }
 
-    public void show(int width, int height){
+    public void show(int width, int height) {
         setSize(width, height);
 //        setLocationRelativeTo(windowForComponent((Component) ResourceManager.getInstance().getApplicationPane()));
         setVisible(true);
