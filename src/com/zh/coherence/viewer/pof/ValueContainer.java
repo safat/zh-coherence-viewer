@@ -1,5 +1,8 @@
 package com.zh.coherence.viewer.pof;
 
+import com.zh.coherence.viewer.pof.printer.Printer;
+import com.zh.coherence.viewer.pof.printer.ValueContainerPrinterFactory;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,26 +14,26 @@ import java.util.List;
  */
 public class ValueContainer {
     private byte[] binary; //todo create flag, is need keep binary
-    private List<Object> value = new ArrayList<Object>();
+    private List<Object> values = new ArrayList<Object>();
 
     private Object userValue;
 
     private int typeId;
 
     public int size() {
-        return value.size();
+        return values.size();
     }
 
     public boolean add(Object o) {
-        return value.add(o);
+        return values.add(o);
     }
 
     public Object get(int index) {
-        return value.get(index);
+        return values.get(index);
     }
 
     public Object set(int index, Object element) {
-        return value.set(index, element);
+        return values.set(index, element);
     }
 
     public byte[] getBinary() {
@@ -57,20 +60,33 @@ public class ValueContainer {
         this.userValue = userValue;
     }
 
+    public List<Object> getValues() {
+        return values;
+    }
+
+    public void setValues(List<Object> values) {
+        this.values = values;
+    }
+
     @Override
     public String toString() {
-        if (userValue != null) {
-            return userValue.toString();
+        Printer printer = ValueContainerPrinterFactory.getInstance().getPrinter(typeId);
+        if (printer != null) {
+            return printer.print(this);
         } else {
-            StringBuilder sb = new StringBuilder();
-            sb.append(typeId).append("{");
-            for (Object obj : value) {
-                sb.append(obj).append(",");
-            }
-            sb.deleteCharAt(sb.length() - 1);
-            sb.append("}");
+            if (userValue != null) {
+                return userValue.toString();
+            } else {
+                StringBuilder sb = new StringBuilder();
+                sb.append(typeId).append("{");
+                for (Object obj : values) {
+                    sb.append(obj).append(",");
+                }
+                sb.deleteCharAt(sb.length() - 1);
+                sb.append("}");
 
-            return sb.toString();
+                return sb.toString();
+            }
         }
     }
 }
