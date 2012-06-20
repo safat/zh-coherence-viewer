@@ -20,7 +20,7 @@ public class ApplicationPane extends JPanel{
 
     public void addTool(CoherenceViewerTool tool, String name) {
         tabbedPane.addTab(name + " #" + count ,tool.getPane());
-        tabbedPane.setIconAt(tabbedPane.getTabCount()-1, null);
+
         tabbedPane.setSelectedIndex(tabbedPane.getTabCount()-1);
         count ++;
     }
