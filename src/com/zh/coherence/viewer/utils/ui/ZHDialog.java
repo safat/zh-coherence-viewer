@@ -52,6 +52,7 @@ public class ZHDialog extends JDialog {
 
     public void show(int width, int height) {
         setSize(width, height);
+//        setPreferredSize(new Dimension(width, height));
 //        setLocationRelativeTo(windowForComponent((Component) ResourceManager.getInstance().getApplicationPane()));
         setVisible(true);
     }
