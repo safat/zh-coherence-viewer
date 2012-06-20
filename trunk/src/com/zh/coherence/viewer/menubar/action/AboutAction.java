@@ -31,7 +31,7 @@ public class AboutAction extends AbstractAction{
             view.setDragEnabled(false);
             view.setEditable(false);
             ZHDialog dialog = new ZHDialog(view, "About");
-
+            dialog.setModal(true);
             dialog.show(361,311);
         } catch (IOException e1) {
             e1.printStackTrace();
