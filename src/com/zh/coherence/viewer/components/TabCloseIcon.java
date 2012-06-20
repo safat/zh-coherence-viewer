@@ -1,7 +1,6 @@
 package com.zh.coherence.viewer.components;
 
-import com.zh.coherence.viewer.utils.icons.IconHelper;
-import com.zh.coherence.viewer.utils.icons.IconType;
+import com.zh.coherence.viewer.utils.icons.IconLoader;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,45 +13,41 @@ import java.awt.event.MouseEvent;
  * Date: 16.02.12
  * Time: 0:30
  */
-public class TabCloseIcon implements Icon {
-    private final Icon mIcon;
-    private JTabbedPane mTabbedPane = null;
-    private transient Rectangle mPosition = null;
+public class TabCloseIcon extends JPanel {
 
-    public TabCloseIcon(Icon mIcon) {
-        this.mIcon = mIcon;
-    }
-
-    public TabCloseIcon() {
-        this(IconHelper.getInstance().getIcon(IconType.CLOSE_TAB));
-    }
-
-    public void paintIcon(Component c, Graphics g, int x, int y) {
-        if (null == mTabbedPane) {
-            mTabbedPane = (JTabbedPane) c;
-            mTabbedPane.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseReleased(MouseEvent e) {
-                    if (!e.isConsumed() && mPosition.contains(e.getX(), e.getY())) {
-                        final int index = mTabbedPane.getSelectedIndex();
-                        mTabbedPane.remove(index);
-                        e.consume();
-                    }
-                }
-            });
+    public TabCloseIcon(final JTabbedPane pane, boolean enableCloseButton) {
+        super(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        if (pane == null) {
+            throw new NullPointerException("TabbedPane is null");
         }
+        setOpaque(false);
 
-        mPosition = new Rectangle(x, y, getIconWidth(), getIconHeight());
-        mIcon.paintIcon(c, g, x, y);
-    }
+        JLabel label = new JLabel() {
+            public String getText() {
+                int i = pane.indexOfTabComponent(TabCloseIcon.this);
+                if (i != -1) {
+                    return pane.getTitleAt(i);
+                }
+                return null;
+            }
+        };
+        add(label);
+        label.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 5));
+        Icon close = new IconLoader("icons/close-icon.gif");
+        JLabel closeLabel = new JLabel(close);
+        if(enableCloseButton){
+            add(closeLabel);
+        }
+        setBorder(BorderFactory.createEmptyBorder(2, 0, 0, 0));
 
-    @Override
-    public int getIconWidth() {
-        return mIcon.getIconWidth();
-    }
-
-    @Override
-    public int getIconHeight() {
-        return mIcon.getIconHeight();
+        closeLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int i = pane.indexOfTabComponent(TabCloseIcon.this);
+                if (i != -1) {
+                    pane.remove(i);
+                }
+            }
+        });
     }
 }
