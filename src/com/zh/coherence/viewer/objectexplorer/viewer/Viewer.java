@@ -5,5 +5,7 @@ public interface Viewer {
 
     String getNodeName();
 
+    String getName();
+
     Object getSubject();
 }

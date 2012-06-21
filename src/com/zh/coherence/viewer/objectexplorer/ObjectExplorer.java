@@ -10,11 +10,13 @@ import org.jdesktop.swingx.search.TreeSearchable;
 import javax.swing.*;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
+import javax.swing.tree.TreePath;
 import java.awt.*;
 
 public class ObjectExplorer extends JPanel {
     private JXTree fieldsTree;
     private ObjectExplorerTreeModel treeModel;
+    private JTextField path;
 
     public ObjectExplorer() {
         super(new BorderLayout());
@@ -36,6 +38,23 @@ public class ObjectExplorer extends JPanel {
         split.setRightComponent(new JScrollPane(text));
         split.setDividerLocation(280);
         split.setDividerSize(2);
+
+        path = new JTextField();
+        add(path, BorderLayout.SOUTH);
+
+        fieldsTree.getSelectionModel().addTreeSelectionListener(new TreeSelectionListener() {
+            @Override
+            public void valueChanged(TreeSelectionEvent e) {
+                try{
+                QueryPathBuilder queryPathBuilder = new QueryPathBuilder();
+                for(TreePath p : fieldsTree.getSelectionPaths()){
+                    path.setText(queryPathBuilder.buildQuery(p));
+                }
+                }catch (Exception ex){
+                    ex.printStackTrace();
+                }
+            }
+        });
     }
 
     private IconValue getIconValue() {
