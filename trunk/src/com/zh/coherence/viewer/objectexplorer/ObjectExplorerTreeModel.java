@@ -1,5 +1,7 @@
 package com.zh.coherence.viewer.objectexplorer;
 
+import com.zh.coherence.viewer.objectexplorer.viewer.DefaultViewer;
+import com.zh.coherence.viewer.objectexplorer.viewer.MapEntryViewer;
 import com.zh.coherence.viewer.objectexplorer.viewer.Viewer;
 import com.zh.coherence.viewer.objectexplorer.viewer.ViewerFactory;
 
@@ -7,6 +9,7 @@ import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.*;
 
@@ -46,6 +49,12 @@ public class ObjectExplorerTreeModel implements TreeModel {
                         return ((Map) subject).size();
                     } else if (subject instanceof Collection) {
                         return ((Collection) subject).size();
+                    } else if(subject.getClass().isArray()){
+                        int size = Array.getLength(subject);
+                        if(size > 100){
+                            size = 101;
+                        }
+                        return size;
                     } else {
                         return getFieldsList(subject).size();
                     }
@@ -109,14 +118,18 @@ public class ObjectExplorerTreeModel implements TreeModel {
     private List<Viewer> getFields(Object obj) {
         List<Viewer> ret = new ArrayList<Viewer>();
         if (obj != null) {
-            if (obj instanceof Map) {
+            if(obj.getClass().isArray()){
+                int size = Array.getLength(obj);
+                for (int i = 0; i < size && i <= 100; i++){
+                    ret.add(new DefaultViewer("["+i+"]", Array.get(obj, i)));
+                }
+                if(size > 100){
+                    ret.add(new DefaultViewer("[...]", null));
+                }
+            }else if (obj instanceof Map) {
                 Set<Map.Entry> set = ((Map) obj).entrySet();
                 for (Map.Entry entry : set) {
-                    String name = entry.getKey().toString();
-                    if (name.length() > 15) {
-                        name = name.substring(0, 12) + "...";
-                    }
-                    ret.add(viewerFactory.getViewer(name, entry));
+                    ret.add(new MapEntryViewer(entry));
                 }
             } else if (obj instanceof Collection) {
                 String name;
