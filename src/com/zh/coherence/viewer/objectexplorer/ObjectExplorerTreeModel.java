@@ -4,16 +4,16 @@ import com.zh.coherence.viewer.objectexplorer.viewer.DefaultViewer;
 import com.zh.coherence.viewer.objectexplorer.viewer.MapEntryViewer;
 import com.zh.coherence.viewer.objectexplorer.viewer.Viewer;
 import com.zh.coherence.viewer.objectexplorer.viewer.ViewerFactory;
+import org.jdesktop.swingx.treetable.AbstractTreeTableModel;
 
 import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;
-import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.*;
 
-public class ObjectExplorerTreeModel implements TreeModel {
+public class ObjectExplorerTreeModel extends AbstractTreeTableModel {
     private Object subject = null;
     private List<TreeModelListener> listeners = new ArrayList<TreeModelListener>();
     private ViewerFactory viewerFactory = new ViewerFactory();
@@ -180,5 +180,27 @@ public class ObjectExplorerTreeModel implements TreeModel {
         }
 
         return cache.get(parent).get(index);
+    }
+
+    @Override
+    public int getColumnCount() {
+        return 2;
+    }
+
+    @Override
+    public Object getValueAt(Object parent, int index) {
+        if(index == 1){
+            return getChildCount(parent);
+        }
+        return null;
+    }
+
+    @Override
+    public String getColumnName(int column) {
+        if(column == 0){
+            return "Tree";
+        }else{
+            return "Size";
+        }
     }
 }

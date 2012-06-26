@@ -4,7 +4,7 @@ import com.zh.coherence.viewer.objectexplorer.viewer.Viewer;
 
 import javax.swing.tree.TreePath;
 import java.lang.reflect.Method;
-import java.util.Map;
+import java.util.*;
 
 public class QueryPathBuilder {
     public String buildQuery(TreePath path) {
@@ -18,8 +18,13 @@ public class QueryPathBuilder {
                 if (parent instanceof Map) {
                     sb.append(".get(").append(wrapObject(name)).append(")");
                     parent = viewer.getSubject();
-                } else if (parent.getClass().isArray()) {
-                    parent = null;
+                } else if (parent.getClass().isArray() || parent instanceof Set) {
+                    break;
+                } else if (parent instanceof List) {
+                    List parentList = (List) parent;
+                    int idx = parentList.indexOf(viewer.getSubject());
+                    sb.append(".get(").append(idx).append(")");
+                    parent = viewer.getSubject();
                 } else {
                     String checkedMethodName;
                     if (name.length() > 1) {
@@ -27,23 +32,30 @@ public class QueryPathBuilder {
                     } else {
                         checkedMethodName = "get" + name.substring(0, 1).toUpperCase();
                     }
-                    boolean getter = false;
-                    for (Method method : parent.getClass().getDeclaredMethods()) {
+                    String methodName = null;
+                    for (Method method : getDeclaredMethods(parent)) {
                         if (checkedMethodName.equals(method.getName())) {
-                            getter = true;
+                            methodName = name;
                             break;
+                        } else if (name.equals(method.getName())) {
+                            methodName = name + "()";
                         }
                     }
-                    sb.append(getter ? "." + name : "." + checkedMethodName + "()");
+                    if (methodName == null) {
+                        break;
+                    }
+                    sb.append(".").append(methodName);
                     parent = viewer.getSubject();
                 }
-            }else {
+            } else {
                 parent = viewer.getSubject();
             }
         }
 
         // == (equals)
-        if (parent instanceof Integer) {
+        if (parent == null) {
+            sb.append(" is null");
+        } else if (parent instanceof Integer) {
             sb.append(" = ").append(parent);
         } else if (parent instanceof Float) {
             sb.append(" = ").append(parent).append('F');
@@ -74,5 +86,20 @@ public class QueryPathBuilder {
         }
 
         return ret;
+    }
+
+    private List<Method> getDeclaredMethods(Object obj) {
+        List<Method> fields = new ArrayList<Method>();
+        Class clazz = obj.getClass();
+        fields.addAll(Arrays.asList(clazz.getDeclaredMethods()));
+        while (true) {
+            clazz = clazz.getSuperclass();
+            if (clazz != null) {
+                fields.addAll(Arrays.asList(clazz.getDeclaredMethods()));
+            } else {
+                break;
+            }
+        }
+        return fields;
     }
 }
