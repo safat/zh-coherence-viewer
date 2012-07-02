@@ -34,8 +34,8 @@ public class ArrayViewer implements Viewer {
         if (subject == null) {
             builder.append("NULL");
         } else {
-            builder.append(subject.getClass().getName());
-            builder.append("\"");
+            builder.append(subject.getClass().getName()).append("\"\n");
+            builder.append("Component Type: ").append(subject.getClass().getComponentType());
             builder.append("\nSize: ").append(Array.getLength(subject));
         }
 
