@@ -28,7 +28,7 @@ public class DefaultViewer implements Viewer {
     @Override
     public String getText() {
         StringBuilder builder = new StringBuilder();
-        builder.append("name: \"");
+        builder.append("Type: \"");
         if (subject == null) {
             builder.append("NULL");
         } else {

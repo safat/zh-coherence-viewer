@@ -23,8 +23,9 @@ public class StopList {
     public static boolean isStopped(Object obj){
         if(obj == null) return true;
         if(STOP_LIST.contains(obj.getClass())) return true;
-//        if(obj.getClass().isArray()) return true;
         if(obj.getClass().isPrimitive()) return true;
+        if(obj instanceof Character) return true;
+        if(obj.getClass().isEnum()) return true;
         return false;
     }
 }

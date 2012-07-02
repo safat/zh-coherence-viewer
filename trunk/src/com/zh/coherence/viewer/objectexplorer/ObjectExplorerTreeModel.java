@@ -42,7 +42,7 @@ public class ObjectExplorerTreeModel extends AbstractTreeTableModel {
         if (parent != null && parent instanceof Viewer) {
             Object subject = ((Viewer) parent).getSubject();
             if (subject != null) {
-                if (StopList.STOP_LIST.contains(subject.getClass())) {
+                if (StopList.isStopped(subject)) {
                     return 0;
                 } else {
                     if (subject instanceof Map) {
