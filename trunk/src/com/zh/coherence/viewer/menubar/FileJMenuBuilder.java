@@ -1,5 +1,6 @@
 package com.zh.coherence.viewer.menubar;
 
+import com.zh.coherence.viewer.ResourceManager;
 import com.zh.coherence.viewer.menubar.action.ShowSettingsAction;
 
 import javax.swing.*;
@@ -11,10 +12,14 @@ import javax.swing.*;
  * Time: 0:41
  */
 public class FileJMenuBuilder {
-    public JMenu buildMenu() {
+    private ResourceManager manager;
+
+    public JMenu buildMenu(ResourceManager manager) {
+        this.manager = manager;
+
         JMenu menu = new JMenu("File");
 
-        menu.add(new ShowSettingsAction());
+        menu.add(new ShowSettingsAction(manager.getConfigContainer()));
         menu.addSeparator();
         menu.add(new JMenuItem(new FileExitAction()));
 

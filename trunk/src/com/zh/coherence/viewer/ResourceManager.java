@@ -1,5 +1,6 @@
 package com.zh.coherence.viewer;
 
+import com.zh.coherence.viewer.config.ConfigContainer;
 import com.zh.coherence.viewer.menubar.FileJMenuBuilder;
 import com.zh.coherence.viewer.menubar.HelpJMenuBuilder;
 import com.zh.coherence.viewer.tools.ToolManager;
@@ -11,6 +12,8 @@ public class ResourceManager {
 
     private ApplicationPane applicationPane;
 
+    private ConfigContainer configContainer;
+
     JMenuBar mainMenuBar;
 
     private ResourceManager() {
@@ -20,7 +23,7 @@ public class ResourceManager {
     private void initMenuBar(){
         mainMenuBar = new JMenuBar();
 
-        mainMenuBar.add(new FileJMenuBuilder().buildMenu());
+        mainMenuBar.add(new FileJMenuBuilder().buildMenu(this));
         mainMenuBar.add(getToolManager().getMenu());
         mainMenuBar.add(new HelpJMenuBuilder().buildMenu());
     }
@@ -46,5 +49,13 @@ public class ResourceManager {
 
     public void setToolManager(ToolManager toolManager) {
         this.toolManager = toolManager;
+    }
+
+    public ConfigContainer getConfigContainer() {
+        return configContainer;
+    }
+
+    public void setConfigContainer(ConfigContainer configContainer) {
+        this.configContainer = configContainer;
     }
 }

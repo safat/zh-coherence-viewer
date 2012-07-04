@@ -6,7 +6,7 @@
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
            http://www.springframework.org/schema/util
            http://www.springframework.org/schema/util/spring-util-3.0.xsd"
-       >
+        >
 
     <!-- main -->
     <bean id="applicationPane" class="com.zh.coherence.viewer.ApplicationPane"/>
@@ -14,6 +14,7 @@
     <bean id="resourceManager" class="com.zh.coherence.viewer.ResourceManager">
         <property name="applicationPane" ref="applicationPane"/>
         <property name="toolManager" ref="toolManager"/>
+        <property name="configContainer" ref="configContainer"/>
     </bean>
 
     <!-- Viewers -->
@@ -102,4 +103,27 @@
             </util:list>
         </property>
     </bean>
+
+    <!-- ********************* CONFIG *************************************************** -->
+
+    <bean id="objectExplorerConfig" class="com.zh.coherence.viewer.objectexplorer.config.OEConfigPanel">
+        <property name="configName" value="Object Explorer"/>
+        <property name="icon">
+            <bean class="com.zh.coherence.viewer.utils.icons.IconLoader">
+                <property name="path" value="icons/settings.png"/>
+            </bean>
+        </property>
+    </bean>
+
+    <!-- Add your config panel here -->
+
+    <bean id="configContainer" class="com.zh.coherence.viewer.config.ConfigContainer">
+        <property name="panels">
+            <util:list value-type="com.zh.coherence.viewer.config.ConfigPanel">
+                <ref bean="objectExplorerConfig"/>
+                <!-- register your config panel here -->
+            </util:list>
+        </property>
+    </bean>
+
 </beans>
