@@ -67,18 +67,11 @@ public class ObjectExplorerTreeModel extends AbstractTreeTableModel {
     @Override
     public boolean isLeaf(Object node) {
         if (node == null) return true;
-        if (node != null && node instanceof Viewer) {
+        if (node instanceof Viewer) {
             Object subject = ((Viewer) node).getSubject();
-            if (subject != null) {
-                return StopList.isStopped(subject);
-            } else {
-                return true;
-            }
+            return subject == null || StopList.isStopped(subject);
         }
-        if ("NULL".equals(node)) {
-            return true;
-        }
-        return false;
+        return "NULL".equals(node);
     }
 
     @Override
