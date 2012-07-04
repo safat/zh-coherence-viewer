@@ -1,38 +1,32 @@
 package com.zh.coherence.viewer.menubar.action;
 
-import com.zh.coherence.viewer.pof.printer.Printer;
-import com.zh.coherence.viewer.pof.printer.ValueContainerPrinterFactory;
-import com.zh.coherence.viewer.utils.icons.IconHelper;
+import com.zh.coherence.viewer.config.ConfigContainer;
 import com.zh.coherence.viewer.utils.icons.IconLoader;
-import com.zh.coherence.viewer.utils.icons.IconType;
-import com.zh.coherence.viewer.utils.ui.ZHDialog;
-import layout.TableLayout;
-import org.jdesktop.swingx.JXTable;
 
 import javax.swing.*;
-import javax.swing.event.*;
-import javax.swing.table.AbstractTableModel;
-import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.util.List;
 
-/**
- * Created by IntelliJ IDEA.
- * User: Живко
- * Date: 22.03.12
- * Time: 0:37
- */
 public class ShowSettingsAction extends AbstractAction {
-    private Printer lastEdited;
+//    private Printer lastEdited;
+    private ConfigContainer configContainer;
 
-    public ShowSettingsAction() {
-
+    public ShowSettingsAction(ConfigContainer configContainer) {
+        this.configContainer = configContainer;
         putValue(Action.NAME, "Settings");
-        putValue(Action.SMALL_ICON, IconHelper.getInstance().getIcon(IconType.SETTINGS));
+        putValue(Action.SMALL_ICON, new IconLoader("icons/settings.png"));
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
+        if(configContainer != null){
+            configContainer.setSize(1000,700);
+            configContainer.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            configContainer.setIconImage(new IconLoader("icons/settings.png").getImage());
+            configContainer.setTitle("Config Panel [ZH Coherence Viewer]");
+            configContainer.setVisible(true);
+        }
+/*
         JPanel configPanel = new JPanel(new BorderLayout());
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 
@@ -77,9 +71,10 @@ public class ShowSettingsAction extends AbstractAction {
 
         dialog.setModal(true);
         dialog.show(600, 450);
+*/
     }
 
-    private class AddPrinterAction extends AbstractAction {
+  /*  private class AddPrinterAction extends AbstractAction {
         MyTableModel tableModel;
 
         private AddPrinterAction(MyTableModel tableModel) {
@@ -147,5 +142,5 @@ public class ShowSettingsAction extends AbstractAction {
         public String getColumnName(int column) {
             return column == 0 ? "POF ID" : "Format";
         }
-    }
+    }*/
 }

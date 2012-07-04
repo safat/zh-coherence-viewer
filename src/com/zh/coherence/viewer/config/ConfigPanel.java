@@ -50,8 +50,8 @@ public interface ConfigPanel {
     ConfigPanel getChild(int index);
 
     /**
-     * Application checks the Config Panel status when it loses focus
-     * @return TRUE if config was changed.
+     * Method will be called when user leave the page
+     * @return TRUE if operation is allowed.
      */
-    boolean isConfigChanged();
+    boolean leaveThePage();
 }
