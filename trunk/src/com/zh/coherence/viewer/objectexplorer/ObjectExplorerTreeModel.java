@@ -156,6 +156,12 @@ public class ObjectExplorerTreeModel extends AbstractTreeTableModel {
                 }
             }
         }
+        Collections.sort(ret, new Comparator<Viewer>() {
+            @Override
+            public int compare(Viewer o1, Viewer o2) {
+                return o1.getNodeName().compareTo(o2.getNodeName());
+            }
+        });
         return ret;
     }
 
