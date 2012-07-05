@@ -58,9 +58,9 @@ public class MapTableModel implements TableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         Object tmp = subject.get(keys.get(rowIndex));
         Object ret;
-        if(tmp instanceof List){
-            ret = ((List)tmp).get(columnIndex);
-        }else{
+        if (tmp instanceof List) {
+            ret = ((List) tmp).get(columnIndex);
+        } else {
             ret = tmp;
         }
 
@@ -79,22 +79,26 @@ public class MapTableModel implements TableModel {
     public void removeTableModelListener(TableModelListener l) {
     }
 
-    private void initModel(){
+    private void initModel() {
         keys = new ArrayList();
         keys.addAll(subject.keySet());
         Term fieldsTerms = params.findChild("fieldList");
         headers = new String[fieldsTerms.length()];
         Term callNode;
         Term identifier;
-        for(int i = 1, size = fieldsTerms.length(); i <= size; i++){
-            callNode = fieldsTerms.termAt(i);
-            if(callNode.getFunctor().equals("callNode")){
-                headers[i-1] = callNode.termAt(1).fullFormString();
-            }else {
-                callNode = callNode.findAttribute("callNode");
-                identifier = fieldsTerms.termAt(i).findAttribute("identifier");
-                headers[i-1] =  callNode.fullFormString()
-                        + (identifier != null ? "."+identifier.fullFormString() : "");
+        for (int i = 1, size = fieldsTerms.length(); i <= size; i++) {
+            try {
+                callNode = fieldsTerms.termAt(i);
+                if (callNode.getFunctor().equals("callNode")) {
+                    headers[i - 1] = callNode.termAt(1).fullFormString();
+                } else {
+                    callNode = callNode.findAttribute("callNode");
+                    identifier = fieldsTerms.termAt(i).findAttribute("identifier");
+                    headers[i - 1] = callNode.fullFormString()
+                            + (identifier != null ? "." + identifier.fullFormString() : "");
+                }
+            } catch (Exception ex) {
+                headers[i - 1] = "Unknown";
             }
         }
     }

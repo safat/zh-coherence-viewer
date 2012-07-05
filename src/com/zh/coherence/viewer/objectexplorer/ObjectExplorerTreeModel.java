@@ -1,5 +1,6 @@
 package com.zh.coherence.viewer.objectexplorer;
 
+import com.zh.coherence.viewer.objectexplorer.config.OEConfigManager;
 import com.zh.coherence.viewer.objectexplorer.viewer.DefaultViewer;
 import com.zh.coherence.viewer.objectexplorer.viewer.MapEntryViewer;
 import com.zh.coherence.viewer.objectexplorer.viewer.Viewer;
@@ -18,6 +19,7 @@ public class ObjectExplorerTreeModel extends AbstractTreeTableModel {
     private List<TreeModelListener> listeners = new ArrayList<TreeModelListener>();
     private ViewerFactory viewerFactory = new ViewerFactory();
     private Map<Object, List<Viewer>> cache = new HashMap<Object, List<Viewer>>();
+    private OEConfigManager configManager = OEConfigManager.getInstance();
 
     @Override
     public Object getRoot() {
@@ -42,7 +44,7 @@ public class ObjectExplorerTreeModel extends AbstractTreeTableModel {
         if (parent != null && parent instanceof Viewer) {
             Object subject = ((Viewer) parent).getSubject();
             if (subject != null) {
-                if (StopList.isStopped(subject)) {
+                if (configManager.isStopped(subject)) {
                     return 0;
                 } else {
                     if (subject instanceof Map) {
@@ -69,7 +71,7 @@ public class ObjectExplorerTreeModel extends AbstractTreeTableModel {
         if (node == null) return true;
         if (node instanceof Viewer) {
             Object subject = ((Viewer) node).getSubject();
-            return subject == null || StopList.isStopped(subject);
+            return subject == null || configManager.isStopped(subject);
         }
         return "NULL".equals(node);
     }
