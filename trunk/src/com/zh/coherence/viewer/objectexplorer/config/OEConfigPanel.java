@@ -9,9 +9,7 @@ import org.jdesktop.swingx.VerticalLayout;
 import org.springframework.beans.factory.InitializingBean;
 
 import javax.swing.*;
-
 import java.awt.*;
-import java.util.Set;
 
 import static layout.TableLayoutConstants.FILL;
 import static layout.TableLayoutConstants.PREFERRED;
@@ -31,6 +29,17 @@ public class OEConfigPanel extends AbstractConfigPanel implements InitializingBe
 
     @Override
     public void applyChanges() {
+        listModel.setClasses(manager.getDataKeeper().getLocalClasses());
+        //
+        manager.getDataKeeper().setPrimitives(primitive.isSelected());
+        manager.getDataKeeper().setEnums(enums.isSelected());
+        manager.getDataKeeper().setArray(array.isSelected());
+        manager.getDataKeeper().setAnonymous(anonymous.isSelected());
+        manager.getDataKeeper().setSynthetic(synthetic.isSelected());
+        //list
+        manager.getDataKeeper().setLocalClasses(listModel.getClasses());
+        manager.convertStringListToClasses();
+
         manager.saveConfig();
     }
 
@@ -83,7 +92,10 @@ public class OEConfigPanel extends AbstractConfigPanel implements InitializingBe
         //list
         JXList jxList = new JXList(listModel);
         JPanel listContainer = new JPanel(new BorderLayout());
-        listContainer.add(new JToolBar(), BorderLayout.NORTH);
+
+        JToolBar toolBar = new JToolBar();
+        toolBar.add(new AddClassAction(listModel));
+        listContainer.add(toolBar, BorderLayout.NORTH);
         listContainer.add(new JScrollPane(jxList));
         config.add(listContainer, "1,3");
         //checks
@@ -98,29 +110,12 @@ public class OEConfigPanel extends AbstractConfigPanel implements InitializingBe
     }
 
     private void updateConfigPanel(){
-        //todo !
-    }
-
-    private class ClassesListModel extends AbstractListModel{
-
-        private Set<Class> classes = null;
-
-        @Override
-        public int getSize() {
-            return 0;
-        }
-
-        @Override
-        public Object getElementAt(int index) {
-            return null;
-        }
-
-        public Set<Class> getClasses() {
-            return classes;
-        }
-
-        public void setClasses(Set<Class> classes) {
-            this.classes = classes;
-        }
+        primitive.setSelected(manager.getDataKeeper().isPrimitives());
+        enums.setSelected(manager.getDataKeeper().isEnums());
+        array.setSelected(manager.getDataKeeper().isArray());
+        anonymous.setSelected(manager.getDataKeeper().isAnonymous());
+        synthetic.setSelected(manager.getDataKeeper().isSynthetic());
+        //list
+        listModel.setClasses(manager.getDataKeeper().getLocalClasses());
     }
 }
