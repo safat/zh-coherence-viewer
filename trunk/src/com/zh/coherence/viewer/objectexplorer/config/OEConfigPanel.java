@@ -1,7 +1,6 @@
 package com.zh.coherence.viewer.objectexplorer.config;
 
 import com.zh.coherence.viewer.config.AbstractConfigPanel;
-import com.zh.coherence.viewer.config.ConfigPanel;
 import layout.TableLayout;
 import org.jdesktop.swingx.JXList;
 import org.jdesktop.swingx.JXTitledSeparator;
@@ -64,16 +63,6 @@ public class OEConfigPanel extends AbstractConfigPanel implements InitializingBe
     }
 
     @Override
-    public int getChildCount() {
-        return 0;
-    }
-
-    @Override
-    public ConfigPanel getChild(int index) {
-        return null;
-    }
-
-    @Override
     public boolean leaveThePage() {
         return true;
     }
@@ -94,7 +83,10 @@ public class OEConfigPanel extends AbstractConfigPanel implements InitializingBe
         JPanel listContainer = new JPanel(new BorderLayout());
 
         JToolBar toolBar = new JToolBar();
+        toolBar.setFloatable(false);
         toolBar.add(new AddClassAction(listModel));
+        toolBar.add(new RemoveClassesAction(listModel, jxList));
+
         listContainer.add(toolBar, BorderLayout.NORTH);
         listContainer.add(new JScrollPane(jxList));
         config.add(listContainer, "1,3");
