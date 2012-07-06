@@ -107,10 +107,18 @@
 
     <bean id="objectExplorerConfig" class="com.zh.coherence.viewer.objectexplorer.config.OEConfigPanel">
         <property name="configName" value="Object Explorer"/>
-        <property name="icon">
-            <bean class="com.zh.coherence.viewer.utils.icons.IconLoader">
-                <property name="path" value="icons/settings.png"/>
-            </bean>
+    </bean>
+
+    <bean id="tableConfig" class="com.zh.coherence.viewer.tableview.config.TableViewConfig">
+        <property name="configName" value="Table View"/>
+    </bean>
+
+    <bean id="coherenceQueryConfig" class="com.zh.coherence.viewer.tools.query.config.CoherenceQueryConfigPanel">
+        <property name="configName" value="Coherence Query"/>
+        <property name="children">
+            <util:list value-type="com.zh.coherence.viewer.config.ConfigPanel">
+                <ref bean="tableConfig"/>
+            </util:list>
         </property>
     </bean>
 
@@ -120,6 +128,8 @@
         <property name="panels">
             <util:list value-type="com.zh.coherence.viewer.config.ConfigPanel">
                 <ref bean="objectExplorerConfig"/>
+                <!--<ref bean="coherenceQueryConfig"/>-->
+
                 <!-- register your config panel here -->
             </util:list>
         </property>

@@ -24,7 +24,7 @@ public class ConfigTreeModel implements TreeModel {
         if(root.equals(parent)){
             return new TreeNodeWrapper(configPanels.get(index));
         }else if(parent instanceof TreeNodeWrapper){
-            return new TreeNodeWrapper(((TreeNodeWrapper) parent).getPanel());
+            return new TreeNodeWrapper(((TreeNodeWrapper) parent).getPanel().getChild(index));
         }
         return null;
     }

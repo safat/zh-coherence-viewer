@@ -29,6 +29,8 @@ public class ConfigContainer extends JFrame implements InitializingBean {
 
     private ConfigPanel currentPanel = null;
 
+    private JButton help;
+
     public ConfigContainer() throws HeadlessException {
         JPanel root = new JPanel(new BorderLayout());
         splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
@@ -43,7 +45,8 @@ public class ConfigContainer extends JFrame implements InitializingBean {
         buttons.add(new JButton(new OkAction(this)), "1,1");
         buttons.add(new JButton(new CancelAction(this)), "3,1");
         buttons.add(new JButton(new ApplyAction(this)), "5,1");
-        buttons.add(new JButton(new HelpAction(this)), "7,1");
+        help = new JButton(new HelpAction(this));
+        buttons.add(help, "7,1");
 
         buttons.setBorder(BorderFactory.createEtchedBorder());
 
@@ -69,7 +72,9 @@ public class ConfigContainer extends JFrame implements InitializingBean {
     }
 
     private void showPanel(ConfigPanel panel) {
-        configPanelContainer.add(panel.getConfigPanel(), BorderLayout.CENTER);
+        if (panel.getConfigPanel() != null) {
+            configPanelContainer.add(panel.getConfigPanel(), BorderLayout.CENTER);
+        }
     }
 
     @Override
@@ -100,6 +105,7 @@ public class ConfigContainer extends JFrame implements InitializingBean {
                 titledPanel.setTitle(currentPanel.getConfigName());
                 showPanel(currentPanel);
                 titledPanel.updateUI();
+                help.setEnabled(currentPanel.isHelpAvailable());
             }
         }
     }
