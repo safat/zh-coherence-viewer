@@ -122,12 +122,17 @@
         </property>
     </bean>
 
+    <bean id="jmxReportConfig" class="com.zh.coherence.viewer.tools.statistic.config.JMXReportConfigPanel">
+        <property name="configName" value="JMX Statistic Config"/>
+    </bean>
+
     <!-- Add your config panel here -->
 
     <bean id="configContainer" class="com.zh.coherence.viewer.config.ConfigContainer">
         <property name="panels">
             <util:list value-type="com.zh.coherence.viewer.config.ConfigPanel">
                 <ref bean="objectExplorerConfig"/>
+                <ref bean="jmxReportConfig"/>
                 <!--<ref bean="coherenceQueryConfig"/>-->
 
                 <!-- register your config panel here -->
