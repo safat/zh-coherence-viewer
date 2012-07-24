@@ -13,6 +13,8 @@ public class MachineInfo implements Named{
 
     private int memMaximum = 0;
 
+    private int units = 0;
+
     private List<NodeInfo> nodes = new ArrayList<NodeInfo>();
 
     public MachineInfo(String name) {
@@ -43,12 +45,24 @@ public class MachineInfo implements Named{
         return memMaximum;
     }
 
+    public int getUnits() {
+        return units;
+    }
+
+    public void setUnits(int units) {
+        this.units = units;
+    }
+
     public void incMemAvailable(int mem){
         memAvailable += mem;
     }
 
     public void incMemMax(int mem){
         memMaximum += mem;
+    }
+
+    public void incUnits(int unit){
+        units += unit;
     }
 
     public int getAverage(){

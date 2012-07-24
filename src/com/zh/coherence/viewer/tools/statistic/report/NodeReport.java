@@ -18,6 +18,8 @@ public class NodeReport implements Named{
 
     private int memMaximum = 0;
 
+    private int units = 0;
+
     public void updateData() {
         try {
             long time = System.currentTimeMillis();
@@ -37,9 +39,11 @@ public class NodeReport implements Named{
                 Integer max = (Integer) attributes.get(2).getValue();
                 String member = (String) attributes.get(3).getValue();
                 Integer id = (Integer) attributes.get(4).getValue();
+                Integer unit = 0;//(Integer) attributes.get(5).getValue();
 
                 memAvailable += available;
                 memMaximum += max;
+                units += unit;
 
                 MachineInfo info = data.get(name);
                 if (info == null) {
@@ -48,8 +52,9 @@ public class NodeReport implements Named{
                 }
                 info.incMemAvailable(available);
                 info.incMemMax(max);
+                info.incUnits(unit);
 
-                info.getNodes().add(new NodeInfo(id + " (" + member + ")", available, max));
+                info.getNodes().add(new NodeInfo(id + " (" + member + ")", available, max, unit));
             }
             System.err.println("nodes report time : " + (System.currentTimeMillis() - time));
         } catch (Exception e) {
@@ -87,6 +92,10 @@ public class NodeReport implements Named{
 
     public int getMemBusy() {
         return memMaximum - memAvailable;
+    }
+
+    public int getUnits() {
+        return units;
     }
 
     @Override

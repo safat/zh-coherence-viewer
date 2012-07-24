@@ -9,10 +9,13 @@ public class NodeInfo implements Named{
 
     private int memMaximum = 0;
 
-    public NodeInfo( String name, int memAvailable, int memMaximum) {
+    private int units = 0;
+
+    public NodeInfo( String name, int memAvailable, int memMaximum, int units) {
         this.memAvailable = memAvailable;
         this.memMaximum = memMaximum;
         this.name = name;
+        this.units = units;
     }
 
     public int getMemAvailable() {
@@ -29,6 +32,14 @@ public class NodeInfo implements Named{
 
     public int getMemBusy(){
         return memMaximum - memAvailable;
+    }
+
+    public int getUnits() {
+        return units;
+    }
+
+    public void setUnits(int units) {
+        this.units = units;
     }
 
     @Override

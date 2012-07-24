@@ -25,10 +25,14 @@ public class JMXConfigTableModel extends AbstractTableModel {
 
     @Override
     public String getColumnName(int column) {
-        if (tabContainer.getType() == TabType.TABLE) {
-            return tableHeader[column];
+        if (tabContainer != null) {
+            if (tabContainer.getType() == TabType.TABLE) {
+                return tableHeader[column];
+            } else {
+                return listHeader[column];
+            }
         } else {
-            return listHeader[column];
+            return "?";
         }
     }
 
@@ -58,6 +62,14 @@ public class JMXConfigTableModel extends AbstractTableModel {
         return null;
     }
 
+    public void createItem(String id) {
+        TabItem item = new TabItem();
+        item.setId(id);
+        item.setTitle(id);
+        tabContainer.getItems().add(item);
+        fireTableDataChanged();
+    }
+
     @Override
     public Class<?> getColumnClass(int columnIndex) {
         if (tabContainer.getType() == TabType.LIST && columnIndex == 2) {
@@ -73,8 +85,7 @@ public class JMXConfigTableModel extends AbstractTableModel {
 
     public void setTabContainer(TabContainer tabContainer) {
         this.tabContainer = tabContainer;
-        this.fireTableDataChanged();
-        System.err.println("changed");
+        this.fireTableStructureChanged();
     }
 
     @Override
