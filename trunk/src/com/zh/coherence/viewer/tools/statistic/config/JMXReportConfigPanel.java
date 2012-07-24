@@ -81,11 +81,11 @@ public class JMXReportConfigPanel extends AbstractConfigPanel {
 
         JToolBar tableBar = new JToolBar(JToolBar.HORIZONTAL);
         tableBar.setFloatable(false);
-        tableBar.add(new AddTableItemAction(null));
-        tableBar.add(new RemoveTableItemAction(null));
+        tableBar.add(new AddTableItemAction(jmxConfigTableModel));
+        tableBar.add(new RemoveTableItemAction(jmxConfigTableModel));
         tableBar.addSeparator();
-        tableBar.add(new MoveTableItemUpAction(null));
-        tableBar.add(new MoveTableItemDownAction(null));
+        tableBar.add(new MoveTableItemUpAction(jmxConfigTableModel));
+        tableBar.add(new MoveTableItemDownAction(jmxConfigTableModel));
 
         root.add(tabsBar, "1, 1");
         root.add(new JScrollPane(tabsList), "1, 3");

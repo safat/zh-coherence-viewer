@@ -9,7 +9,7 @@ public class TabContainer {
 
     private TabType type;
 
-    private List<TabItem> items;
+    private List<TabItem> items = new ArrayList<TabItem>();
 
     public void addTabItem(TabItem tabItem){
         if(items == null){

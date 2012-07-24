@@ -94,6 +94,8 @@ public class NodeInfoPane extends JXPanel {
                                 info.getMemMaximum() - info.getMemAvailable(), "MB");
                     case 4:
                         return FileUtils.convertToStringRepresentation(info.getAverage(), "MB");
+                    case 5:
+                        return FileUtils.convertToStringRepresentation(info.getUnits(), "MB");
                 }
             } else if (o instanceof NodeInfo) {
                 NodeInfo info = (NodeInfo) o;
@@ -105,6 +107,8 @@ public class NodeInfoPane extends JXPanel {
                     case 3:
                         return FileUtils.convertToStringRepresentation(
                                 info.getMemMaximum() - info.getMemAvailable(), "MB");
+//                    case 4:
+//                        return FileUtils.convertToStringRepresentation(info.getUnits(), "MB");
                 }
             } else if (o instanceof NodeReport) {
                 NodeReport report = ((NodeReport) o);
@@ -117,6 +121,8 @@ public class NodeInfoPane extends JXPanel {
                         return FileUtils.convertToStringRepresentation(report.getMemBusy(), "MB");
                     case 4:
                         return FileUtils.convertToStringRepresentation(report.getAverage(), "MB");
+                    case 5:
+                        return FileUtils.convertToStringRepresentation(report.getUnits(), "MB");
                 }
             }
             return "";
