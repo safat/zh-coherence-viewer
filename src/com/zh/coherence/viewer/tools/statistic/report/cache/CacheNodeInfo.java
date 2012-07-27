@@ -9,6 +9,7 @@ public class CacheNodeInfo implements Named{
     private long cacheHits;
     private double averageGetMillis;
     private String name;
+    private long units;
 
     public String getName() {
         return name;
@@ -56,5 +57,13 @@ public class CacheNodeInfo implements Named{
 
     public void setTotalPuts(long totalPuts) {
         this.totalPuts = totalPuts;
+    }
+
+    public long getUnits() {
+        return units;
+    }
+
+    public void setUnits(long units) {
+        this.units = units;
     }
 }

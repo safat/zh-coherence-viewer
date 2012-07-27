@@ -22,6 +22,10 @@ public class CacheInfo implements Named{
 
     private String name;
 
+    private long units = 0;
+
+    private long cacheHits = 0;
+
     public CacheInfo(String name) {
         this.name = name;
     }
@@ -31,6 +35,8 @@ public class CacheInfo implements Named{
         size += info.getSize();
         totalPuts += info.getTotalPuts();
         totalGets += info.getTotalGets();
+        units += info.getUnits();
+        cacheHits += info.getCacheHits();
     }
 
     public List<CacheNodeInfo> getNodes() {
@@ -71,5 +77,21 @@ public class CacheInfo implements Named{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public long getUnits() {
+        return units;
+    }
+
+    public void setUnits(long units) {
+        this.units = units;
+    }
+
+    public long getCacheHits() {
+        return cacheHits;
+    }
+
+    public void setCacheHits(long cacheHits) {
+        this.cacheHits = cacheHits;
     }
 }

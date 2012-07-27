@@ -27,10 +27,11 @@ public class QueryPathBuilder {
                     parent = viewer.getSubject();
                 } else {
                     String checkedMethodName;
+                    String prefix = o instanceof Boolean ? "is" : "get";
                     if (name.length() > 1) {
-                        checkedMethodName = "get" + name.substring(0, 1).toUpperCase() + name.substring(1);
+                        checkedMethodName = prefix + name.substring(0, 1).toUpperCase() + name.substring(1);
                     } else {
-                        checkedMethodName = "get" + name.substring(0, 1).toUpperCase();
+                        checkedMethodName = prefix + name.substring(0, 1).toUpperCase();
                     }
                     String methodName = null;
                     for (Method method : getDeclaredMethods(parent)) {
@@ -61,8 +62,9 @@ public class QueryPathBuilder {
             sb.append(" = ").append(parent).append('F');
         } else if (parent instanceof String) {
             sb.append(" like \"").append(parent).append("\"");
-        }
-        if (parent instanceof Double) {
+        } else if(parent instanceof Character){
+            sb.append(" like '").append(parent).append("'");
+        }else if (parent instanceof Double) {
             sb.append(" = ").append(parent);
         } else if (parent instanceof Long) {
             sb.append(" = ").append(parent).append('L');

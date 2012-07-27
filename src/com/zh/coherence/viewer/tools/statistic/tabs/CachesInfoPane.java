@@ -5,6 +5,7 @@ import com.zh.coherence.viewer.tools.statistic.report.JMXReport;
 import com.zh.coherence.viewer.tools.statistic.report.TreeTableStringValue;
 import com.zh.coherence.viewer.tools.statistic.report.cache.CacheInfo;
 import com.zh.coherence.viewer.tools.statistic.report.cache.CacheNodeInfo;
+import com.zh.coherence.viewer.utils.FileUtils;
 import com.zh.coherence.viewer.utils.icons.IconHelper;
 import org.jdesktop.swingx.JXPanel;
 import org.jdesktop.swingx.JXTreeTable;
@@ -63,7 +64,7 @@ public class CachesInfoPane extends JXPanel {
 
     private class TreeTableModelImpl extends AbstractTreeTableModel {
 
-        private String[] headers = new String[]{"Tree", "Size", "TotalPuts", "TotalGets", "CacheHits"};
+        private String[] headers = new String[]{"Tree", "Size", "TotalPuts", "TotalGets", "CacheHits", "Units"};
 
         public TreeTableModelImpl(Object root) {
             super(root);
@@ -98,6 +99,10 @@ public class CachesInfoPane extends JXPanel {
                         return info.getTotalPuts();
                     case 3:
                         return info.getTotalPuts();
+                    case 4:
+                        return info.getCacheHits();
+                    case 5:
+                        return FileUtils.convertToStringRepresentation(info.getUnits());
                     default:
                         return "";
                 }
@@ -112,6 +117,8 @@ public class CachesInfoPane extends JXPanel {
                         return info.getTotalGets();
                     case 4:
                         return info.getCacheHits();
+                    case 5:
+                        return FileUtils.convertToStringRepresentation(info.getUnits());
                     default:
                         return "";
                 }
