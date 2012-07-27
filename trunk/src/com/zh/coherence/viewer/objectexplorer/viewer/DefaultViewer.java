@@ -50,7 +50,11 @@ public class DefaultViewer implements Viewer {
         if (subject == null) {
             return name + " : NULL";
         } else {
-            return name + " : " + subject.getClass().getSimpleName();
+            String result = name + " : " + subject.getClass().getSimpleName();
+            if(subject instanceof Number || subject instanceof Boolean){
+                result += "[" + subject + "]";
+            }
+            return result;
         }
     }
 

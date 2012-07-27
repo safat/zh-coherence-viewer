@@ -72,7 +72,9 @@ public class JMXConfigTableModel extends AbstractTableModel {
 
     @Override
     public Class<?> getColumnClass(int columnIndex) {
-        if (tabContainer.getType() == TabType.LIST && columnIndex == 2) {
+        if (tabContainer.getType() == TabType.TABLE && columnIndex == 2) {
+            return Integer.class;
+        } else if (tabContainer.getType() == TabType.LIST && columnIndex == 2) {
             return Boolean.class;
         } else {
             return String.class;
@@ -95,6 +97,27 @@ public class JMXConfigTableModel extends AbstractTableModel {
 
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-        //todo !
+        TabItem item = tabContainer.getItems().get(rowIndex);
+        if (tabContainer.getType() == TabType.TABLE) {
+            switch (columnIndex) {
+                case 1:
+                    item.setTitle(String.valueOf(aValue));
+                    break;
+                case 2:
+                    item.setGroupIndex((Integer) aValue);
+                    break;
+                case 3:
+                    item.setIcon(String.valueOf(aValue));
+                    break;
+            }
+        } else {
+            switch (columnIndex) {
+                case 1:
+                    item.setTitle(String.valueOf(aValue));
+                    break;
+                case 2:
+                    item.setEnableChart((Boolean) aValue);
+            }
+        }
     }
 }

@@ -34,7 +34,7 @@ public class CacheReport implements Named{
                 cacheNodeInfo.setName(cacheNameObjName.getKeyProperty("nodeId"));
                 AttributeList attrs = server.getAttributes(
                         cacheNameObjName,
-                        new String[]{"Size", "TotalPuts", "TotalGets", "CacheHits", "AverageGetMillis"});
+                        new String[]{"Size", "TotalPuts", "TotalGets", "CacheHits", "AverageGetMillis", "Units"});
                 List<Attribute> attributes = attrs.asList();
                 Integer size = (Integer) attributes.get(0).getValue();
                 cacheNodeInfo.setSize(size);
@@ -47,6 +47,7 @@ public class CacheReport implements Named{
                 cacheNodeInfo.setCacheHits(cacheHits);
                 Double averageGetMillis = (Double) attributes.get(4).getValue();
                 cacheNodeInfo.setAverageGetMillis(averageGetMillis);
+                cacheNodeInfo.setUnits(Long.valueOf(attributes.get(5).getValue().toString()));
 
                 data.get(name).addCacheNodeInfo(cacheNodeInfo);
             }

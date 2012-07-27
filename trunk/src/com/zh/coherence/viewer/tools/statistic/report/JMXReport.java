@@ -1,11 +1,13 @@
 package com.zh.coherence.viewer.tools.statistic.report;
 
+import com.zh.coherence.viewer.jmx.JMXManager;
+
+import javax.management.MBeanServerConnection;
+import javax.management.ObjectInstance;
+import javax.management.ObjectName;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class JMXReport {
     private List<List> clusterInfo;
@@ -21,6 +23,8 @@ public class JMXReport {
     public CacheReport getCacheReport() {
         return cacheReport;
     }
+
+    private Map<Integer, Map<String, Object>> data = null;
 
     public void setCacheReport(CacheReport cacheReport) {
         this.cacheReport = cacheReport;
@@ -43,11 +47,37 @@ public class JMXReport {
     }
 
     public void refresh() {
+        //collect info
+//        data = new HashMap<Integer, Map<String, Object>>();
+//        collectCacheInfo();
+
         nodeReport.updateData();
         cacheReport.updateData();
 
         for (ChangeListener l : listeners) {
             l.stateChanged(new ChangeEvent(this));
+        }
+    }
+
+    private void collectCacheInfo() {
+        try {
+            Map<String, Object> cacheMap = new HashMap<String, Object>();
+            MBeanServerConnection server = JMXManager.getInstance().getServer();
+            Set<ObjectName> cacheNamesSet = server.queryNames(new ObjectName("Coherence:type=Cache,*"), null);
+            for (Object aCacheNamesSet : cacheNamesSet) {
+                ObjectName cacheNameObjName = (ObjectName) aCacheNamesSet;
+                String name = cacheNameObjName.getKeyProperty("name");
+                String id = cacheNameObjName.getKeyProperty("nodId");
+                ObjectInstance instance = server.getObjectInstance(cacheNameObjName);
+//                System.err.println(instance.getClassName());
+//                JMX.newMBeanProxy(server, cacheNameObjName, instance.getClass(), false);
+
+//                if(instance instanceof CacheMBean){
+//
+//                }
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 
