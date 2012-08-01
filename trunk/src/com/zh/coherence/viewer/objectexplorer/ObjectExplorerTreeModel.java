@@ -193,7 +193,7 @@ public class ObjectExplorerTreeModel extends AbstractTreeTableModel {
         if(index == 1){
             if (parent != null && parent instanceof Viewer) {
                 Object subject = ((Viewer) parent).getSubject();
-                if(subject.getClass().isArray()){
+                if(subject != null && subject.getClass().isArray()){
                     return Array.getLength(subject);
                 }
             }

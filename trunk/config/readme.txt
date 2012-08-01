@@ -12,6 +12,11 @@ How To Configure user POF
 
 Changelog:
 
+0.3.8
+fixed bugs:
+  "select distinct" doesn't work
+  other small bugs
+
 0.3.5
 added JMX cache statistic
 save/ load cohQl script
