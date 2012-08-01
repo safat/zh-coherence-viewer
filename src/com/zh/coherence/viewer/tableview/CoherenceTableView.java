@@ -14,6 +14,7 @@ import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -95,6 +96,8 @@ public class CoherenceTableView extends JPanel {
             tableModel = new SetTableModel((Set) subject, limit);
         } else if ((subject instanceof Number || subject instanceof String) && params instanceof Term) {
             tableModel = new OneLineTableModel(subject, (Term) params);
+        } else if(subject instanceof Collection){
+            tableModel = new CollectionTableModel((Collection) subject, limit);
         }
 
         if (tableModel != null) {
