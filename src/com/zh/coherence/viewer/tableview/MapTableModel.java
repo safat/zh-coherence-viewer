@@ -58,7 +58,7 @@ public class MapTableModel implements TableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         Object tmp = subject.get(keys.get(rowIndex));
         Object ret;
-        if (tmp instanceof List) {
+        if (tmp instanceof List && ((List) tmp).size() == getColumnCount()) {
             ret = ((List) tmp).get(columnIndex);
         } else {
             ret = tmp;
