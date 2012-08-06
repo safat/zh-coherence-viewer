@@ -7,7 +7,9 @@ import com.zh.coherence.viewer.utils.icons.IconType;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -28,8 +30,8 @@ public class InsertCacheNameAction extends AbstractAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         JPopupMenu menu = new JPopupMenu();
-        Set<String> names = JMXManager.getInstance().getCacheNamesList();
-
+        List<String> names = new ArrayList<String>(JMXManager.getInstance().getCacheNamesList());
+        Collections.sort(names);
         for (String name : names) {
             menu.add(new InsertTextAction(name, queryTool));
         }

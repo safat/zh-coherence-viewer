@@ -12,8 +12,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.*;
-import java.util.List;
 
 import static layout.TableLayoutConstants.PREFERRED;
 
@@ -60,9 +58,10 @@ public class AddTableItemAction extends AbstractAction {
                     {4, PREFERRED, 2, PREFERRED, 2, 110,7, 3, 2, PREFERRED, 4}
             }));
 
-            List<String> data = new ArrayList<String>(report.getProperties().keySet());
-            Collections.sort(data);
-            properties = new JXComboBox(data.toArray());
+            //todo ! fix
+//            List<String> data = new ArrayList<String>(report.getProperties().keySet());
+//            Collections.sort(data);
+//            properties = new JXComboBox(data.toArray());
 
             description = new JXTextArea();
             description.setLineWrap(true);
@@ -102,8 +101,9 @@ public class AddTableItemAction extends AbstractAction {
         }
 
         private void showPropertyDescription() {
-            String dsk = report.getProperties().get(properties.getSelectedItem());
-            description.setText(dsk);
+            //todo ! fix
+//            String dsk = report.getProperties().get(properties.getSelectedItem());
+//            description.setText(dsk);
         }
 
         public void showDialog() {
