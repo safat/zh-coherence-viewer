@@ -6,12 +6,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 
-/**
- * Created by IntelliJ IDEA.
- * User: Живко
- * Date: 05.03.12
- * Time: 23:14
- */
 public class FileUtils {
     public static void copyFile(File sourceFile, File destinationFile) throws IOException {
         if (!destinationFile.exists()) {
