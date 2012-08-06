@@ -95,10 +95,22 @@
     <bean id="toolManager" class="com.zh.coherence.viewer.tools.ToolManager">
         <property name="applicationPane" ref="applicationPane"/>
         <property name="launchers">
-            <util:list value-type="com.zh.coherence.viewer.tools.query.QueryToolLauncher">
+            <util:list value-type="java.lang.Object">
                 <ref bean="queryTool"/>
                 <ref bean="backupTool"/>
-                <ref bean="statisticTool"/>
+                <bean class="com.zh.coherence.viewer.menubar.SubMenu">
+                    <property name="name" value="JMX Reports"/>
+                    <property name="icon">
+                        <bean class="com.zh.coherence.viewer.utils.icons.IconLoader">
+                            <property name="path" value="icons/chart-up.png"/>
+                        </bean>
+                    </property>
+                    <property name="child">
+                        <util:list value-type="java.lang.Object">
+                            <ref bean="statisticTool"/>
+                        </util:list>
+                    </property>
+                </bean>
             </util:list>
         </property>
     </bean>
