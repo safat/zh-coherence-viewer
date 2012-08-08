@@ -92,6 +92,15 @@
         </property>
     </bean>
 
+    <bean id="clusterReportTool" class="com.zh.coherence.viewer.tools.report.jmx.cluster.ClusterReportToolLauncher">
+        <property name="name" value="JMX Statistic"/>
+        <property name="icon">
+            <bean class="com.zh.coherence.viewer.utils.icons.IconLoader">
+                <property name="path" value="icons/cluster.png"/>
+            </bean>
+        </property>
+    </bean>
+
     <bean id="toolManager" class="com.zh.coherence.viewer.tools.ToolManager">
         <property name="applicationPane" ref="applicationPane"/>
         <property name="launchers">
@@ -108,6 +117,7 @@
                     <property name="child">
                         <util:list value-type="java.lang.Object">
                             <ref bean="statisticTool"/>
+                            <ref bean="clusterReportTool"/>
                         </util:list>
                     </property>
                 </bean>
