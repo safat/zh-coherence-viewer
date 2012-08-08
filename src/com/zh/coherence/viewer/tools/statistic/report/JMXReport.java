@@ -26,6 +26,7 @@ public class JMXReport {
     private Map<CacheKey, Map<String, Object>> cacheInfo = new HashMap<CacheKey, Map<String, Object>>();
     private Map<Integer, Map<String, Object>> nodeInfo = new HashMap<Integer, Map<String, Object>>();
     private Map<CacheKey, Map<String, Object>> serviceInfo = new HashMap<CacheKey, Map<String, Object>>();
+    private Map<String, Object> clusterJmxInfo = new HashMap<String, Object>();
 
     public CacheReport getCacheReport() {
         return cacheReport;
@@ -54,15 +55,21 @@ public class JMXReport {
     }
 
     public void refresh() {
+        nodeReport.updateData();
+        cacheReport.updateData();
+
+        for (ChangeListener l : listeners) {
+            l.stateChanged(new ChangeEvent(this));
+        }
+    }
+
+    public void refreshReport(){
         //collect info
         data = new HashMap<Integer, Map<String, Object>>();
         collectCacheInfo();
         collectNodeInfo();
         collectServiceInfo();
-
-        for (ChangeListener l : listeners) {
-            l.stateChanged(new ChangeEvent(this));
-        }
+        collectClusterInfo();
     }
 
     private void collectCacheInfo() {
@@ -124,6 +131,20 @@ public class JMXReport {
                     cacheMap.put(attribute.getName(), attribute.getValue());
                 }
                 serviceInfo.put(new CacheKey(id, name), cacheMap);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private void collectClusterInfo() {
+        try {
+            MBeanServerConnection server = JMXManager.getInstance().getServer();
+            ObjectName oName = new ObjectName("Coherence:type=Cluster");
+            List<Attribute> attributes = server.getAttributes(
+                    oName, propertyContainer.getFilteredNames("cluster")).asList();
+            for (Attribute attribute : attributes) {
+                clusterJmxInfo.put(attribute.getName(), attribute.getValue());
             }
         } catch (Exception ex) {
             ex.printStackTrace();

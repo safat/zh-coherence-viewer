@@ -33,12 +33,14 @@ public class ExecuteQueryAction extends AbstractAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         context.setBusy(true);
-        long time = System.currentTimeMillis();
+        final long time = System.currentTimeMillis();
 
         try {
-            SwingUtilities.invokeLater(new Runnable() {
+
+            new SwingWorker<Void, Void>() {
+
                 @Override
-                public void run() {
+                protected Void doInBackground() throws Exception {
                     QueryResult result = queryEngine.execute(context.getQueryTool().getScript());
                     if (result.isContainsError()) {
                         context.showShortMessage(result.getErrorMessage());
@@ -84,15 +86,19 @@ public class ExecuteQueryAction extends AbstractAction {
                             context.showOutputPane(QueryContext.EVENT_LOG);
                         }
                     }
+                    return null;
                 }
-            });
+
+                @Override
+                protected void done() {
+                    context.setTime(System.currentTimeMillis() - time);
+                    context.setBusy(false);
+                    super.done();
+                }
+            }.execute();
+
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-
-        context.setTime(System.currentTimeMillis() - time);
-        context.setBusy(false);
     }
-
-
 }

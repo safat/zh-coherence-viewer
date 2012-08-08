@@ -485,6 +485,21 @@
         The type identifier of the service.
     </property>
 
-    <!--<property type="" target="service" name=""></property>-->
-    <!--<property type="" target="service" name=""></property>-->
+    <property type="STR" target="cluster" name="ClusterName">
+        The name of the cluster.
+    </property>
+    <property type="INT" target="cluster" name="ClusterSize">
+        The total number of cluster nodes.
+    </property>
+    <property type="LONG" target="cluster" name="MembersDepartureCount">
+        The number of times this node has observed another node`s departure from the cluster since this management node
+        has joined the cluster or statistics have been reset.
+    </property>
+    <property type="STR" target="cluster" name="Version">
+        The Coherence version.
+    </property>
+    <!--<property type="" target="cluster" name=""></property>-->
+    <!--<property type="" target="cluster" name=""></property>-->
+    <!--<property type="" target="cluster" name=""></property>-->
+    <!--<property type="" target="cluster" name=""></property>-->
 </config>
