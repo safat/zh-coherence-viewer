@@ -13,6 +13,13 @@ import java.io.File;
 import java.util.*;
 
 public class JMXReport {
+
+    private static JMXReport instance = new JMXReport();
+
+    public static JMXReport getInstance() {
+        return instance;
+    }
+
     private List<List> clusterInfo;
 
     private NodeReport nodeReport = new NodeReport();
@@ -58,18 +65,24 @@ public class JMXReport {
         nodeReport.updateData();
         cacheReport.updateData();
 
+        notifyAllListeners();
+    }
+
+    public void notifyAllListeners() {
         for (ChangeListener l : listeners) {
             l.stateChanged(new ChangeEvent(this));
         }
     }
 
-    public void refreshReport(){
+    public void refreshReport() {
         //collect info
         data = new HashMap<Integer, Map<String, Object>>();
         collectCacheInfo();
         collectNodeInfo();
         collectServiceInfo();
         collectClusterInfo();
+
+        notifyAllListeners();
     }
 
     private void collectCacheInfo() {
@@ -103,7 +116,7 @@ public class JMXReport {
                 ObjectName cacheNameObjName = (ObjectName) aCacheNamesSet;
                 Integer id = Integer.valueOf(cacheNameObjName.getKeyProperty("nodeId"));
                 List<Attribute> attributes = server.getAttributes(
-                        cacheNameObjName, propertyContainer.getFilteredNames("cache")).asList();
+                        cacheNameObjName, propertyContainer.getFilteredNames("node")).asList();
                 cacheMap = new HashMap<String, Object>();
                 for (Attribute attribute : attributes) {
                     cacheMap.put(attribute.getName(), attribute.getValue());
@@ -222,5 +235,21 @@ public class JMXReport {
         public void setName(String name) {
             this.name = name;
         }
+    }
+
+    public Map<String, Object> getClusterJmxInfo() {
+        return clusterJmxInfo;
+    }
+
+    public Map<CacheKey, Map<String, Object>> getServiceInfo() {
+        return serviceInfo;
+    }
+
+    public Map<Integer, Map<String, Object>> getNodeInfo() {
+        return nodeInfo;
+    }
+
+    public Map<CacheKey, Map<String, Object>> getCacheInfo() {
+        return cacheInfo;
     }
 }

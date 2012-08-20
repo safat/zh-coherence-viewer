@@ -498,7 +498,10 @@
     <property type="STR" target="cluster" name="Version">
         The Coherence version.
     </property>
-    <!--<property type="" target="cluster" name=""></property>-->
+
+    <property type="STR" target="cluster" name="LicenseMode">
+        The license mode that this cluster is using. Possible values are Evaluation, Development or Production.
+    </property>
     <!--<property type="" target="cluster" name=""></property>-->
     <!--<property type="" target="cluster" name=""></property>-->
     <!--<property type="" target="cluster" name=""></property>-->

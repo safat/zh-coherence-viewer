@@ -19,7 +19,7 @@ public class ApplicationMainFrame extends JFrame {
     }
 
     public void showFrame() {
-        setSize(1024, 700);
+        setSize(1024, 768);
         setContentPane(resourceManager.getApplicationPane());
 
         setJMenuBar(resourceManager.getMenuBar());
