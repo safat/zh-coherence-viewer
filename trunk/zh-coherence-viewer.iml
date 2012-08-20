@@ -12,15 +12,6 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://D:/dist/java/coherence/lib/coherence.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
           <root url="jar://$MODULE_DIR$/lib/AutoComplete.jar!/" />
         </CLASSES>
         <JAVADOC />
@@ -58,15 +49,6 @@
         <SOURCES>
           <root url="jar://$MODULE_DIR$/lib/TableLayout.jar!/" />
         </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/user-files/testUserApp.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
       </library>
     </orderEntry>
     <orderEntry type="module-library">
@@ -145,6 +127,17 @@
       <library>
         <CLASSES>
           <root url="jar://$MODULE_DIR$/lib/org.springframework.expression-3.1.1.RELEASE.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="lib" level="project" />
+    <orderEntry type="library" name="coherence" level="application" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../support/user.jar/user.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

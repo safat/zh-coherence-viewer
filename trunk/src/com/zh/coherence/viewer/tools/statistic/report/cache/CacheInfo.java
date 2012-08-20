@@ -30,7 +30,7 @@ public class CacheInfo implements Named{
         this.name = name;
     }
 
-    public void addCacheNodeInfo(CacheNodeInfo info){
+    public synchronized void addCacheNodeInfo(CacheNodeInfo info){
         nodes.add(info);
         size += info.getSize();
         totalPuts += info.getTotalPuts();
