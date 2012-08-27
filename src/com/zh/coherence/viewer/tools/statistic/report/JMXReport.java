@@ -97,6 +97,7 @@ public class JMXReport {
                 List<Attribute> attributes = server.getAttributes(
                         cacheNameObjName, propertyContainer.getFilteredNames("cache")).asList();
                 cacheMap = new HashMap<String, Object>();
+                cacheMap.put("service", cacheNameObjName.getKeyProperty("service"));
                 for (Attribute attribute : attributes) {
                     cacheMap.put(attribute.getName(), attribute.getValue());
                 }
@@ -191,7 +192,7 @@ public class JMXReport {
         }
     }
 
-    private class CacheKey {
+    public class CacheKey {
         private String name;
         private int id;
 
@@ -251,5 +252,9 @@ public class JMXReport {
 
     public Map<CacheKey, Map<String, Object>> getCacheInfo() {
         return cacheInfo;
+    }
+
+    public ConfigPropertyContainer getPropertyContainer() {
+        return propertyContainer;
     }
 }

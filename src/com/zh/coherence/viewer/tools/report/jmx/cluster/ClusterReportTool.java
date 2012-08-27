@@ -7,11 +7,17 @@ import com.zh.coherence.viewer.tools.statistic.report.JMXReport;
 import layout.TableLayout;
 import org.jdesktop.swingx.JXPanel;
 import org.jdesktop.swingx.JXRadioGroup;
+import org.jdesktop.swingx.JXTable;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import static layout.TableLayoutConstants.FILL;
 import static layout.TableLayoutConstants.PREFERRED;
@@ -21,10 +27,12 @@ public class ClusterReportTool extends JXPanel implements CoherenceViewerTool, C
     private JTextField clusterName, totalNodesCount, license;
     private JProgressBar totalMemory;
     private static final String MODEL_SERVICES = "Services";
-    private static final String MODEL_CACHES = "Caches";
-    private static final String MODEL_NODES = "Nodes";
+    private static final String MODEL_CLUSTER = "Cluster info";
 
     private ClusterReportDataProvider dataProvider;
+    private ServiceTableModel serviceTableModel;
+    private ClusterTableModel clusterTableModel;
+    private JXTable table;
 
     public ClusterReportTool() {
         dataProvider = new ClusterReportDataProvider();
@@ -34,7 +42,7 @@ public class ClusterReportTool extends JXPanel implements CoherenceViewerTool, C
     public JComponent getPane() {
         this.setLayout(new BorderLayout());
         JSplitPane split = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
-        split.setDividerLocation(400);
+        split.setDividerLocation(200);
         add(split, BorderLayout.CENTER);
 
         JPanel north = new JPanel();
@@ -51,9 +59,20 @@ public class ClusterReportTool extends JXPanel implements CoherenceViewerTool, C
         //Info
         JComponent infoPanel = generateNorthInfoPane();
         north.add(infoPanel, "1,1");
+        serviceTableModel = new ServiceTableModel(dataProvider);
+        table = new JXTable(){
+            public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
+                Component c = super.prepareRenderer(renderer, row, column);
+                if (column == 0 && getModel() instanceof ClusterTableModel) {
+                    JComponent jc = (JComponent) c;
+                    String key = getValueAt(row, column).toString();
+                    jc.setToolTipText(dataProvider.getPropertyDescription(key));
+                }
+                return c;
+            }
+        };
         north.add(generateNorthToolPanel(), "1,3");
-
-
+        north.add(new JScrollPane(table), "1,5");
 //SOUTH
 
         JMXReport.getInstance().addListener(this);
@@ -95,8 +114,25 @@ public class ClusterReportTool extends JXPanel implements CoherenceViewerTool, C
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBorder(BorderFactory.createEtchedBorder());
 
-        JXRadioGroup<String> radioGroup = new JXRadioGroup<String>(new String[]{MODEL_SERVICES, MODEL_CACHES, MODEL_NODES});
+        final JXRadioGroup<String> radioGroup = new JXRadioGroup<String>(new String[]{MODEL_SERVICES, MODEL_CLUSTER});
         panel.add(radioGroup, BorderLayout.CENTER);
+
+        serviceTableModel = new ServiceTableModel(dataProvider);
+        clusterTableModel = new ClusterTableModel(dataProvider);
+
+        radioGroup.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(MODEL_SERVICES.equals(radioGroup.getSelectedValue())){
+                    table.setModel(serviceTableModel);
+                }else{
+                    table.setModel(clusterTableModel);
+                }
+                stateChanged(null);
+            }
+        });
+
+        radioGroup.setSelectedValue(MODEL_SERVICES);
 
         return panel;
     }
@@ -112,5 +148,7 @@ public class ClusterReportTool extends JXPanel implements CoherenceViewerTool, C
         totalMemory.setString(memoryInfo.busyLabel + "/" + memoryInfo.maxLabel);
         totalMemory.setStringPainted(true);
         license.setText(dataProvider.getLicense());
+
+        ((AbstractTableModel)table.getModel()).fireTableDataChanged();
     }
 }

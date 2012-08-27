@@ -25,6 +25,16 @@ public class ConfigPropertyContainer {
         return list.toArray(new String[list.size()]);
     }
 
+    public String getDescription(String name){
+        for(ConfigProperty property : properties){
+            if(property.getName().equals(name)){
+                return property.getDescription();
+            }
+        }
+
+        return "";
+    }
+
     public List<ConfigProperty> getProperties() {
         return properties;
     }
