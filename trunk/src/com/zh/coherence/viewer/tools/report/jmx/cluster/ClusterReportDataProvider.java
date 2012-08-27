@@ -12,7 +12,6 @@ public class ClusterReportDataProvider {
 
     public ClusterReportDataProvider() {
         report = JMXReport.getInstance();
-        report.refreshReport();
     }
 
     public String getClusterName() {

@@ -104,7 +104,7 @@ public class ClusterReportTool extends JXPanel implements CoherenceViewerTool, C
         infoPanel.add(license, "14,0");
         JButton refresh = new JButton(new RefreshJmxDataAction());
         infoPanel.add(refresh, "16,0");
-        JButton autoRefresh = new JButton(new AutoRefreshJmxDataAction());
+        JToggleButton autoRefresh = new JToggleButton(new AutoRefreshJmxDataAction());
         infoPanel.add(autoRefresh, "18,0");
 
         return infoPanel;

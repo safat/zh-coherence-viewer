@@ -11,6 +11,9 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class JMXReport {
 
@@ -38,8 +41,6 @@ public class JMXReport {
     public CacheReport getCacheReport() {
         return cacheReport;
     }
-
-    private Map<Integer, Map<String, Object>> data = null;
 
     public void setCacheReport(CacheReport cacheReport) {
         this.cacheReport = cacheReport;
@@ -75,83 +76,131 @@ public class JMXReport {
     }
 
     public void refreshReport() {
-        //collect info
-        data = new HashMap<Integer, Map<String, Object>>();
-        collectCacheInfo();
-        collectNodeInfo();
-        collectServiceInfo();
-        collectClusterInfo();
-
+        long time = System.currentTimeMillis();
+        ExecutorService es = Executors.newFixedThreadPool(15);
+        try {
+            //collect info
+            collectCacheInfo(es);
+            collectNodeInfo(es);
+            collectServiceInfo(es);
+            collectClusterInfo(es);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            es.shutdown();
+            try {
+                if (!es.awaitTermination(10, TimeUnit.MINUTES)) {
+                    es.shutdownNow();
+                    if (!es.awaitTermination(5, TimeUnit.MINUTES)) {
+                        System.err.println("ScheduledCalculate pool did not terminate.");
+                    }
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+        System.err.println("nodes report time : " + (System.currentTimeMillis() - time));
         notifyAllListeners();
     }
 
-    private void collectCacheInfo() {
+    private void collectCacheInfo(ExecutorService es) {
+
         try {
-            Map<String, Object> cacheMap;
-            MBeanServerConnection server = JMXManager.getInstance().getServer();
+            final MBeanServerConnection server = JMXManager.getInstance().getServer();
             Set<ObjectName> cacheNamesSet = server.queryNames(new ObjectName("Coherence:type=Cache,*"), null);
-            for (Object aCacheNamesSet : cacheNamesSet) {
-                ObjectName cacheNameObjName = (ObjectName) aCacheNamesSet;
-                String name = cacheNameObjName.getKeyProperty("name");
-                Integer id = Integer.valueOf(cacheNameObjName.getKeyProperty("nodeId"));
-                List<Attribute> attributes = server.getAttributes(
-                        cacheNameObjName, propertyContainer.getFilteredNames("cache")).asList();
-                cacheMap = new HashMap<String, Object>();
-                cacheMap.put("service", cacheNameObjName.getKeyProperty("service"));
-                for (Attribute attribute : attributes) {
-                    cacheMap.put(attribute.getName(), attribute.getValue());
-                }
-                cacheInfo.put(new CacheKey(id, name), cacheMap);
+            for (final Object aCacheNamesSet : cacheNamesSet) {
+                es.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        Map<String, Object> cacheMap;
+                        try {
+                            ObjectName cacheNameObjName = (ObjectName) aCacheNamesSet;
+                            String name = cacheNameObjName.getKeyProperty("name");
+                            Integer id = Integer.valueOf(cacheNameObjName.getKeyProperty("nodeId"));
+                            List<Attribute> attributes = server.getAttributes(
+                                    cacheNameObjName, propertyContainer.getFilteredNames("cache")).asList();
+                            cacheMap = new HashMap<String, Object>();
+                            cacheMap.put("service", cacheNameObjName.getKeyProperty("service"));
+                            for (Attribute attribute : attributes) {
+                                cacheMap.put(attribute.getName(), attribute.getValue());
+                            }
+                            cacheInfo.put(new CacheKey(id, name), cacheMap);
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+                });
             }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
 
-    private void collectNodeInfo() {
+    private void collectNodeInfo(ExecutorService es) {
         try {
-            Map<String, Object> cacheMap;
-            MBeanServerConnection server = JMXManager.getInstance().getServer();
+            final MBeanServerConnection server = JMXManager.getInstance().getServer();
             Set<ObjectName> cacheNamesSet = server.queryNames(new ObjectName("Coherence:type=Node,*"), null);
-            for (Object aCacheNamesSet : cacheNamesSet) {
-                ObjectName cacheNameObjName = (ObjectName) aCacheNamesSet;
-                Integer id = Integer.valueOf(cacheNameObjName.getKeyProperty("nodeId"));
-                List<Attribute> attributes = server.getAttributes(
-                        cacheNameObjName, propertyContainer.getFilteredNames("node")).asList();
-                cacheMap = new HashMap<String, Object>();
-                for (Attribute attribute : attributes) {
-                    cacheMap.put(attribute.getName(), attribute.getValue());
-                }
-                nodeInfo.put(id, cacheMap);
+
+            for (final Object aCacheNamesSet : cacheNamesSet) {
+                es.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        Map<String, Object> cacheMap;
+                        try {
+                            ObjectName cacheNameObjName = (ObjectName) aCacheNamesSet;
+                            Integer id = Integer.valueOf(cacheNameObjName.getKeyProperty("nodeId"));
+                            List<Attribute> attributes = server.getAttributes(
+                                    cacheNameObjName, propertyContainer.getFilteredNames("node")).asList();
+                            cacheMap = new HashMap<String, Object>();
+                            for (Attribute attribute : attributes) {
+                                cacheMap.put(attribute.getName(), attribute.getValue());
+                            }
+                            nodeInfo.put(id, cacheMap);
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+                });
             }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
 
-    private void collectServiceInfo() {
+    private void collectServiceInfo(ExecutorService es) {
         try {
             Map<String, Object> cacheMap;
-            MBeanServerConnection server = JMXManager.getInstance().getServer();
+            final MBeanServerConnection server = JMXManager.getInstance().getServer();
             Set<ObjectName> cacheNamesSet = server.queryNames(new ObjectName("Coherence:type=Service,*"), null);
-            for (Object aCacheNamesSet : cacheNamesSet) {
-                ObjectName cacheNameObjName = (ObjectName) aCacheNamesSet;
-                Integer id = Integer.valueOf(cacheNameObjName.getKeyProperty("nodeId"));
-                String name = cacheNameObjName.getKeyProperty("name");
-                List<Attribute> attributes = server.getAttributes(
-                        cacheNameObjName, propertyContainer.getFilteredNames("service")).asList();
-                cacheMap = new HashMap<String, Object>();
-                for (Attribute attribute : attributes) {
-                    cacheMap.put(attribute.getName(), attribute.getValue());
-                }
-                serviceInfo.put(new CacheKey(id, name), cacheMap);
+            for (final Object aCacheNamesSet : cacheNamesSet) {
+                es.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        Map<String, Object> cacheMap;
+                        try {
+                            ObjectName cacheNameObjName = (ObjectName) aCacheNamesSet;
+                            Integer id = Integer.valueOf(cacheNameObjName.getKeyProperty("nodeId"));
+                            String name = cacheNameObjName.getKeyProperty("name");
+                            List<Attribute> attributes = server.getAttributes(
+                                    cacheNameObjName, propertyContainer.getFilteredNames("service")).asList();
+                            cacheMap = new HashMap<String, Object>();
+                            for (Attribute attribute : attributes) {
+                                cacheMap.put(attribute.getName(), attribute.getValue());
+                            }
+                            serviceInfo.put(new CacheKey(id, name), cacheMap);
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+                });
+
             }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
 
-    private void collectClusterInfo() {
+    private void collectClusterInfo(ExecutorService es) {
         try {
             MBeanServerConnection server = JMXManager.getInstance().getServer();
             ObjectName oName = new ObjectName("Coherence:type=Cluster");
