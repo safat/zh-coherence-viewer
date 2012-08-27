@@ -32,7 +32,7 @@ public class AboutAction extends AbstractAction{
             view.setEditable(false);
             ZHDialog dialog = new ZHDialog(view, "About");
             dialog.setModal(true);
-            dialog.show(361,311);
+            dialog.show(410,300);
         } catch (IOException e1) {
             e1.printStackTrace();
         }

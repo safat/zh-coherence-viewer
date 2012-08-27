@@ -6,6 +6,7 @@ import com.zh.coherence.viewer.tableview.CoherenceTableView;
 import com.zh.coherence.viewer.tools.CoherenceViewerTool;
 import com.zh.coherence.viewer.tools.query.actions.*;
 import com.zh.coherence.viewer.utils.LRUList;
+import com.zh.coherence.viewer.utils.icons.IconLoader;
 import org.fife.ui.autocomplete.AutoCompletion;
 import org.fife.ui.autocomplete.DefaultCompletionProvider;
 import org.fife.ui.autocomplete.LanguageAwareCompletionProvider;
@@ -17,6 +18,7 @@ import org.fife.ui.rsyntaxtextarea.templates.StaticCodeTemplate;
 import org.fife.ui.rtextarea.RTextScrollPane;
 import org.jdesktop.swingx.JXLabel;
 import org.jdesktop.swingx.JXPanel;
+import org.jdesktop.swingx.JXRadioGroup;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,6 +37,7 @@ public class QueryTool extends JXPanel implements CoherenceViewerTool {
     private QueryContext context;
     private QueryStatusBar statusBar;
     private EventLogPane eventLogPane;
+    private JXRadioGroup<JToggleButton> resultsTarget;
 
     private QueryEngine queryEngine;
 
@@ -59,6 +62,13 @@ public class QueryTool extends JXPanel implements CoherenceViewerTool {
         toolBar.addSeparator();
         toolBar.add(new SaveCohQlAction(this));
         toolBar.add(new OpenCohQlAction(this));
+
+//        JToggleButton gridTarget = new JToggleButton(new IconLoader("icons/grid.png"));
+//        JToggleButton textTarget = new JToggleButton(new IconLoader("icons/text.png"));
+//        resultsTarget = new JXRadioGroup<JToggleButton>(new JToggleButton[]{gridTarget, textTarget});
+//        resultsTarget.setSelectedValue(gridTarget);
+//        toolBar.addSeparator();
+//        toolBar.add(resultsTarget);
 
         add(toolBar, BorderLayout.NORTH);
 
