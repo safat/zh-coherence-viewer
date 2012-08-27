@@ -484,6 +484,9 @@
     <property type="STR" target="service" name="Type">
         The type identifier of the service.
     </property>
+    <property type="INT" target="service" name="SeniorMemberId">
+        The service senior member id. The value is -1 If the service is not running.
+    </property>
 
     <property type="STR" target="cluster" name="ClusterName">
         The name of the cluster.
