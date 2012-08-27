@@ -88,13 +88,20 @@ public class ConfigContainer extends JFrame implements InitializingBean {
         tree.getSelectionModel().addTreeSelectionListener(new SelectionListener());
     }
 
+    private boolean disableTreeListener = false;
+
     private class SelectionListener implements TreeSelectionListener {
         @Override
         public void valueChanged(TreeSelectionEvent e) {
+            if(disableTreeListener){
+                disableTreeListener = false;
+                return;
+            }
             if (currentPanel != null) {
                 boolean allow = currentPanel.leaveThePage();
                 if (!allow) {
                     //return selection
+                    disableTreeListener = true;
                     tree.getSelectionModel().setSelectionPath(e.getOldLeadSelectionPath());
                     return;
                 }else{

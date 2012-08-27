@@ -20,7 +20,9 @@ public class QueryToolLauncher extends ToolLauncher implements InitializingBean{
     @Override
     public CoherenceViewerTool newTool() {
         CoherenceTableView tableView = new CoherenceTableView(viewers, viewerMenuBuilder);
-        return new QueryTool(tableView, queryEngine);
+        QueryTool tool = new QueryTool(tableView, queryEngine);
+        tableView.setQueryContext(tool.getContext());
+        return tool;
     }
 
     public List<UserObjectViewer> getViewers() {

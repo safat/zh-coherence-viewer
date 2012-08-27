@@ -22,7 +22,7 @@ public class BackupContext {
     private Target target = Target.FOLDER;
     private String path;
     private BackupTableModel backupTableModel = new BackupTableModel();
-    private int bufferSize = 2000;
+    private int bufferSize = 200;
 
     public void updateGeneralProgress(){
         generalProgress.setString((Math.rint(1000.0 * generalProgress.getPercentComplete()) / 10.0)  + " %");
