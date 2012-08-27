@@ -1,5 +1,6 @@
 package com.zh.coherence.viewer.tableview;
 
+import com.zh.coherence.viewer.tools.query.QueryContext;
 import com.zh.coherence.viewer.utils.icons.IconHelper;
 import com.zh.coherence.viewer.utils.icons.IconType;
 import org.jdesktop.swingx.AbstractPatternPanel;
@@ -41,6 +42,7 @@ public class JXSearchPanelForJXTable extends AbstractPatternPanel {
     private List<PatternMatcher> patternMatchers;
     private JXTable table;
     private Map<String, CheckStore> columnsStoreMap = new HashMap<String, CheckStore>();
+    private QueryContext context;
 
     /**
      * Creates a search panel.
@@ -201,6 +203,10 @@ public class JXSearchPanelForJXTable extends AbstractPatternPanel {
         columns.setEnabled(false);
     }
 
+    public void setQueryContext(QueryContext context) {
+        this.context = context;
+    }
+
     class CheckStore {
         String id;
         Boolean state;
@@ -322,6 +328,9 @@ public class JXSearchPanelForJXTable extends AbstractPatternPanel {
                 table.setRowFilter(rowFilter);
             } else {
                 table.setRowFilter(null);
+            }
+            if(context != null){
+                context.setSize(table.getRowCount());
             }
         }
     }

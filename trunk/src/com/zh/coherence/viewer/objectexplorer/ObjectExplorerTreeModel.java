@@ -132,7 +132,7 @@ public class ObjectExplorerTreeModel extends AbstractTreeTableModel {
                     if (o != null) {
                         name = o.toString();
                         if (name.length() > 15) {
-                            name = name.substring(0, 12) + "...";
+                            name = name.substring(0, 15) + "...";
                         }
                     } else {
                         name = "NULL";

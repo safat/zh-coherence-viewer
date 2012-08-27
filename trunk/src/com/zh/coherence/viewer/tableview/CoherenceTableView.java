@@ -4,6 +4,7 @@ import com.tangosol.coherence.dsltools.termtrees.Term;
 import com.zh.coherence.viewer.tableview.actions.ExportDownDropAction;
 import com.zh.coherence.viewer.tableview.actions.TableHighlighterAction;
 import com.zh.coherence.viewer.tableview.user.UserObjectViewer;
+import com.zh.coherence.viewer.tools.query.QueryContext;
 import org.jdesktop.swingx.JXButton;
 import org.jdesktop.swingx.JXTable;
 import org.jdesktop.swingx.search.TableSearchable;
@@ -31,6 +32,7 @@ public class CoherenceTableView extends JPanel {
     private RightButtonMenuBuilder rightButtonMenuBuilder;
     private JXSearchPanelForJXTable searchPanel;
     private List<UserObjectViewer> viewers;
+    private QueryContext context;
 
     private Object subject;
 
@@ -117,5 +119,10 @@ public class CoherenceTableView extends JPanel {
 
     public void setTable(JXTable table) {
         this.table = table;
+    }
+
+    public void setQueryContext(QueryContext context) {
+        this.context = context;
+        searchPanel.setQueryContext(context);
     }
 }

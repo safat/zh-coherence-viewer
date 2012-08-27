@@ -84,6 +84,9 @@ public class UserClassViewerTableModel extends AbstractTableModel {
                 target.add(new MethodDescription(getter, m.getName(), m.getReturnType().toString()));
             }
         }
+        if(clz.getSuperclass() != null){
+            update(clz.getSuperclass(), target);
+        }
     }
 
     public boolean isGetter(Method method) {
