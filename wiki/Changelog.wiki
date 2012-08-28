@@ -1,3 +1,9 @@
+== 0.3.8 ==
+fixed bugs:
+ * "select distinct" doesn't work
+ * When value of a field is a Set then only the first element is shown in the results
+ * and other
+
 == 0.3.7 ==
  * updated Object Explorer
  * added config manager which lets add user config panels
