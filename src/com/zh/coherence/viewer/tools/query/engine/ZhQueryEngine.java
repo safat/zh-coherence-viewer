@@ -38,4 +38,9 @@ public class ZhQueryEngine implements QueryEngine{
 
         return null;
     }
+
+    @Override
+    public Object getBackend() {
+        return null;
+    }
 }

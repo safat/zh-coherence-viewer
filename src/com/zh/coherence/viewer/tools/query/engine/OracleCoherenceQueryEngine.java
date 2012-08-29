@@ -15,6 +15,7 @@ import java.lang.reflect.Field;
 import java.util.regex.Pattern;
 
 public class OracleCoherenceQueryEngine implements QueryEngine {
+    CoherenceQuery query = new CoherenceQuery(true);
 
     @Override
     public String getJavaSource(String query) {
@@ -50,10 +51,9 @@ public class OracleCoherenceQueryEngine implements QueryEngine {
             SQLOPParser parser = new SQLOPParser(script, tokenTable);
             Term term;
             boolean buildResult;
-            CoherenceQuery query;
+
             term = parser.parse();
             result.setTerm(term);
-            query = new CoherenceQuery(true);
             buildResult = query.build((NodeTerm) term);
 
             if (!buildResult) {
@@ -80,5 +80,10 @@ public class OracleCoherenceQueryEngine implements QueryEngine {
 
         result.setEndTime(System.currentTimeMillis());
         return result;
+    }
+
+    @Override
+    public Object getBackend() {
+        return query;
     }
 }

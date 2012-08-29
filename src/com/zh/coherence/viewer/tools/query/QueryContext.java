@@ -14,6 +14,7 @@ public class QueryContext {
     public static final String ERROR = "error";
 
     private QueryTool queryTool;
+    private String currentOutputTool = TABLE_VIEW;
 
     public QueryContext(QueryTool queryTool) {
         this.queryTool = queryTool;
@@ -45,5 +46,13 @@ public class QueryContext {
 
     public void setSize(int size){
         queryTool.getStatusBar().setRowsSize(size);
+    }
+
+    public String getCurrentOutputTool() {
+        return currentOutputTool;
+    }
+
+    public void setCurrentOutputTool(String currentOutputTool) {
+        this.currentOutputTool = currentOutputTool;
     }
 }
