@@ -1,3 +1,7 @@
 =HOW TO:=
 
-[Create_my_own_viewer_tool Create my own viewer tool]
+[Create_viewer_tool Create viewer tool]
+
+[Create_table_object_viewer Create table object viewer]
+
+[Create_Config_Panel Create config panel]
