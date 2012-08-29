@@ -16,4 +16,6 @@ public interface QueryEngine {
      * @return result of query
      */
     public QueryResult execute(String query);
+
+    public Object getBackend();
 }

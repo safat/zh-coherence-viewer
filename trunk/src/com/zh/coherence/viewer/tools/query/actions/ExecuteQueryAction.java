@@ -61,7 +61,7 @@ public class ExecuteQueryAction extends AbstractAction {
                             if (size == 0) {
                                 context.showOutputPane(QueryContext.NO_DATA);
                             } else {
-                                context.showOutputPane(QueryContext.TABLE_VIEW);
+                                context.showOutputPane(context.getCurrentOutputTool());
                                 context.getQueryTool().showResult(ret, result.getTerm(), size);
                             }
                         } else if (ret instanceof Collection) {
@@ -70,12 +70,12 @@ public class ExecuteQueryAction extends AbstractAction {
                             if (size == 0) {
                                 context.showOutputPane(QueryContext.NO_DATA);
                             } else {
-                                context.showOutputPane(QueryContext.TABLE_VIEW);
+                                context.showOutputPane(context.getCurrentOutputTool());
                                 context.getQueryTool().showResult(ret, result.getTerm(), size);
                             }
                         } else if (ret instanceof Number || ret instanceof String) {
                             context.setSize(1);
-                            context.showOutputPane(QueryContext.TABLE_VIEW);
+                            context.showOutputPane(context.getCurrentOutputTool());
                             context.getQueryTool().showResult(ret, result.getTerm(), 1);
                             context.showShortMessage("OK");
                         } else {
