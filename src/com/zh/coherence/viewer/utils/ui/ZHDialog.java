@@ -28,6 +28,21 @@ public class ZHDialog extends JDialog {
         init();
     }
 
+    public ZHDialog(JComponent pane, String title, final Runnable runnable, String name) {
+        this.pane = pane;
+        this.title = title;
+        userAction = new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                runnable.run();
+                dispose();
+            }
+        };
+        userAction.putValue(Action.NAME, name);
+
+        init();
+    }
+
     public void init() {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setTitle(title);
@@ -54,6 +69,12 @@ public class ZHDialog extends JDialog {
         setSize(width, height);
 //        setPreferredSize(new Dimension(width, height));
 //        setLocationRelativeTo(windowForComponent((Component) ResourceManager.getInstance().getApplicationPane()));
+        setVisible(true);
+    }
+
+    public void show(Container parent, int width, int height) {
+        setSize(width, height);
+        setLocationRelativeTo(SwingUtilities.windowForComponent(parent));
         setVisible(true);
     }
 }
