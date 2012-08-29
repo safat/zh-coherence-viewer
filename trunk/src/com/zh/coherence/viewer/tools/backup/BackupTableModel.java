@@ -2,6 +2,7 @@ package com.zh.coherence.viewer.tools.backup;
 
 import com.zh.coherence.viewer.jmx.JMXManager;
 import com.zh.coherence.viewer.utils.icons.IconHelper;
+import com.zh.coherence.viewer.utils.icons.IconLoader;
 import com.zh.coherence.viewer.utils.icons.IconType;
 
 import javax.swing.*;
@@ -21,8 +22,9 @@ public class BackupTableModel implements TableModel {
     private Map<String, CacheInfo> index = new HashMap<String, CacheInfo>();
     private List<CacheInfo> cacheInfoList = new ArrayList<CacheInfo>();
     private String directory = null;
-    private Icon clock = IconHelper.getInstance().getIcon(IconType.CLOCK);
-    private Icon processed = IconHelper.getInstance().getIcon(IconType.TICK_WHITE);
+    private Icon clock = new IconLoader("icons/clock.png");
+    private Icon processed = new IconLoader("icons/tick-white.png");
+    private Icon filterIcon = new IconLoader("icons/filter.png");
     private Set<TableModelListener> listeners = new HashSet<TableModelListener>();
 
     public void updateCachesFromJMX(){
@@ -74,7 +76,7 @@ public class BackupTableModel implements TableModel {
 
     @Override
     public int getColumnCount() {
-        return 3;
+        return 4;
     }
 
     @Override
@@ -88,6 +90,7 @@ public class BackupTableModel implements TableModel {
             case 0: return Boolean.class;
             case 1: return String.class;
             case 2: return Icon.class;
+            case 3: return Icon.class;
             default: return String.class;
         }
     }
@@ -111,6 +114,9 @@ public class BackupTableModel implements TableModel {
                     icon = null;
                 }
                 return icon;
+            }
+            case 3:{
+                return cacheInfo.enableFilter ? filterIcon : null;
             }
             default: return null;
         }
@@ -159,7 +165,7 @@ public class BackupTableModel implements TableModel {
         sendEvent(null);
     }
 
-    private void sendEvent(Integer row){
+    public void sendEvent(Integer row){
         for(TableModelListener l : listeners){
             if(row == null){
                 l.tableChanged(new TableModelEvent(this));
@@ -184,6 +190,8 @@ public class BackupTableModel implements TableModel {
         public String name;
         public boolean enabled = true;
         public boolean processed = false;
+        public boolean enableFilter = false;
+        public String filter = null;
 
         private CacheInfo(String name) {
             this.name = name;

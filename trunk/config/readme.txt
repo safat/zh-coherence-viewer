@@ -12,19 +12,14 @@ How To Configure user POF
 
 Changelog:
 
+0.3.9
+Query:
+    added print to text action (Standard query plus output)
+Backup
+    ...
+
 0.3.8
 fixed bugs:
   "select distinct" doesn't work
   When value of a field is a Set then only the first element is shown in the results
   other small bugs
-
-0.3.5
-added JMX cache statistic
-save/ load cohQl script
-query tool: show number of loaded rows
-added simple user classes viewer
-
-0.3.4
-tools.list file changed with tools.xml
-added simple jmx memory report
-fixed some small bugs

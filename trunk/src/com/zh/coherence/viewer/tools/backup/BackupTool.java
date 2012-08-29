@@ -21,12 +21,6 @@ import java.awt.*;
 import static layout.TableLayoutConstants.FILL;
 import static layout.TableLayoutConstants.PREFERRED;
 
-/**
- * Created by IntelliJ IDEA.
- * User: Живко
- * Date: 19.03.12
- * Time: 20:24
- */
 public class BackupTool extends JPanel implements CoherenceViewerTool {
 
     private JRadioButton backupActionRadio, restoreActionRadio;
@@ -38,7 +32,7 @@ public class BackupTool extends JPanel implements CoherenceViewerTool {
 
     public BackupTool() {
         super(new TableLayout(new double[][]{
-                {2, 300, 2, TableLayout.FILL, 2},
+                {2, 400, 2, TableLayout.FILL, 2},
                 {2, PREFERRED, 2, PREFERRED, 5, PREFERRED, 5, PREFERRED, 10, PREFERRED, 5, FILL}
                 //  header        action      source/target   progress       button     event_log
         }));
@@ -57,6 +51,8 @@ public class BackupTool extends JPanel implements CoherenceViewerTool {
         col.setPreferredWidth(25);
         col = caches.getColumnModel().getColumn(2);
         col.setPreferredWidth(25);
+        col = caches.getColumnModel().getColumn(3);
+        col.setPreferredWidth(25);
         col = caches.getColumnModel().getColumn(1);
         int total = caches.getColumnModel().getTotalColumnWidth();
         col.setPreferredWidth(total - 10);
@@ -71,6 +67,8 @@ public class BackupTool extends JPanel implements CoherenceViewerTool {
         cacheListToolBar.addSeparator();
         cacheListToolBar.add(new CheckAllCachesAction(context.getBackupTableModel()));
         cacheListToolBar.add(new UnCheckAllCachesAction(context.getBackupTableModel()));
+        cacheListToolBar.addSeparator();
+        cacheListToolBar.add(new CacheFilterAction(context.getBackupTableModel(), caches));
 
         add(cacheListPane, "1, 3, 1, 9");
 
