@@ -3,26 +3,24 @@ package com.zh.coherence.viewer.tools.backup;
 import com.zh.coherence.viewer.eventlog.EventLogPane;
 
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
 
-/**
- * Created by IntelliJ IDEA.
- * User: Живко
- * Date: 19.03.12
- * Time: 20:56
- */
 public class BackupContext {
     public enum BackupAction {BACKUP, RESTORE}
-    public enum Target {FOLDER, ZIP}
 
     protected JProgressBar generalProgress, cacheProgress;
 
     public EventLogPane logPane;
 
-    private BackupAction action = BackupAction.BACKUP;
-    private Target target = Target.FOLDER;
+    private BackupAction action;
     private String path;
-    private BackupTableModel backupTableModel = new BackupTableModel();
     private int bufferSize = 200;
+    private List<CacheInfo> cacheInfoList = new ArrayList<CacheInfo>();
+
+    public BackupContext(BackupAction action) {
+        this.action = action;
+    }
 
     public void updateGeneralProgress(){
         generalProgress.setString((Math.rint(1000.0 * generalProgress.getPercentComplete()) / 10.0)  + " %");
@@ -55,42 +53,12 @@ public class BackupContext {
         return action;
     }
 
-    public void setAction(BackupAction action) {
-        this.action = action;
-        refreshTableData();
-    }
-
-    public void refreshTableData(){
-        switch (action){
-            case BACKUP:
-                backupTableModel.updateCachesFromJMX();
-                break;
-            case RESTORE:
-                backupTableModel.updateCacheFromDir(path);
-        }
-    }
-
-    public void setTarget(Target target) {
-        this.target = target;
-    }
-
-    public Target getTarget() {
-        return target;
-    }
-
     public String getPath() {
         return path;
     }
 
     public void setPath(String path) {
         this.path = path;
-        if(action == BackupAction.RESTORE){
-            refreshTableData();
-        }
-    }
-
-    public BackupTableModel getBackupTableModel() {
-        return backupTableModel;
     }
 
     public int getBufferSize() {
@@ -103,5 +71,9 @@ public class BackupContext {
         }catch (NumberFormatException ex){
             //nothing to do
         }
+    }
+
+    public List<CacheInfo> getCacheInfoList() {
+        return cacheInfoList;
     }
 }

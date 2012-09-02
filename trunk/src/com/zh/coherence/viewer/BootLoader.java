@@ -1,6 +1,5 @@
 package com.zh.coherence.viewer;
 
-import bsh.Interpreter;
 import com.zh.coherence.viewer.utils.FileUtils;
 
 import javax.swing.*;
@@ -28,13 +27,6 @@ public class BootLoader {
      * @throws Exception exception
      */
     public static void main(String[] args) throws Exception {
-        Interpreter i = new Interpreter();
-        //Filter filter1 = new EqualsFilter("test", 18);
-//        i.eval("import com.tangosol.util.filter.*");
-//        i.eval("import com.tangosol.util.*");
-//        i.eval("Filter filter = new EqualsFilter(\"test\", 18)");
-//        System.out.println( i.get("filter") );
-
         new BootLoader();
     }
 

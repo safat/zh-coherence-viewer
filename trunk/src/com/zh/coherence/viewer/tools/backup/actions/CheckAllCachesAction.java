@@ -24,6 +24,6 @@ public class CheckAllCachesAction extends AbstractAction{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        model.changeCheck(true);
+        model.fireTableDataChanged();
     }
 }

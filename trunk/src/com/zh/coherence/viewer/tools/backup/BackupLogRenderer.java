@@ -6,12 +6,6 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-/**
- * Created by IntelliJ IDEA.
- * User: Живко
- * Date: 07.04.12
- * Time: 19:56
- */
 public class BackupLogRenderer implements EventLogRenderer {
     private final String header = "<div width='100%'><div width='100%' style='background: #CEE2D3;'>";
 

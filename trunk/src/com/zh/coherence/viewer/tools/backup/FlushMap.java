@@ -4,12 +4,6 @@ import com.tangosol.net.NamedCache;
 
 import java.util.HashMap;
 
-/**
- * Created by IntelliJ IDEA.
- * User: Живко
- * Date: 25.04.12
- * Time: 23:02
- */
 public class FlushMap extends HashMap {
     private int bufferSize;
     private NamedCache cache;

@@ -1,11 +1,5 @@
 package com.zh.coherence.viewer.tools.backup;
 
-/**
- * Created by IntelliJ IDEA.
- * User: Живко
- * Date: 07.04.12
- * Time: 20:38
- */
 public class BackupLogEvent {
     private long startTime;
     private String cacheName;

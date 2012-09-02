@@ -25,6 +25,7 @@ import java.util.Set;
 public class BackupMaker {
     BackupContext context;
 
+
     public BackupMaker(BackupContext context) {
         this.context = context;
     }
@@ -40,9 +41,9 @@ public class BackupMaker {
         NamedCache nCache;
         int maxElements = 0;
 
-        for (BackupTableModel.CacheInfo info : context.getBackupTableModel().getCacheInfoList()) {
-            if (info.enabled) {
-                nCache = CacheFactory.getCache(info.name);
+        for (CacheInfo info : context.getCacheInfoList()) {
+            if (info.isEnabled()) {
+                nCache = CacheFactory.getCache(info.getName());
                 caches.add(new CacheWrapper(nCache, info));
                 maxElements += nCache.size();
             }
@@ -59,7 +60,7 @@ public class BackupMaker {
             context.cacheProgress.setValue(0);
             context.updateCacheProgress(wrapper.cache.getCacheName());
             //store file
-            File target = new File(context.getPath() + File.separator + wrapper.info.name);
+            File target = new File(context.getPath() + File.separator + wrapper.info.getName());
             if (wrapper.cache instanceof SafeNamedCache) {
                 SafeNamedCache snc = (SafeNamedCache) wrapper.cache;
                 try {
@@ -73,7 +74,7 @@ public class BackupMaker {
                     WrapperBufferOutput buf = new WrapperBufferOutput(file);
                     buf.writePackedInt(-28);
                     buf.writePackedInt(wrapper.cache.size());
-                    context.updateCacheProgress("loading the keys of cache [" + wrapper.info.name + "]...");
+                    context.updateCacheProgress("loading the keys of cache [" + wrapper.info.getName() + "]...");
                     Set keys = store.keySet();
                     List keysPack = new ArrayList();
                     for(Object key : keys){
@@ -93,11 +94,11 @@ public class BackupMaker {
             } else {
                 throw new RuntimeException("cannot save class: " + wrapper.cache.getClass());
             }
-            wrapper.info.processed = true;
-            context.getBackupTableModel().refresh(wrapper.info);
+            wrapper.info.setProcessed(true);
+//            context.getBackupTableModel().refresh(wrapper.info);
 
             context.logPane.addMessage(new BackupLogEvent(
-                    startTime, wrapper.info.name, System.currentTimeMillis(),
+                    startTime, wrapper.info.getName(), System.currentTimeMillis(),
                     "Done, cache has been saved, size of file: "
                             + FileUtils.convertToStringRepresentation(target.length()), "backup"));
         }
@@ -106,7 +107,7 @@ public class BackupMaker {
     }
 
     private void flushData(CacheWrapper wrapper, Map map, WrapperBufferOutput buf) throws Exception {
-        context.incrementCacheProgress(wrapper.info.name, map.size());
+        context.incrementCacheProgress(wrapper.info.getName(), map.size());
         context.incrementGeneralProgress(map.size());
         for(Object entryObj : map.entrySet()){
             Map.Entry<Binary, Binary> entry = (Map.Entry<Binary, Binary>) entryObj;

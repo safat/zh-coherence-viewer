@@ -75,10 +75,18 @@
     </bean>
 
     <bean id="backupTool" class="com.zh.coherence.viewer.tools.backup.BackupToolLauncher">
-        <property name="name" value="Backup/Restore"/>
+        <property name="name" value="Backup"/>
         <property name="icon">
             <bean class="com.zh.coherence.viewer.utils.icons.IconLoader">
-                <property name="path" value="icons/camera.png"/>
+                <property name="path" value="icons/backup-restore.png"/>
+            </bean>
+        </property>
+    </bean>
+    <bean id="restoreTool" class="com.zh.coherence.viewer.tools.backup.RestoreToolLauncher">
+        <property name="name" value="Restore"/>
+        <property name="icon">
+            <bean class="com.zh.coherence.viewer.utils.icons.IconLoader">
+                <property name="path" value="icons/backup-restore.png"/>
             </bean>
         </property>
     </bean>
@@ -106,7 +114,21 @@
         <property name="launchers">
             <util:list value-type="java.lang.Object">
                 <ref bean="queryTool"/>
-                <ref bean="backupTool"/>
+                <bean class="com.zh.coherence.viewer.menubar.SubMenu">
+                    <property name="name" value="Backup"/>
+                    <property name="icon">
+                        <bean class="com.zh.coherence.viewer.utils.icons.IconLoader">
+                            <property name="path" value="icons/backup-restore.png"/>
+                        </bean>
+                    </property>
+                    <property name="child">
+                        <util:list value-type="java.lang.Object">
+                            <ref bean="backupTool"/>
+                            <ref bean="restoreTool"/>
+                        </util:list>
+                    </property>
+                </bean>
+
                 <bean class="com.zh.coherence.viewer.menubar.SubMenu">
                     <property name="name" value="JMX Reports"/>
                     <property name="icon">

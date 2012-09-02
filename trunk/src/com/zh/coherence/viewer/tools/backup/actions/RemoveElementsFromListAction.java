@@ -29,9 +29,9 @@ public class RemoveElementsFromListAction extends AbstractAction{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        BackupTableModel model = context.getBackupTableModel();
-        for(int row : table.getSelectedRows()){
-            model.removeValue((String) model.getValueAt(row, 1));
-        }
+//        BackupTableModel model = context.getBackupTableModel();
+//        for(int row : table.getSelectedRows()){
+//            model.removeValue((String) model.getValueAt(row, 1));
+//        }
     }
 }
