@@ -5,12 +5,10 @@ import com.zh.coherence.viewer.tools.CoherenceViewerTool;
 import com.zh.coherence.viewer.tools.backup.actions.*;
 import com.zh.coherence.viewer.tools.backup.actions.filter.CacheFilterAction;
 import com.zh.coherence.viewer.utils.icons.IconHelper;
+import com.zh.coherence.viewer.utils.icons.IconLoader;
 import com.zh.coherence.viewer.utils.icons.IconType;
 import layout.TableLayout;
-import org.jdesktop.swingx.JXHeader;
-import org.jdesktop.swingx.JXRadioGroup;
-import org.jdesktop.swingx.JXTable;
-import org.jdesktop.swingx.VerticalLayout;
+import org.jdesktop.swingx.*;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -24,27 +22,33 @@ import static layout.TableLayoutConstants.PREFERRED;
 
 public class BackupTool extends JPanel implements CoherenceViewerTool {
 
-    private JRadioButton backupActionRadio, restoreActionRadio;
-    private JRadioButton folderRadio, zipRadio;
-    private BackupContext context = new BackupContext();
+    private BackupContext context;
     private JXTable caches;
+    private BackupTableModel backupTableModel;
     private JPanel cacheListPane = new JPanel(new BorderLayout());
     private JTextField pathFiled;
+    //actions
+    private ReloadCacheList reloadCacheList;
 
-    public BackupTool() {
+    public BackupTool(BackupContext.BackupAction action) {
         super(new TableLayout(new double[][]{
                 {2, 400, 2, TableLayout.FILL, 2},
                 {2, PREFERRED, 2, PREFERRED, 5, PREFERRED, 5, PREFERRED, 10, PREFERRED, 5, FILL}
                 //  header        action      source/target   progress       button     event_log
         }));
 
-        JXHeader header = new JXHeader("Backup / Restore",
-                "Use this tool to write/read a serialized representation of the given caches\n" +
-                        "This tool doesn't use standard coherence tool",
-                IconHelper.getInstance().getIcon(IconType.BACKUP));
+        String actionTitle = action == BackupContext.BackupAction.BACKUP ? "Backup" : "Restore";
+        String headerAction = action == BackupContext.BackupAction.BACKUP ? "write" : "read";
+        JXHeader header = new JXHeader(actionTitle,
+                "Use this tool to " + headerAction + " a serialized representation of the given caches\n"
+                        + "This tool doesn't use standard coherence tool",
+                new IconLoader("icons/backup.png"));
         add(header, "1,1,3,1");
 
-        caches = new JXTable(context.getBackupTableModel());
+        context = new BackupContext(action);
+        backupTableModel = new BackupTableModel(context);
+        caches = new JXTable(backupTableModel);
+        caches.setSortable(false);
         JTableHeader tHeader = caches.getTableHeader();
         tHeader.setReorderingAllowed(false);
         tHeader.setResizingAllowed(false);
@@ -65,66 +69,52 @@ public class BackupTool extends JPanel implements CoherenceViewerTool {
         cacheListPane.add(cacheListToolBar, BorderLayout.NORTH);
         cacheListToolBar.add(new AddStringToListAction(context));
         cacheListToolBar.add(new RemoveElementsFromListAction(context, caches));
+        reloadCacheList = new ReloadCacheList(context, backupTableModel);
+        cacheListToolBar.add(reloadCacheList);
         cacheListToolBar.addSeparator();
-        cacheListToolBar.add(new CheckAllCachesAction(context.getBackupTableModel()));
-        cacheListToolBar.add(new UnCheckAllCachesAction(context.getBackupTableModel()));
+        cacheListToolBar.add(new SaveCacheList());
+        cacheListToolBar.add(new LoadCacheList());
         cacheListToolBar.addSeparator();
-        cacheListToolBar.add(new CacheFilterAction(context.getBackupTableModel(), caches));
+        cacheListToolBar.add(new CacheFilterAction(backupTableModel, caches));
+        cacheListToolBar.addSeparator();
+        cacheListToolBar.add(new CheckAllCachesAction(backupTableModel));
+        cacheListToolBar.add(new UnCheckAllCachesAction(backupTableModel));
 
         add(cacheListPane, "1, 3, 1, 9");
 
-        backupActionRadio = new JRadioButton(new BackupAction(context, BackupContext.BackupAction.BACKUP, "Backup"));
-        restoreActionRadio = new JRadioButton(new BackupAction(context, BackupContext.BackupAction.RESTORE, "Restore"));
+//Threads
+        JPanel threadsPanel = new JPanel(new BorderLayout());
+        threadsPanel.add(new JLabel(new IconLoader("icons/processor.png")), BorderLayout.WEST);
+        final JSpinner threads = new JSpinner(new SpinnerNumberModel(2, 1, Integer.MAX_VALUE, 1));
+        threadsPanel.add(threads, BorderLayout.CENTER);
+        threadsPanel.setBorder(BorderFactory.createTitledBorder("Threads"));
 
-        JXRadioGroup actionRadioGroup = new JXRadioGroup();
-        actionRadioGroup.setValues(new JRadioButton[]{backupActionRadio, restoreActionRadio});
-        actionRadioGroup.setSelectedValue(backupActionRadio);
-        actionRadioGroup.setBorder(BorderFactory.createTitledBorder("Action"));
-        JPanel panel1 = new JPanel(new TableLayout(new double[][]{
-                {FILL,2,FILL},
-                {PREFERRED}
-        }));
+        JPanel panel1 = new JPanel(new TableLayout(new double[][]{{120, 2, 200, FILL}, {PREFERRED}}));
 
-        panel1.add(actionRadioGroup,"0,0");
-        JPanel bufferPanel = new JPanel(new BorderLayout());
-        bufferPanel.setBorder(BorderFactory.createTitledBorder("Buffer size"));
-        final JTextField bufferSizeText = new JTextField();
-        bufferPanel.add(bufferSizeText);
-        bufferSizeText.setText("" + context.getBufferSize());
-        bufferSizeText.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                context.setBufferSize(bufferSizeText.getText());
-            }
+        panel1.add(threadsPanel, "0,0");
 
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                context.setBufferSize(bufferSizeText.getText());
-            }
+//Buffer size
+        JPanel bufferPanel = new JPanel(new BorderLayout(2, 0));
+        bufferPanel.setBorder(BorderFactory.createTitledBorder("Buffer"));
+        final JSpinner buffer = new JSpinner(new SpinnerNumberModel(context.getBufferSize(), 1, Integer.MAX_VALUE, 5));
+        bufferPanel.add(new JLabel(new IconLoader("icons/memory-module.png")), BorderLayout.WEST);
+        bufferPanel.add(buffer, BorderLayout.CENTER);
+        JComboBox<String> bufferType = new JComboBox<String>(new String[]{"Units", "Megabytes"});
+        bufferPanel.add(bufferType, BorderLayout.EAST);
 
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                context.setBufferSize(bufferSizeText.getText());
-            }
-        });
         panel1.add(bufferPanel, "2,0");
+        JPanel emptyPanel = new JPanel();
+        emptyPanel.setBorder(BorderFactory.createTitledBorder(""));
+        panel1.add(emptyPanel, "3,0");
+
         add(panel1, "3, 3");
 
-        folderRadio = new JRadioButton(new ChangeTargetAction(context, BackupContext.Target.FOLDER, "Folder"));
-        zipRadio = new JRadioButton(new ChangeTargetAction(context, BackupContext.Target.FOLDER, "ZIP"));
-        zipRadio.setEnabled(false);
-
         JXRadioGroup targetRadioGroup = new JXRadioGroup();
-        targetRadioGroup.setValues(new JRadioButton[]{folderRadio, zipRadio});
-        targetRadioGroup.setSelectedValue(folderRadio);
         JPanel targetPanel = new JPanel(new VerticalLayout(2));
-        targetPanel.setBorder(BorderFactory.createTitledBorder("Source/Target"));
+        targetPanel.setBorder(BorderFactory.createTitledBorder("Folder"));
         targetPanel.add(targetRadioGroup);
-        //path
-        JPanel targetPath = new JPanel(new TableLayout(new double[][]{
-                {PREFERRED,2,PREFERRED,2,FILL},
-                {PREFERRED}
-        }));
+//path
+        JPanel folderPanel = new JPanel(new BorderLayout(2, 0));
         pathFiled = new JTextField();
 
         pathFiled.getDocument().addDocumentListener(new DocumentListener() {
@@ -143,35 +133,34 @@ public class BackupTool extends JPanel implements CoherenceViewerTool {
                 context.setPath(pathFiled.getText());
             }
         });
-        targetPath.add(new JLabel("Path:"), "0,0");
-        targetPath.add(new JButton(new ChoosePathAction(context, pathFiled)), "2,0");
-        targetPath.add(pathFiled, "4,0");
+        folderPanel.add(new JButton(new ChoosePathAction(context, pathFiled)), BorderLayout.EAST);
+        folderPanel.add(pathFiled, BorderLayout.CENTER);
 
-        targetPanel.add(targetPath);
+        targetPanel.add(folderPanel);
         add(targetPanel, "3,5");
 
         JPanel progressPanel = new JPanel(new TableLayout(new double[][]{
-                {PREFERRED, 2, FILL},{PREFERRED, 2, PREFERRED}
+                {FILL, 2}, {PREFERRED, 2, 35, 5, PREFERRED, 2, 35}
         }));
-        progressPanel.setBorder(BorderFactory.createTitledBorder("Progress"));
+//        progressPanel.setBorder(BorderFactory.createTitledBorder("Progress"));
 
-        progressPanel.add(new JLabel("General:"), "0,0");
+        progressPanel.add(new JXTitledSeparator("General", JSeparator.CENTER), "0,0");
         context.generalProgress = new JProgressBar();
         context.generalProgress.setString("Wait");
         context.generalProgress.setStringPainted(true);
-        progressPanel.add(context.generalProgress, "2,0");
+        progressPanel.add(context.generalProgress, "0,2");
 
-        progressPanel.add(new JLabel("Cache:"), "0,2");
+        progressPanel.add(new JXTitledSeparator("Cache", JSeparator.CENTER), "0,4");
         context.cacheProgress = new JProgressBar();
         context.cacheProgress.setString("Wait");
         context.cacheProgress.setStringPainted(true);
-        progressPanel.add(context.cacheProgress, "2,2");
+        progressPanel.add(context.cacheProgress, "0,6");
 
         add(progressPanel, "3, 7");
 
         JButton start = new JButton(new StartAction(context));
         JPanel startPanel = new JPanel(new TableLayout(new double[][]{
-                {150},{75}
+                {150}, {75}
         }));
         startPanel.add(start, "0,0");
         add(startPanel, "3,9");
@@ -183,10 +172,8 @@ public class BackupTool extends JPanel implements CoherenceViewerTool {
 
     @Override
     public JComponent getPane() {
-        return this;
-    }
+        reloadCacheList.reload();
 
-    public String getName(){
-        return "Backup/Restore";
+        return this;
     }
 }

@@ -30,7 +30,7 @@ public class AddStringToListAction extends AbstractAction{
         String name = JOptionPane.showInputDialog(parent, "input cache's name:",
                 "Cache's name", JOptionPane.QUESTION_MESSAGE);
         if(name != null && !name.isEmpty()){
-            context.getBackupTableModel().addValue(name);
+//            context.getBackupTableModel().addValue(name);
         }
     }
 }

@@ -2,6 +2,7 @@ package com.zh.coherence.viewer.tools.backup.actions.filter;
 
 import com.zh.coherence.viewer.console.JTextAreaWriter;
 import com.zh.coherence.viewer.tools.backup.BackupTableModel;
+import com.zh.coherence.viewer.tools.backup.CacheInfo;
 import com.zh.coherence.viewer.tools.backup.FilterExecutor;
 import com.zh.coherence.viewer.utils.icons.IconLoader;
 import com.zh.coherence.viewer.utils.ui.ZHDialog;
@@ -125,9 +126,9 @@ public class CacheFilterAction extends AbstractAction {
             @Override
             public void run() {
                 int row = table.getSelectedRow();
-                BackupTableModel.CacheInfo info = backupTableModel.getCacheInfoList().get(row);
-                info.enableFilter = enable.isSelected();
-                backupTableModel.sendEvent(row);
+                CacheInfo info = backupTableModel.getContext().getCacheInfoList().get(row);
+                info.setEnableFilter(enable.isSelected());
+                backupTableModel.fireTableDataChanged();
             }
         }, "OK");
 

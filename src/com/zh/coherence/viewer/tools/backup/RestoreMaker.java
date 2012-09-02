@@ -16,12 +16,6 @@ import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by IntelliJ IDEA.
- * User: Живко
- * Date: 21.03.12
- * Time: 20:58
- */
 public class RestoreMaker {
     private BackupContext context;
     private JComponent parent;
@@ -49,9 +43,9 @@ public class RestoreMaker {
         List<CacheWrapper> caches = new ArrayList<CacheWrapper>();
 
         NamedCache nCache;
-        for (BackupTableModel.CacheInfo info : context.getBackupTableModel().getCacheInfoList()) {
-            if (info.enabled) {
-                nCache = CacheFactory.getCache(info.name);
+        for (CacheInfo info : context.getCacheInfoList()) {
+            if (info.isEnabled()) {
+                nCache = CacheFactory.getCache(info.getName());
                 caches.add(new CacheWrapper(nCache, info));
             }
         }
@@ -79,10 +73,10 @@ public class RestoreMaker {
             for (final CacheWrapper wrapper : caches) {
                 long startTime = System.currentTimeMillis();
                 restoreCache(wrapper, path);
-                wrapper.info.processed = true;
-                context.getBackupTableModel().refresh(wrapper.info);
+                wrapper.info.setProcessed(true);
+//                context.getBackupTableModel().refresh(wrapper.info);
                 context.logPane.addMessage(new BackupLogEvent(
-                        startTime,wrapper.info.name , System.currentTimeMillis(),
+                        startTime,wrapper.info.getName() , System.currentTimeMillis(),
                         "Done, cache has been restored.", "restore"));
             }
             context.logPane.addMessage(new BackupLogEvent(
@@ -98,7 +92,7 @@ public class RestoreMaker {
         context.cacheProgress.setMinimum(0);
         context.cacheProgress.setValue(0);
 
-        f = new File(path + File.separator + wrapper.info.name);
+        f = new File(path + File.separator + wrapper.info.getName());
         try {
             raf = new RandomAccessFile(f, "rw");
             DataInput dInput = raf;

@@ -1,13 +1,11 @@
 package com.zh.coherence.viewer.tools.backup;
 
 import bsh.Interpreter;
-import com.tangosol.io.pof.reflect.SimplePofPath;
 import com.tangosol.net.CacheFactory;
 import com.tangosol.net.NamedCache;
 import com.tangosol.util.Filter;
 import com.tangosol.util.QueryHelper;
 import com.tangosol.util.aggregator.Count;
-import com.tangosol.util.extractor.PofExtractor;
 
 import java.io.PrintWriter;
 
@@ -19,7 +17,7 @@ public class FilterExecutor {
     private Interpreter interpreter;
 
     public Filter execute(String script, Executor executor) throws Exception {
-        Filter filter = null;
+        Filter filter;
         if (executor == Executor.QUERY) {
             filter = QueryHelper.createFilter(script);
         } else {
@@ -40,7 +38,6 @@ public class FilterExecutor {
             }
         }
 
-        PofExtractor ex = new PofExtractor(null, new SimplePofPath(0), PofExtractor.KEY);
         return filter;
     }
 

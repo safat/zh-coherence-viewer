@@ -9,12 +9,6 @@ import com.zh.coherence.viewer.utils.icons.IconType;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
-/**
- * Created by IntelliJ IDEA.
- * User: Живко
- * Date: 19.03.12
- * Time: 22:09
- */
 public class StartAction extends AbstractAction{
     private BackupContext context;
 
