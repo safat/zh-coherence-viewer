@@ -3,6 +3,7 @@ package com.zh.coherence.viewer.tools.backup;
 import com.zh.coherence.viewer.eventlog.EventLogPane;
 import com.zh.coherence.viewer.tools.CoherenceViewerTool;
 import com.zh.coherence.viewer.tools.backup.actions.*;
+import com.zh.coherence.viewer.tools.backup.actions.filter.CacheFilterAction;
 import com.zh.coherence.viewer.utils.icons.IconHelper;
 import com.zh.coherence.viewer.utils.icons.IconType;
 import layout.TableLayout;
