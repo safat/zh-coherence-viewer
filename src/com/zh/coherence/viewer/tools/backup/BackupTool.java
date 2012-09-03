@@ -11,11 +11,15 @@ import layout.TableLayout;
 import org.jdesktop.swingx.*;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 import java.awt.*;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import static layout.TableLayoutConstants.FILL;
 import static layout.TableLayoutConstants.PREFERRED;
@@ -27,6 +31,9 @@ public class BackupTool extends JPanel implements CoherenceViewerTool {
     private BackupTableModel backupTableModel;
     private JPanel cacheListPane = new JPanel(new BorderLayout());
     private JTextField pathFiled;
+    private JSpinner threads;
+    private JSpinner buffer;
+    private JComboBox<String> bufferType;
     //actions
     private ReloadCacheList reloadCacheList;
 
@@ -72,8 +79,8 @@ public class BackupTool extends JPanel implements CoherenceViewerTool {
         reloadCacheList = new ReloadCacheList(context, backupTableModel);
         cacheListToolBar.add(reloadCacheList);
         cacheListToolBar.addSeparator();
-        cacheListToolBar.add(new SaveCacheList());
-        cacheListToolBar.add(new LoadCacheList());
+        cacheListToolBar.add(new SaveCacheList(context));
+        cacheListToolBar.add(new LoadCacheList(context, this));
         cacheListToolBar.addSeparator();
         cacheListToolBar.add(new CacheFilterAction(backupTableModel, caches));
         cacheListToolBar.addSeparator();
@@ -85,8 +92,14 @@ public class BackupTool extends JPanel implements CoherenceViewerTool {
 //Threads
         JPanel threadsPanel = new JPanel(new BorderLayout());
         threadsPanel.add(new JLabel(new IconLoader("icons/processor.png")), BorderLayout.WEST);
-        final JSpinner threads = new JSpinner(new SpinnerNumberModel(2, 1, Integer.MAX_VALUE, 1));
+        threads = new JSpinner(new SpinnerNumberModel(2, 1, Integer.MAX_VALUE, 1));
         threadsPanel.add(threads, BorderLayout.CENTER);
+        threads.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                context.setThreads((Integer) threads.getValue());
+            }
+        });
         threadsPanel.setBorder(BorderFactory.createTitledBorder("Threads"));
 
         JPanel panel1 = new JPanel(new TableLayout(new double[][]{{120, 2, 200, FILL}, {PREFERRED}}));
@@ -96,10 +109,22 @@ public class BackupTool extends JPanel implements CoherenceViewerTool {
 //Buffer size
         JPanel bufferPanel = new JPanel(new BorderLayout(2, 0));
         bufferPanel.setBorder(BorderFactory.createTitledBorder("Buffer"));
-        final JSpinner buffer = new JSpinner(new SpinnerNumberModel(context.getBufferSize(), 1, Integer.MAX_VALUE, 5));
+        buffer = new JSpinner(new SpinnerNumberModel(context.getBufferSize(), 1, Integer.MAX_VALUE, 5));
+        buffer.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                context.setBufferSize((Integer) buffer.getValue());
+            }
+        });
         bufferPanel.add(new JLabel(new IconLoader("icons/memory-module.png")), BorderLayout.WEST);
         bufferPanel.add(buffer, BorderLayout.CENTER);
-        JComboBox<String> bufferType = new JComboBox<String>(new String[]{"Units", "Megabytes"});
+        bufferType = new JComboBox<String>(new String[]{"Units", "Megabytes"});
+        bufferType.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                context.setBufferType(String.valueOf(bufferType.getSelectedItem()));
+            }
+        });
         bufferPanel.add(bufferType, BorderLayout.EAST);
 
         panel1.add(bufferPanel, "2,0");
@@ -175,5 +200,13 @@ public class BackupTool extends JPanel implements CoherenceViewerTool {
         reloadCacheList.reload();
 
         return this;
+    }
+
+    public void updateUIFromContext(){
+        pathFiled.setText(context.getPath());
+        threads.setValue(context.getThreads());
+        buffer.setValue(context.getBufferSize());
+        bufferType.setSelectedItem(context.getBufferType());
+        backupTableModel.fireTableDataChanged();
     }
 }

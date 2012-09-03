@@ -95,7 +95,7 @@ public class BackupTableModel extends AbstractTableModel {
                 return icon;
             }
             case 3: {
-                return cacheInfo.isEnableFilter() ? filterIcon : null;
+                return cacheInfo.getFilter().isEnabled() ? filterIcon : null;
             }
             default:
                 return null;

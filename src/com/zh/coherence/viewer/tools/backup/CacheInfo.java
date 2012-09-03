@@ -1,14 +1,27 @@
 package com.zh.coherence.viewer.tools.backup;
 
+import javax.xml.bind.annotation.*;
+
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.NONE)
 public class CacheInfo {
+
+    @XmlAttribute
     private String name;
+
+    @XmlAttribute
     private boolean enabled = true;
+
     private boolean processed = false;
-    private boolean enableFilter = false;
-    private String filter = null;
+
+    @XmlElement
+    private BackupFilter filter = new BackupFilter();
 
     public CacheInfo(String name) {
         this.name = name;
+    }
+
+    public CacheInfo() {
     }
 
     @Override
@@ -42,19 +55,11 @@ public class CacheInfo {
         this.processed = processed;
     }
 
-    public boolean isEnableFilter() {
-        return enableFilter;
-    }
-
-    public void setEnableFilter(boolean enableFilter) {
-        this.enableFilter = enableFilter;
-    }
-
-    public String getFilter() {
+    public BackupFilter getFilter() {
         return filter;
     }
 
-    public void setFilter(String filter) {
+    public void setFilter(BackupFilter filter) {
         this.filter = filter;
     }
 
