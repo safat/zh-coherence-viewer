@@ -16,16 +16,16 @@ public class FilterExecutor {
 
     private Interpreter interpreter;
 
-    public Filter execute(String script, Executor executor) throws Exception {
+    public Filter execute(BackupFilter backupFilter) throws Exception {
         Filter filter;
-        if (executor == Executor.QUERY) {
-            filter = QueryHelper.createFilter(script);
+        if (backupFilter.getFilterType() == BackupFilter.FilterType.QUERY) {
+            filter = QueryHelper.createFilter(backupFilter.getSource());
         } else {
             if (interpreter == null) {
                 interpreter = new Interpreter();
             }
 
-            Object result = interpreter.eval(script);
+            Object result = interpreter.eval(backupFilter.getSource());
             if(result == null){
                 result = interpreter.get("filter");
             }
@@ -41,11 +41,11 @@ public class FilterExecutor {
         return filter;
     }
 
-    public void checkScript(String cache, String script, Executor executor, PrintWriter out) {
+    public void checkScript(String cache, BackupFilter backupFilter, PrintWriter out) {
         out.write("Compile script...\t");
         out.flush();
         try {
-            Filter filter = execute(script, executor);
+            Filter filter = execute(backupFilter);
             System.err.println("FILTER: " + filter);
             out.write("Fine!\n");
             out.write("Try to execute filter...\n");

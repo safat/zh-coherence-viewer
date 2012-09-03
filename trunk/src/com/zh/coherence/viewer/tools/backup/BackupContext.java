@@ -3,9 +3,12 @@ package com.zh.coherence.viewer.tools.backup;
 import com.zh.coherence.viewer.eventlog.EventLogPane;
 
 import javax.swing.*;
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.NONE)
 public class BackupContext {
     public enum BackupAction {BACKUP, RESTORE}
 
@@ -14,9 +17,24 @@ public class BackupContext {
     public EventLogPane logPane;
 
     private BackupAction action;
+
+    @XmlElement
     private String path;
+
+    @XmlAttribute
     private int bufferSize = 200;
+
+    @XmlAttribute
+    private String bufferType = "Units";
+
+    @XmlAttribute
+    private int threads = 2;
+
+    @XmlElement
     private List<CacheInfo> cacheInfoList = new ArrayList<CacheInfo>();
+
+    public BackupContext() {
+    }
 
     public BackupContext(BackupAction action) {
         this.action = action;
@@ -65,15 +83,31 @@ public class BackupContext {
         return bufferSize;
     }
 
-    public void setBufferSize(String bufferSize) {
-        try{
-            this.bufferSize = Integer.parseInt(bufferSize);
-        }catch (NumberFormatException ex){
-            //nothing to do
-        }
-    }
-
     public List<CacheInfo> getCacheInfoList() {
         return cacheInfoList;
+    }
+
+    public void setBufferSize(int bufferSize) {
+        this.bufferSize = bufferSize;
+    }
+
+    public void setCacheInfoList(List<CacheInfo> cacheInfoList) {
+        this.cacheInfoList = cacheInfoList;
+    }
+
+    public int getThreads() {
+        return threads;
+    }
+
+    public void setThreads(int threads) {
+        this.threads = threads;
+    }
+
+    public String getBufferType() {
+        return bufferType;
+    }
+
+    public void setBufferType(String bufferType) {
+        this.bufferType = bufferType;
     }
 }
