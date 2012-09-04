@@ -102,7 +102,7 @@ public class BackupTool extends JPanel implements CoherenceViewerTool {
         });
         threadsPanel.setBorder(BorderFactory.createTitledBorder("Threads"));
 
-        JPanel panel1 = new JPanel(new TableLayout(new double[][]{{120, 2, 200, FILL}, {PREFERRED}}));
+        JPanel panel1 = new JPanel(new TableLayout(new double[][]{{120, 2, 120, FILL}, {PREFERRED}}));
 
         panel1.add(threadsPanel, "0,0");
 
@@ -118,14 +118,6 @@ public class BackupTool extends JPanel implements CoherenceViewerTool {
         });
         bufferPanel.add(new JLabel(new IconLoader("icons/memory-module.png")), BorderLayout.WEST);
         bufferPanel.add(buffer, BorderLayout.CENTER);
-        bufferType = new JComboBox<String>(new String[]{"Units", "Megabytes"});
-        bufferType.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                context.setBufferType(String.valueOf(bufferType.getSelectedItem()));
-            }
-        });
-        bufferPanel.add(bufferType, BorderLayout.EAST);
 
         panel1.add(bufferPanel, "2,0");
         JPanel emptyPanel = new JPanel();
@@ -183,7 +175,7 @@ public class BackupTool extends JPanel implements CoherenceViewerTool {
 
         add(progressPanel, "3, 7");
 
-        JButton start = new JButton(new StartAction(context));
+        JButton start = new JButton(new StartAction(context, backupTableModel));
         JPanel startPanel = new JPanel(new TableLayout(new double[][]{
                 {150}, {75}
         }));
@@ -206,7 +198,6 @@ public class BackupTool extends JPanel implements CoherenceViewerTool {
         pathFiled.setText(context.getPath());
         threads.setValue(context.getThreads());
         buffer.setValue(context.getBufferSize());
-        bufferType.setSelectedItem(context.getBufferType());
         backupTableModel.fireTableDataChanged();
     }
 }

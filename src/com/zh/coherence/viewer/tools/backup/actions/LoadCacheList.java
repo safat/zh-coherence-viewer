@@ -50,7 +50,6 @@ public class LoadCacheList extends AbstractAction {
                 context.setPath(backupContext.getPath());
                 context.setBufferSize(backupContext.getBufferSize());
                 context.setCacheInfoList(backupContext.getCacheInfoList());
-                context.setBufferType(backupContext.getBufferType());
                 backupTool.updateUIFromContext();
             } catch (JAXBException ex) {
                 ex.printStackTrace();

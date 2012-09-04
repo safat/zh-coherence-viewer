@@ -6,12 +6,6 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.io.File;
 
-/**
- * Created by IntelliJ IDEA.
- * User: Живко
- * Date: 19.03.12
- * Time: 21:46
- */
 public class ChoosePathAction extends AbstractAction{
     private BackupContext context;
     private JTextField textField;
@@ -37,8 +31,7 @@ public class ChoosePathAction extends AbstractAction{
         }
         fileChooser.setDialogType(context.getAction()== BackupContext.BackupAction.BACKUP
                 ? JFileChooser.SAVE_DIALOG : JFileChooser.OPEN_DIALOG);
-//        fileChooser.setFileSelectionMode(context.getTarget() == BackupContext.Target.FOLDER
-//            ? JFileChooser.DIRECTORIES_ONLY : JFileChooser.FILES_ONLY);
+        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         int ret = fileChooser.showDialog(component.getTopLevelAncestor(), "OK");
         if(ret == JFileChooser.APPROVE_OPTION){
             File target = fileChooser.getSelectedFile();
