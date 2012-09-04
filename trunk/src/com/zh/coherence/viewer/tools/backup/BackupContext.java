@@ -25,9 +25,6 @@ public class BackupContext {
     private int bufferSize = 200;
 
     @XmlAttribute
-    private String bufferType = "Units";
-
-    @XmlAttribute
     private int threads = 2;
 
     @XmlElement
@@ -101,13 +98,5 @@ public class BackupContext {
 
     public void setThreads(int threads) {
         this.threads = threads;
-    }
-
-    public String getBufferType() {
-        return bufferType;
-    }
-
-    public void setBufferType(String bufferType) {
-        this.bufferType = bufferType;
     }
 }

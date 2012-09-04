@@ -16,7 +16,7 @@ Changelog:
 Query:
     added print to text action (Standard query plus output)
 Backup
-    ...
+    save/load backup config
 
 0.3.8
 fixed bugs:

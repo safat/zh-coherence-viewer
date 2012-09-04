@@ -7,13 +7,16 @@ import com.zh.coherence.viewer.utils.icons.IconHelper;
 import com.zh.coherence.viewer.utils.icons.IconType;
 
 import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
 import java.awt.event.ActionEvent;
 
-public class StartAction extends AbstractAction{
+public class StartAction extends AbstractAction {
     private BackupContext context;
+    private AbstractTableModel tableModel;
 
-    public StartAction(BackupContext context) {
+    public StartAction(BackupContext context, AbstractTableModel tableModel) {
         this.context = context;
+        this.tableModel = tableModel;
 
         putValue(Action.NAME, "Start");
         putValue(Action.SMALL_ICON, IconHelper.getInstance().getIcon(IconType.START));
@@ -21,25 +24,32 @@ public class StartAction extends AbstractAction{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        JComponent parent = (JComponent) e.getSource();
-        if(context.getPath() == null || context.getPath().isEmpty()){
+        final JComponent parent = (JComponent) e.getSource();
+        if (context.getPath() == null || context.getPath().isEmpty()) {
             JOptionPane.showMessageDialog(parent, "Path to folder cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        if(context.getAction() == BackupContext.BackupAction.BACKUP){
-            final BackupMaker maker = new BackupMaker(context);
-            Thread thread = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    long time = System.currentTimeMillis();
+        final long time = System.currentTimeMillis();
+        new SwingWorker<Void, Void>() {
+
+            @Override
+            protected Void doInBackground() throws Exception {
+                if (context.getAction() == BackupContext.BackupAction.BACKUP) {
+                    BackupMaker maker = new BackupMaker(context, tableModel);
                     maker.make();
-                    System.err.println("Time: " + (System.currentTimeMillis() - time));
+                } else {
+                    RestoreMaker restoreMaker = new RestoreMaker(context, parent);
+                    restoreMaker.make();
                 }
-            });
-            thread.start();
-        } else {
-            final RestoreMaker restoreMaker = new RestoreMaker(context, parent);
-            restoreMaker.make();
-        }
+
+                return null;
+            }
+
+            @Override
+            protected void done() {
+                super.done();
+                System.err.println("Time: " + (System.currentTimeMillis() - time));
+            }
+        }.execute();
     }
 }
