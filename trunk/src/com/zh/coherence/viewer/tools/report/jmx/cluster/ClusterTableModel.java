@@ -38,7 +38,19 @@ public class ClusterTableModel extends AbstractTableModel {
         }
     }
 
-
+    @Override
+    public Class<?> getColumnClass(int columnIndex) {
+        switch (columnIndex){
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 6:
+                return Integer.class;
+            default:
+                return super.getColumnClass(columnIndex);
+        }
+    }
 
     @Override
     public void fireTableDataChanged() {

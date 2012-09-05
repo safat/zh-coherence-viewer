@@ -75,6 +75,10 @@ public class JMXReport {
         }
     }
 
+    private synchronized void putToMap(Map map, Object key, Object value){
+        map.put(key, value);
+    }
+
     public void refreshReport() {
         long time = System.currentTimeMillis();
         ExecutorService es = Executors.newFixedThreadPool(15);
@@ -124,7 +128,7 @@ public class JMXReport {
                             for (Attribute attribute : attributes) {
                                 cacheMap.put(attribute.getName(), attribute.getValue());
                             }
-                            cacheInfo.put(new CacheKey(id, name), cacheMap);
+                            putToMap(cacheInfo, new CacheKey(id, name), cacheMap);
                         } catch (Exception ex) {
                             ex.printStackTrace();
                         }
@@ -155,7 +159,7 @@ public class JMXReport {
                             for (Attribute attribute : attributes) {
                                 cacheMap.put(attribute.getName(), attribute.getValue());
                             }
-                            nodeInfo.put(id, cacheMap);
+                            putToMap(nodeInfo, id, cacheMap);
                         } catch (Exception ex) {
                             ex.printStackTrace();
                         }
@@ -187,7 +191,7 @@ public class JMXReport {
                             for (Attribute attribute : attributes) {
                                 cacheMap.put(attribute.getName(), attribute.getValue());
                             }
-                            serviceInfo.put(new CacheKey(id, name), cacheMap);
+                            putToMap(serviceInfo, new CacheKey(id, name), cacheMap);
                         } catch (Exception ex) {
                             ex.printStackTrace();
                         }
@@ -207,7 +211,7 @@ public class JMXReport {
             List<Attribute> attributes = server.getAttributes(
                     oName, propertyContainer.getFilteredNames("cluster")).asList();
             for (Attribute attribute : attributes) {
-                clusterJmxInfo.put(attribute.getName(), attribute.getValue());
+                putToMap(clusterJmxInfo, attribute.getName(), attribute.getValue());
             }
         } catch (Exception ex) {
             ex.printStackTrace();
