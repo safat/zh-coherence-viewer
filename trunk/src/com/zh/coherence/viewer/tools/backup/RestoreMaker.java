@@ -8,6 +8,7 @@ import com.tangosol.io.pof.PofInputStream;
 import com.tangosol.net.CacheFactory;
 import com.tangosol.net.CacheService;
 import com.tangosol.net.NamedCache;
+import com.tangosol.util.filter.EntryFilter;
 
 import javax.swing.*;
 import java.io.DataInput;
@@ -105,7 +106,15 @@ public class RestoreMaker {
             if ((dInput instanceof PofInputStream)) {
                 PofInputStream inPof = (PofInputStream) dInput;
                 context.updateCacheProgress(cache.getCacheName());
-                FlushMap map = new FlushMap(context.getBufferSize(), cache);
+                EntryFilter filter = null;
+                if(wrapper.info.getFilter() != null && wrapper.info.getFilter().isEnabled()){
+                    FilterExecutor executor = new FilterExecutor();
+                    Object res = executor.execute(wrapper.info.getFilter());
+                    if(res instanceof EntryFilter){
+                        filter = (EntryFilter) res;
+                    }
+                }
+                FlushMap map = new FlushMap(context.getBufferSize(), cache, filter);
                 map.setContext(context);
                 inPof.getPofReader().readMap(0, map);
                 map.flush();
