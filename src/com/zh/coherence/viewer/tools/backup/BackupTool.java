@@ -33,7 +33,6 @@ public class BackupTool extends JPanel implements CoherenceViewerTool {
     private JTextField pathFiled;
     private JSpinner threads;
     private JSpinner buffer;
-    private JComboBox<String> bufferType;
     //actions
     private ReloadCacheList reloadCacheList;
 
@@ -138,16 +137,19 @@ public class BackupTool extends JPanel implements CoherenceViewerTool {
             @Override
             public void insertUpdate(DocumentEvent e) {
                 context.setPath(pathFiled.getText());
+                reloadCacheList.reload();
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
                 context.setPath(pathFiled.getText());
+                reloadCacheList.reload();
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
                 context.setPath(pathFiled.getText());
+                reloadCacheList.reload();
             }
         });
         folderPanel.add(new JButton(new ChoosePathAction(context, pathFiled)), BorderLayout.EAST);
@@ -159,7 +161,6 @@ public class BackupTool extends JPanel implements CoherenceViewerTool {
         JPanel progressPanel = new JPanel(new TableLayout(new double[][]{
                 {FILL, 2}, {PREFERRED, 2, 35, 5, PREFERRED, 2, 35}
         }));
-//        progressPanel.setBorder(BorderFactory.createTitledBorder("Progress"));
 
         progressPanel.add(new JXTitledSeparator("General", JSeparator.CENTER), "0,0");
         context.generalProgress = new JProgressBar();
