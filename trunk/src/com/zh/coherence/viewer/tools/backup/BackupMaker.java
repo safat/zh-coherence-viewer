@@ -11,12 +11,14 @@ import com.tangosol.util.aggregator.Count;
 import com.zh.coherence.viewer.utils.FileUtils;
 
 import javax.swing.*;
+import javax.swing.Timer;
 import javax.swing.table.AbstractTableModel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.RandomAccessFile;
 import java.lang.reflect.Method;
 import java.util.*;
-import java.util.Timer;
 import java.util.concurrent.*;
 
 public class BackupMaker {
@@ -27,6 +29,9 @@ public class BackupMaker {
         this.context = context;
         this.tableModel = tableModel;
     }
+
+    private long networkStatistic = 0;
+    private long oldNetworkStatistic = 0;
 
     public void make() {
         long globalTime = System.currentTimeMillis();
@@ -63,6 +68,16 @@ public class BackupMaker {
         context.updateGeneralProgress();
 
         ExecutorService threadExecutor = Executors.newFixedThreadPool(context.getThreads());
+        Timer timer = new Timer(2000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                long tmp = networkStatistic;
+                context.getNetworkChartModel().addValue((int)(tmp - oldNetworkStatistic));
+                context.getNetworkChartModel().fireChartChanges();
+                oldNetworkStatistic = tmp;
+            }
+        });
+        timer.start();
         for (final CacheWrapper wrapper : caches) {
             final long startTime = System.currentTimeMillis();
             final CacheHolder cacheHolder = new CacheHolder(wrapper);
@@ -93,6 +108,7 @@ public class BackupMaker {
                     "Done, cache has been saved, size of file: "
                             + FileUtils.convertToStringRepresentation(cacheHolder.getFile().length()), "backup"));
         }
+        timer.stop();
         threadExecutor.shutdown();
         context.logPane.addMessage(new BackupLogEvent(
                 globalTime, "", System.currentTimeMillis(), "Done", "Task has been finished"));
@@ -172,9 +188,11 @@ public class BackupMaker {
                 for (Object entryObj : map.entrySet()) {
                     Map.Entry<Binary, Binary> entry = (Map.Entry<Binary, Binary>) entryObj;
                     byte[] array = entry.getKey().toByteArray();
+                    networkStatistic += array.length;
                     buf.write(array, 1, array.length - 1);
                     array = entry.getValue().toByteArray();
                     buf.write(array, 1, array.length - 1);
+                    networkStatistic += array.length;
                 }
                 buf.flush();
                 context.incrementCacheProgress(wrapper.info.getName(), map.size());

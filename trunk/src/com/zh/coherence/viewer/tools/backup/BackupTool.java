@@ -4,9 +4,8 @@ import com.zh.coherence.viewer.eventlog.EventLogPane;
 import com.zh.coherence.viewer.tools.CoherenceViewerTool;
 import com.zh.coherence.viewer.tools.backup.actions.*;
 import com.zh.coherence.viewer.tools.backup.actions.filter.CacheFilterAction;
-import com.zh.coherence.viewer.utils.icons.IconHelper;
+import com.zh.coherence.viewer.tools.backup.networkchart.NetworkChart;
 import com.zh.coherence.viewer.utils.icons.IconLoader;
-import com.zh.coherence.viewer.utils.icons.IconType;
 import layout.TableLayout;
 import org.jdesktop.swingx.*;
 
@@ -18,8 +17,6 @@ import javax.swing.event.DocumentListener;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 import java.awt.*;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 
 import static layout.TableLayoutConstants.FILL;
 import static layout.TableLayoutConstants.PREFERRED;
@@ -36,7 +33,7 @@ public class BackupTool extends JPanel implements CoherenceViewerTool {
     //actions
     private ReloadCacheList reloadCacheList;
 
-    public BackupTool(BackupContext.BackupAction action) {
+    public BackupTool(final BackupContext.BackupAction action) {
         super(new TableLayout(new double[][]{
                 {2, 400, 2, TableLayout.FILL, 2},
                 {2, PREFERRED, 2, PREFERRED, 5, PREFERRED, 5, PREFERRED, 10, PREFERRED, 5, FILL}
@@ -101,7 +98,7 @@ public class BackupTool extends JPanel implements CoherenceViewerTool {
         });
         threadsPanel.setBorder(BorderFactory.createTitledBorder("Threads"));
 
-        JPanel panel1 = new JPanel(new TableLayout(new double[][]{{120, 2, 120, FILL}, {PREFERRED}}));
+        JPanel panel1 = new JPanel(new TableLayout(new double[][]{{120, 2, 120, FILL}, {50}}));
 
         panel1.add(threadsPanel, "0,0");
 
@@ -119,9 +116,10 @@ public class BackupTool extends JPanel implements CoherenceViewerTool {
         bufferPanel.add(buffer, BorderLayout.CENTER);
 
         panel1.add(bufferPanel, "2,0");
-        JPanel emptyPanel = new JPanel();
-        emptyPanel.setBorder(BorderFactory.createTitledBorder(""));
-        panel1.add(emptyPanel, "3,0");
+//Chart
+        NetworkChart networkChart = new NetworkChart(context.getNetworkChartModel());
+        networkChart.setBorder(BorderFactory.createTitledBorder(""));
+        panel1.add(networkChart, "3,0");
 
         add(panel1, "3, 3");
 
@@ -129,6 +127,7 @@ public class BackupTool extends JPanel implements CoherenceViewerTool {
         JPanel targetPanel = new JPanel(new VerticalLayout(2));
         targetPanel.setBorder(BorderFactory.createTitledBorder("Folder"));
         targetPanel.add(targetRadioGroup);
+
 //path
         JPanel folderPanel = new JPanel(new BorderLayout(2, 0));
         pathFiled = new JTextField();
@@ -137,19 +136,25 @@ public class BackupTool extends JPanel implements CoherenceViewerTool {
             @Override
             public void insertUpdate(DocumentEvent e) {
                 context.setPath(pathFiled.getText());
-                reloadCacheList.reload();
+                reloadCacheList();
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
                 context.setPath(pathFiled.getText());
-                reloadCacheList.reload();
+                reloadCacheList();
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
                 context.setPath(pathFiled.getText());
-                reloadCacheList.reload();
+                reloadCacheList();
+            }
+
+            private void reloadCacheList(){
+                if(action == BackupContext.BackupAction.RESTORE){
+                    reloadCacheList.reload();
+                }
             }
         });
         folderPanel.add(new JButton(new ChoosePathAction(context, pathFiled)), BorderLayout.EAST);
@@ -178,9 +183,9 @@ public class BackupTool extends JPanel implements CoherenceViewerTool {
 
         JButton start = new JButton(new StartAction(context, backupTableModel));
         JPanel startPanel = new JPanel(new TableLayout(new double[][]{
-                {150}, {75}
+                {FILL, 150, FILL}, {55}
         }));
-        startPanel.add(start, "0,0");
+        startPanel.add(start, "1,0");
         add(startPanel, "3,9");
 
         context.logPane = new EventLogPane(new BackupLogRenderer());

@@ -3,6 +3,6 @@
     <user-type-list>
         <include>coherence-pof-config.xml</include>
         <!-- Include your files here -->
-        <include>myPof.xml</include>
+        <!--<include>myPof.xml</include>-->
     </user-type-list>
 </pof-config>
