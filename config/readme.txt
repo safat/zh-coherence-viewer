@@ -17,6 +17,8 @@ Query:
     added print to text action (Standard query plus output)
 Backup
     save/load backup config
+    update UI
+    Be careful backup tool has been changed and doesn't fully tested
 
 0.3.8
 fixed bugs:

@@ -28,7 +28,7 @@
 
     <target name="compile" description="Do the build" depends="init">
         <javac srcdir="${src}" destdir="${classes}" classpathref="base.path"
-               target="1.6"
+               target="1.6" source="1.6"
                debug="true" debuglevel="lines,vars,source"/>
         <copy todir="${classes}">
             <fileset dir="src"

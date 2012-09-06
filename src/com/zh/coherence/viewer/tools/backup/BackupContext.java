@@ -1,6 +1,7 @@
 package com.zh.coherence.viewer.tools.backup;
 
 import com.zh.coherence.viewer.eventlog.EventLogPane;
+import com.zh.coherence.viewer.tools.backup.networkchart.NetworkChartModel;
 
 import javax.swing.*;
 import javax.xml.bind.annotation.*;
@@ -29,6 +30,8 @@ public class BackupContext {
 
     @XmlElement
     private List<CacheInfo> cacheInfoList = new ArrayList<CacheInfo>();
+
+    private NetworkChartModel networkChartModel = new NetworkChartModel();
 
     public BackupContext() {
     }
@@ -98,5 +101,9 @@ public class BackupContext {
 
     public void setThreads(int threads) {
         this.threads = threads;
+    }
+
+    public NetworkChartModel getNetworkChartModel() {
+        return networkChartModel;
     }
 }
