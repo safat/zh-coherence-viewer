@@ -27,6 +27,9 @@ public class OEConfigDataKeeper {
     @XmlElementWrapper(name = "classes")
     private List<String> localClasses;
 
+    @XmlElement
+    private int arrayLimit = 100;
+
     private Set<Class> classes;
 
     public boolean isAnonymous() {
@@ -83,5 +86,13 @@ public class OEConfigDataKeeper {
 
     public void setSynthetic(boolean synthetic) {
         this.synthetic = synthetic;
+    }
+
+    public int getArrayLimit() {
+        return arrayLimit;
+    }
+
+    public void setArrayLimit(int arrayLimit) {
+        this.arrayLimit = arrayLimit;
     }
 }

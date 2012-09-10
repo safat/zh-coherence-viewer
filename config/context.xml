@@ -157,11 +157,16 @@
         <property name="configName" value="Table View"/>
     </bean>
 
+    <bean id="queryTemplateConfig" class="com.zh.coherence.viewer.tools.query.config.template.QueryTemplateConfigPanel">
+        <property name="configName" value="Query template editor"/>
+    </bean>
+
     <bean id="coherenceQueryConfig" class="com.zh.coherence.viewer.tools.query.config.CoherenceQueryConfigPanel">
         <property name="configName" value="Coherence Query"/>
         <property name="children">
             <util:list value-type="com.zh.coherence.viewer.config.ConfigPanel">
-                <ref bean="tableConfig"/>
+                <!--<ref bean="tableConfig"/>-->
+                <ref bean="queryTemplateConfig"/>
             </util:list>
         </property>
     </bean>
@@ -177,7 +182,7 @@
             <util:list value-type="com.zh.coherence.viewer.config.ConfigPanel">
                 <ref bean="objectExplorerConfig"/>
                 <!--<ref bean="jmxReportConfig"/>-->
-                <!--<ref bean="coherenceQueryConfig"/>-->
+                <ref bean="coherenceQueryConfig"/>
 
                 <!-- register your config panel here -->
             </util:list>

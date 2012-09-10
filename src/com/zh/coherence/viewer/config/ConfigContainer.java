@@ -105,7 +105,10 @@ public class ConfigContainer extends JFrame implements InitializingBean {
                     tree.getSelectionModel().setSelectionPath(e.getOldLeadSelectionPath());
                     return;
                 }else{
-                    configPanelContainer.remove(currentPanel.getConfigPanel());
+                    Component component = currentPanel.getConfigPanel();
+                    if(component != null){
+                        configPanelContainer.remove(component);
+                    }
                 }
             }
             Object lastSelected = tree.getLastSelectedPathComponent();

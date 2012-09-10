@@ -1,6 +1,5 @@
 package com.zh.coherence.viewer.tools.query;
 
-import com.tangosol.coherence.dslquery.QueryPlus;
 import com.tangosol.coherence.dsltools.termtrees.Term;
 import com.zh.coherence.viewer.eventlog.EventLogPane;
 import com.zh.coherence.viewer.tableview.CoherenceTableView;
@@ -58,7 +57,6 @@ public class QueryTool extends JXPanel implements CoherenceViewerTool {
 
         JToolBar toolBar = new JToolBar();
         toolBar.add(executeQueryAction);
-        toolBar.add(new HistoryAction(this));
         toolBar.add(new InsertCacheNameAction(this));
         toolBar.addSeparator();
         toolBar.add(new SaveCohQlAction(this));

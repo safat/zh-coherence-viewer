@@ -24,6 +24,8 @@ public class OEConfigPanel extends AbstractConfigPanel implements InitializingBe
     private JCheckBox anonymous = new JCheckBox("Anonymous classes");
     private JCheckBox synthetic = new JCheckBox("Synthetic classes");
 
+    private JSpinner arrayLimit = new JSpinner(new SpinnerNumberModel());
+
     private ClassesListModel listModel = new ClassesListModel();
 
     @Override
@@ -35,6 +37,7 @@ public class OEConfigPanel extends AbstractConfigPanel implements InitializingBe
         manager.getDataKeeper().setArray(array.isSelected());
         manager.getDataKeeper().setAnonymous(anonymous.isSelected());
         manager.getDataKeeper().setSynthetic(synthetic.isSelected());
+        manager.getDataKeeper().setArrayLimit((Integer) arrayLimit.getValue());
         //list
         manager.getDataKeeper().setLocalClasses(listModel.getClasses());
         manager.convertStringListToClasses();
@@ -97,6 +100,8 @@ public class OEConfigPanel extends AbstractConfigPanel implements InitializingBe
         checks.add(array);
         checks.add(anonymous);
         checks.add(synthetic);
+        checks.add(new JSeparator());
+        checks.add(arrayLimit);
 
         config.add(checks, "3,3");
     }
@@ -109,5 +114,6 @@ public class OEConfigPanel extends AbstractConfigPanel implements InitializingBe
         synthetic.setSelected(manager.getDataKeeper().isSynthetic());
         //list
         listModel.setClasses(manager.getDataKeeper().getLocalClasses());
+        arrayLimit.setValue(manager.getDataKeeper().getArrayLimit());
     }
 }

@@ -46,7 +46,6 @@ public class FilterExecutor {
         out.flush();
         try {
             Filter filter = execute(backupFilter);
-            System.err.println("FILTER: " + filter);
             out.write("Fine!\n");
             out.write("Try to execute filter...\n");
             out.flush();

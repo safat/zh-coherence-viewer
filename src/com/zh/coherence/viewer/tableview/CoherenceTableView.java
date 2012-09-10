@@ -20,12 +20,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * Created by IntelliJ IDEA.
- * User: Живко
- * Date: 13.02.12
- * Time: 23:03
- */
 public class CoherenceTableView extends JPanel {
     private JXTable table;
     private TableModel tableModel;
