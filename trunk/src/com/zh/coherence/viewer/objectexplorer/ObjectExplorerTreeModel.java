@@ -53,8 +53,8 @@ public class ObjectExplorerTreeModel extends AbstractTreeTableModel {
                         return ((Collection) subject).size();
                     } else if(subject.getClass().isArray()){
                         int size = Array.getLength(subject);
-                        if(size > 100){
-                            size = 101;
+                        if(size > configManager.getDataKeeper().getArrayLimit()){
+                            size = configManager.getDataKeeper().getArrayLimit() + 1;
                         }
                         return size;
                     } else {
@@ -115,10 +115,10 @@ public class ObjectExplorerTreeModel extends AbstractTreeTableModel {
         if (obj != null) {
             if(obj.getClass().isArray()){
                 int size = Array.getLength(obj);
-                for (int i = 0; i < size && i <= 100; i++){
+                for (int i = 0; i < size && i <= configManager.getDataKeeper().getArrayLimit(); i++){
                     ret.add(new DefaultViewer("["+i+"]", Array.get(obj, i)));
                 }
-                if(size > 100){
+                if(size > configManager.getDataKeeper().getArrayLimit()){
                     ret.add(new DefaultViewer("[...]", null));
                 }
             }else if (obj instanceof Map) {
