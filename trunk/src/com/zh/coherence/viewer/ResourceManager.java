@@ -6,6 +6,7 @@ import com.zh.coherence.viewer.menubar.HelpJMenuBuilder;
 import com.zh.coherence.viewer.tools.ToolManager;
 
 import javax.swing.*;
+import java.util.Properties;
 
 public class ResourceManager {
     private ToolManager toolManager;
