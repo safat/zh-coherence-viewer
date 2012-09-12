@@ -37,6 +37,7 @@ public class QueryTool extends JXPanel implements CoherenceViewerTool {
     private QueryContext context;
     private QueryStatusBar statusBar;
     private EventLogPane eventLogPane;
+    private String templateDir = "config/code_templates";
 
     private QueryEngine queryEngine;
 
@@ -91,10 +92,12 @@ public class QueryTool extends JXPanel implements CoherenceViewerTool {
         });
         RTextScrollPane editorScrollPane = new RTextScrollPane(editor);
         editorScrollPane.setFoldIndicatorEnabled(true);
+        RSyntaxTextArea.setTemplateDirectory(templateDir);
         RSyntaxTextArea.setTemplatesEnabled(true);
-        CodeTemplateManager ctm = RSyntaxTextArea.getCodeTemplateManager();
-        CodeTemplate ct = new StaticCodeTemplate("zc", "select * from 'ch'", null); //todo
-        ctm.addTemplate(ct);
+//        CodeTemplateManager ctm = RSyntaxTextArea.getCodeTemplateManager();
+//        CodeTemplate ct = new StaticCodeTemplate("zc", "select * from 'ch'", null); //todo
+//        ctm.addTemplate(ct);
+
 
         DefaultCompletionProvider provider = new DefaultCompletionProvider();
         ClassLoader cl = getClass().getClassLoader();
@@ -237,5 +240,13 @@ public class QueryTool extends JXPanel implements CoherenceViewerTool {
 
     public QueryEngine getQueryEngine() {
         return queryEngine;
+    }
+
+    public String getTemplateDir() {
+        return templateDir;
+    }
+
+    public void setTemplateDir(String templateDir) {
+        this.templateDir = templateDir;
     }
 }

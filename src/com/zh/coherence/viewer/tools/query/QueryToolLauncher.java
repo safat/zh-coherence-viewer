@@ -17,6 +17,8 @@ public class QueryToolLauncher extends ToolLauncher implements InitializingBean{
 
     private QueryEngine queryEngine;
 
+    private String templateDir;
+
     @Override
     public CoherenceViewerTool newTool() {
         CoherenceTableView tableView = new CoherenceTableView(viewers, viewerMenuBuilder);
@@ -60,5 +62,9 @@ public class QueryToolLauncher extends ToolLauncher implements InitializingBean{
 
     public void setQueryEngine(QueryEngine queryEngine) {
         this.queryEngine = queryEngine;
+    }
+
+    public void setTemplateDir(String templateDir) {
+        this.templateDir = templateDir;
     }
 }
