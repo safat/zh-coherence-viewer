@@ -94,10 +94,6 @@ public class QueryTool extends JXPanel implements CoherenceViewerTool {
         editorScrollPane.setFoldIndicatorEnabled(true);
         RSyntaxTextArea.setTemplateDirectory(templateDir);
         RSyntaxTextArea.setTemplatesEnabled(true);
-//        CodeTemplateManager ctm = RSyntaxTextArea.getCodeTemplateManager();
-//        CodeTemplate ct = new StaticCodeTemplate("zc", "select * from 'ch'", null); //todo
-//        ctm.addTemplate(ct);
-
 
         DefaultCompletionProvider provider = new DefaultCompletionProvider();
         ClassLoader cl = getClass().getClassLoader();

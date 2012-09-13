@@ -13,6 +13,7 @@ public class TemplateListModel extends AbstractListModel {
     private CodeTemplateWrapper[] templates;
 
     public TemplateListModel() {
+        RSyntaxTextArea.setTemplatesEnabled(true);
         RSyntaxTextArea.setTemplateDirectory("config/code_templates");
         reload();
     }
@@ -50,10 +51,10 @@ public class TemplateListModel extends AbstractListModel {
     }
 
     public class CodeTemplateWrapper{
-        public CodeTemplate ct;
+        public StaticCodeTemplate ct;
 
         public CodeTemplateWrapper(CodeTemplate ct) {
-            this.ct = ct;
+            this.ct = (StaticCodeTemplate) ct;
         }
 
         @Override
