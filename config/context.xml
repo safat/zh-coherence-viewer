@@ -104,10 +104,19 @@
     </bean>
 
     <bean id="clusterReportTool" class="com.zh.coherence.viewer.tools.report.jmx.cluster.ClusterReportToolLauncher">
-        <property name="name" value="JMX Statistic"/>
+        <property name="name" value="Cluster report"/>
         <property name="icon">
             <bean class="com.zh.coherence.viewer.utils.icons.IconLoader">
                 <property name="path" value="icons/cluster.png"/>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="chamomileTool" class="com.zh.coherence.viewer.tools.report.jmx.chamomile.ChamomileToolLauncher">
+        <property name="name" value="Chamomile"/>
+        <property name="icon">
+            <bean class="com.zh.coherence.viewer.utils.icons.IconLoader">
+                <property name="path" value="icons/chamomile_16.png"/>
             </bean>
         </property>
     </bean>
@@ -143,6 +152,7 @@
                         <util:list value-type="java.lang.Object">
                             <ref bean="statisticTool"/>
                             <ref bean="clusterReportTool"/>
+                            <ref bean="chamomileTool"/>
                         </util:list>
                     </property>
                 </bean>
