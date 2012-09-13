@@ -25,7 +25,7 @@ public class CreateTemplateAction extends AbstractAction {
     public void actionPerformed(ActionEvent e) {
         Object in = JOptionPane.showInputDialog((Component)e.getSource(), "Input template name", "New Template", JOptionPane.INFORMATION_MESSAGE);
         if(in != null && !in.toString().isEmpty()){
-            CodeTemplate template = new StaticCodeTemplate(in.toString(), "", null);
+            StaticCodeTemplate template = new StaticCodeTemplate(in.toString(), "", null);
             Object selected = listModel.addTemplate(template);
             list.setSelectedValue(selected, true);
         }
