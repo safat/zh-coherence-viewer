@@ -113,10 +113,10 @@
     </bean>
 
     <bean id="chamomileTool" class="com.zh.coherence.viewer.tools.report.jmx.chamomile.ChamomileToolLauncher">
-        <property name="name" value="Chamomile"/>
+        <property name="name" value="Quadratic"/>
         <property name="icon">
             <bean class="com.zh.coherence.viewer.utils.icons.IconLoader">
-                <property name="path" value="icons/chamomile_16.png"/>
+                <property name="path" value="icons/square.png"/>
             </bean>
         </property>
     </bean>
