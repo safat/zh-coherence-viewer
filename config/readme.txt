@@ -12,6 +12,10 @@ How To Configure user POF
 
 Changelog:
 
+0.3.10
+Query:
+    add template replace (CTRL+ALT+SHIFT)
+
 0.3.9
 Query:
     added print to text action (Standard query plus output)

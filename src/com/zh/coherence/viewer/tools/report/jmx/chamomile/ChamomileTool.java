@@ -3,20 +3,13 @@ package com.zh.coherence.viewer.tools.report.jmx.chamomile;
 import com.zh.coherence.viewer.tools.CoherenceViewerTool;
 import com.zh.coherence.viewer.tools.report.jmx.action.AutoRefreshJmxDataAction;
 import com.zh.coherence.viewer.tools.report.jmx.action.RefreshJmxDataAction;
-import com.zh.coherence.viewer.utils.icons.IconLoader;
-import edu.uci.ics.jung.algorithms.layout.CircleLayout;
-import edu.uci.ics.jung.algorithms.layout.Layout;
-import edu.uci.ics.jung.algorithms.layout.RadialTreeLayout;
-import edu.uci.ics.jung.graph.DelegateTree;
-import edu.uci.ics.jung.graph.Forest;
-import edu.uci.ics.jung.graph.Graph;
-import edu.uci.ics.jung.graph.SparseMultigraph;
-import edu.uci.ics.jung.visualization.BasicVisualizationServer;
 import layout.TableLayout;
 import org.jdesktop.swingx.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
@@ -49,51 +42,42 @@ public class ChamomileTool extends JXPanel implements CoherenceViewerTool {
         buttons.add(new JXButton(new RefreshJmxDataAction()), "1,0");
         buttons.add(new JXButton(new AutoRefreshJmxDataAction()), "3,0");
         controlPanel.add(buttons);
+        controlPanel.add(new JXTitledSeparator("<html><b>Preset</b></html>", SwingConstants.HORIZONTAL));
         JXComboBox dataType = new JXComboBox();
         //todo model
         controlPanel.add(dataType);
+        controlPanel.add(new JXTitledSeparator("<html><b>User</b></html>", SwingConstants.HORIZONTAL));
+        JXComboBox userReportType = new JXComboBox();
+        //todo model
+        controlPanel.add(userReportType);
 
-        JSlider zoom = new JSlider(0,500,100);
-        Dictionary<Integer, JComponent> dic = new Hashtable<Integer, JComponent>();
-        dic.put(100, new JLabel("100%"));
-        dic.put(0, new JLabel("0%"));
-        dic.put(250, new JLabel("250%"));
-        dic.put(500, new JLabel("500%"));
-        zoom.setLabelTable(dic);
-        zoom.setPaintLabels(true);
-        zoom.setPaintTrack(true);
-        controlPanel.add(zoom);
+        JXComboBox userReportItem = new JXComboBox();
+        //todo model
+        controlPanel.add(userReportItem);
 
         controlPanel.add(new JXTitledSeparator("<html><b>Label</b></html>", SwingConstants.HORIZONTAL));
+
+        //todo info
+        controlPanel.add(new JXTitledSeparator("<html><b>Info</b></html>", SwingConstants.HORIZONTAL));
+        JTextArea info = new JTextArea();
+        controlPanel.add(info);
+
+        //chart
+        JPanel clusterAveragePanel = new JPanel();
+        controlPanel.add(new JXTitledSeparator("<html><b>Average for the Cluster</b></html>", SwingConstants.HORIZONTAL));
+
+        controlPanel.add(clusterAveragePanel);
+
+
 
         controlPanel.setBorder(BorderFactory.createDashedBorder(Color.GRAY));
         add(controlPanel, BorderLayout.WEST);
 
         //chamomile panel
-        JXPanel chamomilePanel = new JXPanel();
+        JXPanel chamomilePanel = new JXPanel(new BorderLayout());
 
-        Graph<Integer, String> g = new SparseMultigraph<Integer, String>();
-        g.addVertex((Integer)1);
-        g.addVertex((Integer)2);
-        g.addVertex((Integer)3);
-        g.addEdge("Edge-A", 1, 2); // Note that Java 1.5 auto-boxes primitives
-        g.addEdge("Edge-B", 2, 3);
-
-
-        DelegateTree forest = new DelegateTree();
-        forest.setRoot(1);
-        forest.addChild("edge-1", 1, 2);
-        forest.addChild("edge-2", 1, 3);
-        forest.addChild("edge-3", 1, 4);
-        forest.addChild("edge-4", 1, 5);
-
-
-        RadialTreeLayout<Integer, String> layout = new RadialTreeLayout<Integer, String>(forest);
-
-        BasicVisualizationServer<Integer,String> vv = new BasicVisualizationServer<Integer,String>(layout);
-        chamomilePanel.add(vv);
-
-
+        final GraphPanel gp = new GraphPanel();
+        chamomilePanel.add(gp, BorderLayout.CENTER);
         add(chamomilePanel, BorderLayout.CENTER);
     }
 }
