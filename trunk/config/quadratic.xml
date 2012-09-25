@@ -1,0 +1,15 @@
+<xml version="1.0">
+    <quadratic>
+        <item name="Publisher Success Rate" target="node">
+            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.DefaultQuadraticDataProvider">
+                <arg name="path">node/PublisherSuccessRate</arg>
+            </data-provider>
+            <label class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.RangeQuadraticLabel">
+                <arg range="0~0.8" color="-65536"/>
+                <arg range="0.8~0.93" color="-14336"/>
+                <arg range="0.93~0.98" color="-16776961"/>
+                <arg range="0.98~1" color="-16745472"/>
+            </label>
+        </item>
+    </quadratic>
+</xml>
