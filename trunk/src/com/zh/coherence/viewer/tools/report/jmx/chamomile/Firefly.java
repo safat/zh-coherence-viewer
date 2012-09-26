@@ -1,7 +1,5 @@
 package com.zh.coherence.viewer.tools.report.jmx.chamomile;
 
-import layout.TableLayout;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -16,7 +14,7 @@ public class Firefly extends JPanel {
 
     public Firefly(String name) {
         super(new BorderLayout());
-        this.name = name;
+        setName(name);
         initUI();
     }
 
@@ -50,6 +48,7 @@ public class Firefly extends JPanel {
 
     public void setName(String name) {
         this.name = name;
+        updateToolTip();
     }
 
     public Object getValue() {
@@ -59,5 +58,10 @@ public class Firefly extends JPanel {
     public void setValue(Object value) {
         this.value = value;
         valueLabel.setText(String.valueOf(value));
+        updateToolTip();
+    }
+
+    private void updateToolTip(){
+        setToolTipText("Node name: " + name + ", value: " + value);
     }
 }

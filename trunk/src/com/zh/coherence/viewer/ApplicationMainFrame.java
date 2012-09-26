@@ -12,7 +12,7 @@ public class ApplicationMainFrame extends JFrame {
     private ApplicationContext context;
 
     public ApplicationMainFrame() throws HeadlessException {
-        super("ZH Coherence Viewer [0.3.9]");
+        super("ZH Coherence Viewer [0.3.10]");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         context = new ClassPathXmlApplicationContext(new String[]{"context.xml"});
         resourceManager = context.getBean("resourceManager", ResourceManager.class);

@@ -18,10 +18,9 @@ public class RangeQuadraticLabel implements QuadraticLabel {
 
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) {
-        if (QuadraticManager.TAG_ARG.equalsIgnoreCase(qName)) {
-            String[] range = attributes.getValue("range").split("~");
-            String color = attributes.getValue("color");
-            ranges.add(new Range(Double.valueOf(range[0]), Double.parseDouble(range[1]), Color.decode(color)));
+        Range range = RangeHelper.parseRangeTag(qName, attributes);
+        if(range != null){
+            ranges.add(range);
         }
     }
 
@@ -36,8 +35,23 @@ public class RangeQuadraticLabel implements QuadraticLabel {
     }
 
     @Override
-    public Color lightFireflies(Collection<Firefly> fireflies) {
-        return null;
+    public void lightFireflies(Collection<Firefly> fireflies) {
+        Double value;
+        for(Firefly firefly : fireflies){
+            try{
+                value = Double.valueOf(String.valueOf(firefly.getValue()));
+                Color c = null;
+                for(Range range : ranges){
+                    if(range.isInRange(value)){
+                        c = range.color;
+                        break;
+                    }
+                }
+                firefly.setColor(c == null?Color.GRAY:c);
+            }catch (NumberFormatException ex){
+                System.err.println("value is not numeric: " + firefly.getValue());
+            }
+        }
     }
 
     @Override
@@ -46,24 +60,11 @@ public class RangeQuadraticLabel implements QuadraticLabel {
         panel.setBackground(Color.WHITE);
         JLabel label;
         for (Range range : ranges) {
-            label = new JLabel("" + range.firstValue + "-" + range.secondValue, new ColorIcon(range.color), SwingConstants.LEFT);
+            label = new JLabel("" + range.firstValue + " - " + range.secondValue, new ColorIcon(range.color), SwingConstants.LEFT);
             label.setBackground(Color.WHITE);
             panel.add(label);
         }
 
         return panel;
-    }
-
-    private class Range {
-        double firstValue;
-        double secondValue;
-
-        Color color;
-
-        private Range(double firstValue, double secondValue, Color color) {
-            this.firstValue = firstValue;
-            this.secondValue = secondValue;
-            this.color = color;
-        }
     }
 }

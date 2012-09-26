@@ -6,7 +6,7 @@ import java.util.Collection;
 
 public interface QuadraticLabel extends QuadraticTagHandler {
 
-    public Color lightFireflies(Collection<Firefly> fireflies);
+    public void lightFireflies(Collection<Firefly> fireflies);
 
     public JPanel getLabelPanel();
 }
