@@ -1,9 +1,17 @@
+== Plans to 0.3.10 ==
+ * Query
+  * Live templates
+ * JMX Report
+  * new report: Quadratic
+ * Restore backup
+  * dramatically reduced time of restoring
+
 == 0.3.9 ==
  * Query:
-   # added print to text action (Standard query plus output)
+   * added print to text action (Standard query plus output)
  * Backup
-   # save/load backup config
-   # update UI
+   * save/load backup config
+   * update UI
 *_Be careful backup tool has been changed and doesn't fully tested_*
 
 == 0.3.8 ==
