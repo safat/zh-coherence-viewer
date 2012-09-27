@@ -51,7 +51,12 @@ public class CoherenceTableView extends JPanel {
                     ListSelectionModel model = table.getSelectionModel();
                     model.setSelectionInterval(rowNumber, rowNumber);
 
-                    Object value = tableModel.getValueAt(table.getSelectedRow(), table.getSelectedColumn());
+                    int selectRow = table.getSelectedRow();
+                    int selectColumn = table.getSelectedColumn();
+                    int modelRow = table.convertRowIndexToModel(selectRow);
+                    int modelColumn = table.convertColumnIndexToModel(selectColumn);
+
+                    Object value = tableModel.getValueAt(modelRow, modelColumn);
                     JPopupMenu menu = rightButtonMenuBuilder.buildMenu(value, viewers);
                     if (menu.getSubElements().length > 0) {
                         menu.show(e.getComponent(), e.getX(), e.getY());

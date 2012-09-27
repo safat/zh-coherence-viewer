@@ -424,8 +424,8 @@
     </property>
     <property type="STR" target="service" name="StatusHA">
         The High Availability status for this service. The value of MACHINE-SAFE means that all the cluster nodes
-        running on any given machine could be stoppped at once without data loss. The value of NODE-SAFE means that any
-        cluster node could be stoppped without data loss. The value of ENDANGERED indicates that abnormal termination of
+        running on any given machine could be stopped at once without data loss. The value of NODE-SAFE means that any
+        cluster node could be stopped without data loss. The value of ENDANGERED indicates that abnormal termination of
         any cluster node that runs this service may cause data loss.
     </property>
     <property type="BOOL" target="service" name="StorageEnabled">

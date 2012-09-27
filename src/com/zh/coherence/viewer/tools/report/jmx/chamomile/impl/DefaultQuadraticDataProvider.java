@@ -29,7 +29,7 @@ public class DefaultQuadraticDataProvider extends QuadraticDataProvider {
                 data.get(key).setValue(nodeReport.get(key).get(field));
             }
         } else if (TARGET_CACHE.equalsIgnoreCase(path[0]) || TARGET_SERVICE.equalsIgnoreCase(path[0])) {
-            Map<JMXReport.CacheKey, Map<String, Object>> cacheData;// = JMXReport.getInstance().getCacheInfo();
+            Map<JMXReport.CacheKey, Map<String, Object>> cacheData;
             if(TARGET_CACHE.equalsIgnoreCase(path[0])){
                 cacheData = JMXReport.getInstance().getCacheInfo();
             }else{
