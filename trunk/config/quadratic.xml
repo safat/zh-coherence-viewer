@@ -1,5 +1,14 @@
 <xml version="1.0">
     <quadratic>
+        <item name="StatusHA" target="favorites">
+            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.StatusHAQuadraticDataProvider"/>
+            <label class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.StringQuadraticLabel">
+                <arg text="MACHINE-SAFE" color="-16745472"/>
+                <arg text="NODE-SAFE" color="-14336"/>
+                <arg text="ENDANGERED" color="-5111808"/>
+            </label>
+        </item>
+
         <item name="Publisher Success Rate" target="node">
             <data-provider class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.DefaultQuadraticDataProvider">
                 <arg name="path">node/PublisherSuccessRate</arg>
