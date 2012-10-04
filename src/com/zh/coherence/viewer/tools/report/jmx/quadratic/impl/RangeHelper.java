@@ -1,6 +1,6 @@
-package com.zh.coherence.viewer.tools.report.jmx.chamomile.impl;
+package com.zh.coherence.viewer.tools.report.jmx.quadratic.impl;
 
-import com.zh.coherence.viewer.tools.report.jmx.chamomile.QuadraticManager;
+import com.zh.coherence.viewer.tools.report.jmx.quadratic.QuadraticManager;
 import org.xml.sax.Attributes;
 
 import java.awt.*;

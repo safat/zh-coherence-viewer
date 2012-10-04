@@ -1,8 +1,7 @@
 package com.zh.coherence.viewer.tableview.actions;
 
 import com.zh.coherence.viewer.tableview.CoherenceTableView;
-import com.zh.coherence.viewer.utils.icons.IconHelper;
-import com.zh.coherence.viewer.utils.icons.IconType;
+import com.zh.coherence.viewer.utils.icons.IconLoader;
 import jxl.CellView;
 import jxl.Workbook;
 import jxl.format.Border;
@@ -22,19 +21,13 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 import java.util.logging.Level;
 
-/**
- * Created by IntelliJ IDEA.
- * User: Живко
- * Date: 04.04.12
- * Time: 23:04
- */
 public class ExportToExcelAction extends AbstractAction {
     private CoherenceTableView tableView;
 
     public ExportToExcelAction(CoherenceTableView tableView) {
         this.tableView = tableView;
 
-        putValue(Action.SMALL_ICON, IconHelper.getInstance().getIcon(IconType.EXCEL_28));
+        putValue(Action.SMALL_ICON, new IconLoader("icons/excel_icon.jpg"));
         putValue(Action.NAME, "Export to Excel");
     }
 

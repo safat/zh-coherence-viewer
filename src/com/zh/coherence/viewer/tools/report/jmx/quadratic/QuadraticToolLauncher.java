@@ -1,13 +1,13 @@
-package com.zh.coherence.viewer.tools.report.jmx.chamomile;
+package com.zh.coherence.viewer.tools.report.jmx.quadratic;
 
 import com.zh.coherence.viewer.jmx.JMXManager;
 import com.zh.coherence.viewer.tools.CoherenceViewerTool;
 import com.zh.coherence.viewer.tools.ToolLauncher;
 
-public class ChamomileToolLauncher extends ToolLauncher {
+public class QuadraticToolLauncher extends ToolLauncher {
     @Override
     public CoherenceViewerTool newTool() {
-        ChamomileTool tool = new ChamomileTool();
+        QuadraticTool tool = new QuadraticTool();
         return tool;
     }
 

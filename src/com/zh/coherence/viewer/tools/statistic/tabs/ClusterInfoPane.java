@@ -2,8 +2,7 @@ package com.zh.coherence.viewer.tools.statistic.tabs;
 
 import com.zh.coherence.viewer.jmx.JMXManager;
 import com.zh.coherence.viewer.tools.statistic.table.map.MapTableComponent;
-import com.zh.coherence.viewer.utils.icons.IconHelper;
-import com.zh.coherence.viewer.utils.icons.IconType;
+import com.zh.coherence.viewer.utils.icons.IconLoader;
 import layout.TableLayout;
 import org.jdesktop.swingx.JXPanel;
 import org.jdesktop.swingx.JXTitledSeparator;
@@ -22,9 +21,9 @@ public class ClusterInfoPane extends JXPanel implements JmxInfoPane{
                 {5, PREFERRED,2, 150, 2}
         }));
 
-        IconHelper iconHelper = IconHelper.getInstance();
+        Icon icon = new IconLoader("icons/cluster.png");
 
-        add(new JXTitledSeparator("Cluster", SwingConstants.LEFT, iconHelper.getIcon(IconType.CLUSTER)), "1,1");
+        add(new JXTitledSeparator("Cluster", SwingConstants.LEFT, icon), "1,1");
 
         clusterTable = new MapTableComponent();
 

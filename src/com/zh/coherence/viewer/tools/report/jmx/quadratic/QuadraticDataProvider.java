@@ -1,4 +1,4 @@
-package com.zh.coherence.viewer.tools.report.jmx.chamomile;
+package com.zh.coherence.viewer.tools.report.jmx.quadratic;
 
 import com.zh.coherence.viewer.tools.statistic.report.JMXReport;
 

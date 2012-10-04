@@ -1,4 +1,4 @@
-package com.zh.coherence.viewer.tools.report.jmx.chamomile;
+package com.zh.coherence.viewer.tools.report.jmx.quadratic;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;

@@ -1,4 +1,4 @@
-package com.zh.coherence.viewer.tools.report.jmx.chamomile;
+package com.zh.coherence.viewer.tools.report.jmx.quadratic;
 
 public class QuadraticReportItem {
     private String name;

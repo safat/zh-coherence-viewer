@@ -1,4 +1,4 @@
-package com.zh.coherence.viewer.tools.report.jmx.chamomile.impl;
+package com.zh.coherence.viewer.tools.report.jmx.quadratic.impl;
 
 import java.awt.*;
 

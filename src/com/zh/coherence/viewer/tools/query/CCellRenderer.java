@@ -22,8 +22,7 @@
  */
 package com.zh.coherence.viewer.tools.query;
 
-import com.zh.coherence.viewer.utils.icons.IconHelper;
-import com.zh.coherence.viewer.utils.icons.IconType;
+import com.zh.coherence.viewer.utils.icons.IconLoader;
 import org.fife.ui.autocomplete.Completion;
 import org.fife.ui.autocomplete.CompletionCellRenderer;
 import org.fife.ui.autocomplete.FunctionCompletion;
@@ -33,13 +32,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.Serializable;
 
-
-/**
- * The cell renderer used for the C programming language.
- *
- * @author Robert Futrell
- * @version 1.0
- */
 class CCellRenderer extends CompletionCellRenderer {
 
     private Icon keywordIcon;
@@ -51,8 +43,8 @@ class CCellRenderer extends CompletionCellRenderer {
      * Constructor.
      */
     public CCellRenderer() {
-        keywordIcon = IconHelper.getInstance().getIcon(IconType.KEYWORD);
-        functionIcon = IconHelper.getInstance().getIcon(IconType.FUNCTION);
+        keywordIcon = new IconLoader("icons/keyword.png") ;
+        functionIcon = new IconLoader("icons/function.png");
         emptyIcon = new EmptyIcon(16);
     }
 

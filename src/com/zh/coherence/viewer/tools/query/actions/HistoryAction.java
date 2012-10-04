@@ -1,19 +1,12 @@
 package com.zh.coherence.viewer.tools.query.actions;
 
 import com.zh.coherence.viewer.tools.query.QueryTool;
-import com.zh.coherence.viewer.utils.icons.IconHelper;
-import com.zh.coherence.viewer.utils.icons.IconType;
+import com.zh.coherence.viewer.utils.icons.IconLoader;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
-/**
- * Created by IntelliJ IDEA.
- * User: Живко
- * Date: 14.03.12
- * Time: 23:48
- */
 public class HistoryAction extends AbstractAction{
     private QueryTool queryTool;
 
@@ -21,7 +14,7 @@ public class HistoryAction extends AbstractAction{
         this.queryTool = queryTool;
 
         putValue(Action.NAME, "History");
-        putValue(Action.SMALL_ICON, IconHelper.getInstance().getIcon(IconType.CLIPBOARD_TEXT));
+        putValue(Action.SMALL_ICON, new IconLoader("icons/clipboard-text.png"));
     }
 
     @Override

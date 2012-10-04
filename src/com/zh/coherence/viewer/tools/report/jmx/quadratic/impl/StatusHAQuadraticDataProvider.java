@@ -1,6 +1,6 @@
-package com.zh.coherence.viewer.tools.report.jmx.chamomile.impl;
+package com.zh.coherence.viewer.tools.report.jmx.quadratic.impl;
 
-import com.zh.coherence.viewer.tools.report.jmx.chamomile.QuadraticDataProvider;
+import com.zh.coherence.viewer.tools.report.jmx.quadratic.QuadraticDataProvider;
 import com.zh.coherence.viewer.tools.statistic.report.JMXReport;
 import org.xml.sax.Attributes;
 

@@ -2,8 +2,7 @@ package com.zh.coherence.viewer.tools.query.actions;
 
 import com.zh.coherence.viewer.jmx.JMXManager;
 import com.zh.coherence.viewer.tools.query.QueryTool;
-import com.zh.coherence.viewer.utils.icons.IconHelper;
-import com.zh.coherence.viewer.utils.icons.IconType;
+import com.zh.coherence.viewer.utils.icons.IconLoader;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -11,19 +10,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Created by IntelliJ IDEA.
- * User: Живко
- * Date: 06.04.12
- * Time: 0:34
- */
 public class InsertCacheNameAction extends AbstractAction {
     private QueryTool queryTool;
 
     public InsertCacheNameAction(QueryTool queryTool) {
         this.queryTool = queryTool;
 
-        putValue(Action.SMALL_ICON, IconHelper.getInstance().getIcon(IconType.SCRIPTS));
+        putValue(Action.SMALL_ICON, new IconLoader("icons/scripts.png"));
         setEnabled(JMXManager.getInstance().isEnabled());
     }
 

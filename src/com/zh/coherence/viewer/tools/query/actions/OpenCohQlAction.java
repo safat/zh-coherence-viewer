@@ -1,8 +1,7 @@
 package com.zh.coherence.viewer.tools.query.actions;
 
 import com.zh.coherence.viewer.tools.query.QueryTool;
-import com.zh.coherence.viewer.utils.icons.IconHelper;
-import com.zh.coherence.viewer.utils.icons.IconType;
+import com.zh.coherence.viewer.utils.icons.IconLoader;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,19 +9,13 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.FileInputStream;
 
-/**
- * Created by IntelliJ IDEA.
- * User: Живко
- * Date: 26.05.12
- * Time: 16:15
- */
 public class OpenCohQlAction extends AbstractAction {
     private QueryTool tool;
 
     public OpenCohQlAction(QueryTool tool) {
         this.tool = tool;
 
-        putValue(Action.SMALL_ICON, IconHelper.getInstance().getIcon(IconType.FOLDER_OPEN));
+        putValue(Action.SMALL_ICON, new IconLoader("icons/folder-open.png"));
     }
 
     @Override

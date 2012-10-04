@@ -1,4 +1,4 @@
-package com.zh.coherence.viewer.tools.report.jmx.chamomile;
+package com.zh.coherence.viewer.tools.report.jmx.quadratic;
 
 import com.zh.coherence.viewer.tools.CoherenceViewerTool;
 import com.zh.coherence.viewer.tools.report.jmx.action.AutoRefreshJmxDataAction;
@@ -18,7 +18,7 @@ import java.util.Collection;
 import static layout.TableLayoutConstants.FILL;
 import static layout.TableLayoutConstants.PREFERRED;
 
-public class ChamomileTool extends JXPanel implements CoherenceViewerTool, ChangeListener {
+public class QuadraticTool extends JXPanel implements CoherenceViewerTool, ChangeListener {
 
     private GraphPanel gp = new GraphPanel();
 
@@ -37,7 +37,7 @@ public class ChamomileTool extends JXPanel implements CoherenceViewerTool, Chang
         return this;
     }
 
-    public ChamomileTool() {
+    public QuadraticTool() {
         setBackground(Color.WHITE);
     }
 
@@ -123,7 +123,7 @@ public class ChamomileTool extends JXPanel implements CoherenceViewerTool, Chang
         controlPanel.setBorder(BorderFactory.createDashedBorder(Color.GRAY));
         add(controlPanel, BorderLayout.WEST);
 
-        //chamomile panel
+        //quadratic panel
         JXPanel chamomilePanel = new JXPanel(new BorderLayout());
 
         chamomilePanel.add(gp, BorderLayout.CENTER);

@@ -14,7 +14,11 @@ Changelog:
 
 0.3.10
 Query:
-    add template replace (CTRL+ALT+SHIFT)
+    Live templates (CTRL+ALT+SHIFT)
+JMX Report:
+    new report: Quadratic
+Restore backup
+    dramatically reduced time of restoring
 
 0.3.9
 Query:

@@ -112,7 +112,7 @@
         </property>
     </bean>
 
-    <bean id="chamomileTool" class="com.zh.coherence.viewer.tools.report.jmx.chamomile.ChamomileToolLauncher">
+    <bean id="chamomileTool" class="com.zh.coherence.viewer.tools.report.jmx.quadratic.QuadraticToolLauncher">
         <property name="name" value="Quadratic"/>
         <property name="icon">
             <bean class="com.zh.coherence.viewer.utils.icons.IconLoader">

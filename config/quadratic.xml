@@ -1,8 +1,8 @@
 <xml version="1.0">
     <quadratic>
         <item name="StatusHA" target="favorites">
-            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.StatusHAQuadraticDataProvider"/>
-            <label class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.StringQuadraticLabel">
+            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.StatusHAQuadraticDataProvider"/>
+            <label class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.StringQuadraticLabel">
                 <arg text="MACHINE-SAFE" color="-16745472"/>
                 <arg text="NODE-SAFE" color="-14336"/>
                 <arg text="ENDANGERED" color="-5111808"/>
@@ -10,10 +10,10 @@
         </item>
 
         <item name="Publisher Success Rate" target="node">
-            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.DefaultQuadraticDataProvider">
+            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.DefaultQuadraticDataProvider">
                 <arg name="path">node/PublisherSuccessRate</arg>
             </data-provider>
-            <label class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.RangeQuadraticLabel">
+            <label class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.RangeQuadraticLabel">
                 <arg range="0~0.8" color="-5111808"/>
                 <arg range="0.8~0.93" color="-14336"/>
                 <arg range="0.93~0.98" color="-16776961"/>
@@ -22,10 +22,10 @@
         </item>
 
         <item name="Receiver Success Rate" target="node">
-            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.DefaultQuadraticDataProvider">
+            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.DefaultQuadraticDataProvider">
                 <arg name="path">node/ReceiverSuccessRate</arg>
             </data-provider>
-            <label class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.RangeQuadraticLabel">
+            <label class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.RangeQuadraticLabel">
                 <arg range="0~0.8" color="-5111808"/>
                 <arg range="0.8~0.93" color="-14336"/>
                 <arg range="0.93~0.98" color="-16776961"/>
@@ -34,10 +34,10 @@
         </item>
 
         <item name="Packet Delivery Efficiency" target="node">
-            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.DefaultQuadraticDataProvider">
+            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.DefaultQuadraticDataProvider">
                 <arg name="path">node/PacketDeliveryEfficiency</arg>
             </data-provider>
-            <label class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.RangeQuadraticLabel">
+            <label class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.RangeQuadraticLabel">
                 <arg range="0~0.8" color="-5111808"/>
                 <arg range="0.8~0.93" color="-14336"/>
                 <arg range="0.93~0.98" color="-16776961"/>
@@ -46,10 +46,10 @@
         </item>
 
         <item name="Publisher Packet Utilization" target="node">
-            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.DefaultQuadraticDataProvider">
+            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.DefaultQuadraticDataProvider">
                 <arg name="path">node/PublisherPacketUtilization</arg>
             </data-provider>
-            <label class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.RangeQuadraticLabel">
+            <label class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.RangeQuadraticLabel">
                 <arg range="0~0.5" color="-5111808"/>
                 <arg range="0.5~0.7" color="-14336"/>
                 <arg range="0.7~0.9" color="-16776961"/>
@@ -58,10 +58,10 @@
         </item>
 
         <item name="Receiver Packet Utilization" target="node">
-            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.DefaultQuadraticDataProvider">
+            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.DefaultQuadraticDataProvider">
                 <arg name="path">node/ReceiverPacketUtilization</arg>
             </data-provider>
-            <label class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.RangeQuadraticLabel">
+            <label class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.RangeQuadraticLabel">
                 <arg range="0~0.5" color="-5111808"/>
                 <arg range="0.5~0.7" color="-14336"/>
                 <arg range="0.7~0.9" color="-16776961"/>
@@ -70,10 +70,10 @@
         </item>
 
         <item name="Packets Received" target="node">
-            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.DefaultQuadraticDataProvider">
+            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.DefaultQuadraticDataProvider">
                 <arg name="path">node/PacketsReceived</arg>
             </data-provider>
-            <label class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.PercentRangeQuadraticLabel">
+            <label class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.PercentRangeQuadraticLabel">
                 <arg range="80~100" color="-5111808"/>
                 <arg range="60~80" color="-14336"/>
                 <arg range="40~60" color="-11941914"/>
@@ -83,10 +83,10 @@
         </item>
 
         <item name="Packets Repeated" target="node">
-            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.DefaultQuadraticDataProvider">
+            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.DefaultQuadraticDataProvider">
                 <arg name="path">node/PacketsRepeated</arg>
             </data-provider>
-            <label class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.PercentRangeQuadraticLabel">
+            <label class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.PercentRangeQuadraticLabel">
                 <arg range="80~100" color="-5111808"/>
                 <arg range="60~80" color="-14336"/>
                 <arg range="40~60" color="-11941914"/>
@@ -96,10 +96,10 @@
         </item>
 
         <item name="Packets Resent" target="node">
-            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.DefaultQuadraticDataProvider">
+            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.DefaultQuadraticDataProvider">
                 <arg name="path">node/PacketsResent</arg>
             </data-provider>
-            <label class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.PercentRangeQuadraticLabel">
+            <label class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.PercentRangeQuadraticLabel">
                 <arg range="80~100" color="-5111808"/>
                 <arg range="60~80" color="-14336"/>
                 <arg range="40~60" color="-11941914"/>
@@ -109,10 +109,10 @@
         </item>
 
         <item name="Packets Sent" target="node">
-            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.DefaultQuadraticDataProvider">
+            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.DefaultQuadraticDataProvider">
                 <arg name="path">node/PacketsSent</arg>
             </data-provider>
-            <label class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.PercentRangeQuadraticLabel">
+            <label class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.PercentRangeQuadraticLabel">
                 <arg range="80~100" color="-5111808"/>
                 <arg range="60~80" color="-14336"/>
                 <arg range="40~60" color="-11941914"/>
@@ -122,10 +122,10 @@
         </item>
 
         <item name="Priority" target="node">
-            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.DefaultQuadraticDataProvider">
+            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.DefaultQuadraticDataProvider">
                 <arg name="path">node/Priority</arg>
             </data-provider>
-            <label class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.PercentRangeQuadraticLabel">
+            <label class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.PercentRangeQuadraticLabel">
                 <arg range="80~100" color="-5111808"/>
                 <arg range="60~80" color="-14336"/>
                 <arg range="40~60" color="-11941914"/>
@@ -135,10 +135,10 @@
         </item>
 
         <item name="Send Queue Size" target="node">
-            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.DefaultQuadraticDataProvider">
+            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.DefaultQuadraticDataProvider">
                 <arg name="path">node/SendQueueSize</arg>
             </data-provider>
-            <label class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.PercentRangeQuadraticLabel">
+            <label class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.PercentRangeQuadraticLabel">
                 <arg range="80~100" color="-5111808"/>
                 <arg range="60~80" color="-14336"/>
                 <arg range="40~60" color="-11941914"/>
@@ -148,10 +148,10 @@
         </item>
 
         <item name="Size" target="cache">
-            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.DefaultQuadraticDataProvider">
+            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.DefaultQuadraticDataProvider">
                 <arg name="path">cache/Size</arg>
             </data-provider>
-            <label class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.PercentRangeQuadraticLabel">
+            <label class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.PercentRangeQuadraticLabel">
                 <arg range="80~100" color="-5111808"/>
                 <arg range="60~80" color="-14336"/>
                 <arg range="40~60" color="-11941914"/>
@@ -161,10 +161,10 @@
         </item>
 
         <item name="Average Get Millis" target="cache">
-            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.DefaultQuadraticDataProvider">
+            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.DefaultQuadraticDataProvider">
                 <arg name="path">cache/AverageGetMillis</arg>
             </data-provider>
-            <label class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.PercentRangeQuadraticLabel">
+            <label class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.PercentRangeQuadraticLabel">
                 <arg range="80~100" color="-5111808"/>
                 <arg range="60~80" color="-14336"/>
                 <arg range="40~60" color="-11941914"/>
@@ -174,10 +174,10 @@
         </item>
 
         <item name="Average Hit Millis" target="cache">
-            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.DefaultQuadraticDataProvider">
+            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.DefaultQuadraticDataProvider">
                 <arg name="path">cache/AverageHitMillis</arg>
             </data-provider>
-            <label class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.PercentRangeQuadraticLabel">
+            <label class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.PercentRangeQuadraticLabel">
                 <arg range="80~100" color="-5111808"/>
                 <arg range="60~80" color="-14336"/>
                 <arg range="40~60" color="-11941914"/>
@@ -187,10 +187,10 @@
         </item>
 
         <item name="Average Miss Millis" target="cache">
-            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.DefaultQuadraticDataProvider">
+            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.DefaultQuadraticDataProvider">
                 <arg name="path">cache/AverageMissMillis</arg>
             </data-provider>
-            <label class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.PercentRangeQuadraticLabel">
+            <label class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.PercentRangeQuadraticLabel">
                 <arg range="80~100" color="-5111808"/>
                 <arg range="60~80" color="-14336"/>
                 <arg range="40~60" color="-11941914"/>
@@ -200,10 +200,10 @@
         </item>
 
         <item name="Average Put Millis" target="cache">
-            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.DefaultQuadraticDataProvider">
+            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.DefaultQuadraticDataProvider">
                 <arg name="path">cache/AveragePutMillis</arg>
             </data-provider>
-            <label class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.PercentRangeQuadraticLabel">
+            <label class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.PercentRangeQuadraticLabel">
                 <arg range="80~100" color="-5111808"/>
                 <arg range="60~80" color="-14336"/>
                 <arg range="40~60" color="-11941914"/>
@@ -213,10 +213,10 @@
         </item>
 
         <item name="Total Gets" target="cache">
-            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.DefaultQuadraticDataProvider">
+            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.DefaultQuadraticDataProvider">
                 <arg name="path">cache/TotalGets</arg>
             </data-provider>
-            <label class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.PercentRangeQuadraticLabel">
+            <label class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.PercentRangeQuadraticLabel">
                 <arg range="80~100" color="-5111808"/>
                 <arg range="60~80" color="-14336"/>
                 <arg range="40~60" color="-11941914"/>
@@ -226,10 +226,10 @@
         </item>
 
         <item name="Total Gets Millis" target="cache">
-            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.DefaultQuadraticDataProvider">
+            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.DefaultQuadraticDataProvider">
                 <arg name="path">cache/TotalGetsMillis</arg>
             </data-provider>
-            <label class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.PercentRangeQuadraticLabel">
+            <label class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.PercentRangeQuadraticLabel">
                 <arg range="80~100" color="-5111808"/>
                 <arg range="60~80" color="-14336"/>
                 <arg range="40~60" color="-11941914"/>
@@ -239,10 +239,10 @@
         </item>
 
         <item name="Total Puts" target="cache">
-            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.DefaultQuadraticDataProvider">
+            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.DefaultQuadraticDataProvider">
                 <arg name="path">cache/TotalPuts</arg>
             </data-provider>
-            <label class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.PercentRangeQuadraticLabel">
+            <label class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.PercentRangeQuadraticLabel">
                 <arg range="80~100" color="-5111808"/>
                 <arg range="60~80" color="-14336"/>
                 <arg range="40~60" color="-11941914"/>
@@ -252,10 +252,10 @@
         </item>
 
         <item name="Total Puts Millis" target="cache">
-            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.DefaultQuadraticDataProvider">
+            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.DefaultQuadraticDataProvider">
                 <arg name="path">cache/TotalPutsMillis</arg>
             </data-provider>
-            <label class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.PercentRangeQuadraticLabel">
+            <label class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.PercentRangeQuadraticLabel">
                 <arg range="80~100" color="-5111808"/>
                 <arg range="60~80" color="-14336"/>
                 <arg range="40~60" color="-11941914"/>
@@ -265,10 +265,10 @@
         </item>
 
         <item name="Owned Partitions Primary" target="service">
-            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.DefaultQuadraticDataProvider">
+            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.DefaultQuadraticDataProvider">
                 <arg name="path">service/OwnedPartitionsPrimary</arg>
             </data-provider>
-            <label class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.PercentRangeQuadraticLabel">
+            <label class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.PercentRangeQuadraticLabel">
                 <arg range="80~100" color="-5111808"/>
                 <arg range="60~80" color="-14336"/>
                 <arg range="40~60" color="-11941914"/>
@@ -278,10 +278,10 @@
         </item>
 
         <item name="Partitions Endangered" target="service">
-            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.DefaultQuadraticDataProvider">
+            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.DefaultQuadraticDataProvider">
                 <arg name="path">service/PartitionsEndangered</arg>
             </data-provider>
-            <label class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.PercentRangeQuadraticLabel">
+            <label class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.PercentRangeQuadraticLabel">
                 <arg range="80~100" color="-5111808"/>
                 <arg range="60~80" color="-14336"/>
                 <arg range="40~60" color="-11941914"/>
@@ -291,10 +291,10 @@
         </item>
 
         <item name="Partitions Unbalanced" target="service">
-            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.DefaultQuadraticDataProvider">
+            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.DefaultQuadraticDataProvider">
                 <arg name="path">service/PartitionsUnbalanced</arg>
             </data-provider>
-            <label class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.PercentRangeQuadraticLabel">
+            <label class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.PercentRangeQuadraticLabel">
                 <arg range="80~100" color="-5111808"/>
                 <arg range="60~80" color="-14336"/>
                 <arg range="40~60" color="-11941914"/>
@@ -304,10 +304,10 @@
         </item>
 
         <item name="Request Average Duration" target="service">
-            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.DefaultQuadraticDataProvider">
+            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.DefaultQuadraticDataProvider">
                 <arg name="path">service/RequestAverageDuration</arg>
             </data-provider>
-            <label class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.PercentRangeQuadraticLabel">
+            <label class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.PercentRangeQuadraticLabel">
                 <arg range="80~100" color="-5111808"/>
                 <arg range="60~80" color="-14336"/>
                 <arg range="40~60" color="-11941914"/>
@@ -317,10 +317,10 @@
         </item>
 
         <item name="Request Max Duration" target="service">
-            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.DefaultQuadraticDataProvider">
+            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.DefaultQuadraticDataProvider">
                 <arg name="path">service/RequestMaxDuration</arg>
             </data-provider>
-            <label class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.PercentRangeQuadraticLabel">
+            <label class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.PercentRangeQuadraticLabel">
                 <arg range="80~100" color="-5111808"/>
                 <arg range="60~80" color="-14336"/>
                 <arg range="40~60" color="-11941914"/>
@@ -330,10 +330,10 @@
         </item>
 
         <item name="Request Pending Count" target="service">
-            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.DefaultQuadraticDataProvider">
+            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.DefaultQuadraticDataProvider">
                 <arg name="path">service/RequestPendingCount</arg>
             </data-provider>
-            <label class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.PercentRangeQuadraticLabel">
+            <label class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.PercentRangeQuadraticLabel">
                 <arg range="80~100" color="-5111808"/>
                 <arg range="60~80" color="-14336"/>
                 <arg range="40~60" color="-11941914"/>
@@ -343,10 +343,10 @@
         </item>
 
         <item name="Request Pending Duration" target="service">
-            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.DefaultQuadraticDataProvider">
+            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.DefaultQuadraticDataProvider">
                 <arg name="path">service/RequestPendingDuration</arg>
             </data-provider>
-            <label class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.PercentRangeQuadraticLabel">
+            <label class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.PercentRangeQuadraticLabel">
                 <arg range="80~100" color="-5111808"/>
                 <arg range="60~80" color="-14336"/>
                 <arg range="40~60" color="-11941914"/>
@@ -356,10 +356,10 @@
         </item>
 
         <item name="Request Timeout Count" target="service">
-            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.DefaultQuadraticDataProvider">
+            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.DefaultQuadraticDataProvider">
                 <arg name="path">service/RequestTimeoutCount</arg>
             </data-provider>
-            <label class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.PercentRangeQuadraticLabel">
+            <label class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.PercentRangeQuadraticLabel">
                 <arg range="80~100" color="-5111808"/>
                 <arg range="60~80" color="-14336"/>
                 <arg range="40~60" color="-11941914"/>
@@ -369,10 +369,10 @@
         </item>
 
         <item name="Request Total Count" target="service">
-            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.DefaultQuadraticDataProvider">
+            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.DefaultQuadraticDataProvider">
                 <arg name="path">service/RequestTotalCount</arg>
             </data-provider>
-            <label class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.PercentRangeQuadraticLabel">
+            <label class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.PercentRangeQuadraticLabel">
                 <arg range="80~100" color="-5111808"/>
                 <arg range="60~80" color="-14336"/>
                 <arg range="40~60" color="-11941914"/>
@@ -382,10 +382,10 @@
         </item>
 
         <item name="Task Average Duration" target="service">
-            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.DefaultQuadraticDataProvider">
+            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.DefaultQuadraticDataProvider">
                 <arg name="path">service/TaskAverageDuration</arg>
             </data-provider>
-            <label class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.PercentRangeQuadraticLabel">
+            <label class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.PercentRangeQuadraticLabel">
                 <arg range="80~100" color="-5111808"/>
                 <arg range="60~80" color="-14336"/>
                 <arg range="40~60" color="-11941914"/>
@@ -395,10 +395,10 @@
         </item>
 
         <item name="Task Timeout Count" target="service">
-            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.DefaultQuadraticDataProvider">
+            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.DefaultQuadraticDataProvider">
                 <arg name="path">service/TaskTimeoutCount</arg>
             </data-provider>
-            <label class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.PercentRangeQuadraticLabel">
+            <label class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.PercentRangeQuadraticLabel">
                 <arg range="80~100" color="-5111808"/>
                 <arg range="60~80" color="-14336"/>
                 <arg range="40~60" color="-11941914"/>
@@ -408,10 +408,10 @@
         </item>
 
         <item name="Thread Abandoned Count" target="service">
-            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.DefaultQuadraticDataProvider">
+            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.DefaultQuadraticDataProvider">
                 <arg name="path">service/ThreadAbandonedCount</arg>
             </data-provider>
-            <label class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.PercentRangeQuadraticLabel">
+            <label class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.PercentRangeQuadraticLabel">
                 <arg range="80~100" color="-5111808"/>
                 <arg range="60~80" color="-14336"/>
                 <arg range="40~60" color="-11941914"/>
@@ -421,10 +421,10 @@
         </item>
 
         <item name="Thread Average Active Count" target="service">
-            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.DefaultQuadraticDataProvider">
+            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.DefaultQuadraticDataProvider">
                 <arg name="path">service/ThreadAverageActiveCount</arg>
             </data-provider>
-            <label class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.PercentRangeQuadraticLabel">
+            <label class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.PercentRangeQuadraticLabel">
                 <arg range="80~100" color="-5111808"/>
                 <arg range="60~80" color="-14336"/>
                 <arg range="40~60" color="-11941914"/>
@@ -434,10 +434,10 @@
         </item>
 
         <item name="Thread Idle Count" target="service">
-            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.DefaultQuadraticDataProvider">
+            <data-provider class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.DefaultQuadraticDataProvider">
                 <arg name="path">service/ThreadIdleCount</arg>
             </data-provider>
-            <label class="com.zh.coherence.viewer.tools.report.jmx.chamomile.impl.PercentRangeQuadraticLabel">
+            <label class="com.zh.coherence.viewer.tools.report.jmx.quadratic.impl.PercentRangeQuadraticLabel">
                 <arg range="80~100" color="-5111808"/>
                 <arg range="60~80" color="-14336"/>
                 <arg range="40~60" color="-11941914"/>
