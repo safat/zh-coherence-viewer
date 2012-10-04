@@ -1,9 +1,9 @@
-package com.zh.coherence.viewer.tools.report.jmx.chamomile.impl;
+package com.zh.coherence.viewer.tools.report.jmx.quadratic.impl;
 
-import com.zh.coherence.viewer.tools.report.jmx.chamomile.ColorIcon;
-import com.zh.coherence.viewer.tools.report.jmx.chamomile.Firefly;
-import com.zh.coherence.viewer.tools.report.jmx.chamomile.QuadraticLabel;
-import com.zh.coherence.viewer.tools.report.jmx.chamomile.QuadraticManager;
+import com.zh.coherence.viewer.tools.report.jmx.quadratic.ColorIcon;
+import com.zh.coherence.viewer.tools.report.jmx.quadratic.Firefly;
+import com.zh.coherence.viewer.tools.report.jmx.quadratic.QuadraticLabel;
+import com.zh.coherence.viewer.tools.report.jmx.quadratic.QuadraticManager;
 import org.xml.sax.Attributes;
 
 import javax.swing.*;

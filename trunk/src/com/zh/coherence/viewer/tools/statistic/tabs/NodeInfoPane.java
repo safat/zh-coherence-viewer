@@ -6,7 +6,7 @@ import com.zh.coherence.viewer.tools.statistic.report.TreeTableStringValue;
 import com.zh.coherence.viewer.tools.statistic.report.nodeinfo.MachineInfo;
 import com.zh.coherence.viewer.tools.statistic.report.nodeinfo.NodeInfo;
 import com.zh.coherence.viewer.utils.FileUtils;
-import com.zh.coherence.viewer.utils.icons.IconHelper;
+import com.zh.coherence.viewer.utils.icons.IconLoader;
 import org.jdesktop.swingx.JXPanel;
 import org.jdesktop.swingx.JXTreeTable;
 import org.jdesktop.swingx.renderer.DefaultTreeRenderer;
@@ -52,11 +52,11 @@ public class NodeInfoPane extends JXPanel {
             @Override
             public Icon getIcon(Object o) {
                 if(o instanceof NodeReport){
-                    return IconHelper.getInstance().getIcon(com.zh.coherence.viewer.utils.icons.IconType.REPORT);
+                    return new IconLoader("icons/report.png");
                 }else if(o instanceof MachineInfo){
-                    return IconHelper.getInstance().getIcon(com.zh.coherence.viewer.utils.icons.IconType.SERVER_NETWORK);
+                    return new IconLoader("icons/server-network.png");
                 }else if(o instanceof NodeInfo){
-                    return IconHelper.getInstance().getIcon(com.zh.coherence.viewer.utils.icons.IconType.NODE);
+                    return new IconLoader("icons/node.png");
                 }
                 return null;
             }

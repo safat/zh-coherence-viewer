@@ -6,7 +6,7 @@ import com.zh.coherence.viewer.tools.statistic.report.TreeTableStringValue;
 import com.zh.coherence.viewer.tools.statistic.report.cache.CacheInfo;
 import com.zh.coherence.viewer.tools.statistic.report.cache.CacheNodeInfo;
 import com.zh.coherence.viewer.utils.FileUtils;
-import com.zh.coherence.viewer.utils.icons.IconHelper;
+import com.zh.coherence.viewer.utils.icons.IconLoader;
 import org.jdesktop.swingx.JXPanel;
 import org.jdesktop.swingx.JXTreeTable;
 import org.jdesktop.swingx.renderer.DefaultTreeRenderer;
@@ -51,11 +51,11 @@ public class CachesInfoPane extends JXPanel {
             @Override
             public Icon getIcon(Object o) {
                 if(o instanceof CacheReport){
-                    return IconHelper.getInstance().getIcon(com.zh.coherence.viewer.utils.icons.IconType.REPORT);
+                    return new IconLoader("icons/report.png");
                 }else if(o instanceof CacheInfo){
-                    return IconHelper.getInstance().getIcon(com.zh.coherence.viewer.utils.icons.IconType.DATABASE);
+                    return new IconLoader("icons/database.png");
                 }else if(o instanceof CacheNodeInfo){
-                    return IconHelper.getInstance().getIcon(com.zh.coherence.viewer.utils.icons.IconType.NODE);
+                    return new IconLoader("icons/node.png");
                 }
                 return null;
             }

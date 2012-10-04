@@ -1,7 +1,6 @@
 package com.zh.coherence.viewer.tableview.actions;
 
-import com.zh.coherence.viewer.utils.icons.IconHelper;
-import com.zh.coherence.viewer.utils.icons.IconType;
+import com.zh.coherence.viewer.utils.icons.IconLoader;
 import org.jdesktop.swingx.JXTable;
 import org.jdesktop.swingx.decorator.Highlighter;
 import org.jdesktop.swingx.decorator.HighlighterFactory;
@@ -9,15 +8,9 @@ import org.jdesktop.swingx.decorator.HighlighterFactory;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
-/**
- * Created by IntelliJ IDEA.
- * User: Живко
- * Date: 14.03.12
- * Time: 22:06
- */
 public class TableHighlighterAction extends AbstractAction {
-    private Icon yellow = IconHelper.getInstance().getIcon(IconType.YELLOW_HINT);
-    private Icon white = IconHelper.getInstance().getIcon(IconType.WHITE_HINT);
+    private Icon yellow = new IconLoader("icons/yellow-hint-icon.png");
+    private Icon white = new IconLoader("icons/white-hint-icon.png");
     private Highlighter highlighter = HighlighterFactory.createAlternateStriping();
 
     private JToggleButton button;

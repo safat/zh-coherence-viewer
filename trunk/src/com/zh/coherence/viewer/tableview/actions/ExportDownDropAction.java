@@ -1,18 +1,11 @@
 package com.zh.coherence.viewer.tableview.actions;
 
 import com.zh.coherence.viewer.tableview.CoherenceTableView;
-import com.zh.coherence.viewer.utils.icons.IconHelper;
-import com.zh.coherence.viewer.utils.icons.IconType;
+import com.zh.coherence.viewer.utils.icons.IconLoader;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
-/**
- * Created by IntelliJ IDEA.
- * User: Живко
- * Date: 04.04.12
- * Time: 22:50
- */
 public class ExportDownDropAction extends AbstractAction{
     private CoherenceTableView tableView;
     private JPopupMenu menu;
@@ -24,7 +17,7 @@ public class ExportDownDropAction extends AbstractAction{
         menu.add(new ExportToExcelAction(tableView));
         menu.add(new ExportToCsvAction(tableView));
 
-        putValue(Action.SMALL_ICON, IconHelper.getInstance().getIcon(IconType.SAVE));
+        putValue(Action.SMALL_ICON, new IconLoader("icons/save.png"));
     }
 
     @Override

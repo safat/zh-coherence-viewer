@@ -3,8 +3,7 @@ package com.zh.coherence.viewer.tools.backup.actions;
 import com.zh.coherence.viewer.tools.backup.BackupContext;
 import com.zh.coherence.viewer.tools.backup.BackupMaker;
 import com.zh.coherence.viewer.tools.backup.RestoreMaker;
-import com.zh.coherence.viewer.utils.icons.IconHelper;
-import com.zh.coherence.viewer.utils.icons.IconType;
+import com.zh.coherence.viewer.utils.icons.IconLoader;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
@@ -19,7 +18,7 @@ public class StartAction extends AbstractAction {
         this.tableModel = tableModel;
 
         putValue(Action.NAME, "Start");
-        putValue(Action.SMALL_ICON, IconHelper.getInstance().getIcon(IconType.START));
+        putValue(Action.SMALL_ICON, new IconLoader("icons/start-icon.png"));
     }
 
     @Override

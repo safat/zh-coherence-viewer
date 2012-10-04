@@ -1,8 +1,7 @@
 package com.zh.coherence.viewer.tools.backup.actions;
 
 import com.zh.coherence.viewer.tools.backup.BackupTableModel;
-import com.zh.coherence.viewer.utils.icons.IconHelper;
-import com.zh.coherence.viewer.utils.icons.IconType;
+import com.zh.coherence.viewer.utils.icons.IconLoader;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -13,7 +12,7 @@ public class UnCheckAllCachesAction extends AbstractAction {
     public UnCheckAllCachesAction(BackupTableModel model) {
         this.model = model;
 
-        putValue(Action.SMALL_ICON, IconHelper.getInstance().getIcon(IconType.UN_CHECK_ALL));
+        putValue(Action.SMALL_ICON, new IconLoader("icons/uncheck.png"));
     }
 
     @Override

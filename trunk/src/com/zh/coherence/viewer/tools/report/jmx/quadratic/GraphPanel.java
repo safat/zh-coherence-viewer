@@ -1,4 +1,4 @@
-package com.zh.coherence.viewer.tools.report.jmx.chamomile;
+package com.zh.coherence.viewer.tools.report.jmx.quadratic;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,7 +21,6 @@ public class GraphPanel extends JPanel {
         add(carrier);
 
         int columns = (int) Math.floor(Math.sqrt(list.size()));
-        System.err.println("columns: " + columns);
         gridLayout.setColumns(columns);
         gridLayout.setRows(list.size() / columns);
         updateUI();

@@ -1,8 +1,7 @@
 package com.zh.coherence.viewer.connection;
 
 import com.zh.coherence.viewer.jmx.JMXManager;
-import com.zh.coherence.viewer.utils.icons.IconHelper;
-import com.zh.coherence.viewer.utils.icons.IconType;
+import com.zh.coherence.viewer.utils.icons.IconLoader;
 import layout.TableLayout;
 import org.jdesktop.swingx.JXHeader;
 
@@ -43,8 +42,7 @@ public class ConnectionDialog extends JDialog {
         };
         JPanel pane = new JPanel(new TableLayout(layout));
 
-        JXHeader loginHeader = new JXHeader("Login",
-                "Login to the Coherence server", IconHelper.getInstance().getIcon(IconType.LOGIN));
+        JXHeader loginHeader = new JXHeader("Login", "Login to the Coherence server", new IconLoader("icons/login.png"));
 
         pane.add(loginHeader, "1,1,3,1");
         pane.add(new JLabel("Connection's name"), "1, 2");

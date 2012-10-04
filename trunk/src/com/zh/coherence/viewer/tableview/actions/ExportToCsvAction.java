@@ -2,8 +2,7 @@ package com.zh.coherence.viewer.tableview.actions;
 
 import com.csvreader.CsvWriter;
 import com.zh.coherence.viewer.tableview.CoherenceTableView;
-import com.zh.coherence.viewer.utils.icons.IconHelper;
-import com.zh.coherence.viewer.utils.icons.IconType;
+import com.zh.coherence.viewer.utils.icons.IconLoader;
 import org.jdesktop.swingx.JXErrorPane;
 import org.jdesktop.swingx.error.ErrorInfo;
 
@@ -15,19 +14,13 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.logging.Level;
 
-/**
- * Created by IntelliJ IDEA.
- * User: Живко
- * Date: 04.04.12
- * Time: 23:10
- */
 public class ExportToCsvAction extends AbstractAction {
     private CoherenceTableView tableView;
 
     public ExportToCsvAction(CoherenceTableView tableView) {
         this.tableView = tableView;
 
-        putValue(Action.SMALL_ICON, IconHelper.getInstance().getIcon(IconType.CSV_28));
+        putValue(Action.SMALL_ICON, new IconLoader("icons/csv_icon.jpg"));
         putValue(Action.NAME, "Export to CSV");
     }
 

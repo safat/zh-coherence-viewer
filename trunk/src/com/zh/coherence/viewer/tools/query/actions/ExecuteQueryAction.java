@@ -4,20 +4,13 @@ import com.zh.coherence.viewer.tools.query.QueryContext;
 import com.zh.coherence.viewer.tools.query.QueryEngine;
 import com.zh.coherence.viewer.tools.query.QueryLogEvent;
 import com.zh.coherence.viewer.tools.query.QueryResult;
-import com.zh.coherence.viewer.utils.icons.IconHelper;
-import com.zh.coherence.viewer.utils.icons.IconType;
+import com.zh.coherence.viewer.utils.icons.IconLoader;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.util.Collection;
 import java.util.Map;
 
-/**
- * Created by IntelliJ IDEA.
- * User: Живко
- * Date: 11.02.12
- * Time: 17:30
- */
 public class ExecuteQueryAction extends AbstractAction {
     private QueryContext context;
     private QueryEngine queryEngine;
@@ -27,7 +20,7 @@ public class ExecuteQueryAction extends AbstractAction {
 
         this.queryEngine = queryEngine;
         putValue(Action.NAME, "Execute");
-        putValue(Action.SMALL_ICON, IconHelper.getInstance().getIcon(IconType.START));
+        putValue(Action.SMALL_ICON, new IconLoader("icons/start-icon.png"));
     }
 
     @Override

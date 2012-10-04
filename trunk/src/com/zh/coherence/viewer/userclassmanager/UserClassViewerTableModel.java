@@ -1,7 +1,6 @@
 package com.zh.coherence.viewer.userclassmanager;
 
-import com.zh.coherence.viewer.utils.icons.IconHelper;
-import com.zh.coherence.viewer.utils.icons.IconType;
+import com.zh.coherence.viewer.utils.icons.IconLoader;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
@@ -24,7 +23,7 @@ public class UserClassViewerTableModel extends AbstractTableModel {
 
     private String headers[] = new String[]{"", "Method name", "Return Type"};
 
-    private Icon icon = IconHelper.getInstance().getIcon(IconType.ASTERISK);
+    private Icon icon = new IconLoader("icons/asterisk.png");
 
     @Override
     public String getColumnName(int column) {

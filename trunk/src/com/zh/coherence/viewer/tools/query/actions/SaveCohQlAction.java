@@ -1,8 +1,7 @@
 package com.zh.coherence.viewer.tools.query.actions;
 
 import com.zh.coherence.viewer.tools.query.QueryTool;
-import com.zh.coherence.viewer.utils.icons.IconHelper;
-import com.zh.coherence.viewer.utils.icons.IconType;
+import com.zh.coherence.viewer.utils.icons.IconLoader;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,7 +21,7 @@ public class SaveCohQlAction extends AbstractAction {
     public SaveCohQlAction(QueryTool tool) {
         this.tool = tool;
 
-        putValue(Action.SMALL_ICON, IconHelper.getInstance().getIcon(IconType.SAVE));
+        putValue(Action.SMALL_ICON, new IconLoader("icons/save.png"));
     }
 
     @Override

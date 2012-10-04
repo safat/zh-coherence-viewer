@@ -1,7 +1,6 @@
-package com.zh.coherence.viewer.tools.report.jmx.chamomile;
+package com.zh.coherence.viewer.tools.report.jmx.quadratic;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.Collection;
 
 public interface QuadraticLabel extends QuadraticTagHandler {

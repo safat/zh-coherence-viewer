@@ -1,15 +1,14 @@
-package com.zh.coherence.viewer.tools.report.jmx.chamomile.impl;
+package com.zh.coherence.viewer.tools.report.jmx.quadratic.impl;
 
-import com.zh.coherence.viewer.tools.report.jmx.chamomile.ColorIcon;
-import com.zh.coherence.viewer.tools.report.jmx.chamomile.Firefly;
-import com.zh.coherence.viewer.tools.report.jmx.chamomile.QuadraticLabel;
+import com.zh.coherence.viewer.tools.report.jmx.quadratic.ColorIcon;
+import com.zh.coherence.viewer.tools.report.jmx.quadratic.Firefly;
+import com.zh.coherence.viewer.tools.report.jmx.quadratic.QuadraticLabel;
 import org.xml.sax.Attributes;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedList;
 import java.util.List;
 
 public class PercentRangeQuadraticLabel implements QuadraticLabel {
@@ -54,7 +53,6 @@ public class PercentRangeQuadraticLabel implements QuadraticLabel {
                 }else {
                     percent = 0;
                 }
-                System.err.println("p: " + percent);
                 Color c = null;
                 for(Range range : ranges){
                     if(range.isInRange(percent)){

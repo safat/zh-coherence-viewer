@@ -6,8 +6,7 @@ import com.zh.coherence.viewer.tools.statistic.report.JMXReport;
 import com.zh.coherence.viewer.tools.statistic.tabs.CachesInfoPane;
 import com.zh.coherence.viewer.tools.statistic.tabs.ClusterInfoPane;
 import com.zh.coherence.viewer.tools.statistic.tabs.NodeInfoPane;
-import com.zh.coherence.viewer.utils.icons.IconHelper;
-import com.zh.coherence.viewer.utils.icons.IconType;
+import com.zh.coherence.viewer.utils.icons.IconLoader;
 import org.jdesktop.swingx.JXHeader;
 import org.jdesktop.swingx.JXPanel;
 
@@ -24,7 +23,7 @@ public class JmxStatisticTool extends JXPanel implements CoherenceViewerTool {
 
         JXHeader header = new JXHeader("JMX Statistic",
                 "Cluster, Memory and Nodes information",
-                IconHelper.getInstance().getIcon(IconType.FILM));
+                new IconLoader("icons/film.png"));
 
         add(header, BorderLayout.NORTH);
 

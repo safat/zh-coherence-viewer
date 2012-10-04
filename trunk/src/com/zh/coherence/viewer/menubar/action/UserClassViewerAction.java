@@ -1,8 +1,7 @@
 package com.zh.coherence.viewer.menubar.action;
 
 import com.zh.coherence.viewer.userclassmanager.UserClassViewer;
-import com.zh.coherence.viewer.utils.icons.IconHelper;
-import com.zh.coherence.viewer.utils.icons.IconType;
+import com.zh.coherence.viewer.utils.icons.IconLoader;
 import com.zh.coherence.viewer.utils.ui.ZHDialogFrame;
 
 import javax.swing.*;
@@ -18,7 +17,7 @@ public class UserClassViewerAction extends AbstractAction{
 
     public UserClassViewerAction() {
         putValue(Action.NAME, "User classes viewer");
-        putValue(Action.SMALL_ICON, IconHelper.getInstance().getIcon(IconType.DOCUMENT_J));
+        putValue(Action.SMALL_ICON, new IconLoader("icons/document-j.png"));
     }
 
     @Override

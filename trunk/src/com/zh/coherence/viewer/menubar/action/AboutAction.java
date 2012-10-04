@@ -1,7 +1,6 @@
 package com.zh.coherence.viewer.menubar.action;
 
-import com.zh.coherence.viewer.utils.icons.IconHelper;
-import com.zh.coherence.viewer.utils.icons.IconType;
+import com.zh.coherence.viewer.utils.icons.IconLoader;
 import com.zh.coherence.viewer.utils.ui.ZHDialog;
 import org.jdesktop.swingx.JXImageView;
 
@@ -20,7 +19,7 @@ public class AboutAction extends AbstractAction{
 
     public AboutAction() {
         putValue(Action.NAME, "About");
-        putValue(Action.SMALL_ICON, IconHelper.getInstance().getIcon(IconType.INFORMATION));
+        putValue(Action.SMALL_ICON, new IconLoader("icons/information.png"));
     }
 
     @Override
