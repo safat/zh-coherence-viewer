@@ -71,8 +71,8 @@ public class BackupTool extends JPanel implements CoherenceViewerTool {
         cacheListPane.setBorder(BorderFactory.createTitledBorder("List of caches"));
         JToolBar cacheListToolBar = new JToolBar();
         cacheListPane.add(cacheListToolBar, BorderLayout.NORTH);
-        cacheListToolBar.add(new AddStringToListAction(context));
-        cacheListToolBar.add(new RemoveElementsFromListAction(context, caches));
+        cacheListToolBar.add(new AddStringToListAction(context, this));
+        cacheListToolBar.add(new RemoveElementsFromListAction(context, caches, this));
         reloadCacheList = new ReloadCacheList(context, backupTableModel);
         cacheListToolBar.add(reloadCacheList);
         cacheListToolBar.addSeparator();
@@ -205,6 +205,10 @@ public class BackupTool extends JPanel implements CoherenceViewerTool {
         pathFiled.setText(context.getPath());
         threads.setValue(context.getThreads());
         buffer.setValue(context.getBufferSize());
+
+    }
+
+    public void updateTable(){
         backupTableModel.fireTableDataChanged();
     }
 }
