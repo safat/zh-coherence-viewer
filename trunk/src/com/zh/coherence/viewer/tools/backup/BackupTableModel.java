@@ -1,5 +1,6 @@
 package com.zh.coherence.viewer.tools.backup;
 
+import com.zh.coherence.viewer.tools.backup.CacheInfo.Status;
 import com.zh.coherence.viewer.utils.icons.IconLoader;
 
 import javax.swing.*;
@@ -10,14 +11,16 @@ public class BackupTableModel extends AbstractTableModel {
     private String directory = null;
     private BackupContext context;
 
-    //icons
+    // icons
     private Icon clock = new IconLoader("icons/clock.png");
+    private Icon eye = new IconLoader("icons/eye.png");
+    private Icon error = new IconLoader("icons/red_bug.png");
     private Icon processed = new IconLoader("icons/tick-white.png");
     private Icon filterIcon = new IconLoader("icons/filter.png");
 
     public void updateCacheFromDir(String dir) {
         if (dir == null) {
-//            clear();
+            // clear();
             directory = null;
             return;
         }
@@ -25,16 +28,16 @@ public class BackupTableModel extends AbstractTableModel {
             return;
         }
         File file = new File(dir);
-//        clear();
+        // clear();
         if (file.isDirectory()) {
             for (File f : file.listFiles()) {
                 if (f.isFile()) {
-//                    addValue(f.getName());
+                    // addValue(f.getName());
                 }
             }
         }
         directory = dir;
-//        sendEvent(null);
+        // sendEvent(null);
     }
 
     public BackupTableModel(BackupContext context) {
@@ -88,7 +91,24 @@ public class BackupTableModel extends AbstractTableModel {
             case 2: {
                 Icon icon;
                 if (cacheInfo.isEnabled()) {
-                    icon = cacheInfo.isProcessed() ? processed : clock;
+                    Status status;
+                    if ((status = cacheInfo.getStatus()) != null) {
+                        switch (status) {
+                            case PROCESSED:
+                                icon = processed;
+                                break;
+                            case WARN:
+                                icon = eye;
+                                break;
+                            case ERROR:
+                                icon = error;
+                                break;
+                            default:
+                                icon = clock;
+                        }
+                    } else {
+                        icon = cacheInfo.isProcessed() ? processed : clock;
+                    }
                 } else {
                     icon = null;
                 }

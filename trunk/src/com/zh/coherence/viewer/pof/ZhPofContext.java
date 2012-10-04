@@ -1,32 +1,45 @@
 package com.zh.coherence.viewer.pof;
 
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.util.Collection;
+import java.util.Date;
+import java.util.Map;
+
 import com.tangosol.io.ReadBuffer;
 import com.tangosol.io.Serializer;
 import com.tangosol.io.WriteBuffer;
 import com.tangosol.io.pof.PofBufferReader;
 import com.tangosol.io.pof.PofBufferWriter;
 import com.tangosol.io.pof.PofContext;
+import com.tangosol.io.pof.PofHelper;
 import com.tangosol.io.pof.PofSerializer;
+import com.tangosol.io.pof.PortableObject;
+import com.tangosol.io.pof.RawDate;
+import com.tangosol.io.pof.RawDateTime;
+import com.tangosol.io.pof.RawDayTimeInterval;
+import com.tangosol.io.pof.RawQuad;
+import com.tangosol.io.pof.RawTime;
+import com.tangosol.io.pof.RawTimeInterval;
+import com.tangosol.io.pof.RawYearMonthInterval;
+import com.tangosol.util.Binary;
+import com.tangosol.util.LongArray;
+import com.tangosol.util.NullImplementation;
 import com.zh.coherence.viewer.pof.xml.XmlPofConfig;
 import com.zh.coherence.viewer.pof.xml.XmlPofContextReader;
+import com.zh.coherence.viewer.tools.backup.MapPersisterTask;
 
-import java.io.IOException;
-import java.util.Map;
-
-/**
- * Created by IntelliJ IDEA.
- * User: Живко
- * Date: 18.02.12
- * Time: 0:13
- */
 public class ZhPofContext implements Serializer, PofContext {
     private XmlPofConfig pofConfig;
 
     public ZhPofContext() {
         String ignoreUserPof = System.getProperty("zh.coherence.viewer.ignoreUserPof");
-        if(ignoreUserPof == null || !Boolean.parseBoolean(ignoreUserPof)){
+        if (ignoreUserPof == null || !Boolean.parseBoolean(ignoreUserPof)) {
             pofConfig = new XmlPofContextReader().readXmlPofConfig("/zh-pof-config.xml");
-        }else{
+        } else {
             pofConfig = new XmlPofContextReader().readXmlPofConfig("coherence-pof-config.xml");
         }
     }
@@ -70,16 +83,13 @@ public class ZhPofContext implements Serializer, PofContext {
 
     @Override
     public boolean isUserType(Object o) {
-        if(o instanceof Map){
-            return false;
-        }
         return isUserType(o.getClass());
     }
 
     @Override
     public boolean isUserType(Class clazz) {
-        Integer type = pofConfig.getTypeByClass(clazz);
-        return type == null || type > 0;
+        Integer type = PofHelper.getPofTypeId(clazz, this);
+        return type == null ? !PofHelper.isIntrinsicPofType(clazz) : type > 0;
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.zh.coherence.viewer.tools.backup;
 
 import com.zh.coherence.viewer.eventlog.EventLogPane;
 import com.zh.coherence.viewer.tools.CoherenceViewerTool;
+import com.zh.coherence.viewer.tools.backup.BackupContext.BackupAction;
 import com.zh.coherence.viewer.tools.backup.actions.*;
 import com.zh.coherence.viewer.tools.backup.actions.filter.CacheFilterAction;
 import com.zh.coherence.viewer.tools.backup.networkchart.NetworkChart;
@@ -88,7 +89,7 @@ public class BackupTool extends JPanel implements CoherenceViewerTool {
 //Threads
         JPanel threadsPanel = new JPanel(new BorderLayout());
         threadsPanel.add(new JLabel(new IconLoader("icons/processor.png")), BorderLayout.WEST);
-        threads = new JSpinner(new SpinnerNumberModel(2, 1, Integer.MAX_VALUE, 1));
+        threads = new JSpinner(new SpinnerNumberModel(context.getThreads(), 1, Integer.MAX_VALUE, 1));
         threadsPanel.add(threads, BorderLayout.CENTER);
         threads.addChangeListener(new ChangeListener() {
             @Override
@@ -104,7 +105,7 @@ public class BackupTool extends JPanel implements CoherenceViewerTool {
 
 //Buffer size
         JPanel bufferPanel = new JPanel(new BorderLayout(2, 0));
-        bufferPanel.setBorder(BorderFactory.createTitledBorder("Buffer"));
+        bufferPanel.setBorder(BorderFactory.createTitledBorder("Buffer(" + (context.getAction().equals(BackupAction.RESTORE) ? "KB" : "units") + ")"));
         buffer = new JSpinner(new SpinnerNumberModel(context.getBufferSize(), 1, Integer.MAX_VALUE, 5));
         buffer.addChangeListener(new ChangeListener() {
             @Override
@@ -151,8 +152,8 @@ public class BackupTool extends JPanel implements CoherenceViewerTool {
                 reloadCacheList();
             }
 
-            private void reloadCacheList(){
-                if(action == BackupContext.BackupAction.RESTORE){
+            private void reloadCacheList() {
+                if (action == BackupContext.BackupAction.RESTORE) {
                     reloadCacheList.reload();
                 }
             }
@@ -200,7 +201,7 @@ public class BackupTool extends JPanel implements CoherenceViewerTool {
         return this;
     }
 
-    public void updateUIFromContext(){
+    public void updateUIFromContext() {
         pathFiled.setText(context.getPath());
         threads.setValue(context.getThreads());
         buffer.setValue(context.getBufferSize());
