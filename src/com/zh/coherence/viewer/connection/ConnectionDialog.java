@@ -19,13 +19,10 @@ import java.io.File;
 import static layout.TableLayoutConstants.FILL;
 import static layout.TableLayoutConstants.PREFERRED;
 
-/**
- * Created by IntelliJ IDEA.
- * User: Живко
- * Date: 11.02.12
- * Time: 19:38
- */
 public class ConnectionDialog extends JDialog {
+    public static final String HOST_PROPERTY = "viewer.connection.host";
+    public static final String PORT_PROPERTY = "viewer.connection.port";
+
     private ServerList serverList = null;
     private JTextField jmxUrl, host, port;
     private JComboBox hostList;
@@ -111,27 +108,29 @@ public class ConnectionDialog extends JDialog {
         return pane;
     }
 
-    private class LoginKeyListener extends KeyAdapter{
+    private class LoginKeyListener extends KeyAdapter {
         @Override
         public void keyReleased(KeyEvent e) {
-            if(e.getKeyCode() == KeyEvent.VK_ENTER){
+            if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                 login();
             }
         }
     }
 
-    private void login(){
+    private void login() {
         CoherenceConfigGenerator generator = new CoherenceConfigGenerator();
+        System.setProperty(HOST_PROPERTY, host.getText());
+        System.setProperty(PORT_PROPERTY, port.getText());
         generator.setupExtendConfig(host.getText(), port.getText());
-        if(serverList == null){
+        if (serverList == null) {
             serverList = new ServerList();
         }
         //save data
         ServerConfig config;
         Object obj = hostList.getSelectedItem();
-        if(obj instanceof ServerConfig){
+        if (obj instanceof ServerConfig) {
             config = (ServerConfig) obj;
-        }else{
+        } else {
             config = new ServerConfig();
             serverList.addServerConfig(config);
         }
@@ -140,7 +139,7 @@ public class ConnectionDialog extends JDialog {
         config.setPort(Integer.parseInt(port.getText()));
         String jmxUrlString = jmxUrl.getText().trim();
         config.setJmxUrl(jmxUrlString);
-        if(!jmxUrlString.isEmpty()){
+        if (!jmxUrlString.isEmpty()) {
             JMXManager.getInstance().connect(jmxUrlString);
         }
 
@@ -182,7 +181,7 @@ public class ConnectionDialog extends JDialog {
         private JTextField host, port, jmxUrl;
         private JCheckBox ignoreUserConfig;
 
-        private ServerItemListener(JTextField host, JTextField port,JTextField jmxUrl, JCheckBox ignoreUserConfig) {
+        private ServerItemListener(JTextField host, JTextField port, JTextField jmxUrl, JCheckBox ignoreUserConfig) {
             this.host = host;
             this.port = port;
             this.jmxUrl = jmxUrl;
@@ -193,7 +192,7 @@ public class ConnectionDialog extends JDialog {
         public void itemStateChanged(ItemEvent e) {
             if (e.getStateChange() == ItemEvent.SELECTED) {
                 Object item = e.getItem();
-                if(item instanceof  ServerConfig){
+                if (item instanceof ServerConfig) {
                     ServerConfig config = (ServerConfig) item;
                     host.setText(config.getHost());
                     port.setText(String.valueOf(config.getPort()));

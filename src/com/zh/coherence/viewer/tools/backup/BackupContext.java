@@ -11,7 +11,9 @@ import java.util.List;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public class BackupContext {
-    public enum BackupAction {BACKUP, RESTORE}
+    public enum BackupAction {
+        BACKUP, RESTORE
+    }
 
     protected JProgressBar generalProgress, cacheProgress;
 
@@ -23,10 +25,10 @@ public class BackupContext {
     private String path;
 
     @XmlAttribute
-    private int bufferSize = 200;
+    private int bufferSize;
 
     @XmlAttribute
-    private int threads = 2;
+    private int threads;
 
     @XmlElement
     private List<CacheInfo> cacheInfoList = new ArrayList<CacheInfo>();
@@ -38,33 +40,41 @@ public class BackupContext {
 
     public BackupContext(BackupAction action) {
         this.action = action;
+        switch (this.action) {
+            case BACKUP:
+                this.bufferSize = 200;
+                this.threads = 5;
+                break;
+            case RESTORE:
+                this.bufferSize = 350;
+                this.threads = 15;
+        }
     }
 
-    public void updateGeneralProgress(){
-        generalProgress.setString((Math.rint(1000.0 * generalProgress.getPercentComplete()) / 10.0)  + " %");
+    public void updateGeneralProgress() {
+        generalProgress.setString((Math.rint(1000.0 * generalProgress.getPercentComplete()) / 10.0) + " %");
     }
 
-    public void incrementGeneralProgress(){
+    public void incrementGeneralProgress() {
         incrementGeneralProgress(1);
     }
 
-    public void incrementGeneralProgress(int inc){
+    public void incrementGeneralProgress(int inc) {
         generalProgress.setValue(generalProgress.getValue() + inc);
         updateGeneralProgress();
     }
 
-    public void incrementCacheProgress(String name){
+    public void incrementCacheProgress(String name) {
         incrementCacheProgress(name, 1);
     }
 
-    public void incrementCacheProgress(String name, int inc){
+    public void incrementCacheProgress(String name, int inc) {
         cacheProgress.setValue(cacheProgress.getValue() + inc);
         updateCacheProgress(name);
     }
 
     public void updateCacheProgress(String name) {
-        cacheProgress.setString("["+name+"] - " + (Math.rint(100.0 * cacheProgress.getPercentComplete()))
-                + " %");
+        cacheProgress.setString("[" + name + "] - " + (Math.rint(100.0 * cacheProgress.getPercentComplete())) + " %");
     }
 
     public BackupAction getAction() {

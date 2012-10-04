@@ -5,6 +5,7 @@ import javax.xml.bind.annotation.*;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public class CacheInfo {
+    public enum Status {PENDING, WARN, ERROR, PROCESSED}
 
     @XmlAttribute
     private String name;
@@ -13,6 +14,8 @@ public class CacheInfo {
     private boolean enabled = true;
 
     private boolean processed = false;
+
+    private Status status;
 
     @XmlElement
     private BackupFilter filter = new BackupFilter();
@@ -65,5 +68,13 @@ public class CacheInfo {
 
     public String getName() {
         return name;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }
