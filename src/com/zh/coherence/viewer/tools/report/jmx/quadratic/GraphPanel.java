@@ -28,6 +28,6 @@ public class GraphPanel extends JPanel {
 
     public void clear(){
         this.removeAll();
-        gridLayout = new GridLayout();
+        list = new LinkedList<FireflyCarrier>();
     }
 }

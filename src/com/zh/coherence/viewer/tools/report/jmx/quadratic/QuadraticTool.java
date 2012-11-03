@@ -120,7 +120,7 @@ public class QuadraticTool extends JXPanel implements CoherenceViewerTool, Chang
         info.setEditable(false);
         controlPanel.add(new JScrollPane(info));
 
-        controlPanel.setBorder(BorderFactory.createDashedBorder(Color.GRAY));
+        controlPanel.setBorder(BorderFactory.createLineBorder(Color.GRAY));
         add(controlPanel, BorderLayout.WEST);
 
         //quadratic panel

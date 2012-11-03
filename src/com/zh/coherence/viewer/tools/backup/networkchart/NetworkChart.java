@@ -55,9 +55,9 @@ public class NetworkChart extends JXPanel {
 //current
         if (model.getValues().size() > 0) {
             int shift = 15 + (all.length() * 6) + 5;
-            String curr = FileUtils.convertToStringRepresentation(model.getValues().getLast());
+            String curr = FileUtils.convertToStringRepresentation(model.getValues().getLast()/2);
             graphics.setColor(new Color(255, 255, 255, 200));
-            graphics.fillRoundRect(shift, getHeight() - 20, curr.length() * 6, 15, 4, 4);
+            graphics.fillRoundRect(shift, getHeight() - 20, (curr.length()+1) * 6, 15, 4, 4);
             Font oldFont = graphics.getFont();
             graphics.setFont(new Font(oldFont.getName(), Font.BOLD, oldFont.getSize()));
             graphics.setColor(new Color(50, 150, 50));

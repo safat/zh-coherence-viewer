@@ -31,6 +31,7 @@ public class BackupTool extends JPanel implements CoherenceViewerTool {
     private JTextField pathFiled;
     private JSpinner threads;
     private JSpinner buffer;
+    protected JToolBar cacheListToolBar;
     //actions
     private ReloadCacheList reloadCacheList;
 
@@ -69,7 +70,6 @@ public class BackupTool extends JPanel implements CoherenceViewerTool {
         //cache tool bar
         cacheListPane.add(new JScrollPane(caches), BorderLayout.CENTER);
         cacheListPane.setBorder(BorderFactory.createTitledBorder("List of caches"));
-        JToolBar cacheListToolBar = new JToolBar();
         cacheListPane.add(cacheListToolBar, BorderLayout.NORTH);
         cacheListToolBar.add(new AddStringToListAction(context, this));
         cacheListToolBar.add(new RemoveElementsFromListAction(context, caches, this));

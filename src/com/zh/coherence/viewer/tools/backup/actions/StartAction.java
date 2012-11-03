@@ -28,6 +28,9 @@ public class StartAction extends AbstractAction {
             JOptionPane.showMessageDialog(parent, "Path to folder cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        if (parent != null && parent instanceof JButton) {
+            parent.setEnabled(false);
+        }
         final long time = System.currentTimeMillis();
         new SwingWorker<Void, Void>() {
 
@@ -48,6 +51,9 @@ public class StartAction extends AbstractAction {
             protected void done() {
                 super.done();
                 System.err.println("Time: " + (System.currentTimeMillis() - time));
+                if (parent != null && parent instanceof JButton) {
+                    parent.setEnabled(true);
+                }
             }
         }.execute();
     }

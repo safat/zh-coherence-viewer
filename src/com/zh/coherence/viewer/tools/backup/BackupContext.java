@@ -42,7 +42,7 @@ public class BackupContext {
         this.action = action;
         switch (this.action) {
             case BACKUP:
-                this.bufferSize = 200;
+                this.bufferSize = 7;
                 this.threads = 5;
                 break;
             case RESTORE:
@@ -74,7 +74,11 @@ public class BackupContext {
     }
 
     public void updateCacheProgress(String name) {
-        cacheProgress.setString("[" + name + "] - " + (Math.rint(100.0 * cacheProgress.getPercentComplete())) + " %");
+        double percentComplete = cacheProgress.getPercentComplete();
+        if(Double.isNaN(percentComplete) && cacheProgress.getMinimum() == cacheProgress.getMaximum()){
+            percentComplete = 1;
+        }
+        cacheProgress.setString("[" + name + "] - " + (Math.rint(100.0 * percentComplete)) + " %");
     }
 
     public BackupAction getAction() {
