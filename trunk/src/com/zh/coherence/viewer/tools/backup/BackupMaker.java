@@ -2,36 +2,24 @@ package com.zh.coherence.viewer.tools.backup;
 
 import com.tangosol.coherence.component.net.extend.RemoteNamedCache;
 import com.tangosol.coherence.component.util.SafeNamedCache;
-import com.tangosol.io.WrapperBufferOutput;
 import com.tangosol.net.CacheFactory;
 import com.tangosol.net.NamedCache;
-import com.tangosol.util.Binary;
 import com.tangosol.util.Filter;
 import com.tangosol.util.aggregator.Count;
 import com.zh.coherence.viewer.utils.FileUtils;
 
-import javax.swing.*;
-import javax.swing.Timer;
 import javax.swing.table.AbstractTableModel;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.RandomAccessFile;
 import java.lang.reflect.Method;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BackupMaker {
     private BackupContext context;
-    private AbstractTableModel tableModel;
 
     public BackupMaker(BackupContext context, AbstractTableModel tableModel) {
         this.context = context;
-        this.tableModel = tableModel;
     }
-
-    private long networkStatistic = 0;
-    private long oldNetworkStatistic = 0;
 
     public void make() {
         long globalTime = System.currentTimeMillis();
@@ -67,189 +55,45 @@ public class BackupMaker {
         context.generalProgress.setValue(0);
         context.updateGeneralProgress();
 
-        ExecutorService threadExecutor = Executors.newFixedThreadPool(context.getThreads());
-        Timer timer = new Timer(2000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                long tmp = networkStatistic;
-                context.getNetworkChartModel().addValue((int)(tmp - oldNetworkStatistic));
-                context.getNetworkChartModel().fireChartChanges();
-                oldNetworkStatistic = tmp;
-            }
-        });
-        timer.start();
+        String connectionHost = System.getProperty("viewer.connection.host");
+        String connectionPort = System.getProperty("viewer.connection.port");
+        final ConnectionThreadPool threadExecutor = new ConnectionThreadPool(context.getThreads(),
+                new ConnectionThreadFactory(connectionHost, connectionPort));
+
         for (final CacheWrapper wrapper : caches) {
+            context.cacheProgress.setString("[" + wrapper.cache.getCacheName() + "] - analyzing cache");
+            threadExecutor.resetProgress();
             final long startTime = System.currentTimeMillis();
-            final CacheHolder cacheHolder = new CacheHolder(wrapper);
-            //multi threading
-
-            List<Callable<Boolean>> callableList = new ArrayList<Callable<Boolean>>();
-            for (int i = 0; i < context.getThreads(); i++) {
-                callableList.add(new Task(cacheHolder));
+            File file = new File(context.getPath() + File.separator + wrapper.info.getName());
+            CacheBackuper backuper = new CacheBackuper(wrapper, file, threadExecutor, context);
+            try{
+                backuper.backup();
+            } catch (Exception ex){
+                ex.printStackTrace();
+                wrapper.info.setStatus(CacheInfo.Status.ERROR);
             }
 
-            try {
-                threadExecutor.invokeAll(callableList);
-                new SwingWorker(){
-                    @Override
-                    protected Object doInBackground() throws Exception {
-                        cacheHolder.close();
-                        wrapper.info.setProcessed(true);
-                        tableModel.fireTableDataChanged();
-                        return null;
-                    }
-                }.execute();
-
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
             context.logPane.addMessage(new BackupLogEvent(
                     startTime, wrapper.info.getName(), System.currentTimeMillis(),
                     "Done, cache has been saved, size of file: "
-                            + FileUtils.convertToStringRepresentation(cacheHolder.getFile().length()), "backup"));
+                            + FileUtils.convertToStringRepresentation(backuper.getFile().length())
+                            + "; Entries written: " + backuper.getPersistedEntriesSize()
+                            + "; Entries keys extracted: " + backuper.getExtractedKeysSize(), "backup"));
         }
-        timer.stop();
         threadExecutor.shutdown();
         context.logPane.addMessage(new BackupLogEvent(
                 globalTime, "", System.currentTimeMillis(), "Done", "Task has been finished"));
     }
 
-    private class CacheHolder {
-        private File file;
-        private List<Object> keys;
-        private RandomAccessFile raf;
-        private WrapperBufferOutput buf;
-        private int cursor = 0;
-        private int units;
-        private RemoteNamedCache store;
-        private BlockingQueue queue;
-
-        private CacheWrapper wrapper;
-        private boolean closed = false;
-
-        private CacheHolder(CacheWrapper wrapper) {
-            try {
-                this.wrapper = wrapper;
-                file = new File(context.getPath() + File.separator + wrapper.info.getName());
-                raf = new RandomAccessFile(file, "rw");
-                buf = new WrapperBufferOutput(raf);
-                queue = new LinkedBlockingQueue();
-
-                if (wrapper.cache instanceof SafeNamedCache) {
-                    SafeNamedCache snc = (SafeNamedCache) wrapper.cache;
-                    Method method = snc.getClass().getDeclaredMethod("getRunningNamedCache");
-                    method.setAccessible(true);
-                    store = (RemoteNamedCache) method.invoke(snc);
-                    store.setPassThrough(true);
-                    //get keys
-                    if (wrapper.info.getFilter() != null && wrapper.info.getFilter().isEnabled()) {
-                        FilterExecutor executor = new FilterExecutor();
-                        keys = new ArrayList<Object>(store.keySet(executor.execute(wrapper.info.getFilter())));
-                    } else {
-                        keys = new ArrayList<Object>(store.keySet());
-                    }
-
-                    //create header
-                    buf.writePackedInt(-28);
-                    buf.writePackedInt(keys.size());
-                    context.updateCacheProgress("loading the keys of cache [" + wrapper.info.getName() + "]...");
-                    units = context.getBufferSize();
-                    context.cacheProgress.setMinimum(0);
-                    context.cacheProgress.setMaximum(keys.size());
-                    context.cacheProgress.setValue(0);
-                    context.updateCacheProgress(wrapper.cache.getCacheName());
-                } else {
-                    JOptionPane.showMessageDialog(null, "Sorry, cache: " + wrapper.info.getName() + "have unsupported type");
-                }
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
+    public static RemoteNamedCache getRemoteCache(NamedCache namedCache) throws Exception{
+        if(namedCache instanceof SafeNamedCache){
+            SafeNamedCache snc = (SafeNamedCache) namedCache;
+            Method method = snc.getClass().getDeclaredMethod("getRunningNamedCache");
+            method.setAccessible(true);
+            return (RemoteNamedCache) method.invoke(snc);
         }
-
-        public synchronized List<Object> next() {
-            if (cursor == keys.size()) {
-                return null;
-            }
-
-            int end = cursor + units;
-            if (end > keys.size()) {
-                end = keys.size();
-            }
-
-            List<Object> ret = keys.subList(cursor, end);
-
-            cursor = end;
-
-            return ret;
-        }
-
-        public synchronized void write(Map map) {
-            try {
-                for (Object entryObj : map.entrySet()) {
-                    Map.Entry<Binary, Binary> entry = (Map.Entry<Binary, Binary>) entryObj;
-                    byte[] array = entry.getKey().toByteArray();
-                    networkStatistic += array.length;
-                    buf.write(array, 1, array.length - 1);
-                    array = entry.getValue().toByteArray();
-                    buf.write(array, 1, array.length - 1);
-                    networkStatistic += array.length;
-                }
-                buf.flush();
-                context.incrementCacheProgress(wrapper.info.getName(), map.size());
-                context.incrementGeneralProgress(map.size());
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        }
-
-        public void close() {
-            try {
-                store.setPassThrough(false);
-                buf.close();
-                raf.close();
-                closed = true;
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        }
-
-        public void finalize() {
-            if (!closed) {
-                close();
-            }
-        }
-
-        public CacheWrapper getWrapper() {
-            return wrapper;
-        }
-
-        public File getFile() {
-            return file;
-        }
-
-        public RemoteNamedCache getStore() {
-            return store;
-        }
+        return null;
     }
 
-    private class Task implements Callable<Boolean> {
-        private CacheHolder cacheHolder;
 
-        private Task(CacheHolder cacheHolder) {
-            this.cacheHolder = cacheHolder;
-        }
-
-        @Override
-        public Boolean call() throws Exception {
-            List<Object> list;
-            do {
-                list = cacheHolder.next();
-                if (list != null) {
-                    cacheHolder.write(cacheHolder.getStore().getAll(list));
-                }
-            } while (list != null);
-
-            return Boolean.TRUE;
-        }
-    }
 }
