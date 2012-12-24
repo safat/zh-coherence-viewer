@@ -1,0 +1,1 @@
+mvn install:install-file -Dfile=C:\work\LIBS\coherence\lib\coherence.jar -DgroupId=com.oracle -DartifactId=coherence.core -Dversion=3.7 -Dpackaging=jar -DgeneratePom=true
