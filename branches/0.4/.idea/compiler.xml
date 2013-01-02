@@ -5,10 +5,12 @@
     <excludeFromCompile>
       <directory url="file://$PROJECT_DIR$/viewer/target/generated-sources/annotations" includeSubdirectories="true" />
       <directory url="file://$PROJECT_DIR$/viewer/target/generated-test-sources/test-annotations" includeSubdirectories="true" />
-      <directory url="file://$PROJECT_DIR$/icon-provider/target/generated-sources/annotations" includeSubdirectories="true" />
-      <directory url="file://$PROJECT_DIR$/icon-provider/target/generated-test-sources/test-annotations" includeSubdirectories="true" />
       <directory url="file://$PROJECT_DIR$/zhql/target/generated-sources/annotations" includeSubdirectories="true" />
       <directory url="file://$PROJECT_DIR$/zhql/target/generated-test-sources/test-annotations" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/viewer-gui/target/generated-sources/annotations" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/viewer-gui/target/generated-test-sources/test-annotations" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/icon-provider/target/generated-sources/annotations" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/icon-provider/target/generated-test-sources/test-annotations" includeSubdirectories="true" />
       <directory url="file://$PROJECT_DIR$/connect/target/generated-sources/annotations" includeSubdirectories="true" />
       <directory url="file://$PROJECT_DIR$/connect/target/generated-test-sources/test-annotations" includeSubdirectories="true" />
     </excludeFromCompile>
@@ -35,6 +37,7 @@
         <module name="connect" />
         <module name="icon-provider" />
         <module name="viewer" />
+        <module name="viewer-gui" />
         <module name="zhql" />
       </profile>
     </annotationProcessing>

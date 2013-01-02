@@ -13,7 +13,7 @@
     <groupId>com.zh.coherence.viewer</groupId>
     <artifactId>viewer-gui</artifactId>
     <version>0.4-SNAPSHOT</version>
-    <packaging>pom</packaging>
+    <packaging>bundle</packaging>
 
     <dependencies>
         <dependency>
@@ -23,6 +23,23 @@
         <dependency>
             <groupId>com.zh.coherence.viewer</groupId>
             <artifactId>icon-provider</artifactId>
+            <version>0.4-SNAPSHOT</version>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+                <!--<configuration>
+                    <instructions>
+                        <Export-Package></Export-Package>
+                        <Private-Package></Private-Package>
+                    </instructions>
+                </configuration>-->
+            </plugin>
+        </plugins>
+    </build>
 </project>

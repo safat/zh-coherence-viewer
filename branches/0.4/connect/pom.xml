@@ -14,6 +14,7 @@
     <artifactId>connect</artifactId>
     <version>0.4-SNAPSHOT</version>
     <name>connect</name>
+    <packaging>bundle</packaging>
 
     <dependencies>
         <dependency>
@@ -22,5 +23,19 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+                <!--<configuration>-->
+                <!--<instructions>-->
+                <!---->
+                <!--</instructions>-->
+                <!--</configuration>-->
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
