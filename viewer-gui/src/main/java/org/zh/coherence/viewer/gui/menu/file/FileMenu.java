@@ -13,4 +13,8 @@ public class FileMenu extends JMenu {
         super("File");
         setMnemonic('F');
     }
+
+    private void init() {
+        add(new CreateProject());
+    }
 }

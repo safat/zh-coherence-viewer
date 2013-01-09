@@ -16,25 +16,28 @@ public class IconProvider {
     private static File systemDirectory = null;
     private static boolean existDirectory = true;
 
-    public static Icon getIcon(String name) throws Exception {
+    public static Icon getIcon(String name) {
         Icon icon = null;
-
-        //First. try to search in the home directory: icons
-        if (existDirectory) {
-            if (systemDirectory == null) {
-                initializeSystemDirectory();
+        try {
+            //First. try to search in the home directory: icons
+            if (existDirectory) {
+                if (systemDirectory == null) {
+                    initializeSystemDirectory();
+                }
+                File iconFile = new File(systemDirectory, name);
+                if (iconFile.exists()) {
+                    icon = new ImageIcon(iconFile.toURI().toURL());
+                }
             }
-            File iconFile = new File(systemDirectory, name);
-            if (iconFile.exists()) {
-                icon = new ImageIcon(iconFile.toURI().toURL());
+            //Not found? try to search right there
+            if (icon == null) {
+                URL iconUrl = ClassLoader.getSystemResource("icons" + File.pathSeparator + name);
+                if (iconUrl != null) {
+                    icon = new ImageIcon(iconUrl);
+                }
             }
-        }
-        //Not found? try to search right there
-        if (icon == null) {
-            URL iconUrl = ClassLoader.getSystemResource(name);
-            if (iconUrl != null) {
-                icon = new ImageIcon(iconUrl);
-            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
         //or return null, sorry
         return icon;

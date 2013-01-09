@@ -1,5 +1,7 @@
 package org.zh.coherence.viewer.gui.menu.file;
 
+import org.zh.utils.gui.icons.IconProvider;
+
 import javax.swing.*;
 
 /**
@@ -10,6 +12,6 @@ import javax.swing.*;
  */
 public class CreateProject extends JMenuItem {
     public CreateProject() {
-        super("Create project...");
+        super("Create project...", IconProvider.getIcon("database_add.png"));
     }
 }
