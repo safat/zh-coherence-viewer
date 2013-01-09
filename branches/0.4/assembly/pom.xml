@@ -11,14 +11,15 @@
     </parent>
 
     <groupId>com.zh.coherence.viewer</groupId>
-    <artifactId>viewer-gui</artifactId>
+    <artifactId>assembly</artifactId>
     <version>0.4-SNAPSHOT</version>
+    <name>assembly</name>
     <packaging>bundle</packaging>
 
     <dependencies>
         <dependency>
-            <groupId>org.dockingframes</groupId>
-            <artifactId>docking-frames-common</artifactId>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.apache.felix.framework</artifactId>
         </dependency>
         <dependency>
             <groupId>com.zh.coherence.viewer</groupId>
@@ -26,8 +27,9 @@
             <version>0.4-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.felix</groupId>
-            <artifactId>org.osgi.core</artifactId>
+            <groupId>com.zh.coherence.viewer</groupId>
+            <artifactId>viewer-gui</artifactId>
+            <version>0.4-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
@@ -40,11 +42,28 @@
 
                 <configuration>
                     <instructions>
-                        <Bundle-Activator>org.zh.coherence.viewer.gui.Application</Bundle-Activator>
                         <!--<Export-Package></Export-Package>-->
                         <!--<Private-Package></Private-Package>-->
                     </instructions>
                 </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>distributive-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <descriptors>
+                                <descriptor>src/main/assembly/bin.xml</descriptor>
+                                <descriptor>src/main/assembly/config.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
