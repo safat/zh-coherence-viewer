@@ -2,39 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="32f8d5a9-ea61-4018-8b76-eb23db394296" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assembly" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assembly/src/main/assembly" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assembly/src/main/java/org/zh/coherence" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assembly/src/main/config" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/icon-provider/src/main/resources/icons/database_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/icon-provider/src/main/resources/icons" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assembly/src/main/java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assembly/src/main" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assembly/src/main/java/org" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/icon-provider/src/main/resources" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assembly/src" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assembly/src/main/java/org/zh/coherence/viewer" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assembly/src/main/java/org/zh" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assembly/src/main/java/org/zh/coherence/viewer/Launch.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assembly/assembly.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assembly/src/main/assembly/bin.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assembly/src/main/assembly/config.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assembly/pom.xml" />
-      <change type="DELETED" beforePath="C:\work\zh-viewer\0.4\.idea\libraries\Maven__org_zh_coherence_viewer_icon_provider_0_4_SNAPSHOT.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/viewer-gui/src/main/java/org/zh/coherence/viewer/gui/Application.java" afterPath="$PROJECT_DIR$/viewer-gui/src/main/java/org/zh/coherence/viewer/gui/Application.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/viewer-gui/src/main/java/org/zh/coherence/viewer/gui/menu/file/CreateProject.java" afterPath="$PROJECT_DIR$/viewer-gui/src/main/java/org/zh/coherence/viewer/gui/menu/file/CreateProject.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/viewer-gui/src/main/java/org/zh/coherence/viewer/gui/menu/file/FileMenu.java" afterPath="$PROJECT_DIR$/viewer-gui/src/main/java/org/zh/coherence/viewer/gui/menu/file/FileMenu.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icon-provider/src/main/java/org/zh/utils/gui/icons/IconProvider.java" afterPath="$PROJECT_DIR$/icon-provider/src/main/java/org/zh/utils/gui/icons/IconProvider.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assembly/assembly.iml" afterPath="$PROJECT_DIR$/assembly/assembly.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icon-provider/icon-provider.iml" afterPath="$PROJECT_DIR$/icon-provider/icon-provider.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/viewer-gui/pom.xml" afterPath="$PROJECT_DIR$/viewer-gui/pom.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/viewer-gui/viewer-gui.iml" afterPath="$PROJECT_DIR$/viewer-gui/viewer-gui.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="untitled.iws" />
     <ignored path=".idea/workspace.xml" />
+    <ignored path=".idea/" />
     <file path="/pom.xml" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1357762416070" ignored="false" />
     <file path="/Application.java" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1357757774074" ignored="false" />
     <file path="/ConnectionProvider.java" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1356382345420" ignored="false" />
@@ -45,7 +21,7 @@
     <file path="/FileMenu.java" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1357756657462" ignored="false" />
     <file path="/CreateProject.java" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1357756806646" ignored="false" />
     <file path="/IconProvider.java" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1357756862273" ignored="false" />
-    <file path="/Dummy.txt" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1357150164842" ignored="false" />
+    <file path="/Dummy.txt" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1357762900150" ignored="false" />
     <file path="/config.xml" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1357760289277" ignored="false" />
     <file path="/bin.xml" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1357762248405" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -133,10 +109,37 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bin.xml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="bin.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assembly/src/main/assembly/bin.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="61" selection-start="1012" selection-end="1012" vertical-scroll-proportion="0.7071057">
+            <state line="24" column="61" selection-start="1012" selection-end="1012" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Application.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/viewer-gui/src/main/java/org/zh/coherence/viewer/gui/Application.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="39" selection-start="198" selection-end="198" vertical-scroll-proportion="0.14731368">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pom.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/viewer-gui/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="34" column="21" selection-start="1291" selection-end="1291" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pom.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="20" column="25" selection-start="583" selection-end="782" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -199,11 +202,11 @@
         <option value="$PROJECT_DIR$/viewer-gui/src/main/java/org/zh/coherence/viewer/gui/menu/file/CreateProject.java" />
         <option value="$PROJECT_DIR$/icon-provider/src/main/java/org/zh/utils/gui/icons/IconProvider.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/viewer-gui/pom.xml" />
         <option value="$PROJECT_DIR$/viewer-gui/src/main/java/org/zh/coherence/viewer/gui/Application.java" />
         <option value="$PROJECT_DIR$/assembly/src/main/assembly/config.xml" />
         <option value="$PROJECT_DIR$/assembly/pom.xml" />
         <option value="$PROJECT_DIR$/assembly/src/main/assembly/bin.xml" />
+        <option value="$PROJECT_DIR$/viewer-gui/pom.xml" />
       </list>
     </option>
   </component>
@@ -769,7 +772,11 @@
       <created>1357150234159</created>
       <updated>1357150234159</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="added assembly module">
+      <created>1357762928111</created>
+      <updated>1357762928111</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -857,7 +864,7 @@
     <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed pom files" />
+    <option name="LAST_COMMIT_MESSAGE" value="added assembly module" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -871,6 +878,7 @@
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
     <MESSAGE value="fixed pom files" />
+    <MESSAGE value="added assembly module" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -929,27 +937,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="25" selection-start="2060" selection-end="2060" vertical-scroll-proportion="0.5452463">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/viewer-gui/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="21" selection-start="1136" selection-end="1136" vertical-scroll-proportion="0.4089347">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/viewer-gui/src/main/java/org/zh/coherence/viewer/gui/Application.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="18" selection-start="340" selection-end="340" vertical-scroll-proportion="0.038946163">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/connect/src/main/java/org/zh/coherence/connection/ConnectionConfig.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="37" column="0" selection-start="758" selection-end="758" vertical-scroll-proportion="0.0">
@@ -987,7 +974,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/assembly/src/main/assembly/bin.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="61" selection-start="1012" selection-end="1012" vertical-scroll-proportion="0.7071057">
+        <state line="24" column="61" selection-start="1012" selection-end="1012" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="25" selection-start="583" selection-end="782" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/viewer-gui/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="21" selection-start="1291" selection-end="1291" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/viewer-gui/src/main/java/org/zh/coherence/viewer/gui/Application.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="39" selection-start="198" selection-end="198" vertical-scroll-proportion="0.14731368">
           <folding />
         </state>
       </provider>
