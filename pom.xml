@@ -13,41 +13,16 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- Felix -->
+            <!-- JPF -->
             <dependency>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>org.apache.felix.framework</artifactId>
-                <version>4.0.3</version>
+                <groupId>net.sf.jpf</groupId>
+                <artifactId>jpf</artifactId>
+                <version>1.5</version>
             </dependency>
             <dependency>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>org.apache.felix.bundlerepository</artifactId>
-                <version>1.6.6</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>org.apache.felix.fileinstall</artifactId>
-                <version>3.2.6</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>org.apache.felix.ipojo</artifactId>
-                <version>1.8.4</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>org.apache.felix.ipojo.annotations</artifactId>
-                <version>1.8.4</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>org.apache.felix.ipojo.composite</artifactId>
-                <version>1.8.4</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>org.osgi.core</artifactId>
-                <version>1.4.0</version>
+                <groupId>net.sf.jpf</groupId>
+                <artifactId>jpf-boot</artifactId>
+                <version>1.5</version>
             </dependency>
             <!-- docking frames -->
             <dependency>
@@ -55,10 +30,23 @@
                 <artifactId>docking-frames-common</artifactId>
                 <version>1.1.0</version>
             </dependency>
+            <!-- Coherence -->
             <dependency>
                 <groupId>com.oracle</groupId>
                 <artifactId>coherence.core</artifactId>
                 <version>3.7</version>
+            </dependency>
+            <!-- commons -->
+            <dependency>
+                <groupId>commons-logging</groupId>
+                <artifactId>commons-logging</artifactId>
+                <version>1.1.1</version>
+            </dependency>
+            <!-- logging -->
+            <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>1.2.17</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

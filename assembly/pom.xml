@@ -14,12 +14,26 @@
     <artifactId>assembly</artifactId>
     <version>0.4-SNAPSHOT</version>
     <name>assembly</name>
-    <packaging>bundle</packaging>
+    <packaging>pom</packaging>
 
     <dependencies>
+        <!-- JPF -->
         <dependency>
-            <groupId>org.apache.felix</groupId>
-            <artifactId>org.apache.felix.framework</artifactId>
+            <groupId>net.sf.jpf</groupId>
+            <artifactId>jpf</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.jpf</groupId>
+            <artifactId>jpf-boot</artifactId>
+        </dependency>
+        <!-- docking frames -->
+        <dependency>
+            <groupId>org.dockingframes</groupId>
+            <artifactId>docking-frames-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>coherence.core</artifactId>
         </dependency>
         <dependency>
             <groupId>com.zh.coherence.viewer</groupId>
@@ -31,22 +45,20 @@
             <artifactId>viewer-gui</artifactId>
             <version>0.4-SNAPSHOT</version>
         </dependency>
+        <!-- commons -->
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+        </dependency>
+        <!-- logging -->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
-                <extensions>true</extensions>
-
-                <configuration>
-                    <instructions>
-                        <!--<Export-Package></Export-Package>-->
-                        <!--<Private-Package></Private-Package>-->
-                    </instructions>
-                </configuration>
-            </plugin>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <executions>
@@ -59,7 +71,6 @@
                         <configuration>
                             <descriptors>
                                 <descriptor>src/main/assembly/bin.xml</descriptor>
-                                <descriptor>src/main/assembly/config.xml</descriptor>
                             </descriptors>
                         </configuration>
                     </execution>
