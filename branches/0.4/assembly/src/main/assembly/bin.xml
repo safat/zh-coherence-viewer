@@ -10,37 +10,35 @@
 
     <dependencySets>
         <dependencySet>
-            <outputDirectory>modules</outputDirectory>
+            <outputDirectory>plugins</outputDirectory>
             <useProjectArtifact>true</useProjectArtifact>
             <unpack>false</unpack>
             <includes>
                 <include>com.zh.coherence.viewer:*</include>
             </includes>
         </dependencySet>
+
         <dependencySet>
             <outputDirectory>lib</outputDirectory>
             <useProjectArtifact>true</useProjectArtifact>
             <unpack>false</unpack>
             <includes>
-                <include>org.apache.felix:framework</include>
+                <include>jpf:*</include>
+                <include>jpf-boot:*</include>
+                <include>org.dockingframes:*</include>
+                <include>log4j:*</include>
+                <include>commons-logging:*</include>
             </includes>
-        </dependencySet>
-        <dependencySet>
-            <outputDirectory>system</outputDirectory>
-            <useProjectArtifact>false</useProjectArtifact>
-            <unpack>false</unpack>
-            <excludes>
-                <exclude>com.zh.coherence.viewer:*</exclude>
-            </excludes>
         </dependencySet>
     </dependencySets>
     <fileSets>
         <fileSet>
             <directory>${project.basedir}/src/main/config</directory>
             <includes>
-                <include>*.cmd</include>
+                <include>*.bat</include>
+                <include>*.properties</include>
             </includes>
-            <outputDirectory>bin</outputDirectory>
+            <outputDirectory>/</outputDirectory>
         </fileSet>
     </fileSets>
 </assembly>
