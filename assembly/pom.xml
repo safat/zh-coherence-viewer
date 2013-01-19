@@ -14,7 +14,7 @@
     <artifactId>assembly</artifactId>
     <version>0.4-SNAPSHOT</version>
     <name>assembly</name>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
     <dependencies>
         <!-- JPF -->
@@ -35,16 +35,6 @@
             <groupId>com.oracle</groupId>
             <artifactId>coherence.core</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.zh.coherence.viewer</groupId>
-            <artifactId>icon-provider</artifactId>
-            <version>0.4-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.zh.coherence.viewer</groupId>
-            <artifactId>viewer-gui</artifactId>
-            <version>0.4-SNAPSHOT</version>
-        </dependency>
         <!-- commons -->
         <dependency>
             <groupId>commons-logging</groupId>
@@ -55,6 +45,12 @@
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
         </dependency>
+        <!-- APP -->
+        <dependency>
+            <groupId>com.zh.coherence.viewer</groupId>
+            <artifactId>viewer-gui</artifactId>
+            <version>0.4-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -64,7 +60,7 @@
                 <executions>
                     <execution>
                         <id>distributive-assembly</id>
-                        <phase>package</phase>
+                        <phase>install</phase>
                         <goals>
                             <goal>single</goal>
                         </goals>
