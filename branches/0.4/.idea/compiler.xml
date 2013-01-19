@@ -36,6 +36,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
+        <module name="assembly" />
         <module name="connect" />
         <module name="icon-provider" />
         <module name="viewer" />

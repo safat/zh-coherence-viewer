@@ -17,8 +17,8 @@
     <orderEntry type="library" name="Maven: org.dockingframes:docking-frames-common:1.1.0" level="project" />
     <orderEntry type="library" name="Maven: org.dockingframes:docking-frames-core:1.1.0" level="project" />
     <orderEntry type="library" name="Maven: com.oracle:coherence.core:3.7" level="project" />
-    <orderEntry type="module" module-name="icon-provider" />
     <orderEntry type="module" module-name="viewer-gui" />
+    <orderEntry type="module" module-name="icon-provider" />
   </component>
 </module>
 

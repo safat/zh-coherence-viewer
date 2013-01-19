@@ -10,15 +10,6 @@
 
     <dependencySets>
         <dependencySet>
-            <outputDirectory>plugins</outputDirectory>
-            <useProjectArtifact>true</useProjectArtifact>
-            <unpack>false</unpack>
-            <includes>
-                <include>com.zh.coherence.viewer:*</include>
-            </includes>
-        </dependencySet>
-
-        <dependencySet>
             <outputDirectory>lib</outputDirectory>
             <useProjectArtifact>true</useProjectArtifact>
             <unpack>false</unpack>
@@ -31,6 +22,14 @@
             </includes>
         </dependencySet>
     </dependencySets>
+
+    <files>
+        <file>
+            <source>${project.basedir}/../viewer-gui/target/viewer-gui-${project.version}-plugin.zip</source>
+            <filtered>false</filtered>
+            <outputDirectory>plugins</outputDirectory>
+        </file>
+    </files>
     <fileSets>
         <fileSet>
             <directory>${project.basedir}/src/main/config</directory>
