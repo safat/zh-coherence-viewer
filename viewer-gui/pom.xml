@@ -43,7 +43,7 @@
                 <executions>
                     <execution>
                         <id>plugin-assembly</id>
-                        <phase>verify</phase>
+                        <phase>package</phase>
                         <goals>
                             <goal>single</goal>
                         </goals>

@@ -2,22 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="32f8d5a9-ea61-4018-8b76-eb23db394296" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/viewer-gui/src/main/assembly" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/viewer-gui/src/main/assembly/plugin.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assembly/assembly.iml" afterPath="$PROJECT_DIR$/assembly/assembly.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assembly/src/main/assembly/bin.xml" afterPath="$PROJECT_DIR$/assembly/src/main/assembly/bin.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assembly/pom.xml" afterPath="$PROJECT_DIR$/assembly/pom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/viewer-gui/src/main/resources/icons/database.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/viewer-gui/src/main/resources/icons" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/viewer-gui/src/main/java/org/zh/coherence/viewer/CorePlugin.java" afterPath="$PROJECT_DIR$/viewer-gui/src/main/java/org/zh/coherence/viewer/CorePlugin.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assembly/src/main/config/log4j.properties" afterPath="$PROJECT_DIR$/assembly/src/main/config/log4j.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/viewer-gui/src/main/assembly/plugin.xml" afterPath="$PROJECT_DIR$/viewer-gui/src/main/assembly/plugin.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/viewer-gui/pom.xml" afterPath="$PROJECT_DIR$/viewer-gui/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/viewer-gui/viewer-gui.iml" afterPath="$PROJECT_DIR$/viewer-gui/viewer-gui.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assembly/src/main/config/run.sh" afterPath="$PROJECT_DIR$/assembly/src/main/config/run.sh" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="untitled.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/" />
-    <file path="/pom.xml" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1358627422778" ignored="false" />
+    <file path="/pom.xml" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1358682457194" ignored="false" />
     <file path="/Application.java" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1357763177077" ignored="false" />
     <file path="/ConnectionProvider.java" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1356382345420" ignored="false" />
     <file path="/mvn_install_coherence.bat" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1356380857903" ignored="false" />
@@ -27,16 +24,17 @@
     <file path="/FileMenu.java" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1357756657462" ignored="false" />
     <file path="/CreateProject.java" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1357756806646" ignored="false" />
     <file path="/IconProvider.java" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1357756862273" ignored="false" />
-    <file path="/Dummy.txt" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1358543495847" ignored="false" />
+    <file path="/Dummy.txt" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1358627898690" ignored="false" />
     <file path="/config.xml" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1357760289277" ignored="false" />
     <file path="/bin.xml" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1358627745094" ignored="false" />
     <file path="/viewer.bat" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1358277153845" ignored="false" />
     <file path="/config.properties" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1358277810110" ignored="false" />
     <file path="/boot.properties" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1358540135196" ignored="false" />
-    <file path="/plugin.xml" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1358625745412" ignored="false" />
-    <file path="/CorePlugin.java" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1358540546818" ignored="false" />
+    <file path="/plugin.xml" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1358682436640" ignored="false" />
+    <file path="/CorePlugin.java" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1358679864707" ignored="false" />
     <file path="/mvn_install_local_libs.bat" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1358542403746" ignored="false" />
     <file path="/run.bat" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1358543468606" ignored="false" />
+    <file path="/log4j.properties" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1358679435563" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,38 +102,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="pom.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/viewer-gui/pom.xml">
+      <file leaf-file-name="CorePlugin.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/viewer-gui/src/main/java/org/zh/coherence/viewer/CorePlugin.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="21" selection-start="1269" selection-end="1269" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="bin.xml" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/assembly/src/main/assembly/bin.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="47" selection-start="1430" selection-end="1430" vertical-scroll-proportion="0.9522241">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="plugin.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/viewer-gui/src/main/assembly/plugin.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="20" selection-start="457" selection-end="457" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pom.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/assembly/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="64" column="34" selection-start="2161" selection-end="2161" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="50" column="13" selection-start="1472" selection-end="1472" vertical-scroll-proportion="1.0863558">
+              <folding>
+                <element signature="e#1374#1482#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -157,22 +130,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/icon-provider/pom.xml" />
         <option value="$PROJECT_DIR$/connect/pom.xml" />
         <option value="$PROJECT_DIR$/viewer-gui/src/main/java/org/zh/coherence/viewer/gui/Application.java" />
         <option value="$PROJECT_DIR$/assembly/src/main/config/boot.properties" />
         <option value="$PROJECT_DIR$/viewer-gui/src/main/java/org/zh/coherence/viewer/gui/CorePlugin.java" />
-        <option value="$PROJECT_DIR$/viewer-gui/src/main/java/org/zh/coherence/viewer/CorePlugin.java" />
-        <option value="$PROJECT_DIR$/assembly/src/main/config/log4j.properties" />
         <option value="$PROJECT_DIR$/mvn_install_local_libs.bat" />
         <option value="$PROJECT_DIR$/assembly/src/main/config/run.bat" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/viewer-gui/assembly/plugin.xml" />
         <option value="$PROJECT_DIR$/viewer-gui/src/main/resources/plugin.xml" />
-        <option value="$PROJECT_DIR$/viewer-gui/src/main/assembly/plugin.xml" />
         <option value="$PROJECT_DIR$/assembly/pom.xml" />
-        <option value="$PROJECT_DIR$/viewer-gui/pom.xml" />
         <option value="$PROJECT_DIR$/assembly/src/main/assembly/bin.xml" />
+        <option value="$PROJECT_DIR$/assembly/src/main/config/run.sh" />
+        <option value="$PROJECT_DIR$/assembly/src/main/config/log4j.properties" />
+        <option value="$PROJECT_DIR$/viewer-gui/src/main/java/org/zh/coherence/viewer/CorePlugin.java" />
+        <option value="$PROJECT_DIR$/viewer-gui/pom.xml" />
+        <option value="$PROJECT_DIR$/viewer-gui/src/main/assembly/plugin.xml" />
       </list>
     </option>
   </component>
@@ -180,6 +153,7 @@
     <option name="generalSettings">
       <MavenGeneralSettings>
         <option name="mavenHome" value="C:\distributives\apache-maven-3.0.4" />
+        <option name="workOffline" value="true" />
       </MavenGeneralSettings>
     </option>
     <option name="importingSettings">
@@ -189,11 +163,21 @@
     </option>
   </component>
   <component name="MavenProjectNavigator">
+    <option name="groupStructurally" value="true" />
+    <option name="showIgnored" value="false" />
     <treeState>
       <PATH>
         <PATH_ELEMENT>
           <option name="myItemId" value="" />
           <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="ZH-Viewer" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Modules" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ModulesNode" />
         </PATH_ELEMENT>
       </PATH>
       <PATH>
@@ -220,13 +204,19 @@
           <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$LifecycleNode" />
         </PATH_ELEMENT>
       </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+      </PATH>
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1874" />
-    <option name="height" value="1096" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -254,8 +244,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -336,6 +324,36 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="icons" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="untitled" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="0.4" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="viewer-gui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="java" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -367,20 +385,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="assembly" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="untitled" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="0.4" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="icon-provider" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -445,13 +449,11 @@
               <option name="myItemId" value="main" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assembly" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -470,18 +472,20 @@
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="dynamic.classpath" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="dynamic.classpath" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\work\zh-viewer\0.4\viewer-gui\src\main\resources\icons" />
+      <recent name="C:\work\zh-viewer\0.4\viewer-gui\src\main\java\org\zh\coherence\viewer" />
       <recent name="C:\work\zh-viewer\0.4\libs" />
       <recent name="C:\work\zh-viewer\0.4\viewer-gui\src\main\resources" />
       <recent name="C:\work\zh-viewer\0.4\assembly\src\main\config" />
-      <recent name="C:\work\zh-viewer\0.4\icon-provider\src\main\resources\icons" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\work\zh-viewer\0.4\viewer-gui\src\main\resources\icons" />
       <recent name="C:\work\zh-viewer\0.4\viewer-gui\src\main" />
     </key>
   </component>
@@ -537,6 +541,19 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method />
+    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -562,19 +579,6 @@
       <envs />
       <properties />
       <listeners />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -714,7 +718,11 @@
       <created>1358543523117</created>
       <updated>1358543523117</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="fixed maven build scripts">
+      <created>1358627911148</created>
+      <updated>1358627911148</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -738,10 +746,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1874" height="1096" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32731137" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32703003" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -752,10 +760,10 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17218544" sideWeight="0.47284344" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1495585" sideWeight="0.6726886" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15101388" sideWeight="0.67296994" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1777042" sideWeight="0.6726886" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.47502658" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17769477" sideWeight="0.67296994" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4749722" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -802,7 +810,7 @@
     <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="removed felix&#10;added JPF" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed maven build scripts" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -818,6 +826,7 @@
     <MESSAGE value="fixed pom files" />
     <MESSAGE value="added assembly module" />
     <MESSAGE value="removed felix&#10;added JPF" />
+    <MESSAGE value="fixed maven build scripts" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -827,13 +836,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/icon-provider/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="30" selection-start="630" selection-end="630" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/net/sf/jpf/jpf-boot/1.5/jpf-boot-1.5.jar!/org/java/plugin/boot/DefaultApplicationInitializer.class">
       <provider selected="true" editor-type-id="text-editor">
         <state line="6" column="13" selection-start="163" selection-end="163" vertical-scroll-proportion="0.0" />
@@ -842,20 +844,6 @@
     <entry file="jar://$MAVEN_REPOSITORY$/net/sf/jpf/jpf-boot/1.5/jpf-boot-1.5-sources.jar!/org/java/plugin/boot/DefaultApplicationInitializer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="151" column="50" selection-start="7326" selection-end="7326" vertical-scroll-proportion="2.4950712" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assembly/src/main/config/log4j.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="0" selection-start="1463" selection-end="1463" vertical-scroll-proportion="0.68893754" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/viewer-gui/src/main/java/org/zh/coherence/viewer/CorePlugin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="5" selection-start="732" selection-end="732" vertical-scroll-proportion="0.5399781">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
       </provider>
     </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/net/sf/jpf/jpf-boot/1.5.1/jpf-boot-1.5.1.jar!/org/java/plugin/boot/Boot.class">
@@ -871,11 +859,6 @@
     <entry file="file://$PROJECT_DIR$/mvn_install_local_libs.bat">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="170" selection-start="170" selection-end="170" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assembly/src/main/config/run.bat">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="5" selection-start="5" selection-end="5" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
@@ -899,31 +882,61 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/viewer-gui/src/main/assembly/plugin.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="20" selection-start="457" selection-end="457" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/viewer-gui/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="21" selection-start="1269" selection-end="1269" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assembly/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="64" column="34" selection-start="2161" selection-end="2161" vertical-scroll-proportion="0.0">
+        <state line="64" column="34" selection-start="2161" selection-end="2161" vertical-scroll-proportion="-0.03723987">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/assembly/src/main/assembly/bin.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="47" selection-start="1430" selection-end="1430" vertical-scroll-proportion="0.9522241">
+        <state line="21" column="23" selection-start="907" selection-end="907" vertical-scroll-proportion="0.39101863">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assembly/src/main/config/run.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="41" selection-start="41" selection-end="41" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assembly/src/main/config/run.bat">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="47" selection-start="6" selection-end="47" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assembly/src/main/config/log4j.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="17" selection-start="846" selection-end="846" vertical-scroll-proportion="0.29209623">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/viewer-gui/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="45" column="38" selection-start="1553" selection-end="1553" vertical-scroll-proportion="0.5028637">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/viewer-gui/src/main/assembly/plugin.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="24" selection-start="826" selection-end="826" vertical-scroll-proportion="0.33104238">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/viewer-gui/src/main/java/org/zh/coherence/viewer/CorePlugin.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="50" column="13" selection-start="1472" selection-end="1472" vertical-scroll-proportion="1.0863558">
+          <folding>
+            <element signature="e#1374#1482#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
