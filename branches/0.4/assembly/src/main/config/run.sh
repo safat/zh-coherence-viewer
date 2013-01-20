@@ -1,0 +1,1 @@
+javaw -cp lib\* org.java.plugin.boot.Boot

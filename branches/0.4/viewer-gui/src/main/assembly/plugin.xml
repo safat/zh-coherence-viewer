@@ -18,15 +18,14 @@
                 <include>com.zh.coherence.viewer:viewer-gui</include>
             </includes>
         </dependencySet>
-        <dependencySet>
-            <outputDirectory>classes</outputDirectory>
-            <useProjectArtifact>true</useProjectArtifact>
-            <unpack>true</unpack>
-            <includes>
-                <include>com.zh.coherence.viewer:viewer-gui</include>
-            </includes>
-        </dependencySet>
     </dependencySets>
+    <fileSets>
+        <fileSet>
+            <directory>${project.build.directory}/classes</directory>
+            <outputDirectory>classes</outputDirectory>
+            <filtered>false</filtered>
+        </fileSet>
+    </fileSets>
     <files>
         <file>
             <source>${project.basedir}/src/main/resources/plugin.xml</source>
