@@ -29,6 +29,11 @@
             <filtered>false</filtered>
             <outputDirectory>plugins</outputDirectory>
         </file>
+        <file>
+            <source>${project.basedir}/../icon-provider/target/icon-provider-${project.version}-plugin.zip</source>
+            <filtered>false</filtered>
+            <outputDirectory>plugins</outputDirectory>
+        </file>
     </files>
     <fileSets>
         <fileSet>
@@ -38,6 +43,11 @@
                 <include>*.properties</include>
             </includes>
             <outputDirectory>/</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>src/main/resources/icons</directory>
+            <outputDirectory>/icons</outputDirectory>
+            <filtered>false</filtered>
         </fileSet>
     </fileSets>
 </assembly>

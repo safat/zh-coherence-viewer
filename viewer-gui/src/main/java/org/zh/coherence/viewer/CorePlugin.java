@@ -5,6 +5,7 @@ import org.java.plugin.boot.ApplicationPlugin;
 import org.java.plugin.boot.Boot;
 import org.java.plugin.registry.PluginDescriptor;
 import org.java.plugin.util.ExtendedProperties;
+import org.zh.coherence.viewer.gui.menu.ApplicationMenu;
 
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
@@ -69,7 +70,8 @@ public class CorePlugin extends ApplicationPlugin implements Application {
             }
         });
         readState();
-        frame.add(new JLabel("test"));
+        frame.setJMenuBar(new ApplicationMenu());
+
         frame.setVisible(true);
     }
 

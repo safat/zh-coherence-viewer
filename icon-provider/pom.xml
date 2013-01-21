@@ -13,5 +13,27 @@
     <groupId>com.zh.coherence.viewer</groupId>
     <artifactId>icon-provider</artifactId>
     <version>0.4-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>plugin-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <descriptors>
+                                <descriptor>src/main/assembly/plugin.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
