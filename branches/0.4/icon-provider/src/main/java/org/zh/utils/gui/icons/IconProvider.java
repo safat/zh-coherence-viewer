@@ -31,7 +31,7 @@ public class IconProvider {
             }
             //Not found? try to search right there
             if (icon == null) {
-                URL iconUrl = ClassLoader.getSystemResource("icons" + File.pathSeparator + name);
+                URL iconUrl = ClassLoader.getSystemResource("icons" + File.separator + name);
                 if (iconUrl != null) {
                     icon = new ImageIcon(iconUrl);
                 }
@@ -46,7 +46,7 @@ public class IconProvider {
     private static void initializeSystemDirectory() {
         String home = System.getProperty(APPLICATION_ICONS_DIRECTORY);
         if (home == null) {
-            home = File.pathSeparator;
+            home = "." + File.separator + "icons";
         }
 
         systemDirectory = new File(home);

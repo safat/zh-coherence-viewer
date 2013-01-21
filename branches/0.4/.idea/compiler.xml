@@ -38,9 +38,7 @@
         <processorPath useClasspath="true" />
         <module name="assembly" />
         <module name="connect" />
-        <module name="icon-provider" />
         <module name="viewer" />
-        <module name="viewer-gui" />
         <module name="zhql" />
       </profile>
     </annotationProcessing>

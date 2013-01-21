@@ -12,6 +12,8 @@ public class FileMenu extends JMenu {
     public FileMenu() {
         super("File");
         setMnemonic('F');
+
+        init();
     }
 
     private void init() {
