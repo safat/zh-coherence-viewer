@@ -21,7 +21,7 @@
     <fileSets>
         <fileSet>
             <directory>${project.build.directory}/classes</directory>
-            <outputDirectory>classes</outputDirectory>
+            <outputDirectory>/classes</outputDirectory>
             <filtered>false</filtered>
         </fileSet>
         <fileSet>

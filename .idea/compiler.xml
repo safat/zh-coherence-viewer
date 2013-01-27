@@ -38,10 +38,20 @@
         <processorPath useClasspath="true" />
         <module name="assembly" />
         <module name="connect" />
+        <module name="icon-provider" />
         <module name="viewer" />
+        <module name="viewer-gui" />
         <module name="zhql" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="assembly" target="1.7" />
+      <module name="connect" target="1.7" />
+      <module name="icon-provider" target="1.7" />
+      <module name="viewer-gui" target="1.7" />
+      <module name="zh-coherence-viewer" target="1.7" />
+      <module name="zhql" target="1.7" />
+    </bytecodeTargetLevel>
   </component>
 </project>
 
