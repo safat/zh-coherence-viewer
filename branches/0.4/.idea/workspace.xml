@@ -2,32 +2,32 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="32f8d5a9-ea61-4018-8b76-eb23db394296" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/icon-provider/src/main/assembly" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assembly/src/main/resources/icons/database_add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assembly/src/main/resources/icons" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assembly/src/main/resources" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/icon-provider/src/main/assembly/plugin.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/icon-provider/src/main/resources/plugin.xml" />
-      <change type="DELETED" beforePath="C:\work\zh-viewer\0.4\icon-provider\src\main\resources\icons\database_add.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/icon-provider/src/main/resources/icons" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/viewer-gui/src/main/java/org/zh/coherence/viewer/CorePlugin.java" afterPath="$PROJECT_DIR$/viewer-gui/src/main/java/org/zh/coherence/viewer/CorePlugin.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/viewer-gui/src/main/java/org/zh/coherence/viewer/gui/menu/file/FileMenu.java" afterPath="$PROJECT_DIR$/viewer-gui/src/main/java/org/zh/coherence/viewer/gui/menu/file/FileMenu.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icon-provider/src/main/java/org/zh/utils/gui/icons/IconProvider.java" afterPath="$PROJECT_DIR$/icon-provider/src/main/java/org/zh/utils/gui/icons/IconProvider.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/viewer-gui/src/main/java/org/zh/coherence/viewer/project" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/viewer-gui/src/main/java/org/zh/coherence/viewer/project/Project.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/viewer-gui/src/main/java/org/zh/coherence/viewer/project/ProjectManager.java" />
+      <change type="DELETED" beforePath="C:\work\zh-viewer\0.4\viewer-gui\src\main\java\org\zh\coherence\viewer\gui\Application.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assembly/assembly.iml" afterPath="$PROJECT_DIR$/assembly/assembly.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assembly/src/main/assembly/bin.xml" afterPath="$PROJECT_DIR$/assembly/src/main/assembly/bin.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/connect/connect.iml" afterPath="$PROJECT_DIR$/connect/connect.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icon-provider/icon-provider.iml" afterPath="$PROJECT_DIR$/icon-provider/icon-provider.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icon-provider/src/main/assembly/plugin.xml" afterPath="$PROJECT_DIR$/icon-provider/src/main/assembly/plugin.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/viewer-gui/src/main/assembly/plugin.xml" afterPath="$PROJECT_DIR$/viewer-gui/src/main/assembly/plugin.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/viewer-gui/src/main/resources/plugin.xml" afterPath="$PROJECT_DIR$/viewer-gui/src/main/resources/plugin.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icon-provider/pom.xml" afterPath="$PROJECT_DIR$/icon-provider/pom.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/viewer-gui/pom.xml" afterPath="$PROJECT_DIR$/viewer-gui/pom.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/viewer-gui/viewer-gui.iml" afterPath="$PROJECT_DIR$/viewer-gui/viewer-gui.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/zh-coherence-viewer.iml" afterPath="$PROJECT_DIR$/zh-coherence-viewer.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/zhql/zhql.iml" afterPath="$PROJECT_DIR$/zhql/zhql.iml" />
     </list>
     <ignored path="untitled.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/" />
-    <file path="/pom.xml" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1358796062740" ignored="false" />
-    <file path="/Application.java" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1357763177077" ignored="false" />
+    <file path="/pom.xml" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1359288257795" ignored="false" />
+    <file path="/Application.java" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1359285177311" ignored="false" />
     <file path="/ConnectionProvider.java" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1356382345420" ignored="false" />
     <file path="/mvn_install_coherence.bat" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1356380857903" ignored="false" />
     <file path="/Connection.java" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1356382529885" ignored="false" />
@@ -36,24 +36,32 @@
     <file path="/FileMenu.java" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1358797174668" ignored="false" />
     <file path="/CreateProject.java" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1358797676475" ignored="false" />
     <file path="/IconProvider.java" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1358798854462" ignored="false" />
-    <file path="/Dummy.txt" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1358682753345" ignored="false" />
+    <file path="/Dummy.txt" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1358798938591" ignored="false" />
     <file path="/config.xml" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1357760289277" ignored="false" />
     <file path="/bin.xml" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1358798531107" ignored="false" />
     <file path="/viewer.bat" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1358277153845" ignored="false" />
     <file path="/config.properties" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1358277810110" ignored="false" />
     <file path="/boot.properties" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1358540135196" ignored="false" />
     <file path="/plugin.xml" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1358797468361" ignored="false" />
-    <file path="/CorePlugin.java" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1358795635784" ignored="false" />
+    <file path="/CorePlugin.java" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1359286350481" ignored="false" />
     <file path="/mvn_install_local_libs.bat" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1358542403746" ignored="false" />
     <file path="/run.bat" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1358543468606" ignored="false" />
     <file path="/log4j.properties" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1358679435563" ignored="false" />
+    <file path="/ProjectManager.java" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1359286648961" ignored="false" />
+    <file path="/Project.java" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1358882140256" ignored="false" />
+    <file path="/RootContainPane.java" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1358883409374" ignored="false" />
+    <file path="/DummyFile.xpath" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1359284851759" ignored="false" />
+    <file path="/Boot.java" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1359286153692" ignored="false" />
+    <file path="/FXApplication.java" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1359285659865" ignored="false" />
+    <file path="/InitConfiguration.java" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1359286127753" ignored="false" />
+    <file path="$PROJECT_DIR$/.idea/modules.xml" changelist="32f8d5a9-ea61-4018-8b76-eb23db394296" time="1359287388871" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="ChangesViewManager" flattened_view="false" show_ignored="false" />
   <component name="Commander">
     <leftPanel />
     <rightPanel />
@@ -114,49 +122,41 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="FileMenu.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/viewer-gui/src/main/java/org/zh/coherence/viewer/gui/menu/file/FileMenu.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="15" selection-start="286" selection-end="286" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CreateProject.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/viewer-gui/src/main/java/org/zh/coherence/viewer/gui/menu/file/CreateProject.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="52" selection-start="332" selection-end="332" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IconProvider.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/icon-provider/src/main/java/org/zh/utils/gui/icons/IconProvider.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="63" selection-start="545" selection-end="545" vertical-scroll-proportion="0.46815833">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="bin.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/assembly/src/main/assembly/bin.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="0" selection-start="955" selection-end="955" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="CorePlugin.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/viewer-gui/src/main/java/org/zh/coherence/viewer/CorePlugin.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="0" selection-start="1184" selection-end="1184" vertical-scroll-proportion="0.0">
+            <state line="40" column="5" selection-start="1249" selection-end="1249" vertical-scroll-proportion="0.0">
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#1431#1539#0" expanded="true" />
+                <element signature="e#1528#1529#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="plugin.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/viewer-gui/src/main/assembly/plugin.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="29" column="38" selection-start="1174" selection-end="1174" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pom.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/viewer-gui/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="15" column="18" selection-start="615" selection-end="615" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="plugin.xml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/icon-provider/src/main/assembly/plugin.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="32" column="11" selection-start="1221" selection-end="1221" vertical-scroll-proportion="0.93631667">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -178,22 +178,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/viewer-gui/assembly/plugin.xml" />
-        <option value="$PROJECT_DIR$/assembly/pom.xml" />
-        <option value="$PROJECT_DIR$/assembly/src/main/config/run.sh" />
-        <option value="$PROJECT_DIR$/assembly/src/main/config/log4j.properties" />
-        <option value="$PROJECT_DIR$/viewer-gui/src/main/java/org/zh/coherence/viewer/CorePlugin.java" />
-        <option value="$PROJECT_DIR$/icon-provider/pom.xml" />
-        <option value="$PROJECT_DIR$/viewer-gui/pom.xml" />
-        <option value="$PROJECT_DIR$/viewer-gui/src/main/assembly/plugin.xml" />
-        <option value="$PROJECT_DIR$/icon-provider/src/main/assembly/plugin.xml" />
-        <option value="$PROJECT_DIR$/viewer-gui/src/main/java/org/zh/coherence/viewer/gui/menu/file/FileMenu.java" />
-        <option value="$PROJECT_DIR$/icon-provider/src/main/resources/plugin.xml" />
-        <option value="$PROJECT_DIR$/viewer-gui/src/main/resources/plugin.xml" />
-        <option value="$PROJECT_DIR$/viewer-gui/src/main/java/org/zh/coherence/viewer/gui/menu/file/CreateProject.java" />
+        <option value="$PROJECT_DIR$/viewer-gui/src/main/java/org/zh/coherence/viewer/project/Project.java" />
         <option value="$PROJECT_DIR$/assembly/src/main/assembly/bin.xml" />
-        <option value="$PROJECT_DIR$/icon-provider/src/main/java/org/zh/utils/gui/icons/IconProvider.java" />
+        <option value="$PROJECT_DIR$/jpf-boot/src/main/java/org/java/plugin/boot/Application.java" />
+        <option value="$PROJECT_DIR$/jpf-boot/src/main/java/org/java/plugin/boot/FXApplication.java" />
+        <option value="$PROJECT_DIR$/jpf-boot/src/main/java/org/java/plugin/boot/InitConfiguration.java" />
+        <option value="$PROJECT_DIR$/jpf-boot/src/main/java/org/java/plugin/boot/Boot.java" />
+        <option value="$PROJECT_DIR$/jpf-boot/pom.xml" />
+        <option value="$PROJECT_DIR$/viewer-gui/src/main/java/org/zh/coherence/viewer/project/ProjectManager.java" />
+        <option value="$PROJECT_DIR$/viewer-gui/src/main/java/org/zh/coherence/viewer/CorePlugin.java" />
+        <option value="$PROJECT_DIR$/assembly/pom.xml" />
+        <option value="$PROJECT_DIR$/viewer-gui/src/main/assembly/plugin.xml" />
+        <option value="$PROJECT_DIR$/viewer-gui/pom.xml" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/viewer-gui/src/main/java/org/zh/coherence/viewer/gui/RootContainPane.java" />
+        <option value="$PROJECT_DIR$/icon-provider/src/main/assembly/plugin.xml" />
+        <option value="$PROJECT_DIR$/icon-provider/pom.xml" />
       </list>
     </option>
   </component>
@@ -440,7 +440,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="gui" />
+              <option name="myItemId" value="project" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -471,10 +471,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="viewer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gui" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -509,10 +505,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="viewer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gui" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -681,40 +673,6 @@
               <option name="myItemId" value="main" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="icons" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="untitled" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="0.4" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assembly" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -744,37 +702,61 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_directory_selection" value="$PROJECT_DIR$/viewer-gui/src/main/java/org/zh/coherence/viewer" />
-    <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="project.structure.last.edited" value="SDKs" />
-    <property name="OverrideImplement.combined" value="false" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth1" value="247" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth0" value="247" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth3" value="75" />
     <property name="project.structure.proportion" value="0.15" />
+    <property name="OverrideImplement.combined" value="false" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth2" value="247" />
     <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="recentsLimit" value="5" />
-    <property name="options.lastSelected" value="MavenSettings" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder1" value="1" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder0" value="0" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder3" value="3" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder2" value="2" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth2" value="193" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder5" value="5" />
     <property name="MemberChooser.sorted" value="false" />
+    <property name="recentsLimit" value="5" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth1" value="186" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder4" value="4" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth0" value="198" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/.idea" />
-    <property name="project.structure.side.proportion" value="0.2" />
-    <property name="MemberChooser.copyJavadoc" value="false" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth5" value="872" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth4" value="198" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth3" value="197" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth4" value="107" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth5" value="921" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="dynamic.classpath" value="false" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="GoToFile.includeJavaFiles" value="false" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/viewer-gui/src/main/java/org/zh/coherence/viewer" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder5" value="5" />
+    <property name="options.lastSelected" value="net.sf.logsupport.LogSupportComponent" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder3" value="3" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder4" value="4" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder1" value="1" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder2" value="2" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder0" value="0" />
+    <property name="MemberChooser.copyJavadoc" value="false" />
+    <property name="dynamic.classpath" value="false" />
     <property name="options.searchVisible" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\work\zh-viewer\0.4\jpf-boot\src\main\java" />
       <recent name="C:\work\zh-viewer\0.4\assembly\src\main\resources" />
       <recent name="C:\work\zh-viewer\0.4\icon-provider\src\main" />
       <recent name="C:\work\zh-viewer\0.4\icon-provider\src\main\resources" />
       <recent name="C:\work\zh-viewer\0.4\viewer-gui\src\main\resources\icons" />
-      <recent name="C:\work\zh-viewer\0.4\viewer-gui\src\main\java\org\zh\coherence\viewer" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\work\zh-viewer\0.4\viewer-gui\src\main\resources\icons" />
@@ -833,6 +815,19 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method />
+    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -858,19 +853,6 @@
       <envs />
       <properties />
       <listeners />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -1018,7 +1000,11 @@
       <created>1358682768123</created>
       <updated>1358682768123</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="added icon-provider module">
+      <created>1358798962159</created>
+      <updated>1358798962159</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1042,28 +1028,28 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3263041" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32480535" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32852387" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32814237" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32814237" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2497332" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17218544" sideWeight="0.47284344" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15261473" sideWeight="0.6736959" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1248666" sideWeight="0.6751947" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17769477" sideWeight="0.6736959" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.47391787" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17769477" sideWeight="0.6751947" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.47385985" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -1106,7 +1092,7 @@
     <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="plugin structure and build script is ready" />
+    <option name="LAST_COMMIT_MESSAGE" value="added icon-provider module" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1124,119 +1110,113 @@
     <MESSAGE value="removed felix&#10;added JPF" />
     <MESSAGE value="fixed maven build scripts" />
     <MESSAGE value="plugin structure and build script is ready" />
+    <MESSAGE value="added icon-provider module" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
+  </component>
+  <component name="XPathView.XPathProjectComponent">
+    <history />
+    <find-history />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/assembly/pom.xml">
+    <entry file="jar://$MAVEN_REPOSITORY$/net/sf/jpf/jpf-boot/1.5/jpf-boot-1.5-sources.jar!/org/java/plugin/boot/SplashHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="64" column="34" selection-start="2161" selection-end="2161" vertical-scroll-proportion="-0.03723987">
-          <folding />
-        </state>
+        <state line="31" column="17" selection-start="1230" selection-end="1230" vertical-scroll-proportion="0.23367697" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assembly/src/main/config/run.sh">
+    <entry file="jar://$MAVEN_REPOSITORY$/net/sf/jpf/jpf-boot/1.5/jpf-boot-1.5-sources.jar!/org/java/plugin/boot/Boot.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="41" selection-start="41" selection-end="41" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assembly/src/main/config/run.bat">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="47" selection-start="6" selection-end="47" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assembly/src/main/config/log4j.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="17" selection-start="846" selection-end="846" vertical-scroll-proportion="0.29209623" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/viewer-gui/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="31" selection-start="1465" selection-end="1465" vertical-scroll-proportion="0.4857143">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/icon-provider/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="18" selection-start="618" selection-end="618" vertical-scroll-proportion="0.29142857">
-          <folding />
-        </state>
+        <state line="206" column="23" selection-start="9155" selection-end="9155" vertical-scroll-proportion="1.701031" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/viewer-gui/src/main/resources/plugin.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="14" selection-start="409" selection-end="409" vertical-scroll-proportion="0.15542857">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/viewer-gui/src/main/java/org/zh/coherence/viewer/gui/menu/ApplicationMenu.java">
+    <entry file="file://$PROJECT_DIR$/viewer-gui/src/main/java/org/zh/coherence/viewer/project/ProjectManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="16" selection-start="305" selection-end="305" vertical-scroll-proportion="0.25257143">
+        <state line="47" column="29" selection-start="1282" selection-end="1282" vertical-scroll-proportion="0.7594502">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/viewer-gui/src/main/java/org/zh/coherence/viewer/gui/menu/file/FileMenu.java">
+    <entry file="file://$PROJECT_DIR$/viewer-gui/src/main/java/org/zh/coherence/viewer/project/Project.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="15" selection-start="286" selection-end="286" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/viewer-gui/src/main/java/org/zh/coherence/viewer/gui/menu/file/CreateProject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="52" selection-start="332" selection-end="332" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/viewer-gui/src/main/java/org/zh/coherence/viewer/CorePlugin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="0" selection-start="1184" selection-end="1184" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/icon-provider/src/main/resources/plugin.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="49" selection-start="246" selection-end="246" vertical-scroll-proportion="0.07771429">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/icon-provider/src/main/assembly/plugin.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="49" selection-start="861" selection-end="861" vertical-scroll-proportion="0.42742857">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/viewer-gui/src/main/assembly/plugin.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="38" selection-start="1025" selection-end="1173" vertical-scroll-proportion="0.5634286">
+        <state line="10" column="3" selection-start="183" selection-end="183" vertical-scroll-proportion="0.17525773">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/assembly/src/main/assembly/bin.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="0" selection-start="955" selection-end="955" vertical-scroll-proportion="0.0">
+        <state line="17" column="45" selection-start="732" selection-end="732" vertical-scroll-proportion="0.33104238">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/icon-provider/src/main/java/org/zh/utils/gui/icons/IconProvider.java">
+    <entry file="file://$PROJECT_DIR$/assembly/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="63" selection-start="545" selection-end="545" vertical-scroll-proportion="0.46815833">
+        <state line="49" column="54" selection-start="1682" selection-end="1682" vertical-scroll-proportion="0.48682705">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/viewer-gui/src/main/java/org/zh/coherence/viewer/CorePlugin.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="40" column="5" selection-start="1249" selection-end="1249" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#1431#1539#0" expanded="true" />
+            <element signature="e#1528#1529#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/viewer-gui/src/main/assembly/plugin.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="38" selection-start="1174" selection-end="1174" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/viewer-gui/src/main/java/org/zh/coherence/viewer/gui/menu/file/CreateProject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="14" selection-start="199" selection-end="199" vertical-scroll-proportion="0.15463917">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="24" selection-start="1002" selection-end="1002" vertical-scroll-proportion="0.38946164">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/viewer-gui/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="18" selection-start="615" selection-end="615" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/icon-provider/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="18" selection-start="618" selection-end="618" vertical-scroll-proportion="0.29209623">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/icon-provider/src/main/assembly/plugin.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="11" selection-start="1221" selection-end="1221" vertical-scroll-proportion="0.93631667">
           <folding />
         </state>
       </provider>
@@ -1293,7 +1273,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>assembly</last-edited>
+          <last-edited>jpf-boot</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

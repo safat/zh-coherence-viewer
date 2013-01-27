@@ -13,7 +13,7 @@
     <groupId>com.zh.coherence.viewer</groupId>
     <artifactId>icon-provider</artifactId>
     <version>0.4-SNAPSHOT</version>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
     <build>
         <plugins>

@@ -13,7 +13,7 @@
     <groupId>com.zh.coherence.viewer</groupId>
     <artifactId>viewer-gui</artifactId>
     <version>0.4-SNAPSHOT</version>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
@@ -33,6 +33,10 @@
         <dependency>
             <groupId>net.sf.jpf</groupId>
             <artifactId>jpf-boot</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
         </dependency>
     </dependencies>
 

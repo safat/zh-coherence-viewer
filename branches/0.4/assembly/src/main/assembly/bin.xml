@@ -16,7 +16,6 @@
             <includes>
                 <include>jpf:*</include>
                 <include>jpf-boot:*</include>
-                <include>org.dockingframes:*</include>
                 <include>log4j:*</include>
                 <include>commons-logging:*</include>
             </includes>
