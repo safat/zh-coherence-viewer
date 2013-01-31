@@ -6,6 +6,7 @@
     </requires>
     <runtime>
         <library id="core" path="classes/" type="code"/>
+        <library id="tableLayout" path="lib/TableLayout-20050920.jar" type="code"/>
     </runtime>
     <!--<extension-point id="Tool">-->
     <!--<parameter-def id="class" />-->

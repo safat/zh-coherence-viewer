@@ -15,6 +15,7 @@
             <unpack>false</unpack>
             <includes>
                 <include>docking-frames-common:*</include>
+                <include>TableLayout:*</include>
             </includes>
         </dependencySet>
     </dependencySets>
