@@ -25,7 +25,7 @@ public class CreateProject extends JMenuItem {
             public void actionPerformed(ActionEvent e) {
                 JComponent component = (JComponent) e.getSource();
                 JFrame frame = FrameUtil.getFrame(component);
-                ProjectEditor projectEditor = new ProjectEditor(frame);
+                ProjectEditor projectEditor = new ProjectEditor(frame, null);
                 projectEditor.showEditor();
             }
         });

@@ -16,6 +16,7 @@
             <includes>
                 <include>docking-frames-common:*</include>
                 <include>TableLayout:*</include>
+                <include>swingx-all:*</include>
             </includes>
         </dependencySet>
     </dependencySets>
