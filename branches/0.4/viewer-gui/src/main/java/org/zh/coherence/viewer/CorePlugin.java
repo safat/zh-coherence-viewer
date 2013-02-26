@@ -72,6 +72,12 @@ public class CorePlugin extends ApplicationPlugin implements Application {
         readState();
         frame.setJMenuBar(new ApplicationMenu());
 
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception ex) {
+            log.error("Couldn't set system look & feel", ex);
+        }
+
         frame.setVisible(true);
     }
 

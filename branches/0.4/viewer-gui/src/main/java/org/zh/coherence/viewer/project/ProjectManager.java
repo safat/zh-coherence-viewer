@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
 
@@ -22,9 +23,6 @@ public class ProjectManager {
     private static final Log LOGGER = LogFactory.getLog(ProjectManager.class);
     public static final String PROJECT_NAME = "project.name";
 
-    public static final String PROJECT_PATH_TO_CONFIGURATION_XML = "path.to.configuration";
-
-    public static final String PROJECT_PATH_TO_LIBRARY_DIRECTORIES = "path.to.libraries";
 
     private File projectDirectory;
 
@@ -57,8 +55,10 @@ public class ProjectManager {
             Properties properties = new Properties();
             properties.load(is);
             project.name = properties.getProperty(PROJECT_NAME);
-            project.coherenceConfig = properties.getProperty(PROJECT_PATH_TO_CONFIGURATION_XML);
-            project.pathToLibraries = properties.getProperty(PROJECT_PATH_TO_LIBRARY_DIRECTORIES).split(";");
+            project.properties = new HashMap<>();
+            for (Object key : properties.keySet()) {
+                project.properties.put((String) key, (String) properties.get(key));
+            }
         } catch (Exception ex) {
             LOGGER.error("Couldn't load project file: " + path.getAbsolutePath(), ex);
         }
