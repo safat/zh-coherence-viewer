@@ -31,7 +31,7 @@ public class BackupTool extends JPanel implements CoherenceViewerTool {
     private JTextField pathFiled;
     private JSpinner threads;
     private JSpinner buffer;
-    protected JToolBar cacheListToolBar;
+    protected JToolBar cacheListToolBar = new JToolBar();
     //actions
     private ReloadCacheList reloadCacheList;
 

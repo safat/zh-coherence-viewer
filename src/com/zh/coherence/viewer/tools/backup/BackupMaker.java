@@ -6,13 +6,18 @@ import com.tangosol.net.CacheFactory;
 import com.tangosol.net.NamedCache;
 import com.tangosol.util.Filter;
 import com.tangosol.util.aggregator.Count;
+import com.tangosol.util.filter.AlwaysFilter;
 import com.zh.coherence.viewer.utils.FileUtils;
 
 import javax.swing.table.AbstractTableModel;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 public class BackupMaker {
     private BackupContext context;
@@ -28,7 +33,7 @@ public class BackupMaker {
         context.logPane.addMessage(new BackupLogEvent(System.currentTimeMillis(), "Info", System.currentTimeMillis(),
                 "buffer size: " + context.getBufferSize(), "backup"));
 
-        List<CacheWrapper> caches = new ArrayList<CacheWrapper>();
+        List<CacheWrapper> caches = new ArrayList<>();
         NamedCache nCache;
         int maxElements = 0;
 
@@ -62,13 +67,12 @@ public class BackupMaker {
 
         for (final CacheWrapper wrapper : caches) {
             context.cacheProgress.setString("[" + wrapper.cache.getCacheName() + "] - analyzing cache");
-            threadExecutor.resetProgress();
             final long startTime = System.currentTimeMillis();
-            File file = new File(context.getPath() + File.separator + wrapper.info.getName());
+            File file = new File(context.getPath() + File.separator + wrapper.info.getName() + CacheWrapper.FILE_EXT);
             CacheBackuper backuper = new CacheBackuper(wrapper, file, threadExecutor, context);
-            try{
+            try {
                 backuper.backup();
-            } catch (Exception ex){
+            } catch (Exception ex) {
                 ex.printStackTrace();
                 wrapper.info.setStatus(CacheInfo.Status.ERROR);
             }
@@ -80,20 +84,19 @@ public class BackupMaker {
                             + "; Entries written: " + backuper.getPersistedEntriesSize()
                             + "; Entries keys extracted: " + backuper.getExtractedKeysSize(), "backup"));
         }
+
         threadExecutor.shutdown();
         context.logPane.addMessage(new BackupLogEvent(
                 globalTime, "", System.currentTimeMillis(), "Done", "Task has been finished"));
     }
 
-    public static RemoteNamedCache getRemoteCache(NamedCache namedCache) throws Exception{
-        if(namedCache instanceof SafeNamedCache){
+
+    public static RemoteNamedCache getRemoteCache(NamedCache namedCache) throws Exception {
+        if (namedCache instanceof SafeNamedCache) {
             SafeNamedCache snc = (SafeNamedCache) namedCache;
-            Method method = snc.getClass().getDeclaredMethod("getRunningNamedCache");
-            method.setAccessible(true);
-            return (RemoteNamedCache) method.invoke(snc);
+            RemoteNamedCache remoteNamedCache = (RemoteNamedCache) snc.ensureRunningNamedCache();
+            return remoteNamedCache;
         }
         return null;
     }
-
-
 }

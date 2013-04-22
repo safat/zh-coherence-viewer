@@ -1,59 +1,62 @@
 package com.zh.coherence.viewer.tools.backup;
 
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.FutureTask;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicLong;
 
 import com.zh.coherence.viewer.utils.connection.ExtendConnectionBase;
 
 public class ConnectionThreadPool extends ThreadPoolExecutor {
-    private AtomicLong progress;
+    private final Semaphore semaphore;
+
+    public ConnectionThreadPool(int nThreads, ThreadFactory threadFactory, int queueCapacity) {
+        super(nThreads, nThreads, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>(), threadFactory);
+        this.semaphore = queueCapacity == Integer.MAX_VALUE ? null : new Semaphore(queueCapacity);
+        System.out.println("Blocking queue capacity: " + queueCapacity);
+    }
 
     public ConnectionThreadPool(int nThreads, ThreadFactory threadFactory) {
-        super(nThreads, nThreads, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>(), threadFactory);
-        this.progress = new AtomicLong(0);
+        this(nThreads, threadFactory, Integer.MAX_VALUE);
     }
 
-    @SuppressWarnings("unchecked")
     @Override
-    protected void afterExecute(Runnable r, Throwable t) {
-        super.afterExecute(r, t);
-        if (r instanceof FutureTask) {
-            FutureTask<Integer> futureTask = (FutureTask<Integer>) r;
+    public <T> Future<T> submit(final Callable<T> task) {
+        if (semaphore != null) {
             try {
-                Integer progressUpdate = futureTask.get();
-                this.progress.addAndGet(progressUpdate);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
+                semaphore.acquire();
+                try {
+                    return super.submit(new Callable<T>() {
+                        @Override
+                        public T call() throws Exception {
+                            try {
+                                return task.call();
+                            } finally {
+                                semaphore.release();
+                            }
+                        }
+                    });
+                } catch (RejectedExecutionException ex) {
+                    ex.printStackTrace();
+                    semaphore.release();
+                }
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+                semaphore.release();
             }
+        } else {
+            return super.submit(task);
         }
+
+        return null;
     }
 
-
-    @Override
     public void terminated() {
         super.terminated();
         ThreadFactory factory = this.getThreadFactory();
         if (factory instanceof ConnectionThreadFactory) {
-            ConnectionThreadFactory connFactory = (ConnectionThreadFactory) factory;
-            for (ExtendConnectionBase connection : connFactory.getThreadsConnections()) {
+            ConnectionThreadFactory connectionThreadFactory = (ConnectionThreadFactory) factory;
+            for (ExtendConnectionBase connection : connectionThreadFactory.getThreadsConnections()) {
                 connection.disconnect();
             }
         }
     }
-
-    public long getProgress() {
-        return progress.get();
-    }
-
-    public void resetProgress() {
-        progress.set(0);
-    }
-
 }

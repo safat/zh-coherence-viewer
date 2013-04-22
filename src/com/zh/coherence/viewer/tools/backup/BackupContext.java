@@ -15,7 +15,7 @@ public class BackupContext {
         BACKUP, RESTORE
     }
 
-    protected JProgressBar generalProgress, cacheProgress;
+    public JProgressBar generalProgress, cacheProgress;
 
     public EventLogPane logPane;
 
@@ -46,8 +46,8 @@ public class BackupContext {
                 this.threads = 5;
                 break;
             case RESTORE:
-                this.bufferSize = 350;
-                this.threads = 15;
+                this.bufferSize = 2048;
+                this.threads = 6;
         }
     }
 
@@ -119,5 +119,23 @@ public class BackupContext {
 
     public NetworkChartModel getNetworkChartModel() {
         return networkChartModel;
+    }
+
+    public void resetProgress(int maxValue, int value, String cacheName){
+        if(cacheName == null || cacheName.isEmpty()){
+            generalProgress.setMinimum(0);
+            generalProgress.setMinimum(maxValue);
+            generalProgress.setValue(value);
+            updateGeneralProgress();
+        }else{
+            cacheProgress.setMinimum(0);
+            cacheProgress.setMaximum(maxValue);
+            cacheProgress.setValue(value);
+            updateCacheProgress(cacheName);
+        }
+    }
+
+    public void resetProgress(int maxValue, String cacheName){
+        resetProgress(maxValue, 0, cacheName);
     }
 }
