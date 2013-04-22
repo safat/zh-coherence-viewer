@@ -11,7 +11,7 @@ public class ConnectionThread extends Thread {
 	private ExtendConnectionBase connection;
 	
 	public ConnectionThread(Runnable r, String host, String port) {
-	    super(r);
+	    super(r, "ZHConnectionThread-" + r.hashCode());
 	    this.connection = ConfigurableExtendConnection.getInstance("extend-client-config-template.xml", host, port);
 	}
 	

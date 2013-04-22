@@ -24,7 +24,7 @@ public class CacheBackuper {
     private int unitsBuffer = -1;
     private int backupedSize = 0;
     private RemoteNamedCache store;
-    private WrapperBufferOutput outputStream;
+    private DataOutputStream outputStream;
 
     private Timer timer;
     private volatile long networkStatistic = 0;
@@ -34,6 +34,11 @@ public class CacheBackuper {
         this.file = file;
         this.taskExecutor = taskExecutor;
         this.context = context;
+
+        Runtime.getRuntime().gc();
+        long heapFreeSize = Runtime.getRuntime().freeMemory();
+        int capacity = (int) (heapFreeSize / ((long) context.getBufferSize() * 1024 * 10));
+        System.out.println("Queue capacity: " + capacity);
     }
 
     public int getExtractedKeysSize(){
@@ -108,10 +113,8 @@ public class CacheBackuper {
         if(keys == null){
             throw new IllegalArgumentException("Keys object should be initialized first.");
         }
-        outputStream = new WrapperBufferOutput(new DataOutputStream(new BufferedOutputStream(
-                new FileOutputStream(file), (int)(context.getBufferSize() * 1.5) * 1024 *1024 )));
-        outputStream.writePackedInt(-38);
-        outputStream.writePackedInt(keys.size());
+        outputStream = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(file.getAbsolutePath())));
+        outputStream.writeInt(keys.size());
     }
 
     private void release() throws IOException{
@@ -185,11 +188,12 @@ public class CacheBackuper {
         }else{
             unitsBuffer = 0;
         }
+        System.out.println("[" + store.getName() + "] calculated units buffer size: " + unitsBuffer);
         this.unitsBuffer = unitsBuffer;
     }
 
     private void extractKeySet() throws Exception{
-        if(keys == null && store == null){
+        if(store == null){
             throw new IllegalArgumentException("Keys object should be initialized first.");
         }
         Set<Binary> cacheKeySet;
@@ -226,7 +230,11 @@ public class CacheBackuper {
             dataLength += keyArray.length;
             byte[] valueArray = entry.getValue().toByteArray();
             dataLength += valueArray.length;
+            outputStream.writeInt(keyArray.length);
+            outputStream.write(21);
             outputStream.write(keyArray, 1, keyArray.length - 1);
+            outputStream.writeInt(valueArray.length);
+            outputStream.write(21);
             outputStream.write(valueArray, 1, valueArray.length - 1);
         }
         updateStatistic(dataLength, map.size());

@@ -3,12 +3,14 @@ package com.zh.coherence.viewer.tools.backup.actions;
 import com.zh.coherence.viewer.jmx.JMXManager;
 import com.zh.coherence.viewer.tools.backup.BackupContext;
 import com.zh.coherence.viewer.tools.backup.CacheInfo;
+import com.zh.coherence.viewer.tools.backup.CacheWrapper;
 import com.zh.coherence.viewer.utils.icons.IconLoader;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.awt.event.ActionEvent;
 import java.io.File;
+import java.io.FileFilter;
 
 public class ReloadCacheList extends AbstractAction {
     private BackupContext context;
@@ -53,9 +55,15 @@ public class ReloadCacheList extends AbstractAction {
             context.getCacheInfoList().clear();
 
             if (file.isDirectory()) {
-                for (File f : file.listFiles()) {
+                FileFilter filter = new FileFilter() {
+                    @Override
+                    public boolean accept(File pathname) {
+                        return pathname.getName().endsWith(CacheWrapper.FILE_EXT);
+                    }
+                };
+                for (File f : file.listFiles(filter)) {
                     if (f.isFile()) {
-                        context.getCacheInfoList().add(new CacheInfo(f.getName()));
+                        context.getCacheInfoList().add(new CacheInfo(f.getName().replace(CacheWrapper.FILE_EXT, "")));
                     }
                 }
             }
