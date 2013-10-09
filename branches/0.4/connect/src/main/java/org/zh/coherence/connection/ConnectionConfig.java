@@ -1,5 +1,7 @@
 package org.zh.coherence.connection;
 
+import org.zh.coherence.connection.proxy.ProxyConnectionProvider;
+
 import javax.swing.*;
 
 /**
@@ -11,6 +13,7 @@ import javax.swing.*;
 public interface ConnectionConfig {
     /**
      * It's type of connection, e.g. extend:// kerberos_extend://
+     *
      * @return ID of connection type
      */
     String getExtention();
@@ -21,6 +24,7 @@ public interface ConnectionConfig {
 
     /**
      * sets URL to connect
+     *
      * @param url URL to connect
      */
     void setURL(String url);
@@ -32,12 +36,14 @@ public interface ConnectionConfig {
 
     /**
      * it's a flag to notify the system that it needs some advanced properties
+     *
      * @return is connection needs advanced properties
      */
     boolean hasAdvanced();
 
     /**
      * This panel will be opened on logon panel as a tab
+     *
      * @return
      */
     JComponent getAdvancedPanel();
@@ -45,8 +51,9 @@ public interface ConnectionConfig {
     void setAdvancedProperties();
 
     /**
-     * Connect to Coherence and return ConnectionProvider to user
-     * @return ConnectionProvider
+     * Connect to Coherence and return ProxyConnectionProvider to user
+     *
+     * @return ProxyConnectionProvider
      */
-    ConnectionProvider connect();
+    ProxyConnectionProvider connect();
 }

@@ -54,15 +54,27 @@
                 <version>1.2.17</version>
             </dependency>
             <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>0.11.6</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
                 <groupId>org.swinglabs.swingx</groupId>
                 <artifactId>swingx-all</artifactId>
                 <version>1.6.4</version>
+            </dependency>
+            <!-- jgoodies -->
+            <dependency>
+                <groupId>com.jgoodies</groupId>
+                <artifactId>binding</artifactId>
+                <version>2.0.6</version>
+            </dependency>
+            <!-- util -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>0.12.0</version>
+            </dependency>
+            <!-- inner -->
+            <dependency>
+                <groupId>com.zh.coherence.viewer</groupId>
+                <artifactId>viewer-gui</artifactId>
+                <version>0.4-SNAPSHOT</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -70,10 +82,12 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
-                <extensions>true</extensions>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
+                    <compilerVersion>1.7</compilerVersion>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
                 </configuration>
             </plugin>
             <plugin>
@@ -90,6 +104,7 @@
     </build>
 
     <modules>
+        <module>core</module>
         <module>connect</module>
         <module>viewer-gui</module>
         <module>icon-provider</module>

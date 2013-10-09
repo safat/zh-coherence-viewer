@@ -5,11 +5,21 @@
         <import plugin-id="org.zh.jpf.icon.provider"></import>
     </requires>
     <runtime>
-        <library id="core" path="classes/" type="code"/>
+        <library id="core" path="classes/" type="code">
+            <export prefix="org.zh.coherence.viewer.shared.*"/>
+        </library>
         <library id="tableLayout" path="lib/TableLayout-20050920.jar" type="code"/>
         <library id="swingx" path="lib/swingx-all-1.6.4.jar" type="code"/>
 
     </runtime>
+
+    <extension-point id="ConnectionProvider">
+        <parameter-def id="class"/>
+        <parameter-def id="name"/>
+        <parameter-def id="description" multiplicity="none-or-one"/>
+        <parameter-def id="icon" multiplicity="none-or-one"/>
+    </extension-point>
+
     <!--<extension-point id="Tool">-->
     <!--<parameter-def id="class" />-->
     <!--<parameter-def id="name" />-->

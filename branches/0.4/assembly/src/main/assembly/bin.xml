@@ -33,6 +33,11 @@
             <filtered>false</filtered>
             <outputDirectory>plugins</outputDirectory>
         </file>
+        <file>
+            <source>${project.basedir}/../connect/target/connect-${project.version}-plugin.zip</source>
+            <filtered>false</filtered>
+            <outputDirectory>plugins</outputDirectory>
+        </file>
     </files>
     <fileSets>
         <fileSet>

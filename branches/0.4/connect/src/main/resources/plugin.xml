@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<!DOCTYPE plugin PUBLIC "-//JPF//Java Plug-in Manifest 1.0" "http://jpf.sourceforge.net/plugin_1_0.dtd">
+<plugin id="org.zh.coherence.viewer.connection" version="0.4.0">
+    <requires>
+        <import plugin-id="org.zh.jpf.icon.provider"></import>
+        <import plugin-id="org.zh.coherence.viewer.core"></import>
+    </requires>
+    <runtime>
+        <library id="connection" path="classes/" type="code"/>
+        <library id="tableLayout" path="lib/TableLayout-20050920.jar" type="code"/>
+        <library id="swingx" path="lib/swingx-all-1.6.4.jar" type="code"/>
+        <library type="resources" path="icons/" id="icons"/>
+    </runtime>
+
+    <extension plugin-id="org.zh.coherence.viewer.core" point-id="ConnectionProvider" id="proxyConnectionProvider">
+        <parameter id="class" value="org.zh.coherence.connection.proxy.ProxyConnectionProvider"/>
+        <parameter id="name" value="Proxy connection"/>
+        <parameter id="description" value="Connect to coherence over extend-proxy"/>
+        <parameter id="icon" value="connect.png"/>
+    </extension>
+</plugin>
