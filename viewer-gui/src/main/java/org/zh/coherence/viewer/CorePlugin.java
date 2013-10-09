@@ -21,13 +21,14 @@ import java.util.Properties;
  */
 public class CorePlugin extends ApplicationPlugin implements Application {
 
+    public static final String PLUGIN_ID = "org.zh.coherence.viewer.core";
+
     private File dataFolder;
     private JFrame frame;
 
     @Override
     public Application initApplication(ExtendedProperties config, String[] strings) throws Exception {
-        dataFolder = new File(config.getProperty("dataFolder",
-                "." + File.separator + "data"));
+        dataFolder = new File(config.getProperty("dataFolder", "." + File.separator + "data"));
         dataFolder = dataFolder.getCanonicalFile();
         log.debug("data folder - " + dataFolder);
         if (!dataFolder.isDirectory() && !dataFolder.mkdirs()) {
